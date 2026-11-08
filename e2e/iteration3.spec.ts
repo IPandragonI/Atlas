@@ -266,7 +266,7 @@ test.describe("map palette", () => {
       return { land: s.getPropertyValue("--land").trim(), water: s.getPropertyValue("--water").trim(), border: s.getPropertyValue("--map-border").trim() };
     });
     await page.evaluate(() => (document.documentElement.dataset.theme = "light"));
-    expect(await tokens()).toEqual({ land: "#d4cdb7", water: "#e0eaec", border: "#968f79" });
+    expect(await tokens()).toEqual({ land: "#d4cdb7", water: "#eae7da", border: "#968f79" });
     await page.evaluate(() => (document.documentElement.dataset.theme = "dark"));
     expect(await tokens()).toEqual({ land: "#303633", water: "#1b1f1e", border: "#555d57" });
   });
