@@ -38,6 +38,13 @@ Playable geometry uses *map units* and excludes overseas units (`FRA`: Guiana, G
 chain, Pacific micro-states…). Land supersedes sea. Never auto-generated from proximity. A test asserts every country is
 reachable when sea links are enabled.
 
+### Sea-link audit (`npm run data:audit-sea`)
+Each curated sea pair is measured on the real coastlines (`sea-audit.json`). Crossings over `SEA_DISTANCE_LIMIT_KM` must be
+a documented entry of `SEA_DISTANCE_EXCEPTIONS` (with a reason): remote island states and links required by already-published
+daily challenges (FJI–NZL, KIR–TUV, JAM–NIC, TON–WSM, FJI–VUT). `sea-links.test.ts` fails on an unaudited or unjustified link.
+Pruning links changed gameplay, so `DATASET_VERSION` is `2026.2`; `npm run data:revalidate-daily` checks every published day
+still validates (invalid *future* days were regenerated; past and today's days were never touched).
+
 ## Tests guarding the data
 France–Spain/Germany land; France–UK sea only; France–Brazil none; bidirectionality; maritime on/off; Luxembourg's three
 neighbours; main land component membership; 195 countries; metadata completeness.

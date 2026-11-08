@@ -3,7 +3,8 @@ import { dailyId } from "@/engine/generator/generator";
 import type { HistoryEntry } from "@/engine/generator/diversity";
 import type { Challenge, GameMode } from "@/engine/types";
 import { DAILY_DIFFICULTY, dailyRegionFor } from "./daily-schedule";
-import { generateWithRetry, validateChallenge } from "./generate";
+import { generateAsync } from "./generate-client";
+import { validateChallenge } from "./generate";
 
 export interface DailyLoad {
   challenge: Challenge;
@@ -30,7 +31,7 @@ export async function loadDailyChallenge(date: string, mode: GameMode, history: 
   const weekday = new Date(`${date}T00:00:00Z`).getUTCDay();
   const difficulty = DAILY_DIFFICULTY[mode][weekday];
   const region = mode === "regional" ? dailyRegionFor(date, REGION_DEFS.map((r) => r.id)) : undefined;
-  const g = generateWithRetry({ mode, difficulty, region, seed: `${date}|${mode}`, id: dailyId(date, mode), date, candidates: 600 }, history, 12);
+  const g = await generateAsync({ mode, difficulty, region, seed: `${date}|${mode}`, id: dailyId(date, mode), date, candidates: 600 }, history, { attempts: 12 });
   return g ? { challenge: g.challenge, fallback: true } : null;
 }
 

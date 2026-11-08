@@ -45,7 +45,7 @@ export function buildResult(state: GameState, minIntermediate: number): GameResu
   const won = state.status === "won";
   // The route holds start + entered countries only (the destination is never part of it).
   const intermediates = Math.max(0, state.route.length - 1);
-  const optimal = won && intermediates === minIntermediate;
+  const optimal = won && intermediates === Math.max(1, minIntermediate); // at least one country must be entered
   const hintsUsed = state.hints.map((h) => h.payload.kind);
   return {
     challengeId: state.challengeId,

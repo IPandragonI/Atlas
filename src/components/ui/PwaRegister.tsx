@@ -21,6 +21,13 @@ export function PwaRegister() {
     };
   }, []);
 
+  // While online, warm the cache with the next days' daily files: they stay playable offline without precaching a whole year.
+  useEffect(() => {
+    if (process.env.NODE_ENV !== "production" || !navigator.onLine) return;
+    const t0 = Date.now();
+    for (let i = 0; i < 7; i++) fetch(`/daily/${new Date(t0 + i * 86400000).toISOString().slice(0, 10)}.json`).catch(() => undefined);
+  }, []);
+
   useEffect(() => {
     if (process.env.NODE_ENV !== "production" || !("serviceWorker" in navigator)) return;
     let cancelled = false;

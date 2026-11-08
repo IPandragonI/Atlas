@@ -1,7 +1,7 @@
 {
  "date": "2027-06-20",
- "rulesVersion": "1",
- "datasetVersion": "2026.1",
+ "rulesVersion": "2",
+ "datasetVersion": "2026.2",
  "challenges": [
   {
    "id": "daily-2027-06-20-classic",
@@ -17,28 +17,30 @@
    "minIntermediate": 6,
    "attempts": 9,
    "date": "2027-06-20",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-06-20-constraints",
    "mode": "constraints",
    "difficulty": "hard",
-   "start": "BRB",
-   "destination": "ETH",
+   "start": "GEO",
+   "destination": "GMB",
    "rules": {
-    "maritime": true,
-    "forbidden": [],
-    "mandatory": [
-     "LCA"
+    "maritime": false,
+    "forbidden": [
+     "MLI"
     ],
-    "avoidRegion": "asia"
+    "mandatory": [
+     "BFA"
+    ],
+    "avoidRegion": "middle-east"
    },
-   "minIntermediate": 13,
-   "attempts": 14,
+   "minIntermediate": 12,
+   "attempts": 13,
    "date": "2027-06-20",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-06-20-regional",
@@ -55,8 +57,8 @@
    "minIntermediate": 4,
    "attempts": 7,
    "date": "2027-06-20",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   }
  ]
 }

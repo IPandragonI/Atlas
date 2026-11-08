@@ -29,7 +29,9 @@ Appeal: log₂(optimal routes) ×0.6, subregion variety ×2, island/landlocked s
 history for later days (the build runs this script and is idempotent). Difficulty is fixed per mode and UTC weekday
 (`src/lib/daily-schedule.ts`); the regional region rotates with stride 4 over the 15 regions. If a file is missing or no
 longer validates, the client regenerates deterministically from the date seed (flagged as local fallback).
-Bundled range: 2026-11-01 → 2027-12-05; extend it by re-running the script before a release.
+The range is automatic: the script keeps `DAILY_AHEAD_DAYS` (default 365) days ahead of today and only adds missing days; a
+monthly GitHub Action (`.github/workflows/extend-daily.yml`) commits the new files. `npm run data:revalidate-daily` verifies
+every file against the current graph.
 
 ## Simulation and tuning
 `npm run data:simulate -- [perCombo=60] [candidates=300]` prints invalid rate, repeats, country/continent/subregion/corridor

@@ -1,64 +1,64 @@
 {
  "date": "2027-05-09",
- "rulesVersion": "1",
- "datasetVersion": "2026.1",
+ "rulesVersion": "2",
+ "datasetVersion": "2026.2",
  "challenges": [
   {
    "id": "daily-2027-05-09-classic",
    "mode": "classic",
    "difficulty": "normal",
-   "start": "FIN",
-   "destination": "LIE",
+   "start": "MAR",
+   "destination": "SRB",
    "rules": {
     "maritime": false,
     "forbidden": [],
     "mandatory": []
    },
-   "minIntermediate": 4,
-   "attempts": 7,
+   "minIntermediate": 5,
+   "attempts": 8,
    "date": "2027-05-09",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-05-09-constraints",
    "mode": "constraints",
    "difficulty": "hard",
-   "start": "MWI",
-   "destination": "UZB",
+   "start": "ZWE",
+   "destination": "SVK",
    "rules": {
     "maritime": false,
     "forbidden": [
-     "SDN"
+     "ZMB"
     ],
     "mandatory": [
-     "MOZ"
+     "BWA"
     ],
-    "avoidRegion": "south-asia"
+    "avoidRegion": "middle-east"
    },
-   "minIntermediate": 12,
-   "attempts": 13,
+   "minIntermediate": 13,
+   "attempts": 14,
    "date": "2027-05-09",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-05-09-regional",
    "mode": "regional",
    "difficulty": "normal",
-   "start": "LCA",
-   "destination": "CUB",
+   "start": "KNA",
+   "destination": "LCA",
    "rules": {
     "maritime": true,
     "forbidden": [],
     "mandatory": [],
     "allowedRegion": "caribbean"
    },
-   "minIntermediate": 5,
-   "attempts": 8,
+   "minIntermediate": 2,
+   "attempts": 5,
    "date": "2027-05-09",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   }
  ]
 }

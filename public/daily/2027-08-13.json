@@ -1,7 +1,7 @@
 {
  "date": "2027-08-13",
- "rulesVersion": "1",
- "datasetVersion": "2026.1",
+ "rulesVersion": "2",
+ "datasetVersion": "2026.2",
  "challenges": [
   {
    "id": "daily-2027-08-13-classic",
@@ -17,29 +17,29 @@
    "minIntermediate": 11,
    "attempts": 12,
    "date": "2027-08-13",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-08-13-constraints",
    "mode": "constraints",
    "difficulty": "hard",
-   "start": "GUY",
-   "destination": "WSM",
+   "start": "UGA",
+   "destination": "VUT",
    "rules": {
     "maritime": true,
     "forbidden": [
-     "BRA"
+     "SLB"
     ],
     "mandatory": [
-     "MNG"
+     "TCD"
     ]
    },
    "minIntermediate": 13,
    "attempts": 14,
    "date": "2027-08-13",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-08-13-regional",
@@ -56,8 +56,8 @@
    "minIntermediate": 1,
    "attempts": 2,
    "date": "2027-08-13",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   }
  ]
 }

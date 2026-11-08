@@ -1,7 +1,7 @@
 {
  "date": "2027-09-02",
- "rulesVersion": "1",
- "datasetVersion": "2026.1",
+ "rulesVersion": "2",
+ "datasetVersion": "2026.2",
  "challenges": [
   {
    "id": "daily-2027-09-02-classic",
@@ -17,8 +17,8 @@
    "minIntermediate": 6,
    "attempts": 9,
    "date": "2027-09-02",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-09-02-constraints",
@@ -29,17 +29,15 @@
    "rules": {
     "maritime": true,
     "forbidden": [
-     "UKR"
+     "PHL"
     ],
-    "mandatory": [
-     "PRK"
-    ]
+    "mandatory": []
    },
-   "minIntermediate": 6,
-   "attempts": 9,
+   "minIntermediate": 8,
+   "attempts": 11,
    "date": "2027-09-02",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-09-02-regional",
@@ -56,8 +54,8 @@
    "minIntermediate": 3,
    "attempts": 6,
    "date": "2027-09-02",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   }
  ]
 }

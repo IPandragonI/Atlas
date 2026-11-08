@@ -1,14 +1,14 @@
 {
  "date": "2026-12-13",
- "rulesVersion": "1",
- "datasetVersion": "2026.1",
+ "rulesVersion": "2",
+ "datasetVersion": "2026.2",
  "challenges": [
   {
    "id": "daily-2026-12-13-classic",
    "mode": "classic",
    "difficulty": "normal",
-   "start": "ITA",
-   "destination": "BGD",
+   "start": "ARM",
+   "destination": "VAT",
    "rules": {
     "maritime": false,
     "forbidden": [],
@@ -17,28 +17,27 @@
    "minIntermediate": 6,
    "attempts": 9,
    "date": "2026-12-13",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2026-12-13-constraints",
    "mode": "constraints",
    "difficulty": "hard",
-   "start": "ROU",
-   "destination": "VCT",
+   "start": "MDA",
+   "destination": "SYC",
    "rules": {
     "maritime": true,
-    "forbidden": [
-     "CUB"
-    ],
+    "forbidden": [],
     "mandatory": [],
-    "avoidRegion": "middle-east"
+    "avoidRegion": "caucasus",
+    "minIsland": 2
    },
-   "minIntermediate": 9,
-   "attempts": 10,
+   "minIntermediate": 10,
+   "attempts": 11,
    "date": "2026-12-13",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2026-12-13-regional",
@@ -55,8 +54,8 @@
    "minIntermediate": 3,
    "attempts": 6,
    "date": "2026-12-13",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   }
  ]
 }

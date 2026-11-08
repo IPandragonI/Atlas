@@ -7,9 +7,12 @@
   --bg: #f5f3eb;
   --surface: #ffffff;
   --surface-2: #faf8f1;
-  --land: #e4e0d4;
-  --land-off: #ece9df;
-  --water: #eae7da;
+  /* map palette (light): land clearly darker than the ocean, muted */
+  --land: #d4cdb7;
+  --land-off: #dcd6c3;
+  --water: #e0eaec;
+  --map-border: #968f79;
+  --map-region: #e5ebd8;
   --border: #c5c1b5;
   --border-soft: #dcd8cb;
   --text: #252923;
@@ -38,6 +41,8 @@
   --land: #303633;
   --land-off: #262b29;
   --water: #1b1f1e;
+  --map-border: #555d57;
+  --map-region: #2c3b30;
   --border: #555d57;
   --border-soft: #3b423e;
   --text: #ecede6;
@@ -152,14 +157,22 @@ button:disabled { cursor: not-allowed; opacity: 0.5; }
 @keyframes pop { 0% { transform: scale(0.96); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
 @keyframes slide-up { from { transform: translateY(12px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes branch { 0% { background: color-mix(in srgb, var(--accent) 28%, transparent); } 100% { background: transparent; } }
 @keyframes glow { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 50%, transparent); } 100% { box-shadow: 0 0 0 14px transparent; } }
 .anim-pop { animation: pop 0.22s ease-out; }
 .anim-shake { animation: shake 0.28s ease-in-out; }
 .anim-slide { animation: slide-up 0.25s ease-out; }
 .anim-glow { animation: glow 0.9s ease-out; }
+.anim-branch { animation: branch 0.8s ease-out; border-radius: var(--radius-sm); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
 }
 
 /* Scrollbars */
 * { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+
+/* Touch screens: every control is at least 44 px (WCAG 2.5.5) */
+@media (pointer: coarse) {
+  .btn { min-height: 44px; }
+  .map-ctl { width: 44px; height: 44px; }
+}

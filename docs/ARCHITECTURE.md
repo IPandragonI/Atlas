@@ -42,9 +42,19 @@ validated (`validateImport`). First completion of a daily challenge is the one s
 for flash-free first paint. If storage is unavailable the game remains playable.
 
 ## PWA / offline
-`scripts/build-sw.mjs` writes `out/sw.js` listing every exported file (shell, JS/CSS, geometry, countries, graph, **all daily
-JSON**, flags, icons, MapLibre worker). Navigations are network-first with cache fallback; assets cache-first. Updates show a
+`scripts/build-sw.mjs` writes `out/sw.js` listing every exported file (shell, JS/CSS, geometry, countries, graph, **a window of daily
+JSON (yesterday → +60 days, `scripts/sw-manifest.mjs`; other days are cached when first fetched and prefetched while online)**, flags, icons, MapLibre worker). Navigations are network-first with cache fallback; assets cache-first. Updates show a
 reload prompt (`PwaRegister`). e2e verifies: install, offline reload, offline daily challenge, offline map painting.
+
+## Generation in a Web Worker
+`src/workers/generate.worker.ts` runs the generator off the main thread. Turbopack does not bundle `new Worker(new URL(...))`
+for TypeScript correctly, so `scripts/build-worker.mjs` (esbuild) pre-bundles it to `public/workers/generate.worker.js`
+(run by `predev` and `build`; git-ignored). `generate-client.ts` falls back to the main thread if the worker is unavailable
+(always in `next dev`) and sets `html[data-gen-worker]` so e2e can prove which path ran. The game modal warms the worker up.
+
+## Accessibility
+Focus trap + focus return in dialogs (`useFocusTrap`), labelled map and a textual route summary (`sr-route`), coarse-pointer
+target sizes, no opacity-based dimming of text. `e2e/a11y.spec.ts` runs axe (WCAG 2 A/AA) on every screen in both themes.
 
 ## Testing
 Vitest (graph, rules, pathfinding, difficulty, hints, scoring, generator, daily files, persistence, i18n parity),

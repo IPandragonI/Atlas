@@ -1,6 +1,7 @@
 import Dexie, { type EntityTable } from "dexie";
 import type { HistoryEntry } from "@/engine/generator/diversity";
-import type { ChallengeDifficulty, GameMode } from "@/engine/types";
+import type { Challenge, ChallengeDifficulty, GameMode, GameState } from "@/engine/types";
+import type { GameConfig } from "@/lib/config";
 
 /** Bump when the IndexedDB structure changes, and add a `.version(n)` block with an upgrade. */
 export const DB_VERSION = 1;
@@ -258,4 +259,36 @@ export async function importSnapshot(db: AtlasDB, data: Snapshot): Promise<void>
     await db.achievements.bulkPut(data.achievements);
     await db.recents.bulkAdd(data.recents);
   });
+}
+
+// ------------------------------------------------------------------ in-progress game (resume)
+
+/**
+ * The single game currently being played, saved after every move so a reload, a crash or a phone call never loses it.
+ * Stored in the existing `kv` table (no schema change). It is NOT part of exports and is removed when the game ends.
+ */
+export interface InProgressRecord {
+  version: 1;
+  /** Identity of the game = its URL parameters; opening the same URL resumes this game. */
+  key: string;
+  challenge: Challenge;
+  config: GameConfig | null;
+  state: GameState;
+  /** Time already played, so the clock resumes instead of counting the time away. */
+  elapsedMs: number;
+  savedAt: number;
+}
+
+const IN_PROGRESS_KEY = "inprogress";
+
+export async function saveInProgress(db: AtlasDB, rec: InProgressRecord): Promise<void> {
+  await db.kv.put({ key: IN_PROGRESS_KEY, value: rec });
+}
+export async function loadInProgress(db: AtlasDB): Promise<InProgressRecord | null> {
+  const row = await db.kv.get(IN_PROGRESS_KEY);
+  const v = row?.value as InProgressRecord | undefined;
+  return v && typeof v === "object" && v.version === 1 && typeof v.key === "string" ? v : null;
+}
+export async function clearInProgress(db: AtlasDB): Promise<void> {
+  await db.kv.delete(IN_PROGRESS_KEY);
 }

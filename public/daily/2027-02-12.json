@@ -1,7 +1,7 @@
 {
  "date": "2027-02-12",
- "rulesVersion": "1",
- "datasetVersion": "2026.1",
+ "rulesVersion": "2",
+ "datasetVersion": "2026.2",
  "challenges": [
   {
    "id": "daily-2027-02-12-classic",
@@ -17,28 +17,30 @@
    "minIntermediate": 9,
    "attempts": 10,
    "date": "2027-02-12",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-02-12-constraints",
    "mode": "constraints",
    "difficulty": "hard",
-   "start": "FJI",
-   "destination": "ETH",
+   "start": "COD",
+   "destination": "KHM",
    "rules": {
-    "maritime": true,
+    "maritime": false,
     "forbidden": [
-     "RUS"
+     "LAO"
     ],
-    "mandatory": [],
+    "mandatory": [
+     "IND"
+    ],
     "avoidRegion": "middle-east"
    },
-   "minIntermediate": 13,
-   "attempts": 14,
+   "minIntermediate": 14,
+   "attempts": 15,
    "date": "2027-02-12",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-02-12-regional",
@@ -55,8 +57,8 @@
    "minIntermediate": 3,
    "attempts": 4,
    "date": "2027-02-12",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   }
  ]
 }

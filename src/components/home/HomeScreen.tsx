@@ -13,6 +13,9 @@ import { COUNTRIES, graph } from "@/lib/atlas";
 import { dailyMeta } from "@/lib/daily";
 import { DAILY_MODES, utcDate } from "@/lib/daily-schedule";
 import { dailyStreak } from "@/lib/progress";
+import { getDB, loadInProgress, type InProgressRecord } from "@/lib/db";
+import { warmUpGenerator } from "@/lib/generate-client";
+import { isResumable } from "@/stores/game";
 import { useProgress } from "@/stores/progress";
 import { GameConfigModal } from "./GameConfigModal";
 
@@ -26,6 +29,14 @@ export function HomeScreen() {
   const dailyRecs = useProgress((s) => s.daily);
   const [today, setToday] = useState<string | null>(null);
   useEffect(() => setToday(utcDate()), []);
+
+  useEffect(() => warmUpGenerator(), []);
+
+  // A saved game in progress (any mode) can be resumed from here.
+  const [saved, setSaved] = useState<InProgressRecord | null>(null);
+  useEffect(() => {
+    loadInProgress(getDB()).then((r) => setSaved(isResumable(r) ? r : null)).catch(() => undefined);
+  }, []);
 
   // Each free-play mode opens its own configuration modal; "/?mode=classic" opens it directly (used after a daily).
   const router = useRouter();
@@ -50,6 +61,17 @@ export function HomeScreen() {
   return (
     <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-6 md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] md:px-6 md:py-10">
       <div className="grid content-start gap-8">
+        {saved && (
+          <section aria-label={t("home.resume.title")} className="card flex flex-wrap items-center justify-between gap-3 border-accent p-4" data-testid="resume-card">
+            <div className="grid gap-0.5">
+              <span className="eyebrow">{t("home.resume.title")}</span>
+              <span className="font-medium">
+                {t("home.resume.detail", { from: graph.country(saved.challenge.start).name[locale], to: graph.country(saved.challenge.destination).name[locale], n: saved.state.visited.length })}
+              </span>
+            </div>
+            <Link href={`/game?${saved.key}` as "/game"} className="btn btn-primary" data-testid="resume-link">{t("home.resume.action")}</Link>
+          </section>
+        )}
         <section aria-labelledby="daily-title">
           <div className="mb-3">
             <h1 id="daily-title" className="text-2xl md:text-3xl">{t("home.dailyTitle")}</h1>

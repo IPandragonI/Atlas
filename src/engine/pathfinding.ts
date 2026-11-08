@@ -1,23 +1,9 @@
 import type { AtlasGraph, GraphView } from "./graph/graph";
+import { bfsDistances } from "./graph/bfs";
 import { routeSatisfies } from "./rules";
-import type { Challenge } from "./types";
 
-/** BFS hop distances from `source` (unweighted shortest paths). */
-export function bfsDistances(graph: AtlasGraph, source: string, view: GraphView): Map<string, number> {
-  const dist = new Map<string, number>([[source, 0]]);
-  const queue = [source];
-  for (let i = 0; i < queue.length; i++) {
-    const cur = queue[i];
-    const d = dist.get(cur)!;
-    for (const n of graph.neighbors(cur, view)) {
-      if (!dist.has(n)) {
-        dist.set(n, d + 1);
-        queue.push(n);
-      }
-    }
-  }
-  return dist;
-}
+export { bfsDistances };
+import type { Challenge } from "./types";
 
 /** Number of distinct shortest routes between two countries (no route-level constraints). */
 export function countShortestRoutes(graph: AtlasGraph, start: string, goal: string, view: GraphView): number {

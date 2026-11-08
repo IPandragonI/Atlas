@@ -6,11 +6,12 @@ import { CONTINENT_IDS } from "@/data/regions";
 import { useRegionName } from "@/components/ui/useNames";
 import { COUNTRIES, graph } from "@/lib/atlas";
 import { utcDate } from "@/lib/daily-schedule";
-import { computeStats } from "@/lib/progress";
+import { bestScore, computeStats, modeBreakdown, recentScores } from "@/lib/progress";
 import { useProgress } from "@/stores/progress";
 
 export function StatsScreen() {
   const t = useTranslations("stats");
+  const tm = useTranslations("modes");
   const locale = useLocale() as "fr" | "en";
   const regionName = useRegionName();
   const { discovered, games, daily } = useProgress();
@@ -43,6 +44,52 @@ export function StatsScreen() {
           </div>
         ))}
       </dl>
+
+      <section aria-labelledby="by-mode">
+        <h2 id="by-mode" className="mb-3 text-xl">{t("byMode")}</h2>
+        <div className="overflow-x-auto rounded-[var(--radius)] border border-border-soft bg-surface">
+          <table className="w-full min-w-[480px] text-sm" data-testid="mode-table">
+            <thead>
+              <tr className="text-left text-xs muted">
+                <th className="px-3 py-2 font-medium">{t("mode")}</th>
+                <th className="px-3 py-2 font-medium">{t("played2")}</th>
+                <th className="px-3 py-2 font-medium">{t("winRate")}</th>
+                <th className="px-3 py-2 font-medium">{t("avg")}</th>
+                <th className="px-3 py-2 font-medium">{t("optimalRate")}</th>
+                <th className="px-3 py-2 font-medium">{t("avgMistakes")}</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border-soft">
+              {modeBreakdown(games).map((m) => (
+                <tr key={m.mode} data-testid={`mode-row-${m.mode}`}>
+                  <th scope="row" className="px-3 py-2 text-left font-medium">{tm(`${m.mode}.name`)}</th>
+                  <td className="px-3 py-2 tabular-nums">{m.played}</td>
+                  <td className="px-3 py-2 tabular-nums">{m.played ? `${m.wins}/${m.played}` : t("noModeData")}</td>
+                  <td className="px-3 py-2 tabular-nums">{m.played ? Math.round(m.avgScore) : t("noModeData")}</td>
+                  <td className="px-3 py-2 tabular-nums">{m.played ? `${Math.round(m.optimalRate * 100)}%` : t("noModeData")}</td>
+                  <td className="px-3 py-2 tabular-nums">{m.played ? m.avgMistakes.toFixed(1) : t("noModeData")}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {games.length > 0 && (
+        <section aria-labelledby="recent-scores">
+          <div className="mb-3 flex items-baseline justify-between">
+            <h2 id="recent-scores" className="text-xl">{t("recent")}</h2>
+            <span className="text-sm muted">{t("bestScore")} : <b className="text-text">{bestScore(games)}</b></span>
+          </div>
+          <ol className="flex h-28 items-end gap-1 rounded-[var(--radius)] border border-border-soft bg-surface p-3" data-testid="score-chart" aria-label={t("recent")}>
+            {recentScores(games).map((g, i) => (
+              <li key={i} className="flex-1" title={`${g.score}`} aria-label={`${g.score}`}>
+                <div className={`w-full rounded-t ${g.status === "won" ? "bg-accent" : "bg-error"}`} style={{ height: `${Math.max(4, g.score / 10)}%` }} />
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
 
       <section>
         <h2 className="mb-3 text-xl">{t("perContinent")}</h2>

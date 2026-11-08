@@ -1,7 +1,7 @@
 {
  "date": "2026-11-30",
- "rulesVersion": "1",
- "datasetVersion": "2026.1",
+ "rulesVersion": "2",
+ "datasetVersion": "2026.2",
  "challenges": [
   {
    "id": "daily-2026-11-30-classic",
@@ -17,8 +17,8 @@
    "minIntermediate": 2,
    "attempts": 7,
    "date": "2026-11-30",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2026-11-30-constraints",
@@ -38,15 +38,15 @@
    "minIntermediate": 3,
    "attempts": 8,
    "date": "2026-11-30",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2026-11-30-regional",
    "mode": "regional",
    "difficulty": "easy",
-   "start": "USA",
-   "destination": "HND",
+   "start": "BLZ",
+   "destination": "CUB",
    "rules": {
     "maritime": true,
     "forbidden": [],
@@ -56,8 +56,8 @@
    "minIntermediate": 1,
    "attempts": 6,
    "date": "2026-11-30",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   }
  ]
 }

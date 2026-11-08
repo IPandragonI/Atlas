@@ -10,7 +10,7 @@ export default defineConfig({
   workers: 1, // software WebGL (SwiftShader) is CPU-heavy: parallel workers cause timing flakes
   retries: 0,
   reporter: [["list"]],
-  use: { baseURL: "http://localhost:4173", trace: "retain-on-failure", launchOptions },
+  use: { baseURL: "http://localhost:4173", storageState: "e2e/.state/tutorial-done.json", trace: "retain-on-failure", launchOptions },
   // Serves the static export (npm run build first).
   webServer: { command: "npx serve out -l 4173 --no-clipboard", url: "http://localhost:4173/fr/", reuseExistingServer: true, timeout: 60_000 },
   projects: [

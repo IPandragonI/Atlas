@@ -89,7 +89,7 @@ test.describe("home and configuration modal", () => {
     await expect(page.getByTestId("cfg-start")).toBeDisabled();
     await page.getByTestId("cfg-min").fill("3");
     await page.getByTestId("cfg-attempts").fill("0");
-    await expect(page.getByTestId("cfg-errors")).toContainText("essais");
+    await expect(page.getByTestId("cfg-errors")).toContainText("erreurs autorisées");
     await expect(page.getByTestId("cfg-start")).toBeDisabled();
     await page.getByTestId("cfg-attempts").fill("5");
     await expect(page.getByTestId("cfg-errors")).toHaveCount(0);

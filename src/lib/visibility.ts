@@ -12,20 +12,20 @@ export interface MapVisibility {
  * configuration: Easy = full map, Normal / Hard = progressive discovery, Custom = whatever the player chose.
  *  - Full map: nothing is masked.
  *  - Progressive: hidden while playing, except the arrival country (always displayed), the departure country (unless the
- *    player disabled it) and each correctly entered country, which appears the moment it is validated.
- *    Wrong guesses are never drawn.
+ *    player disabled it) and every country the player has correctly entered (the discovery history, including branches
+ *    abandoned after a change of direction). Wrong guesses are never drawn.
  *  - Finished game (win or loss): everything is revealed.
- * `route` is the engine route (start + entered countries; never the destination).
  */
 export function computeVisibility(args: {
   appearance: MapAppearance;
   finished: boolean;
-  route: readonly string[];
+  /** Every country correctly entered so far (GameState.visited), not only the active route. */
+  entered: readonly string[];
   start: string;
   destination: string;
 }): MapVisibility {
   const masked = !args.appearance.full && !args.finished;
   if (!masked) return { masked, shown: [] };
-  const shown = [args.destination, ...(args.appearance.start ? [args.start] : []), ...args.route.slice(1)];
+  const shown = [args.destination, ...(args.appearance.start ? [args.start] : []), ...args.entered];
   return { masked, shown: [...new Set(shown)] };
 }

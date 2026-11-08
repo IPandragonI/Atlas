@@ -1,63 +1,64 @@
 {
  "date": "2027-10-06",
- "rulesVersion": "1",
- "datasetVersion": "2026.1",
+ "rulesVersion": "2",
+ "datasetVersion": "2026.2",
  "challenges": [
   {
    "id": "daily-2027-10-06-classic",
    "mode": "classic",
    "difficulty": "normal",
-   "start": "JOR",
-   "destination": "TZA",
+   "start": "ESP",
+   "destination": "SRB",
    "rules": {
     "maritime": false,
     "forbidden": [],
     "mandatory": []
    },
-   "minIntermediate": 5,
-   "attempts": 8,
+   "minIntermediate": 4,
+   "attempts": 7,
    "date": "2027-10-06",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-10-06-constraints",
    "mode": "constraints",
    "difficulty": "normal",
-   "start": "FIN",
-   "destination": "LBN",
+   "start": "ZAF",
+   "destination": "SDN",
    "rules": {
     "maritime": false,
     "forbidden": [
-     "TUR"
+     "MOZ"
     ],
     "mandatory": [
-     "AFG"
-    ]
+     "RWA"
+    ],
+    "minCoastal": 3
    },
    "minIntermediate": 6,
    "attempts": 9,
    "date": "2027-10-06",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-10-06-regional",
    "mode": "regional",
    "difficulty": "normal",
-   "start": "DOM",
-   "destination": "VCT",
+   "start": "TTO",
+   "destination": "DMA",
    "rules": {
     "maritime": true,
     "forbidden": [],
     "mandatory": [],
     "allowedRegion": "caribbean"
    },
-   "minIntermediate": 4,
-   "attempts": 7,
+   "minIntermediate": 2,
+   "attempts": 5,
    "date": "2027-10-06",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   }
  ]
 }

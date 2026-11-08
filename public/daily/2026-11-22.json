@@ -1,7 +1,7 @@
 {
  "date": "2026-11-22",
- "rulesVersion": "1",
- "datasetVersion": "2026.1",
+ "rulesVersion": "2",
+ "datasetVersion": "2026.2",
  "challenges": [
   {
    "id": "daily-2026-11-22-classic",
@@ -17,28 +17,28 @@
    "minIntermediate": 4,
    "attempts": 7,
    "date": "2026-11-22",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2026-11-22-constraints",
    "mode": "constraints",
    "difficulty": "hard",
-   "start": "PSE",
-   "destination": "NRU",
+   "start": "NLD",
+   "destination": "MUS",
    "rules": {
     "maritime": true,
     "forbidden": [
-     "SLB"
+     "MLT"
     ],
     "mandatory": [],
-    "avoidRegion": "europe"
+    "minIsland": 2
    },
-   "minIntermediate": 9,
-   "attempts": 10,
+   "minIntermediate": 11,
+   "attempts": 12,
    "date": "2026-11-22",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2026-11-22-regional",
@@ -55,8 +55,8 @@
    "minIntermediate": 4,
    "attempts": 7,
    "date": "2026-11-22",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   }
  ]
 }

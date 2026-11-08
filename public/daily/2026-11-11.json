@@ -1,14 +1,14 @@
 {
  "date": "2026-11-11",
- "rulesVersion": "1",
- "datasetVersion": "2026.1",
+ "rulesVersion": "2",
+ "datasetVersion": "2026.2",
  "challenges": [
   {
    "id": "daily-2026-11-11-classic",
    "mode": "classic",
    "difficulty": "normal",
-   "start": "PRK",
-   "destination": "JOR",
+   "start": "ALB",
+   "destination": "BLR",
    "rules": {
     "maritime": false,
     "forbidden": [],
@@ -17,34 +17,34 @@
    "minIntermediate": 4,
    "attempts": 7,
    "date": "2026-11-11",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2026-11-11-constraints",
    "mode": "constraints",
    "difficulty": "normal",
-   "start": "FSM",
-   "destination": "SWE",
+   "start": "VCT",
+   "destination": "PRY",
    "rules": {
     "maritime": true,
     "forbidden": [],
     "mandatory": [
-     "LVA"
+     "LCA"
     ]
    },
-   "minIntermediate": 6,
-   "attempts": 9,
+   "minIntermediate": 5,
+   "attempts": 8,
    "date": "2026-11-11",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2026-11-11-regional",
    "mode": "regional",
    "difficulty": "normal",
-   "start": "CHN",
-   "destination": "LBN",
+   "start": "SAU",
+   "destination": "KOR",
    "rules": {
     "maritime": true,
     "forbidden": [],
@@ -54,8 +54,8 @@
    "minIntermediate": 4,
    "attempts": 7,
    "date": "2026-11-11",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   }
  ]
 }

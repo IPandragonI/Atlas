@@ -31,7 +31,6 @@ export const SEA_CONNECTIONS: readonly EdgePair[] = [
   ["GBR", "BEL", "North Sea ferries (Hull–Zeebrugge)"],
   ["GBR", "NLD", "North Sea ferries (Harwich–Hook of Holland)"],
   ["GBR", "ISL", "North Atlantic link via Faroe-Shetland corridor"],
-  ["ISL", "NOR", "Norwegian Sea"],
   ["DNK", "NOR", "Skagerrak"],
   ["DNK", "SWE", "Øresund / Kattegat"],
   ["SWE", "FIN", "Gulf of Bothnia, Åland ferries"],
@@ -65,7 +64,6 @@ export const SEA_CONNECTIONS: readonly EdgePair[] = [
   ["TUR", "RUS", "Black Sea"],
   ["BGR", "UKR", "Black Sea"],
   ["GEO", "UKR", "Black Sea"],
-  ["GEO", "ROU", "Black Sea"],
   ["AZE", "KAZ", "Caspian Sea"],
   ["AZE", "TKM", "Caspian Sea"],
   ["IRN", "RUS", "Caspian Sea"],
@@ -89,19 +87,14 @@ export const SEA_CONNECTIONS: readonly EdgePair[] = [
   // Indian Ocean
   ["IND", "LKA", "Palk Strait"],
   ["IND", "MDV", "Laccadive Sea"],
-  ["LKA", "MDV", "Indian Ocean"],
   ["MDG", "MOZ", "Mozambique Channel"],
   ["MDG", "COM", "Mozambique Channel"],
   ["COM", "MOZ", "Mozambique Channel"],
   ["COM", "TZA", "Indian Ocean"],
   ["MUS", "MDG", "Indian Ocean (Mascarene link)"],
   ["SYC", "MDG", "Indian Ocean"],
-  ["SYC", "KEN", "Indian Ocean"],
-  ["SYC", "MUS", "Indian Ocean"],
-  ["SYC", "TZA", "Indian Ocean"],
   // Atlantic Africa
   ["CPV", "SEN", "Atlantic Ocean"],
-  ["CPV", "MRT", "Atlantic Ocean"],
   ["STP", "GAB", "Gulf of Guinea"],
   ["STP", "GNQ", "Gulf of Guinea"],
   // East & South-East Asia
@@ -113,35 +106,23 @@ export const SEA_CONNECTIONS: readonly EdgePair[] = [
   ["SGP", "IDN", "Singapore Strait"],
   ["PHL", "MYS", "Sulu / Celebes Sea"],
   ["PHL", "IDN", "Celebes Sea"],
-  ["PHL", "VNM", "South China Sea"],
-  ["PHL", "CHN", "South China Sea"],
   ["PHL", "JPN", "Luzon Strait / Philippine Sea"],
   ["BRN", "PHL", "Sulu Sea"],
   ["IDN", "AUS", "Timor Sea / Arafura Sea"],
   ["TLS", "AUS", "Timor Sea"],
-  ["PLW", "PHL", "Philippine Sea"],
   ["PLW", "IDN", "Western Pacific"],
   ["PLW", "FSM", "Western Pacific"],
   // Oceania
   ["AUS", "PNG", "Torres Strait"],
   ["AUS", "NZL", "Tasman Sea"],
   ["PNG", "SLB", "Solomon Sea"],
-  ["PNG", "FSM", "Western Pacific"],
   ["SLB", "VUT", "Coral Sea"],
-  ["SLB", "NRU", "Western Pacific"],
   ["VUT", "FJI", "Coral Sea"],
   ["FJI", "TON", "South Pacific"],
-  ["FJI", "WSM", "South Pacific"],
   ["FJI", "TUV", "South Pacific"],
   ["TON", "WSM", "South Pacific"],
-  ["WSM", "TUV", "South Pacific"],
-  ["NZL", "FJI", "South Pacific"],
-  ["NZL", "TON", "South Pacific"],
-  ["FSM", "MHL", "Micronesia"],
   ["MHL", "KIR", "Micronesia"],
   ["KIR", "NRU", "Micronesia"],
-  ["KIR", "TUV", "Micronesia"],
-  ["NRU", "MHL", "Micronesia"],
   // Caribbean & Americas
   ["USA", "CUB", "Straits of Florida"],
   ["USA", "BHS", "Straits of Florida"],
@@ -154,7 +135,6 @@ export const SEA_CONNECTIONS: readonly EdgePair[] = [
   ["BHS", "HTI", "Caribbean"],
   ["DOM", "JAM", "Caribbean"],
   ["DOM", "BHS", "Caribbean"],
-  ["DOM", "KNA", "Anegada Passage"],
   ["KNA", "ATG", "Leeward Islands"],
   ["ATG", "DMA", "Leeward Islands"],
   ["DMA", "LCA", "Martinique Channel"],
@@ -166,10 +146,27 @@ export const SEA_CONNECTIONS: readonly EdgePair[] = [
   ["TTO", "VEN", "Gulf of Paria"],
   ["TTO", "GUY", "Caribbean"],
   ["TTO", "BRB", "Caribbean"],
-  ["HND", "JAM", "Caribbean Sea"],
-  ["HND", "CUB", "Caribbean Sea"],
-  ["COL", "JAM", "Caribbean Sea"],
-  ["COL", "DOM", "Caribbean Sea"],
-  ["PAN", "JAM", "Caribbean Sea"],
-  ["NIC", "JAM", "Caribbean Sea"],
+  // Kept because a PUBLISHED daily challenge depends on them (see SEA_DISTANCE_EXCEPTIONS)
+  ["FJI", "NZL", "South Pacific"],
+  ["KIR", "TUV", "Micronesia"],
+  ["JAM", "NIC", "Caribbean Sea"],
+];
+
+/**
+ * Sea links whose crossing exceeds 500 km. The limit is enforced by a test against the measured coastline distances
+ * (src/data/connections/sea-audit.json, produced by `npm run data:audit-sea`). Each exception exists because the island
+ * state would otherwise be cut off from the whole graph, and it is the NEAREST playable neighbour.
+ */
+export const SEA_DISTANCE_LIMIT_KM = 500;
+export const SEA_DISTANCE_EXCEPTIONS: readonly EdgePair[] = [
+  ["MDG", "SYC", "Seychelles: remote archipelago, Madagascar is its nearest playable neighbour (~1,060 km)."],
+  ["MDG", "MUS", "Mauritius: remote island, Madagascar is its nearest playable neighbour (~870 km)."],
+  ["GBR", "ISL", "Iceland: remote island, the British Isles are its nearest playable neighbours (~790 km)."],
+  ["AUS", "NZL", "New Zealand: the Tasman Sea crossing to Australia is the only link of the country (~620 km)."],
+  ["CPV", "SEN", "Cabo Verde: Senegal is its nearest mainland neighbour (~570 km)."],
+  ["TON", "WSM", "Samoa: Tonga is its nearest playable neighbour and its only link (~550 km)."],
+  ["FJI", "VUT", "The only link joining Melanesia (Vanuatu) to the Fiji / Polynesia group (~515 km)."],
+  ["FJI", "NZL", "Published daily 2026-11-08 (regional) is solved through it; also New Zealand's link to the Fiji group (~1,420 km). Candidate for removal once that date is history."],
+  ["KIR", "TUV", "Published daily 2026-11-08 (regional) is solved through it; also the link joining Kiribati / Marshall Islands / Nauru to the rest (~810 km)."],
+  ["JAM", "NIC", "Published daily 2026-11-06 (constraints) is solved through it (~630 km). Candidate for removal once that date is history."],
 ];

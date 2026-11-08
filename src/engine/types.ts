@@ -88,8 +88,10 @@ export type GameStatus = "playing" | "won" | "lost";
 
 export interface GameState {
   challengeId: string;
-  /** start + accepted countries (destination appended on victory). */
+  /** The ACTIVE route: start + the current branch of accepted countries (never the destination). Used for scoring. */
   route: string[];
+  /** Discovery history: every country correctly entered this game, including branches the player abandoned. */
+  visited: string[];
   attemptsTotal: number;
   attemptsLeft: number;
   /** Rejected submissions (country ids), in order. */

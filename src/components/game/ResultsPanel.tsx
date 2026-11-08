@@ -9,6 +9,7 @@ import type { Solution } from "@/engine/pathfinding";
 import type { Challenge, GameResult } from "@/engine/types";
 import { graph } from "@/lib/atlas";
 import { buildShareText } from "@/lib/share";
+import { renderShareImage } from "@/lib/share-image";
 import { Link } from "@/i18n/navigation";
 import type { GameMode, HintRecord } from "@/engine/types";
 import type { NextSuggestion } from "@/lib/replay";
@@ -86,6 +87,35 @@ export function ResultsPanel({ challenge, result, solution, hints, fresh, achiev
       }
     } catch {
       /* cancelled */
+    }
+  };
+
+  const shareImage = async () => {
+    try {
+      const blob = await renderShareImage({
+        heading: `${t(`modes.${challenge.mode}.name`)} · ${t(`difficulty.${challenge.difficulty}.name`)}`,
+        subtitle: challenge.date ?? new Date().toISOString().slice(0, 10),
+        won,
+        score: s.total,
+        outOf: t("results.outOf"),
+        optimalLabel: result.optimal ? t("results.optimalBadge") : null,
+        steps: result.intermediates,
+        mistakes: result.mistakes,
+        hints: result.hintsUsed.length,
+        legend: t("results.imageLegend"),
+        footer: t("results.imageFooter"),
+      });
+      const file = new File([blob], `atlas-${challenge.date ?? "game"}.png`, { type: "image/png" });
+      if (navigator.canShare?.({ files: [file] })) await navigator.share({ files: [file] });
+      else {
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = file.name;
+        a.click();
+        URL.revokeObjectURL(a.href);
+      }
+    } catch {
+      /* cancelled or unsupported */
     }
   };
 
@@ -170,8 +200,9 @@ export function ResultsPanel({ challenge, result, solution, hints, fresh, achiev
           <span className="font-semibold">{t("results.replaySame")}</span>
           <span className="text-xs font-normal opacity-80">{daily ? t("results.replaySameDailyDesc") : t("results.replaySameDesc")}</span>
         </button>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-3 gap-2">
           <button type="button" className="btn" onClick={share}><Icon name="share" size={16} />{copied ? t("results.copied") : t("results.share")}</button>
+          <button type="button" className="btn" onClick={shareImage} data-testid="share-image"><Icon name="download" size={16} />{t("results.shareImage")}</button>
           <Link href="/" className="btn btn-ghost">{t("results.home")}</Link>
         </div>
       </section>

@@ -60,3 +60,22 @@ export function generateForConfig(
 export function scopeFacts(cfg: Pick<GameConfig, "mode" | "scope" | "forbidden">): ScopeInfo {
   return scopeInfo(makeContext(), cfg);
 }
+
+// ------------------------------------------------------------------ worker protocol
+
+export interface WorkerRequest {
+  id: number;
+  req: GenRequest;
+  history: HistoryEntry[];
+  attempts: number;
+  relaxExclude: boolean;
+}
+export type WorkerResponse = { id: number; result: Generated | null } | { id: number; error: string };
+
+/** Pure: the same code runs inside the Web Worker and, as a fallback, on the main thread. */
+export function handleGenerate(msg: WorkerRequest): { id: number; result: Generated | null } {
+  const first = generateWithRetry(msg.req, msg.history, msg.attempts);
+  // A very small scope can have a single possible start/destination pair: rather than failing a replay, allow it again.
+  const result = first ?? (msg.relaxExclude && msg.req.exclude ? generateWithRetry({ ...msg.req, exclude: undefined }, msg.history, msg.attempts) : null);
+  return { id: msg.id, result };
+}

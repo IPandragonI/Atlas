@@ -1,44 +1,44 @@
 {
  "date": "2027-07-09",
- "rulesVersion": "1",
- "datasetVersion": "2026.1",
+ "rulesVersion": "2",
+ "datasetVersion": "2026.2",
  "challenges": [
   {
    "id": "daily-2027-07-09-classic",
    "mode": "classic",
    "difficulty": "hard",
-   "start": "SVK",
+   "start": "KWT",
    "destination": "GNQ",
    "rules": {
     "maritime": false,
     "forbidden": [],
     "mandatory": []
    },
-   "minIntermediate": 9,
-   "attempts": 10,
+   "minIntermediate": 7,
+   "attempts": 8,
    "date": "2027-07-09",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-07-09-constraints",
    "mode": "constraints",
    "difficulty": "hard",
-   "start": "BWA",
-   "destination": "PLW",
+   "start": "BDI",
+   "destination": "PNG",
    "rules": {
     "maritime": true,
-    "forbidden": [
-     "SOM"
+    "forbidden": [],
+    "mandatory": [
+     "GEO"
     ],
-    "mandatory": [],
-    "avoidRegion": "south-asia"
+    "avoidRegion": "middle-east"
    },
-   "minIntermediate": 10,
-   "attempts": 11,
+   "minIntermediate": 12,
+   "attempts": 13,
    "date": "2027-07-09",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-07-09-regional",
@@ -55,8 +55,8 @@
    "minIntermediate": 7,
    "attempts": 8,
    "date": "2027-07-09",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   }
  ]
 }

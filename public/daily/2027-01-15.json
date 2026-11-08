@@ -1,7 +1,7 @@
 {
  "date": "2027-01-15",
- "rulesVersion": "1",
- "datasetVersion": "2026.1",
+ "rulesVersion": "2",
+ "datasetVersion": "2026.2",
  "challenges": [
   {
    "id": "daily-2027-01-15-classic",
@@ -17,28 +17,29 @@
    "minIntermediate": 7,
    "attempts": 8,
    "date": "2027-01-15",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-01-15-constraints",
    "mode": "constraints",
    "difficulty": "hard",
-   "start": "NRU",
-   "destination": "AGO",
+   "start": "PNG",
+   "destination": "RWA",
    "rules": {
     "maritime": true,
     "forbidden": [
-     "JPN"
+     "SAU"
     ],
-    "mandatory": [],
-    "avoidRegion": "balkans"
+    "mandatory": [
+     "AUS"
+    ]
    },
-   "minIntermediate": 12,
-   "attempts": 13,
+   "minIntermediate": 11,
+   "attempts": 12,
    "date": "2027-01-15",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-01-15-regional",
@@ -55,8 +56,8 @@
    "minIntermediate": 1,
    "attempts": 2,
    "date": "2027-01-15",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   }
  ]
 }

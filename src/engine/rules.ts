@@ -1,4 +1,5 @@
 import type { AtlasGraph } from "./graph/graph";
+import { bfsDistances } from "./graph/bfs";
 import type { Challenge, ChallengeRules } from "./types";
 
 /** True when the rules contain constraints that depend on the whole route. */
@@ -47,10 +48,9 @@ export function isValidRoute(graph: AtlasGraph, ch: Pick<Challenge, "start" | "d
 }
 
 /**
- * Countries that are valid next moves right now: adjacent under the active connection rules, unused,
- * not forbidden, inside the region, within the intermediate budget. The destination is NEVER a move:
- * it is only used internally to decide victory (see {@link reachesDestination}).
- * Engine/hints only: the autocomplete UI deliberately does NOT use this (it would leak geography).
+ * Countries that extend the CURRENT end of the route right now: adjacent under the active connection rules, unused,
+ * not forbidden, inside the region, within the intermediate budget. The destination is never a move: it only decides
+ * victory (see {@link reachesDestination}). Used by the hint engine; the autocomplete UI deliberately does NOT use it.
  */
 export function nextMoves(graph: AtlasGraph, ch: Challenge, route: readonly string[]): string[] {
   const current = route[route.length - 1];
@@ -66,8 +66,10 @@ export function nextMoves(graph: AtlasGraph, ch: Challenge, route: readonly stri
  * Victory test, run after each accepted move: the current country must connect to the destination under
  * the active connection rules AND the completed route (route + destination) must satisfy every route-level
  * constraint. Otherwise the game simply continues (which constraint is missing is never revealed).
+ * At least one country must have been entered: a start that already touches the destination never wins by itself.
  */
 export function reachesDestination(graph: AtlasGraph, ch: Challenge, route: readonly string[]): boolean {
+  if (route.length < 2) return false;
   const current = route[route.length - 1];
   if (current === ch.destination) return false;
   const view = graph.viewFor(ch.rules, [ch.start, ch.destination]);
@@ -75,12 +77,55 @@ export function reachesDestination(graph: AtlasGraph, ch: Challenge, route: read
   return routeSatisfies(graph, [...route, ch.destination], ch.rules);
 }
 
-export interface MoveValidation {
-  valid: boolean;
+/** True when the departure country is already connected to the destination under the active rules. */
+export function startTouchesDestination(graph: AtlasGraph, ch: Pick<Challenge, "start" | "destination" | "rules">): boolean {
+  const view = graph.viewFor(ch.rules, [ch.start, ch.destination]);
+  return graph.neighbors(ch.start, view).includes(ch.destination);
 }
 
-/** Single source of truth for accepting a guess. The reason for rejection is never exposed. */
+export interface MoveResolution {
+  valid: boolean;
+  /**
+   * Index in the current route of the country the new one connects to. `route.length - 1` is a plain extension of
+   * the route; a smaller index is a change of direction: everything after that index leaves the active route.
+   */
+  from: number;
+}
+
+/**
+ * Single source of truth for accepting a guess; the reason for a rejection is never exposed.
+ *  - Plain extension: adjacent to the last country of the route (any valid neighbour, as before).
+ *  - Change of direction: adjacent to an EARLIER country of the route AND strictly closer to the destination than that
+ *    country (shortest-path distance in the active graph). The latest such connection point is used.
+ * Forbidden / out-of-region / used countries, the intermediate budget and route-level constraints apply to the NEW route,
+ * so a change of direction can never be used to bypass a constraint.
+ */
+export function resolveMove(graph: AtlasGraph, ch: Challenge, route: readonly string[], guess: string): MoveResolution {
+  const no: MoveResolution = { valid: false, from: -1 };
+  if (!graph.has(guess) || guess === ch.start || guess === ch.destination || route.includes(guess)) return no;
+  const view = graph.viewFor(ch.rules, [ch.start, ch.destination]);
+  if (view.blocked.has(guess) || (view.allowed && !view.allowed.has(guess))) return no;
+  const max = ch.rules.maxIntermediate;
+  const touching = new Set(graph.neighbors(guess, view));
+  const last = route.length - 1;
+  if (touching.has(route[last])) return max === undefined || route.length <= max ? { valid: true, from: last } : no;
+
+  const toGoal = bfsDistances(graph, ch.destination, view);
+  const dGuess = toGoal.get(guess);
+  if (dGuess === undefined) return no;
+  for (let i = last - 1; i >= 0; i--) {
+    if (!touching.has(route[i])) continue;
+    const dHere = toGoal.get(route[i]);
+    if (dHere === undefined || dGuess >= dHere) continue; // must be real progress towards the destination
+    if (max !== undefined && i + 1 > max) continue; // the new route would have too many intermediates
+    return { valid: true, from: i };
+  }
+  return no;
+}
+
+export type MoveValidation = MoveResolution;
+
+/** Validation of a guess (see {@link resolveMove}). */
 export function validateMove(graph: AtlasGraph, ch: Challenge, route: readonly string[], guess: string): MoveValidation {
-  if (!graph.has(guess)) return { valid: false };
-  return { valid: nextMoves(graph, ch, route).includes(guess) };
+  return resolveMove(graph, ch, route, guess);
 }

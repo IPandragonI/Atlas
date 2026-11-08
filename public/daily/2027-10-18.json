@@ -1,7 +1,7 @@
 {
  "date": "2027-10-18",
- "rulesVersion": "1",
- "datasetVersion": "2026.1",
+ "rulesVersion": "2",
+ "datasetVersion": "2026.2",
  "challenges": [
   {
    "id": "daily-2027-10-18-classic",
@@ -17,27 +17,27 @@
    "minIntermediate": 3,
    "attempts": 8,
    "date": "2027-10-18",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-10-18-constraints",
    "mode": "constraints",
    "difficulty": "easy",
-   "start": "MHL",
-   "destination": "NZL",
+   "start": "AUS",
+   "destination": "KIR",
    "rules": {
     "maritime": true,
-    "forbidden": [],
-    "mandatory": [
-     "VUT"
-    ]
+    "forbidden": [
+     "NZL"
+    ],
+    "mandatory": []
    },
-   "minIntermediate": 4,
-   "attempts": 9,
+   "minIntermediate": 5,
+   "attempts": 10,
    "date": "2027-10-18",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-10-18-regional",
@@ -54,8 +54,8 @@
    "minIntermediate": 1,
    "attempts": 6,
    "date": "2027-10-18",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   }
  ]
 }

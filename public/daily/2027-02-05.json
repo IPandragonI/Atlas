@@ -1,7 +1,7 @@
 {
  "date": "2027-02-05",
- "rulesVersion": "1",
- "datasetVersion": "2026.1",
+ "rulesVersion": "2",
+ "datasetVersion": "2026.2",
  "challenges": [
   {
    "id": "daily-2027-02-05-classic",
@@ -17,46 +17,45 @@
    "minIntermediate": 9,
    "attempts": 10,
    "date": "2027-02-05",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-02-05-constraints",
    "mode": "constraints",
    "difficulty": "hard",
-   "start": "PER",
-   "destination": "COD",
+   "start": "MUS",
+   "destination": "HUN",
    "rules": {
     "maritime": true,
     "forbidden": [],
-    "mandatory": [
-     "BRA"
-    ],
-    "avoidRegion": "middle-east"
+    "mandatory": [],
+    "minIsland": 2,
+    "avoidRegion": "balkans"
    },
-   "minIntermediate": 12,
-   "attempts": 13,
+   "minIntermediate": 10,
+   "attempts": 11,
    "date": "2027-02-05",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-02-05-regional",
    "mode": "regional",
    "difficulty": "hard",
-   "start": "GIN",
-   "destination": "MDG",
+   "start": "LSO",
+   "destination": "GNB",
    "rules": {
     "maritime": true,
     "forbidden": [],
     "mandatory": [],
     "allowedRegion": "africa"
    },
-   "minIntermediate": 7,
-   "attempts": 8,
+   "minIntermediate": 9,
+   "attempts": 10,
    "date": "2027-02-05",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   }
  ]
 }

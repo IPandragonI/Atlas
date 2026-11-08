@@ -31,7 +31,8 @@
     "points": "{n} pts",
     "error": "Something went wrong.",
     "mapLoading": "Loading the map…",
-    "mapError": "The map could not be displayed."
+    "mapError": "The map could not be displayed.",
+    "mapLabel": "Interactive world map"
   },
   "themes": {
     "light": "Light",
@@ -59,19 +60,19 @@
     "label": "Difficulty",
     "easy": {
       "name": "Easy",
-      "desc": "Short routes, 5 spare attempts"
+      "desc": "Short routes, 5 spare mistakes"
     },
     "normal": {
       "name": "Normal",
-      "desc": "Varied routes, 3 spare attempts"
+      "desc": "Varied routes, 3 spare mistakes"
     },
     "hard": {
       "name": "Hard",
-      "desc": "Long routes, only 1 spare attempt"
+      "desc": "Long routes, only 1 spare mistake"
     },
     "custom": {
       "name": "Custom",
-      "desc": "Set the route length, attempts and map yourself"
+      "desc": "Set the route length, allowed mistakes and map yourself"
     }
   },
   "home": {
@@ -91,20 +92,25 @@
     "dailyTodo": "To play",
     "playNow": "Play",
     "openCollection": "View collection",
-    "dailyUnavailable": "Generated locally (today’s file is unavailable)."
+    "dailyUnavailable": "Generated locally (today’s file is unavailable).",
+    "resume": {
+      "title": "Game in progress",
+      "detail": "{from} → {to} · {n, plural, =0 {no country entered} one {# country entered} other {# countries entered}}",
+      "action": "Resume"
+    }
   },
   "game": {
     "from": "From",
     "to": "To",
-    "attempts": "Attempts left",
-    "attemptsShort": "{n} attempts",
+    "attempts": "Mistakes allowed",
+    "attemptsShort": "{n} mistakes allowed",
     "route": "Your route",
     "routeEmpty": "Enter a neighbouring country to move on.",
     "inputLabel": "Next country",
-    "inputPlaceholder": "Type a neighbouring country…",
+    "inputPlaceholder": "Type a country name…",
     "noSuggestions": "No country matches.",
     "submit": "Submit",
-    "wrong": "Incorrect — one attempt used.",
+    "wrong": "Incorrect — one allowed mistake used.",
     "right": "Nice!",
     "constraints": "Active rules",
     "noConstraints": "No special rules",
@@ -135,9 +141,13 @@
     "minShown": "Goal: reach a country bordering the destination with as few countries as possible.",
     "mapHidden": "The rest of the map reveals itself as you discover countries.",
     "menu": "Menu",
-    "hintConfirm": "Use this hint? Immediate penalty: −{n} pts. No attempt is consumed.",
+    "hintConfirm": "Use this hint? Immediate penalty: −{n} pts. No mistake is counted.",
     "hintLocked": "Use the previous hint first",
-    "hintUsed": "Used"
+    "hintUsed": "Used",
+    "branch": "New direction: your route was updated.",
+    "startAdjacent": "The starting country already borders the destination: begin by entering another country. This does not count as a mistake and costs no points.",
+    "help": "How to play",
+    "srRoute": "Active route: {route}. {n, plural, =0 {No country discovered} one {# country discovered} other {# countries discovered}}."
   },
   "constraint": {
     "forbidden": "Avoid: {countries}",
@@ -201,7 +211,12 @@
     "replaySameDesc": "Same mode, same difficulty, same area — but a new route.",
     "replaySameDailyDesc": "Free game with the same mode and difficulty. Your daily result stays saved.",
     "showMoreRoutes": "Show the {n} other routes",
-    "showFewerRoutes": "Hide the other routes"
+    "showFewerRoutes": "Hide the other routes",
+    "shareImage": "Image",
+    "shareImageSaved": "Image saved",
+    "imageLegend": "■ countries entered  ◆ destination  ■ mistakes",
+    "imageFooter": "Connect two countries, border by border.",
+    "imageHeading": "Score"
   },
   "collection": {
     "title": "Your collection",
@@ -277,7 +292,17 @@
     "emptyHistory": "No games played yet.",
     "won": "Victory",
     "lost": "Defeat",
-    "perContinent": "Discovery by continent"
+    "perContinent": "Discovery by continent",
+    "byMode": "By mode",
+    "mode": "Mode",
+    "played2": "Games",
+    "winRate": "Wins",
+    "avg": "Average score",
+    "optimalRate": "Optimal",
+    "avgMistakes": "Mistakes / game",
+    "recent": "Recent scores",
+    "bestScore": "Best score",
+    "noModeData": "—"
   },
   "settings": {
     "title": "Settings",
@@ -362,8 +387,8 @@
     "custom": "Custom settings",
     "minRoute": "Minimum route length",
     "minRouteHelp": "Minimum number of intermediate countries (maximum possible for this area: {max}).",
-    "attempts": "Number of attempts",
-    "attemptsHelp": "Between {min} and {max}.",
+    "attempts": "Allowed mistakes",
+    "attemptsHelp": "Number of allowed mistakes, between {min} and {max}.",
     "map": "Map appearance",
     "mapStart": "Show the starting country",
     "mapBorders": "Show country borders",
@@ -385,11 +410,47 @@
     "checking": "Looking for a route…",
     "errors": {
       "min": "The minimum length must be between 1 and {max} for this area.",
-      "attempts": "Attempts must be a whole number between 1 and 30.",
+      "attempts": "Allowed mistakes must be a whole number between 1 and 30.",
       "forbidden": "Too many avoided countries (maximum 10).",
       "scope": "Invalid playing area.",
       "noRoute": "No route is possible with these settings. Remove an avoided country, pick a larger area or lower the minimum length.",
       "failed": "Could not generate a game. Try again."
+    },
+    "warnHidden": "With the map hidden and no borders or names, the game becomes very hard."
+  },
+  "tutorial": {
+    "title": "How to play",
+    "close": "Close",
+    "next": "Next",
+    "back": "Back",
+    "done": "Let’s go",
+    "progress": "Step {n} of {total}",
+    "steps": {
+      "goal": {
+        "title": "Connect two countries",
+        "body": "You get a starting country and a destination. Connect them by naming countries that touch each other, border after border.",
+        "tip": "The fewer intermediate countries you use, the better your score."
+      },
+      "play": {
+        "title": "Type the countries",
+        "body": "Type a country name (in French or English) and submit. The game ends as soon as your last country touches the destination: you never have to type the destination.",
+        "tip": "A wrong answer uses one allowed mistake, with no explanation."
+      },
+      "branch": {
+        "title": "Change direction",
+        "body": "You can restart from an earlier country of your route when the new country gets you closer to the destination. The old branch leaves your route, with no penalty.",
+        "tip": "Countries you already found stay discovered in your collection."
+      },
+      "map": {
+        "title": "The map reveals itself",
+        "body": "In Normal and Hard the map is hidden: only the start, the destination and the countries you find appear. At the end the whole map is revealed.",
+        "tip": "Two hints exist: the first letter (−75), then the borders of a valid country (−150)."
+      },
+      "score": {
+        "title": "A score out of 1,000",
+        "body": "Victory, an optimal route, no mistakes and no hints earn points. Every mistake and every hint costs some.",
+        "tip": "Every day, three identical challenges for everyone are waiting on the home screen."
+      }
     }
   }
 }

@@ -20,7 +20,7 @@ export function AchievementList() {
         const [cur, target] = a.progress(ctx);
         const done = have.has(a.id) || a.check(ctx);
         return (
-          <li key={a.id} className={`card flex items-start gap-3 p-3 ${done ? "" : "opacity-80"}`} data-unlocked={done}>
+          <li key={a.id} className={`card flex items-start gap-3 p-3 ${done ? "" : "border-dashed"}`} data-unlocked={done}>
             <span className={`grid h-9 w-9 flex-none place-items-center rounded-full ${done ? "bg-dest-soft text-dest" : "bg-surface-2 text-text-2"}`}>
               <Icon name={done ? "trophy" : "lock"} size={17} />
             </span>
@@ -28,7 +28,7 @@ export function AchievementList() {
               <div className="text-sm font-medium">{t(`achievements.${a.id}.name`)}</div>
               <div className="text-xs muted">{t(`achievements.${a.id}.desc`)}</div>
               <div className="mt-1.5 flex items-center gap-2">
-                <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-border-soft" role="progressbar" aria-valuemin={0} aria-valuemax={target} aria-valuenow={cur}>
+                <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-border-soft" role="progressbar" aria-label={t(`achievements.${a.id}.name`)} aria-valuemin={0} aria-valuemax={target} aria-valuenow={cur}>
                   <div className="h-full rounded-full bg-accent transition-all" style={{ width: `${Math.min(100, (cur / target) * 100)}%` }} />
                 </div>
                 <span className="text-[11px] tabular-nums muted">{cur}/{target}</span>

@@ -1,7 +1,7 @@
 {
  "date": "2027-06-15",
- "rulesVersion": "1",
- "datasetVersion": "2026.1",
+ "rulesVersion": "2",
+ "datasetVersion": "2026.2",
  "challenges": [
   {
    "id": "daily-2027-06-15-classic",
@@ -17,34 +17,34 @@
    "minIntermediate": 2,
    "attempts": 7,
    "date": "2027-06-15",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-06-15-constraints",
    "mode": "constraints",
    "difficulty": "normal",
-   "start": "NRU",
-   "destination": "PRK",
+   "start": "MKD",
+   "destination": "PLW",
    "rules": {
     "maritime": true,
     "forbidden": [],
     "mandatory": [
-     "MNG"
+     "CHN"
     ]
    },
    "minIntermediate": 7,
    "attempts": 10,
    "date": "2027-06-15",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-06-15-regional",
    "mode": "regional",
    "difficulty": "easy",
-   "start": "BGD",
-   "destination": "BTN",
+   "start": "BTN",
+   "destination": "NPL",
    "rules": {
     "maritime": false,
     "forbidden": [],
@@ -54,8 +54,8 @@
    "minIntermediate": 1,
    "attempts": 6,
    "date": "2027-06-15",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   }
  ]
 }

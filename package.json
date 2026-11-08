@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/copy-maplibre-worker.mjs && npm run data:daily && next build && node scripts/build-sw.mjs",
+    "build": "node scripts/copy-maplibre-worker.mjs && node scripts/build-worker.mjs && npm run data:daily && next build && node scripts/build-sw.mjs",
     "start": "npx serve out",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
@@ -14,8 +14,11 @@
     "data:build": "tsx scripts/build-data.ts",
     "data:daily": "tsx scripts/generate-daily.ts",
     "data:simulate": "tsx scripts/simulate.ts",
-    "predev": "node scripts/copy-maplibre-worker.mjs",
-    "postinstall": "node scripts/copy-maplibre-worker.mjs"
+    "predev": "node scripts/copy-maplibre-worker.mjs && node scripts/build-worker.mjs",
+    "postinstall": "node scripts/copy-maplibre-worker.mjs",
+    "worker:build": "node scripts/build-worker.mjs",
+    "data:audit-sea": "tsx scripts/audit-sea.ts",
+    "data:revalidate-daily": "tsx scripts/revalidate-daily.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -30,6 +33,7 @@
     "zustand": "^5.1.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
     "@playwright/test": "^1.65.0",
     "@tailwindcss/turbopack": "^4",
     "@types/geojson": "^7946.0.16",
@@ -38,6 +42,7 @@
     "@types/react-dom": "^19",
     "@types/topojson-client": "^3.1.5",
     "@vitest/coverage-v8": "^5.1.0",
+    "esbuild": "^0.28.2",
     "eslint": "^9",
     "eslint-config-next": "16.4.5",
     "fake-indexeddb": "^6.2.7",

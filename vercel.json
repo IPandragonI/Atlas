@@ -18,11 +18,11 @@
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
     },
     {
-      "source": "/(data|vendor|icons)/(.*)",
+      "source": "/(data|vendor|icons|workers)/(.*)",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }]
     },
     {
-      "source": "/vendor/(.*)",
+      "source": "/(vendor|workers)/(.*)",
       "headers": [{ "key": "Content-Type", "value": "text/javascript; charset=utf-8" }]
     },
     {

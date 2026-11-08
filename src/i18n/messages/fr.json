@@ -31,7 +31,8 @@
     "points": "{n} pts",
     "error": "Une erreur est survenue.",
     "mapLoading": "Chargement de la carte…",
-    "mapError": "La carte n’a pas pu être affichée."
+    "mapError": "La carte n’a pas pu être affichée.",
+    "mapLabel": "Carte du monde interactive"
   },
   "themes": {
     "light": "Clair",
@@ -59,19 +60,19 @@
     "label": "Difficulté",
     "easy": {
       "name": "Facile",
-      "desc": "Routes courtes, 5 essais de marge"
+      "desc": "Routes courtes, 5 erreurs de marge"
     },
     "normal": {
       "name": "Normal",
-      "desc": "Routes variées, 3 essais de marge"
+      "desc": "Routes variées, 3 erreurs de marge"
     },
     "hard": {
       "name": "Difficile",
-      "desc": "Routes longues, 1 seul essai de marge"
+      "desc": "Routes longues, 1 seule erreur de marge"
     },
     "custom": {
       "name": "Personnalisé",
-      "desc": "Tu règles toi-même la longueur, les essais et la carte"
+      "desc": "Tu règles la longueur, les erreurs permises et la carte"
     }
   },
   "home": {
@@ -91,20 +92,25 @@
     "dailyTodo": "À jouer",
     "playNow": "Jouer",
     "openCollection": "Voir la collection",
-    "dailyUnavailable": "Défi généré localement (fichier du jour indisponible)."
+    "dailyUnavailable": "Défi généré localement (fichier du jour indisponible).",
+    "resume": {
+      "title": "Partie en cours",
+      "detail": "{from} → {to} · {n, plural, =0 {aucun pays saisi} one {# pays saisi} other {# pays saisis}}",
+      "action": "Reprendre"
+    }
   },
   "game": {
     "from": "Départ",
     "to": "Arrivée",
-    "attempts": "Essais restants",
-    "attemptsShort": "{n} essais",
+    "attempts": "Erreurs permises",
+    "attemptsShort": "{n} erreurs permises",
     "route": "Ton itinéraire",
     "routeEmpty": "Saisis un pays voisin pour avancer.",
     "inputLabel": "Pays suivant",
-    "inputPlaceholder": "Tape un pays voisin…",
+    "inputPlaceholder": "Tape le nom d’un pays…",
     "noSuggestions": "Aucun pays ne correspond.",
     "submit": "Valider",
-    "wrong": "Incorrect — un essai en moins.",
+    "wrong": "Incorrect — une erreur permise en moins.",
     "right": "Bien joué !",
     "constraints": "Règles actives",
     "noConstraints": "Aucune règle particulière",
@@ -135,9 +141,13 @@
     "minShown": "Objectif : atteindre un pays voisin de l’arrivée avec le moins de pays possible.",
     "mapHidden": "Le reste de la carte se dévoile au fil de tes découvertes.",
     "menu": "Menu",
-    "hintConfirm": "Utiliser cet indice ? Pénalité immédiate : −{n} pts. Aucun essai n’est consommé.",
+    "hintConfirm": "Utiliser cet indice ? Pénalité immédiate : −{n} pts. Aucune erreur n’est comptée.",
     "hintLocked": "Utilise d’abord l’indice précédent",
-    "hintUsed": "Utilisé"
+    "hintUsed": "Utilisé",
+    "branch": "Nouvelle direction : ton itinéraire a été mis à jour.",
+    "startAdjacent": "Le pays de départ est déjà voisin de l’arrivée : commence par entrer un autre pays. Cela ne compte pas comme une erreur et ne coûte aucun point.",
+    "help": "Comment jouer",
+    "srRoute": "Itinéraire actif : {route}. {n, plural, =0 {Aucun pays découvert} one {# pays découvert} other {# pays découverts}}."
   },
   "constraint": {
     "forbidden": "Éviter : {countries}",
@@ -201,7 +211,12 @@
     "replaySameDesc": "Même mode, même difficulté, même zone — mais un nouveau trajet.",
     "replaySameDailyDesc": "Partie libre avec le même mode et la même difficulté. Ton défi du jour reste enregistré.",
     "showMoreRoutes": "Afficher les {n} autres routes",
-    "showFewerRoutes": "Masquer les autres routes"
+    "showFewerRoutes": "Masquer les autres routes",
+    "shareImage": "Image",
+    "shareImageSaved": "Image enregistrée",
+    "imageLegend": "■ pays saisis  ◆ arrivée  ■ erreurs",
+    "imageFooter": "Relie deux pays, frontière après frontière.",
+    "imageHeading": "Score"
   },
   "collection": {
     "title": "Ta collection",
@@ -277,7 +292,17 @@
     "emptyHistory": "Aucune partie jouée pour l’instant.",
     "won": "Victoire",
     "lost": "Défaite",
-    "perContinent": "Découverte par continent"
+    "perContinent": "Découverte par continent",
+    "byMode": "Par mode",
+    "mode": "Mode",
+    "played2": "Parties",
+    "winRate": "Victoires",
+    "avg": "Score moyen",
+    "optimalRate": "Optimales",
+    "avgMistakes": "Erreurs / partie",
+    "recent": "Derniers scores",
+    "bestScore": "Meilleur score",
+    "noModeData": "—"
   },
   "settings": {
     "title": "Réglages",
@@ -362,8 +387,8 @@
     "custom": "Réglages personnalisés",
     "minRoute": "Longueur minimale du trajet",
     "minRouteHelp": "Nombre minimal de pays intermédiaires (maximum possible pour cette zone : {max}).",
-    "attempts": "Nombre d’essais",
-    "attemptsHelp": "Entre {min} et {max}.",
+    "attempts": "Erreurs autorisées",
+    "attemptsHelp": "Nombre d’erreurs permises, entre {min} et {max}.",
     "map": "Apparence de la carte",
     "mapStart": "Afficher le pays de départ",
     "mapBorders": "Afficher les frontières",
@@ -385,11 +410,47 @@
     "checking": "Recherche d’un trajet…",
     "errors": {
       "min": "La longueur minimale doit être comprise entre 1 et {max} pour cette zone.",
-      "attempts": "Le nombre d’essais doit être un entier entre 1 et 30.",
+      "attempts": "Le nombre d’erreurs autorisées doit être un entier entre 1 et 30.",
       "forbidden": "Trop de pays évités (maximum 10).",
       "scope": "Zone de jeu invalide.",
       "noRoute": "Aucun trajet possible avec ces réglages. Retire un pays évité, choisis une zone plus grande ou réduis la longueur minimale.",
       "failed": "Impossible de générer une partie. Réessaie."
+    },
+    "warnHidden": "Avec la carte masquée, sans frontières ni noms, le jeu devient très difficile."
+  },
+  "tutorial": {
+    "title": "Comment jouer",
+    "close": "Fermer",
+    "next": "Suivant",
+    "back": "Retour",
+    "done": "C’est parti",
+    "progress": "Étape {n} sur {total}",
+    "steps": {
+      "goal": {
+        "title": "Relie deux pays",
+        "body": "On te donne un pays de départ et un pays d’arrivée. Tu dois les relier en nommant des pays qui se touchent, frontière après frontière.",
+        "tip": "Moins tu utilises de pays intermédiaires, meilleur est ton score."
+      },
+      "play": {
+        "title": "Tape les pays",
+        "body": "Saisis le nom d’un pays (en français ou en anglais) et valide. La partie se termine dès que ton dernier pays touche l’arrivée : tu n’as jamais à taper l’arrivée.",
+        "tip": "Une mauvaise réponse consomme une erreur permise, sans explication."
+      },
+      "branch": {
+        "title": "Change de direction",
+        "body": "Tu peux repartir d’un pays plus tôt dans ton itinéraire si le nouveau pays te rapproche de l’arrivée. L’ancienne branche disparaît de ton itinéraire, sans pénalité.",
+        "tip": "Les pays déjà trouvés restent découverts dans ta collection."
+      },
+      "map": {
+        "title": "La carte se dévoile",
+        "body": "En Normal et Difficile, la carte est cachée : seuls le départ, l’arrivée et les pays que tu trouves apparaissent. À la fin, toute la carte est révélée.",
+        "tip": "Deux indices existent : la première lettre (−75), puis les frontières d’un pays valide (−150)."
+      },
+      "score": {
+        "title": "Un score sur 1 000",
+        "body": "Victoire, route optimale, aucune erreur et aucun indice rapportent des points. Chaque erreur et chaque indice en coûtent.",
+        "tip": "Chaque jour, trois défis identiques pour tout le monde t’attendent sur l’accueil."
+      }
     }
   }
 }

@@ -1,14 +1,14 @@
 {
  "date": "2027-03-27",
- "rulesVersion": "1",
- "datasetVersion": "2026.1",
+ "rulesVersion": "2",
+ "datasetVersion": "2026.2",
  "challenges": [
   {
    "id": "daily-2027-03-27-classic",
    "mode": "classic",
    "difficulty": "normal",
-   "start": "GRC",
-   "destination": "VAT",
+   "start": "BGR",
+   "destination": "MCO",
    "rules": {
     "maritime": false,
     "forbidden": [],
@@ -17,34 +17,33 @@
    "minIntermediate": 5,
    "attempts": 8,
    "date": "2027-03-27",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-03-27-constraints",
    "mode": "constraints",
    "difficulty": "normal",
-   "start": "IRQ",
-   "destination": "FSM",
+   "start": "HUN",
+   "destination": "NGA",
    "rules": {
     "maritime": true,
-    "forbidden": [
-     "TUR"
-    ],
-    "mandatory": []
+    "forbidden": [],
+    "mandatory": [],
+    "minCoastal": 4
    },
    "minIntermediate": 5,
    "attempts": 8,
    "date": "2027-03-27",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-03-27-regional",
    "mode": "regional",
    "difficulty": "normal",
-   "start": "ROU",
-   "destination": "SVN",
+   "start": "ALB",
+   "destination": "ROU",
    "rules": {
     "maritime": false,
     "forbidden": [],
@@ -54,8 +53,8 @@
    "minIntermediate": 2,
    "attempts": 5,
    "date": "2027-03-27",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   }
  ]
 }

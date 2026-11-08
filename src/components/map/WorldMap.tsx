@@ -8,7 +8,7 @@ import { COUNTRIES, graph } from "@/lib/atlas";
 import { MapControls } from "./MapControls";
 
 /** Visual states a country can have (see docs/ARCHITECTURE.md). */
-export type MapState = "start" | "destination" | "traversed" | "wrong" | "discovered" | "new" | "region" | "dim" | "hint";
+export type MapState = "start" | "destination" | "traversed" | "wrong" | "discovered" | "new" | "region" | "dim" | "hint" | "abandoned";
 export type LabelMode = "none" | "route" | "all";
 
 export interface WorldMapProps {
@@ -43,7 +43,7 @@ export interface WorldMapProps {
 
 interface Palette {
   water: string; land: string; landOff: string; border: string; accent: string; dest: string; route: string;
-  discovered: string; error: string; success: string; text: string; surface: string; region: string; hint: string;
+  discovered: string; abandoned: string; error: string; success: string; text: string; surface: string; region: string; hint: string;
 }
 
 // MapLibre 6 needs an explicit worker URL under bundlers (file vendored by scripts/copy-maplibre-worker.mjs).
@@ -57,9 +57,9 @@ function readPalette(): Palette {
   const v = (n: string) => css.getPropertyValue(n).trim();
   const land = v("--land");
   return {
-    water: v("--water"), land, landOff: v("--land-off"), border: v("--border"), accent: v("--accent"), dest: v("--dest"),
-    route: v("--route"), discovered: v("--discovered"), error: mix(v("--error"), land, 0.55), success: v("--success"),
-    text: v("--text"), surface: v("--surface"), region: v("--accent-soft"), hint: v("--hint"),
+    water: v("--water"), land, landOff: v("--land-off"), border: v("--map-border"), accent: v("--accent"), dest: v("--dest"),
+    route: v("--route"), discovered: v("--discovered"), abandoned: mix(v("--discovered"), land, 0.5), error: mix(v("--error"), land, 0.55), success: v("--success"),
+    text: v("--text"), surface: v("--surface"), region: v("--map-region"), hint: v("--hint"),
   };
 }
 
@@ -90,6 +90,7 @@ function fillExpr(c: Palette): ExpressionSpecification {
       "new", c.success,
       "region", c.region,
       "hint", c.hint,
+      "abandoned", c.abandoned,
       "dim", c.landOff,
       c.land,
     ],
@@ -478,7 +479,7 @@ export default function WorldMap(props: WorldMapProps) {
 
   return (
     <div ref={wrapRef} className={`relative overflow-hidden atlas-map ${className ?? ""}`} data-testid="world-map" data-ready={ready} data-painted={painted} data-masked={masked} data-shown={masked ? Object.keys(states ?? {}).length : "all"}>
-      <div ref={mapEl} style={{ position: "absolute", inset: 0 }} role="application" aria-label="Map" />
+      <div ref={mapEl} style={{ position: "absolute", inset: 0 }} role="application" aria-label={t("mapLabel")} />
       <div ref={tipRef} className="atlas-tooltip" style={{ display: "none" }} />
       <MapControls
         onZoomIn={() => mapRef.current?.zoomIn({ duration: 250 })}

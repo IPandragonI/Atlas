@@ -97,7 +97,7 @@ describe("victory: reaching a country connected to the destination", () => {
 
 describe("map visibility is a visual rule only", () => {
   const v = (d: Difficulty, finished: boolean, route: string[]) =>
-    computeVisibility({ appearance: PRESET_MAP[d], finished, route, start: "FRA", destination: "POL" });
+    computeVisibility({ appearance: PRESET_MAP[d], finished, entered: route.slice(1), start: "FRA", destination: "POL" });
 
   it("normal and hard hide everything except arrival, departure and entered countries", () => {
     for (const d of ["normal", "hard"] as const) {
@@ -111,9 +111,9 @@ describe("map visibility is a visual rule only", () => {
     expect(shown).toContain("POL");
   });
   it("custom appearance: the starting country can be hidden, the full map can be shown", () => {
-    const hiddenStart = computeVisibility({ appearance: { start: false, borders: true, names: true, full: false }, finished: false, route: ["FRA", "BEL"], start: "FRA", destination: "POL" });
+    const hiddenStart = computeVisibility({ appearance: { start: false, borders: true, names: true, full: false }, finished: false, entered: ["BEL"], start: "FRA", destination: "POL" });
     expect(hiddenStart.shown).toEqual(["POL", "BEL"]);
-    const full = computeVisibility({ appearance: { start: true, borders: false, names: false, full: true }, finished: false, route: ["FRA"], start: "FRA", destination: "POL" });
+    const full = computeVisibility({ appearance: { start: true, borders: false, names: false, full: true }, finished: false, entered: [], start: "FRA", destination: "POL" });
     expect(full.masked).toBe(false);
   });
   it("wrong answers cannot reveal anything: they never enter the route", () => {
@@ -124,7 +124,7 @@ describe("map visibility is a visual rule only", () => {
   it("easy keeps the full map, and any finished game reveals it (whatever the appearance)", () => {
     expect(v("easy", false, ["FRA"]).masked).toBe(false);
     expect(v("hard", true, ["FRA", "BEL"]).masked).toBe(false);
-    expect(computeVisibility({ appearance: { start: false, borders: false, names: false, full: false }, finished: true, route: ["FRA"], start: "FRA", destination: "POL" }).masked).toBe(false);
+    expect(computeVisibility({ appearance: { start: false, borders: false, names: false, full: false }, finished: true, entered: [], start: "FRA", destination: "POL" }).masked).toBe(false);
   });
   it("does not affect validation or the graph", () => {
     const ch = mk("FRA", "POL", {}, "hard");

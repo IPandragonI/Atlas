@@ -23,6 +23,26 @@ A valid next move is: adjacent to the current country under the active connectio
 forbidden, not the start, not the destination, inside the allowed region, and (with `maxIntermediate`) within the
 intermediate budget.
 
+## Changing direction (route branching)
+A guess that is **not** adjacent to the last country is still accepted when it is adjacent to an **earlier** country of the
+active route **and** strictly closer to the destination than that country (shortest-path distance in the active graph,
+`rules.resolveMove`; the latest qualifying earlier country wins). The active route becomes *route up to that country + the
+new country*; the abandoned tail leaves the route, the map highlight and the score, but its countries **stay discovered**
+(`GameState.visited` is the discovery history, `GameState.route` the active route). All other rules still apply (forbidden,
+mandatory, region, intermediate budget, no repeats). It costs nothing and is never reported as an error: a subtle toast
+("New direction") and a short animation. A guess that is not closer is an ordinary wrong answer.
+
+## Start next to the destination
+If the start already touches the destination, a non-blocking notice is shown. No point is deducted, no attempt consumed, it is
+not an error. Victory still requires at least one intermediate country (`reachesDestination` needs a route of 2+), so the
+player cannot win by typing nothing or the destination.
+
+## Resuming a game
+One in-progress game is saved (IndexedDB `kv`) after every accepted or rejected move, keyed by the game URL parameters. Opening
+Atlas, or the home screen's *Resume* card, restores route, discovery history, mistakes, hints and remaining attempts, and
+re-validates the save (`isResumable`: same challenge, dataset/rules version). Finishing or abandoning clears it; starting a
+different game replaces it (single slot).
+
 ## Starting a game: the configuration modal
 There is no "Play" page. The home screen lists the three modes; each opens its own modal (`GameConfigModal`):
 - **Difficulty**: Easy / Normal / Hard (unchanged behaviour) or **Custom**.

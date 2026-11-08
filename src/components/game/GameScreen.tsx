@@ -13,8 +13,9 @@ import type { Challenge, GameMode } from "@/engine/types";
 import { useRouter } from "@/i18n/navigation";
 import { graph } from "@/lib/atlas";
 import { loadDailyChallenge } from "@/lib/daily";
+import { nextMoves, startTouchesDestination } from "@/engine/rules";
 import { configFromChallenge, effectiveMap, parseConfig, PRESET_MAP, replayParams, type GameConfig } from "@/lib/config";
-import { generateForConfig } from "@/lib/generate";
+import { generateForConfigAsync } from "@/lib/generate-client";
 import { suggestAfterDaily } from "@/lib/replay";
 import { playSound } from "@/lib/sound";
 import { computeVisibility } from "@/lib/visibility";
@@ -24,6 +25,7 @@ import { useSettings } from "@/stores/settings";
 import { ConstraintList } from "./ConstraintList";
 import { CountryCombobox } from "./CountryCombobox";
 import { HintPanel } from "./HintPanel";
+import { HowToPlay, TUTORIAL_KEY } from "./HowToPlay";
 import { ResultsPanel, useRouteChoices } from "./ResultsPanel";
 import { RouteList } from "./RouteList";
 
@@ -54,7 +56,7 @@ export function GameScreen() {
   const isDesktop = useMedia("(min-width: 768px)");
 
   const { challenge, config, state, result, solution, fresh, newAchievements, feedback } = useGame();
-  const { start, restore, guess, hint, giveUp, clear } = useGame.getState();
+  const { start, restore, resume, guess, hint, giveUp, clear } = useGame.getState();
   const labels = useSettings((s) => s.labels);
   const sound = useSettings((s) => s.sound);
   const progressLoaded = useProgress((s) => s.loaded);
@@ -67,6 +69,7 @@ export function GameScreen() {
   const [selected, setSelected] = useState(0);
   const [toast, setToast] = useState<{ text: string; kind: "ok" | "bad" } | null>(null);
   const [errTick, setErrTick] = useState(0);
+  const [showHelp, setShowHelp] = useState(false);
   const key = params.toString();
   const startedKey = useRef<string | null>(null);
 
@@ -75,6 +78,17 @@ export function GameScreen() {
     setPhase("loading");
     setSelected(0);
     await new Promise((r) => setTimeout(r, 30)); // let the loading state paint before CPU work
+    // Reload / back navigation: continue the saved game of this URL exactly where it was left (unless that daily is already completed).
+    const saved = await useGame.getState().findSaved(key);
+    if (saved) {
+      const completed = saved.challenge.date ? useProgress.getState().games.some((x) => x.challengeId === saved.challenge.id && x.daily) : false;
+      if (!completed) {
+        resume(saved);
+        setFallback(false);
+        setPhase("ready");
+        return;
+      }
+    }
     const history = useProgress.getState().recents.map((r) => r.entry);
     const daily = params.get("daily");
     const mode = (params.get("mode") ?? "classic") as GameMode;
@@ -87,7 +101,7 @@ export function GameScreen() {
     } else {
       const parsed = parseConfig(params);
       cfg = parsed.config;
-      const g = generateForConfig(parsed.config, parsed.seed, history, parsed.exclude);
+      const g = await generateForConfigAsync(parsed.config, parsed.seed, history, parsed.exclude);
       ch = g?.challenge ?? null;
       setFallback(false);
     }
@@ -95,7 +109,7 @@ export function GameScreen() {
       // An already completed daily is shown as completed (state + results): no new attempt.
       const done = ch.date ? useProgress.getState().games.find((x) => x.challengeId === ch!.id && x.daily) : undefined;
       if (done) restore(ch, done);
-      else start(ch, cfg);
+      else start(ch, cfg, key);
       setPhase("ready");
     } else setPhase("error");
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -109,6 +123,16 @@ export function GameScreen() {
 
   useEffect(() => () => clear(), [clear]);
 
+  // First visit: show the short "how to play" walkthrough once (it stays reachable from the ? button).
+  useEffect(() => {
+    if (phase !== "ready") return;
+    try {
+      if (!localStorage.getItem(TUTORIAL_KEY)) setShowHelp(true);
+    } catch {
+      /* storage unavailable */
+    }
+  }, [phase]);
+
   // ---------------------------------------------------------------- feedback (sounds, toast)
   useEffect(() => {
     if (!feedback) return;
@@ -118,7 +142,7 @@ export function GameScreen() {
       setToast({ text: t("game.wrong"), kind: "bad" });
     } else if (feedback.outcome === "accepted") {
       playSound("ok", sound);
-      setToast({ text: t("game.right"), kind: "ok" });
+      setToast({ text: feedback.removed.length > 0 ? t("game.branch") : t("game.right"), kind: "ok" });
     } else if (feedback.outcome === "won") playSound("win", sound);
     const tm = setTimeout(() => setToast(null), 6000);
     return () => clearTimeout(tm);
@@ -148,19 +172,20 @@ export function GameScreen() {
       computeVisibility({
         appearance,
         finished,
-        route: state?.route ?? [],
+        entered: state?.visited ?? [],
         start: challenge?.start ?? "",
         destination: challenge?.destination ?? "",
       }),
-    [appearance, challenge?.start, challenge?.destination, finished, state?.route],
+    [appearance, challenge?.start, challenge?.destination, finished, state?.visited],
   );
 
   // Borders hint: the shape of ONE valid next country, drawn without its name, only while it is still a valid next step.
   const hintId = useMemo(() => {
     if (!state || finished) return null;
     const h = [...state.hints].reverse().find((x) => x.payload.kind === "borders");
-    return h && h.atMove === state.route.length - 1 ? h.payload.countryId : null;
-  }, [state, finished]);
+    // still shown only while that country is a valid next step for the CURRENT active route
+    return h && challenge && h.atMove === state.route.length - 1 && nextMoves(graph, challenge, state.route).includes(h.payload.countryId) ? h.payload.countryId : null;
+  }, [state, finished, challenge]);
 
   // Who can replay what: after a daily, suggest the other dailies, then a new Classic game.
   const suggestion = useMemo(
@@ -171,8 +196,11 @@ export function GameScreen() {
   const mapStates = useMemo(() => {
     if (!challenge) return {};
     const s: Record<string, MapState> = {};
+    // countries of branches the player abandoned stay discovered, but are not part of the active route
+    const abandoned = state && (!finished || selected === 0) ? state.visited.filter((id) => !state.route.includes(id)) : [];
     if (vis.masked) {
       for (const id of vis.shown) s[id] = "traversed";
+      for (const id of abandoned) s[id] = "abandoned";
       if (appearance.start) s[challenge.start] = "start";
       s[challenge.destination] = "destination";
       if (hintId) s[hintId] = "hint";
@@ -180,6 +208,7 @@ export function GameScreen() {
     }
     if (challenge.rules.allowedRegion) for (const id of graph.regionMembers(challenge.rules.allowedRegion)) s[id] = "region";
     if (state && (!finished || selected === 0)) for (const id of state.mistakes) if (graph.has(id)) s[id] = "wrong";
+    for (const id of abandoned) if (!viewRoute.includes(id)) s[id] = "abandoned";
     for (const id of viewRoute) s[id] = "traversed";
     if (showStart) s[challenge.start] = "start";
     s[challenge.destination] = "destination";
@@ -234,12 +263,17 @@ export function GameScreen() {
   const startC = graph.country(challenge.start);
   const destC = graph.country(challenge.destination);
   const playing = state.status === "playing";
+  // non-blocking notice: costs nothing, and the destination can never be reached without entering a country
+  const startTouches = startTouchesDestination(graph, challenge);
 
   const modeBadge = (
     <div className="flex flex-wrap items-center gap-1.5">
       <span className="chip">{t(`modes.${challenge.mode}.name`)}</span>
       <span className="chip">{t(`difficulty.${challenge.difficulty}.name`)}</span>
       {challenge.date && <span className="chip">{t("game.daily")}</span>}
+      <button type="button" className="btn btn-ghost ml-auto !min-h-8 !px-2" onClick={() => setShowHelp(true)} aria-label={t("game.help")} title={t("game.help")} data-testid="howto-open">
+        <Icon name="help" size={16} />
+      </button>
     </div>
   );
 
@@ -253,6 +287,9 @@ export function GameScreen() {
 
   return (
     <div className="relative flex h-[100dvh] min-h-0 flex-col md:h-[calc(100dvh-var(--header-h))] md:flex-row" data-testid="game-screen">
+      <p className="sr-only" aria-live="polite" data-testid="sr-route">
+        {t("game.srRoute", { route: state.route.map(name).join(" → "), n: state.visited.length })}
+      </p>
       {/* ------------------------------------------------------------ map */}
       <div className="relative min-h-0 flex-1">
         <MapView
@@ -261,7 +298,7 @@ export function GameScreen() {
           masked={vis.masked}
           controlsInset
           route={viewRoute}
-          routeKey={viewRoute.length}
+          routeKey={viewRoute.join(">")}
           start={showStart ? challenge.start : undefined}
           destination={challenge.destination}
           showBorders={appearance.borders || finished}
@@ -278,6 +315,9 @@ export function GameScreen() {
           <div className="pointer-events-auto flex items-center justify-between gap-2 rounded-lg border border-border-soft bg-surface/95 px-2 py-1.5 shadow-sm backdrop-blur">
             <MobileMenu />
             <div className="min-w-0 flex-1">{fromTo}</div>
+            <button type="button" className="btn btn-ghost !min-h-10 !min-w-10 !px-2" onClick={() => setShowHelp(true)} aria-label={t("game.help")} data-testid="howto-open-m">
+              <Icon name="help" />
+            </button>
             <Attempts left={state.attemptsLeft} total={state.attemptsTotal} />
           </div>
         </div>
@@ -299,7 +339,7 @@ export function GameScreen() {
         className={`z-20 flex flex-col border-border-soft bg-surface
           max-md:absolute max-md:inset-x-0 max-md:bottom-0 max-md:rounded-t-2xl max-md:border-t max-md:shadow-[0_-8px_30px_rgba(0,0,0,.18)]
           md:w-[clamp(320px,26vw,400px)] md:flex-none md:border-l`}
-        style={{ maxHeight: isDesktop ? undefined : expanded ? "72dvh" : undefined, paddingBottom: isDesktop ? undefined : "var(--safe-bottom)" }}
+        style={{ maxHeight: isDesktop ? undefined : expanded ? "58dvh" : undefined, paddingBottom: isDesktop ? undefined : "var(--safe-bottom)" }}
         aria-label={t("game.route")}
       >
         {/* sheet handle (mobile) */}
@@ -330,6 +370,11 @@ export function GameScreen() {
 
           {!finished && (
             <div className="mt-3 grid gap-4 md:mt-4">
+              {startTouches && state.route.length === 1 && (
+                <p className="rounded-md border border-dest/50 bg-dest-soft px-3 py-2 text-sm anim-slide" role="status" data-testid="start-adjacent">
+                  {t("game.startAdjacent")}
+                </p>
+              )}
               <CountryCombobox
                 disabled={!playing}
                 errorTick={errTick}
@@ -349,7 +394,9 @@ export function GameScreen() {
                 </section>
                 <section>
                   <h3 className="eyebrow mb-1">{t("game.route")}</h3>
-                  <RouteList route={state.route} destination={challenge.destination} finished={false} />
+                  <div key={feedback?.n ?? 0} className={feedback && feedback.removed.length > 0 ? "anim-branch" : undefined} data-testid="route-wrap" data-branched={feedback && feedback.removed.length > 0 ? "true" : "false"}>
+                    <RouteList route={state.route} destination={challenge.destination} finished={false} />
+                  </div>
                   {state.route.length === 1 && <p className="mt-1 text-sm muted">{t("game.routeEmpty")}</p>}
                 </section>
                 <HintPanel hints={state.hints} disabled={!playing} onUse={hint} />
@@ -392,6 +439,7 @@ export function GameScreen() {
           )}
         </div>
       </aside>
+      {showHelp && <HowToPlay onClose={() => setShowHelp(false)} />}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 {
  "date": "2027-02-01",
- "rulesVersion": "1",
- "datasetVersion": "2026.1",
+ "rulesVersion": "2",
+ "datasetVersion": "2026.2",
  "challenges": [
   {
    "id": "daily-2027-02-01-classic",
@@ -17,27 +17,27 @@
    "minIntermediate": 2,
    "attempts": 7,
    "date": "2027-02-01",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-02-01-constraints",
    "mode": "constraints",
    "difficulty": "easy",
-   "start": "TLS",
-   "destination": "WSM",
+   "start": "BRA",
+   "destination": "GRD",
    "rules": {
     "maritime": true,
     "forbidden": [],
     "mandatory": [
-     "VUT"
+     "BRB"
     ]
    },
-   "minIntermediate": 5,
-   "attempts": 10,
+   "minIntermediate": 4,
+   "attempts": 9,
    "date": "2027-02-01",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-02-01-regional",
@@ -54,8 +54,8 @@
    "minIntermediate": 1,
    "attempts": 6,
    "date": "2027-02-01",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   }
  ]
 }

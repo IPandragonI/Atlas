@@ -1,7 +1,7 @@
 {
  "date": "2026-12-06",
- "rulesVersion": "1",
- "datasetVersion": "2026.1",
+ "rulesVersion": "2",
+ "datasetVersion": "2026.2",
  "challenges": [
   {
    "id": "daily-2026-12-06-classic",
@@ -17,46 +17,46 @@
    "minIntermediate": 4,
    "attempts": 7,
    "date": "2026-12-06",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2026-12-06-constraints",
    "mode": "constraints",
    "difficulty": "hard",
-   "start": "NRU",
-   "destination": "ERI",
+   "start": "BDI",
+   "destination": "CRI",
    "rules": {
     "maritime": true,
     "forbidden": [
-     "SAU"
+     "COD"
     ],
     "mandatory": [],
-    "avoidRegion": "europe"
+    "avoidRegion": "caribbean"
    },
-   "minIntermediate": 9,
-   "attempts": 10,
+   "minIntermediate": 12,
+   "attempts": 13,
    "date": "2026-12-06",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2026-12-06-regional",
    "mode": "regional",
    "difficulty": "normal",
-   "start": "NIC",
-   "destination": "BLZ",
+   "start": "PAN",
+   "destination": "SLV",
    "rules": {
     "maritime": false,
     "forbidden": [],
     "mandatory": [],
     "allowedRegion": "central-america"
    },
-   "minIntermediate": 2,
-   "attempts": 5,
+   "minIntermediate": 3,
+   "attempts": 6,
    "date": "2026-12-06",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   }
  ]
 }

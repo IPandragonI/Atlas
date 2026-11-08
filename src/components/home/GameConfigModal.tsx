@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { CountryCombobox } from "@/components/game/CountryCombobox";
 import { Icon } from "@/components/ui/Icon";
+import { useFocusTrap } from "@/components/ui/useFocusTrap";
 import { useRegionName } from "@/components/ui/useNames";
 import type { ChallengeDifficulty, GameMode } from "@/engine/types";
 import { useRouter } from "@/i18n/navigation";
@@ -11,7 +12,8 @@ import { graph } from "@/lib/atlas";
 import {
   configToParams, defaultConfig, LIMITS, parseConfig, scopeOptions, validateConfig, WORLD, type GameConfig, type MapAppearance,
 } from "@/lib/config";
-import { generateForConfig, scopeFacts } from "@/lib/generate";
+import { generateForConfigAsync, warmUpGenerator } from "@/lib/generate-client";
+import { scopeFacts } from "@/lib/generate";
 import { useProgress } from "@/stores/progress";
 
 const DIFFICULTIES: ChallengeDifficulty[] = ["easy", "normal", "hard", "custom"];
@@ -65,23 +67,13 @@ export function GameConfigModal({ mode, onClose }: { mode: GameMode; onClose: ()
   const [busy, setBusy] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const dialog = useRef<HTMLDivElement>(null);
-  const opener = useRef<Element | null>(null);
 
   useEffect(() => {
-    opener.current = document.activeElement;
     setCfg(loadSaved(mode));
     setLoaded(true);
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    dialog.current?.focus();
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-      (opener.current as HTMLElement | null)?.focus?.();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    warmUpGenerator(); // the worker loads while the player chooses, so the first generation is instant
   }, [mode]);
+  useFocusTrap(dialog, true, onClose);
 
   const update = (patch: Partial<GameConfig>) => {
     setError(null);
@@ -109,7 +101,7 @@ export function GameConfigModal({ mode, onClose }: { mode: GameMode; onClose: ()
     const seed = String(Date.now());
     const history = useProgress.getState().recents.map((r) => r.entry);
     // Same inputs as the game screen => the very same challenge: an impossible setup is reported here.
-    const g = generateForConfig(cfg, seed, history);
+    const g = await generateForConfigAsync(cfg, seed, history);
     if (!g) {
       setBusy(false);
       setError(t("config.errors.noRoute"));
@@ -167,7 +159,7 @@ export function GameConfigModal({ mode, onClose }: { mode: GameMode; onClose: ()
                   className={`card grid content-start gap-0.5 p-3 text-left transition-colors ${cfg.difficulty === d ? "!border-accent bg-accent-soft" : "hover:border-border"} ${d === "custom" ? "border-dashed" : ""}`}
                 >
                   <span className="text-sm font-semibold">{t(`difficulty.${d}.name`)}</span>
-                  <span className="text-[11px] leading-snug muted">{t(`difficulty.${d}.desc`)}</span>
+                  <span className="hidden text-[11px] leading-snug muted sm:block">{t(`difficulty.${d}.desc`)}</span>
                 </button>
               ))}
             </div>
@@ -211,6 +203,9 @@ export function GameConfigModal({ mode, onClose }: { mode: GameMode; onClose: ()
                   <Switch testId="cfg-map-borders" checked={cfg.map.borders} onChange={(v) => updateMap({ borders: v })} label={t("config.mapBorders")} />
                   <Switch testId="cfg-map-names" checked={cfg.map.names} onChange={(v) => updateMap({ names: v })} label={t("config.mapNames")} />
                 </div>
+                {!cfg.map.full && !cfg.map.borders && !cfg.map.names && (
+                  <p role="note" className="mt-2 rounded-md border border-dest/50 bg-dest-soft px-3 py-2 text-xs" data-testid="cfg-hidden-warning">{t("config.warnHidden")}</p>
+                )}
               </div>
             </section>
           )}

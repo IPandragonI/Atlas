@@ -1,0 +1,6 @@
+{
+  "cookies": [],
+  "origins": [
+    { "origin": "http://localhost:4173", "localStorage": [{ "name": "atlas-tutorial-v1", "value": "done" }] }
+  ]
+}

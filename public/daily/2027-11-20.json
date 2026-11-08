@@ -1,14 +1,14 @@
 {
  "date": "2027-11-20",
- "rulesVersion": "1",
- "datasetVersion": "2026.1",
+ "rulesVersion": "2",
+ "datasetVersion": "2026.2",
  "challenges": [
   {
    "id": "daily-2027-11-20-classic",
    "mode": "classic",
    "difficulty": "normal",
-   "start": "LVA",
-   "destination": "ITA",
+   "start": "HRV",
+   "destination": "SWE",
    "rules": {
     "maritime": false,
     "forbidden": [],
@@ -17,36 +17,35 @@
    "minIntermediate": 4,
    "attempts": 7,
    "date": "2027-11-20",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-11-20-constraints",
    "mode": "constraints",
    "difficulty": "normal",
-   "start": "GNQ",
-   "destination": "MWI",
+   "start": "ZAF",
+   "destination": "PSE",
    "rules": {
     "maritime": false,
     "forbidden": [
-     "GAB"
+     "SSD"
     ],
     "mandatory": [
      "BDI"
-    ],
-    "minCoastal": 4
+    ]
    },
-   "minIntermediate": 5,
-   "attempts": 8,
+   "minIntermediate": 7,
+   "attempts": 10,
    "date": "2027-11-20",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-11-20-regional",
    "mode": "regional",
    "difficulty": "normal",
-   "start": "CUB",
+   "start": "KNA",
    "destination": "LCA",
    "rules": {
     "maritime": true,
@@ -54,11 +53,11 @@
     "mandatory": [],
     "allowedRegion": "caribbean"
    },
-   "minIntermediate": 5,
-   "attempts": 8,
+   "minIntermediate": 2,
+   "attempts": 5,
    "date": "2027-11-20",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   }
  ]
 }

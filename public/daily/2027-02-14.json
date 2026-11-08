@@ -1,7 +1,7 @@
 {
  "date": "2027-02-14",
- "rulesVersion": "1",
- "datasetVersion": "2026.1",
+ "rulesVersion": "2",
+ "datasetVersion": "2026.2",
  "challenges": [
   {
    "id": "daily-2027-02-14-classic",
@@ -17,36 +17,36 @@
    "minIntermediate": 4,
    "attempts": 7,
    "date": "2027-02-14",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-02-14-constraints",
    "mode": "constraints",
    "difficulty": "hard",
-   "start": "SRB",
-   "destination": "VCT",
+   "start": "KIR",
+   "destination": "SSD",
    "rules": {
     "maritime": true,
     "forbidden": [
-     "JAM"
+     "TUR"
     ],
     "mandatory": [
      "AZE"
     ]
    },
-   "minIntermediate": 11,
-   "attempts": 12,
+   "minIntermediate": 13,
+   "attempts": 14,
    "date": "2027-02-14",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   },
   {
    "id": "daily-2027-02-14-regional",
    "mode": "regional",
    "difficulty": "normal",
-   "start": "ISL",
-   "destination": "FIN",
+   "start": "FIN",
+   "destination": "DNK",
    "rules": {
     "maritime": true,
     "forbidden": [],
@@ -56,8 +56,8 @@
    "minIntermediate": 1,
    "attempts": 4,
    "date": "2027-02-14",
-   "rulesVersion": "1",
-   "datasetVersion": "2026.1"
+   "rulesVersion": "2",
+   "datasetVersion": "2026.2"
   }
  ]
 }

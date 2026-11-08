@@ -1,4 +1,4 @@
-import type { Country } from "@/engine/types";
+import type { Country, GameMode } from "@/engine/types";
 import type { DailyRecord, GameRecord } from "@/lib/db";
 
 /** Pure progression logic: achievements, statistics and streaks. No storage, no UI. */
@@ -110,4 +110,40 @@ export function dailyStreak(daily: readonly DailyRecord[], today: string): { cur
   const last = days[days.length - 1];
   const current = last !== undefined && (last === t || last === t - 1) ? run : 0;
   return { current, best };
+}
+
+export interface ModeStats {
+  mode: GameMode;
+  played: number;
+  wins: number;
+  avgScore: number;
+  /** Share of played games finished on an optimal route (0-1). */
+  optimalRate: number;
+  avgMistakes: number;
+}
+
+/** Statistics split by game mode (always the three modes, in a stable order). */
+export function modeBreakdown(games: readonly GameRecord[]): ModeStats[] {
+  return (["classic", "constraints", "regional"] as const).map((mode) => {
+    const g = games.filter((x) => x.mode === mode);
+    const n = g.length;
+    const mean = (f: (x: GameRecord) => number) => (n ? g.reduce((s, x) => s + f(x), 0) / n : 0);
+    return {
+      mode,
+      played: n,
+      wins: g.filter((x) => x.status === "won").length,
+      avgScore: mean((x) => x.score),
+      optimalRate: n ? g.filter((x) => x.optimal).length / n : 0,
+      avgMistakes: mean((x) => x.mistakes),
+    };
+  });
+}
+
+/** Scores of the last `n` games, oldest first (for the history chart). */
+export function recentScores(games: readonly GameRecord[], n = 30): { score: number; status: "won" | "lost" }[] {
+  return [...games].sort((a, b) => a.finishedAt - b.finishedAt).slice(-n).map((g) => ({ score: g.score, status: g.status }));
+}
+
+export function bestScore(games: readonly GameRecord[]): number {
+  return games.reduce((m, g) => Math.max(m, g.score), 0);
 }

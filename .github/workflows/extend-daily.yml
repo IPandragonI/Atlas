@@ -1,0 +1,37 @@
+name: Extend daily challenges
+
+# Keeps the bundled daily challenges well ahead of today. Published days are never modified:
+# the generator only adds missing future days (see scripts/generate-daily.ts).
+on:
+  schedule:
+    - cron: "0 4 1 * *" # monthly
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Generate missing daily challenges (one year ahead)
+        run: npm run data:daily
+        env:
+          DAILY_AHEAD_DAYS: "365"
+      - name: Commit new files
+        run: |
+          git config user.name "atlas-bot"
+          git config user.email "atlas-bot@users.noreply.github.com"
+          git add public/daily
+          if git diff --cached --quiet; then
+            echo "Nothing to add."
+          else
+            git commit -m "chore: extend daily challenges"
+            git push
+          fi

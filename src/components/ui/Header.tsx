@@ -42,6 +42,7 @@ export function Header() {
               key={n.href}
               href={n.href}
               aria-current={active ? "page" : undefined}
+              aria-label={t(`nav.${n.key}`)}
               className={`flex min-h-10 items-center gap-1.5 rounded-md px-2.5 text-sm font-medium transition-colors md:px-3 ${active ? "bg-accent-soft text-text" : "text-text-2 hover:text-text"}`}
             >
               <Icon name={n.icon} size={17} />

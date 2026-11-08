@@ -8,6 +8,7 @@ export function createGame(ch: Challenge, now: number): GameState {
   return {
     challengeId: ch.id,
     route: [ch.start],
+    visited: [],
     attemptsTotal: ch.attempts,
     attemptsLeft: ch.attempts,
     mistakes: [],
@@ -20,6 +21,8 @@ export function createGame(ch: Challenge, now: number): GameState {
 export interface MoveResult {
   state: GameState;
   outcome: MoveOutcome;
+  /** Countries that left the active route because the player changed direction (still in the discovery history). */
+  removed?: string[];
 }
 
 /**
@@ -28,12 +31,16 @@ export interface MoveResult {
  */
 export function submitGuess(graph: AtlasGraph, ch: Challenge, state: GameState, guess: string, now: number): MoveResult {
   if (state.status !== "playing") return { state, outcome: "ignored" };
-  const { valid } = validateMove(graph, ch, state.route, guess);
+  const { valid, from } = validateMove(graph, ch, state.route, guess);
   if (valid) {
-    // The destination is never appended to the route; it only decides victory.
-    const route = [...state.route, guess];
-    if (reachesDestination(graph, ch, route)) return { state: { ...state, route, status: "won", endedAt: now }, outcome: "won" };
-    return { state: { ...state, route }, outcome: "accepted" };
+    // A change of direction replaces the abandoned branch: the active route ends at the connection point + the new country.
+    // The destination is never appended to the route; it only decides victory. No attempt is consumed and nothing is penalised.
+    const route = [...state.route.slice(0, from + 1), guess];
+    const removed = state.route.slice(from + 1);
+    const visited = state.visited.includes(guess) ? state.visited : [...state.visited, guess];
+    const base: GameState = { ...state, route, visited };
+    if (reachesDestination(graph, ch, route)) return { state: { ...base, status: "won", endedAt: now }, outcome: "won", removed };
+    return { state: base, outcome: "accepted", removed };
   }
   const attemptsLeft = state.attemptsLeft - 1;
   const next: GameState = { ...state, attemptsLeft, mistakes: [...state.mistakes, guess] };
