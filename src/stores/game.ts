@@ -120,7 +120,7 @@ export const useGame = create<GameStore>((set, get) => {
 
     restore: (ch, rec) => {
       const won = rec.status === "won";
-      const hintsUsed = (rec.hintKinds ?? []).filter((k): k is HintKind => k === "letter" || k === "borders");
+      const hintsUsed = (rec.hintKinds ?? []).filter((k): k is HintKind => k === "letter" || k === "borders" || k === "reveal");
       const state: GameState = {
         challengeId: ch.id, route: rec.route, visited: rec.route.slice(1), attemptsTotal: ch.attempts, attemptsLeft: Math.max(0, ch.attempts - rec.mistakes),
         mistakes: [], hints: [], status: rec.status, startedAt: rec.finishedAt - rec.durationMs, endedAt: rec.finishedAt,
@@ -170,7 +170,7 @@ export const useGame = create<GameStore>((set, get) => {
         void write.finally(() => pendingWrites.delete(write));
       }
       if (outcome === "won" || outcome === "lost") void finish(challenge, next);
-      else if (outcome !== "ignored") persist();
+      else if (outcome !== "ignored" && outcome !== "repeated") persist();
       return outcome;
     },
 

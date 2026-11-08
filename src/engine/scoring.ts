@@ -12,6 +12,7 @@ export const SCORE = {
 export const HINT_PENALTY: Record<HintKind, number> = {
   letter: 75,
   borders: 150,
+  reveal: 300,
 };
 
 export interface ScoreInput {

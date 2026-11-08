@@ -70,18 +70,22 @@ export interface Challenge {
   datasetVersion: string;
 }
 
-/** Two progressive hints, in this order: first letter, then the borders of the same country. */
-export type HintKind = "letter" | "borders";
+/** Three progressive hints, in this order: first letter, the borders, then the full name of a valid next country. */
+export type HintKind = "letter" | "borders" | "reveal";
 
 /** `countryId` is the hinted (valid next) country; the UI must never display its name. */
 export type HintPayload =
   | { kind: "letter"; letter: { fr: string; en: string }; countryId: string }
-  | { kind: "borders"; countryId: string };
+  | { kind: "borders"; countryId: string }
+  /** Hint 3: the UI shows the name of `countryId`. It is still the player who has to type it. */
+  | { kind: "reveal"; countryId: string };
 
 export interface HintRecord {
   payload: HintPayload;
   penalty: number;
   atMove: number;
+  /** The active route (joined with ">") the hint was computed for. Older saves have none. */
+  routeKey?: string;
 }
 
 export type GameStatus = "playing" | "won" | "lost";
@@ -102,7 +106,8 @@ export interface GameState {
   endedAt?: number;
 }
 
-export type MoveOutcome = "accepted" | "won" | "lost" | "rejected" | "ignored";
+/** "repeated": a country already submitted (and rejected) earlier in this game, submitted again: nothing is counted. */
+export type MoveOutcome = "accepted" | "won" | "lost" | "rejected" | "repeated" | "ignored";
 
 export interface ScoreBreakdown {
   victory: number;

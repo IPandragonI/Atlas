@@ -147,7 +147,10 @@
     "branch": "New direction: your route was updated.",
     "startAdjacent": "The starting country already borders the destination: begin by entering another country. This does not count as a mistake and costs no points.",
     "help": "How to play",
-    "srRoute": "Active route: {route}. {n, plural, =0 {No country discovered} one {# country discovered} other {# countries discovered}}."
+    "srRoute": "Active route: {route}. {n, plural, =0 {No country discovered} one {# country discovered} other {# countries discovered}}.",
+    "repeated": "Already tried — no mistake counted.",
+    "hintsLeft": "{n, plural, =0 {all used} one {# left} other {# left}}",
+    "constraintsCount": "{n}"
   },
   "constraint": {
     "forbidden": "Avoid: {countries}",
@@ -172,7 +175,15 @@
       "short": "Borders"
     },
     "letterText": "A valid next country starts with the letter “{letter}”.",
-    "bordersText": "The borders of a valid next country are shown on the map (without its name)."
+    "bordersText": "The borders of a valid next country are shown on the map (without its name).",
+    "reveal": {
+      "name": "Country name",
+      "desc": "The full name of a valid next country. You still have to type it.",
+      "short": "Name"
+    },
+    "revealText": "A valid next country: {name}.",
+    "outdated": "this hint no longer matches your current route.",
+    "followed": "followed"
   },
   "results": {
     "won": "Destination reached!",
@@ -249,28 +260,43 @@
   "achievements": {
     "first-journey": {
       "name": "First Journey",
-      "desc": "Discover 5 countries."
+      "desc": "Discover 5 countries.",
+      "about": "Your first steps in the atlas.",
+      "condition": "Discover 5 different countries. A country is discovered the first time you enter it correctly during a game, in any mode."
     },
     "european-explorer": {
       "name": "European Explorer",
-      "desc": "Discover every country in Europe."
+      "desc": "Discover every country in Europe.",
+      "about": "You know the whole map of Europe.",
+      "condition": "Discover every European country at least once."
     },
     "island-hopper": {
       "name": "Island Hopper",
-      "desc": "Discover 10 island countries."
+      "desc": "Discover 10 island countries.",
+      "about": "A taste for islands and archipelagos.",
+      "condition": "Discover 10 different island countries."
     },
     "around-the-world": {
       "name": "Around the World",
-      "desc": "Discover a country on every continent."
+      "desc": "Discover a country on every continent.",
+      "about": "Your discoveries span the whole planet.",
+      "condition": "Discover at least one country on each of the 6 inhabited continents: Africa, Asia, Europe, North America, South America and Oceania."
     },
     "globe-trotter": {
       "name": "Globe-Trotter",
-      "desc": "Discover 50 countries."
+      "desc": "Discover 50 countries.",
+      "about": "A well-travelled mind.",
+      "condition": "Discover 50 different countries."
     },
     "geographer": {
       "name": "Geographer",
-      "desc": "Complete 10 optimal routes."
-    }
+      "desc": "Complete 10 optimal routes.",
+      "about": "You always find the shortest way.",
+      "condition": "Win 10 games with an optimal route, using the fewest intermediate countries possible."
+    },
+    "infoLabel": "About the achievement “{name}”",
+    "conditionTitle": "How to unlock it",
+    "progressTitle": "Your progress"
   },
   "stats": {
     "title": "Statistics",

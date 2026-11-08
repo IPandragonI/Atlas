@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { Icon } from "@/components/ui/Icon";
+import { AchievementInfo } from "./AchievementInfo";
 import { COUNTRIES } from "@/lib/atlas";
 import { ACHIEVEMENTS } from "@/lib/progress";
 import { useProgress } from "@/stores/progress";
@@ -25,7 +26,10 @@ export function AchievementList() {
               <Icon name={done ? "trophy" : "lock"} size={17} />
             </span>
             <div className="min-w-0 flex-1">
-              <div className="text-sm font-medium">{t(`achievements.${a.id}.name`)}</div>
+              <div className="flex items-center gap-1.5 text-sm font-medium">
+                {t(`achievements.${a.id}.name`)}
+                <AchievementInfo id={a.id} progress={[cur, target]} />
+              </div>
               <div className="text-xs muted">{t(`achievements.${a.id}.desc`)}</div>
               <div className="mt-1.5 flex items-center gap-2">
                 <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-border-soft" role="progressbar" aria-label={t(`achievements.${a.id}.name`)} aria-valuemin={0} aria-valuemax={target} aria-valuenow={cur}>

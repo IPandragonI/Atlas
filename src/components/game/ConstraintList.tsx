@@ -5,6 +5,14 @@ import type { ChallengeRules } from "@/engine/types";
 import { Icon } from "@/components/ui/Icon";
 import { useCountryName, useRegionName } from "@/components/ui/useNames";
 
+/** Number of rule lines `ConstraintList` shows (the connection-type line is always there). */
+export function constraintCount(rules: ChallengeRules): number {
+  return (
+    1 +
+    [rules.allowedRegion, rules.forbidden.length > 0, rules.mandatory.length > 0, rules.minCoastal !== undefined, rules.minIsland !== undefined, rules.maxIntermediate !== undefined, rules.requireRegion, rules.avoidRegion].filter(Boolean).length
+  );
+}
+
 /** Human-readable list of the rules that apply to a challenge. */
 export function ConstraintList({ rules }: { rules: ChallengeRules }) {
   const t = useTranslations();

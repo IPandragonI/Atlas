@@ -13,6 +13,7 @@ import { renderShareImage } from "@/lib/share-image";
 import { Link } from "@/i18n/navigation";
 import type { GameMode, HintRecord } from "@/engine/types";
 import type { NextSuggestion } from "@/lib/replay";
+import { AchievementInfo } from "@/components/collection/AchievementInfo";
 import { HintText } from "./HintPanel";
 
 export interface RouteChoice {
@@ -177,7 +178,7 @@ export function ResultsPanel({ challenge, result, solution, hints, fresh, achiev
       {achievements.length > 0 && (
         <section className="rounded-md border border-dest/50 bg-dest-soft px-3 py-2 anim-pop">
           {achievements.map((a) => (
-            <p key={a} className="flex items-center gap-2 text-sm font-medium"><Icon name="trophy" size={16} />{t("collection.unlocked")} · {t(`achievements.${a}.name`)}</p>
+            <p key={a} className="flex items-center gap-2 text-sm font-medium"><Icon name="trophy" size={16} />{t("collection.unlocked")} · {t(`achievements.${a}.name`)}<AchievementInfo id={a} /></p>
           ))}
         </section>
       )}

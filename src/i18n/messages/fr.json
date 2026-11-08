@@ -147,7 +147,10 @@
     "branch": "Nouvelle direction : ton itinéraire a été mis à jour.",
     "startAdjacent": "Le pays de départ est déjà voisin de l’arrivée : commence par entrer un autre pays. Cela ne compte pas comme une erreur et ne coûte aucun point.",
     "help": "Comment jouer",
-    "srRoute": "Itinéraire actif : {route}. {n, plural, =0 {Aucun pays découvert} one {# pays découvert} other {# pays découverts}}."
+    "srRoute": "Itinéraire actif : {route}. {n, plural, =0 {Aucun pays découvert} one {# pays découvert} other {# pays découverts}}.",
+    "repeated": "Déjà essayé — aucune erreur comptée.",
+    "hintsLeft": "{n, plural, =0 {tous utilisés} one {# restant} other {# restants}}",
+    "constraintsCount": "{n}"
   },
   "constraint": {
     "forbidden": "Éviter : {countries}",
@@ -172,7 +175,15 @@
       "short": "Frontières"
     },
     "letterText": "Un prochain pays valide commence par la lettre « {letter} ».",
-    "bordersText": "Les frontières d’un prochain pays valide sont affichées sur la carte (sans son nom)."
+    "bordersText": "Les frontières d’un prochain pays valide sont affichées sur la carte (sans son nom).",
+    "reveal": {
+      "name": "Nom du pays",
+      "desc": "Le nom complet d’un prochain pays valide. À toi de le saisir.",
+      "short": "Nom"
+    },
+    "revealText": "Un prochain pays valide : {name}.",
+    "outdated": "cet indice ne correspond plus à ton itinéraire actuel.",
+    "followed": "suivi"
   },
   "results": {
     "won": "Destination atteinte !",
@@ -249,28 +260,43 @@
   "achievements": {
     "first-journey": {
       "name": "Premier voyage",
-      "desc": "Découvre 5 pays."
+      "desc": "Découvre 5 pays.",
+      "about": "Tes premiers pas dans l’atlas.",
+      "condition": "Découvre 5 pays différents. Un pays est découvert la première fois que tu le saisis correctement pendant une partie, dans n’importe quel mode."
     },
     "european-explorer": {
       "name": "Explorateur européen",
-      "desc": "Découvre tous les pays d’Europe."
+      "desc": "Découvre tous les pays d’Europe.",
+      "about": "Tu connais toute la carte de l’Europe.",
+      "condition": "Découvre chaque pays européen au moins une fois."
     },
     "island-hopper": {
       "name": "Saute-île",
-      "desc": "Découvre 10 pays insulaires."
+      "desc": "Découvre 10 pays insulaires.",
+      "about": "Le goût des îles et des archipels.",
+      "condition": "Découvre 10 pays insulaires différents."
     },
     "around-the-world": {
       "name": "Tour du monde",
-      "desc": "Découvre au moins un pays sur chaque continent."
+      "desc": "Découvre au moins un pays sur chaque continent.",
+      "about": "Tes découvertes couvrent toute la planète.",
+      "condition": "Découvre au moins un pays sur chacun des 6 continents habités : Afrique, Asie, Europe, Amérique du Nord, Amérique du Sud et Océanie."
     },
     "globe-trotter": {
       "name": "Globe-trotter",
-      "desc": "Découvre 50 pays."
+      "desc": "Découvre 50 pays.",
+      "about": "Un esprit bien voyagé.",
+      "condition": "Découvre 50 pays différents."
     },
     "geographer": {
       "name": "Géographe",
-      "desc": "Réussis 10 routes optimales."
-    }
+      "desc": "Réussis 10 routes optimales.",
+      "about": "Tu trouves toujours le chemin le plus court.",
+      "condition": "Remporte 10 parties avec un itinéraire optimal, c’est-à-dire avec le moins de pays intermédiaires possible."
+    },
+    "infoLabel": "À propos du succès « {name} »",
+    "conditionTitle": "Comment le débloquer",
+    "progressTitle": "Ta progression"
   },
   "stats": {
     "title": "Statistiques",

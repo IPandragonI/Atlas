@@ -97,8 +97,8 @@ export interface MoveResolution {
  *  - Plain extension: adjacent to the last country of the route (any valid neighbour, as before).
  *  - Change of direction: adjacent to an EARLIER country of the route AND strictly closer to the destination than that
  *    country (shortest-path distance in the active graph). The latest such connection point is used.
- * Forbidden / out-of-region / used countries, the intermediate budget and route-level constraints apply to the NEW route,
- * so a change of direction can never be used to bypass a constraint.
+ * Forbidden / out-of-region / used countries and the intermediate budget apply to the NEW route, and a change of
+ * direction may not drop a mandatory country from the route: it can never be used to bypass a constraint.
  */
 export function resolveMove(graph: AtlasGraph, ch: Challenge, route: readonly string[], guess: string): MoveResolution {
   const no: MoveResolution = { valid: false, from: -1 };
@@ -108,7 +108,9 @@ export function resolveMove(graph: AtlasGraph, ch: Challenge, route: readonly st
   const max = ch.rules.maxIntermediate;
   const touching = new Set(graph.neighbors(guess, view));
   const last = route.length - 1;
-  if (touching.has(route[last])) return max === undefined || route.length <= max ? { valid: true, from: last } : no;
+  // A plain extension wins when it is allowed. When the country touches the last one but the budget is already full, the
+  // move is NOT rejected yet: a change of direction from an earlier country (a shorter new route) may still be valid.
+  if (touching.has(route[last]) && (max === undefined || route.length <= max)) return { valid: true, from: last };
 
   const toGoal = bfsDistances(graph, ch.destination, view);
   const dGuess = toGoal.get(guess);
@@ -118,6 +120,9 @@ export function resolveMove(graph: AtlasGraph, ch: Challenge, route: readonly st
     const dHere = toGoal.get(route[i]);
     if (dHere === undefined || dGuess >= dHere) continue; // must be real progress towards the destination
     if (max !== undefined && i + 1 > max) continue; // the new route would have too many intermediates
+    // A change of direction can never be used to drop a mandatory country: it would leave the player on a route that
+    // cannot be completed (the abandoned country cannot be re-entered). Such a guess is an ordinary wrong answer.
+    if (ch.rules.mandatory.length > 0 && route.slice(i + 1).some((id) => ch.rules.mandatory.includes(id))) continue;
     return { valid: true, from: i };
   }
   return no;

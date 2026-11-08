@@ -92,15 +92,18 @@ describe("changing direction during a game", () => {
     const r = mk("FRA", "DEU", { allowedRegion: "europe" });
     expect(resolveMove(graph, r, ["FRA", "ESP", "PRT"], "MAR").valid).toBe(false); // outside Europe
   });
-  it("cannot be used to bypass route-level constraints: a mandatory country must still be on the ACTIVE route", () => {
+  it("cannot be used to bypass a mandatory country: a branch that would drop it is an ordinary wrong answer", () => {
     const m = mk("FRA", "PRT", { mandatory: ["CHE"] });
-    // FRA -> CHE -> ITA, then Spain (borders FRA, closer to Portugal): CHE leaves the active route
+    // FRA -> CHE -> ITA, then Spain (borders FRA, closer to Portugal): it would drop Switzerland from the route
     const { st, log } = play(m, ["CHE", "ITA", "ESP"]);
-    expect(log[2].outcome).toBe("accepted"); // accepted as a branch ...
-    expect(st.route).toEqual(["FRA", "ESP"]);
-    expect(st.status).toBe("playing"); // ... but NOT a victory: the mandatory country is no longer on the route
-    expect(reachesDestination(graph, m, st.route)).toBe(false);
-    expect(st.visited).toContain("CHE"); // still discovered
+    expect(log[2].outcome).toBe("rejected");
+    expect(st.route).toEqual(["FRA", "CHE", "ITA"]); // the route is untouched ...
+    expect(st.attemptsLeft).toBe(m.attempts - 1); // ... and it costs an attempt like any wrong answer
+    expect(st.mistakes).toEqual(["ESP"]);
+    // a branch that keeps the mandatory country on the route is fine: FRA > CHE > ITA > SVN, then Germany (touches CHE, nearer Poland)
+    const kept = mk("FRA", "POL", { mandatory: ["CHE"] });
+    expect(resolveMove(graph, kept, ["FRA", "CHE", "ITA", "SVN"], "DEU").valid).toBe(true); // touches CHE (index 1): CHE stays
+    expect(resolveMove(graph, kept, ["FRA", "CHE", "ITA", "SVN"], "DEU").from).toBe(1);
   });
   it("respects maxIntermediate for the new route", () => {
     const c = mk("FRA", "PRT", { maxIntermediate: 1 });
@@ -142,5 +145,52 @@ describe("a start that already touches the destination", () => {
     expect(res.intermediates).toBe(1);
     expect(res.optimal).toBe(true); // one entered country is the minimum possible
     expect(res.score.total).toBe(1000);
+  });
+});
+
+describe("submitting the same wrong country again", () => {
+  const ch = mk("FRA", "POL");
+
+  it("is not counted as a new mistake: no attempt, no penalty, nothing recorded", () => {
+    let st = createGame(ch, 0);
+    const first = submitGuess(graph, ch, st, "JPN", 1);
+    expect(first.outcome).toBe("rejected");
+    st = first.state;
+    expect(st.attemptsLeft).toBe(ch.attempts - 1);
+    const again = submitGuess(graph, ch, st, "JPN", 2);
+    expect(again.outcome).toBe("repeated");
+    expect(again.state).toBe(st); // the very same state: nothing changed
+    expect(again.state.attemptsLeft).toBe(ch.attempts - 1);
+    expect(again.state.mistakes).toEqual(["JPN"]);
+    expect(buildResult({ ...again.state, status: "won", endedAt: 3 }, ch.minIntermediate).mistakes).toBe(1);
+  });
+  it("never ends the game, however many times it is repeated", () => {
+    let st = createGame(ch, 0);
+    st = submitGuess(graph, ch, st, "JPN", 1).state;
+    for (let i = 0; i < 20; i++) expect(submitGuess(graph, ch, st, "JPN", 2).outcome).toBe("repeated");
+    expect(st.status).toBe("playing");
+  });
+  it("a different wrong country is still a mistake", () => {
+    let st = createGame(ch, 0);
+    st = submitGuess(graph, ch, st, "JPN", 1).state;
+    const other = submitGuess(graph, ch, st, "BRA", 2);
+    expect(other.outcome).toBe("rejected");
+    expect(other.state.attemptsLeft).toBe(ch.attempts - 2);
+  });
+  it("a country rejected earlier is accepted normally once it has become valid", () => {
+    const c = mk("FRA", "BGR");
+    let st = createGame(c, 0);
+    st = submitGuess(graph, c, st, "AUT", 1).state; // Austria does not touch France: rejected
+    expect(st.mistakes).toEqual(["AUT"]);
+    expect(submitGuess(graph, c, st, "AUT", 2).outcome).toBe("repeated"); // still wrong: free
+    st = submitGuess(graph, c, st, "DEU", 3).state;
+    const later = submitGuess(graph, c, st, "AUT", 4); // adjacent to Germany now: a normal move
+    expect(later.outcome).toBe("accepted");
+    expect(later.state.route).toEqual(["FRA", "DEU", "AUT"]);
+    expect(later.state.attemptsLeft).toBe(c.attempts - 1); // only the first wrong submission ever cost anything
+  });
+  it("does nothing once the game is over", () => {
+    const st = { ...createGame(ch, 0), status: "lost" as const };
+    expect(submitGuess(graph, ch, st, "JPN", 1).outcome).toBe("ignored");
   });
 });

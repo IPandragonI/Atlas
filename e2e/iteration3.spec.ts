@@ -1,41 +1,9 @@
-import { expect, test, type Page } from "@playwright/test";
-import { graph } from "../src/lib/atlas";
-import { attemptsFor } from "../src/engine/difficulty";
-import { solve } from "../src/engine/pathfinding";
-import type { Challenge } from "../src/engine/types";
+import { expect, test } from "@playwright/test";
 import { configToParams, defaultConfig } from "../src/lib/config";
 import { generateForConfig } from "../src/lib/generate";
+import { custom, expandSheet, fr, serve, type } from "./helpers";
 
 test.use({ locale: "fr-FR" });
-
-const fr = (id: string) => graph.country(id).name.fr;
-const FAKE_DATE = "2099-01-01";
-
-/** A fully controlled challenge, served instead of a real daily file (so the scenario is deterministic). */
-function custom(start: string, destination: string, difficulty: Challenge["difficulty"] = "easy"): Challenge {
-  const rules = { maritime: false, forbidden: [], mandatory: [] };
-  const sol = solve(graph, { start, destination, rules });
-  return {
-    id: `daily-${FAKE_DATE}-classic`, mode: "classic", difficulty, start, destination, rules, minIntermediate: sol.minIntermediate,
-    attempts: attemptsFor(Math.max(0, sol.minIntermediate), difficulty === "custom" ? "normal" : difficulty), date: FAKE_DATE, rulesVersion: "2", datasetVersion: "2026.2",
-  };
-}
-async function serve(page: Page, ch: Challenge) {
-  await page.route(`**/daily/${FAKE_DATE}.json`, (route) =>
-    route.fulfill({ contentType: "application/json", body: JSON.stringify({ date: FAKE_DATE, rulesVersion: "2", datasetVersion: "2026.2", challenges: [ch] }) }),
-  );
-  await page.goto(`/fr/game/?daily=${FAKE_DATE}&mode=classic`);
-  await expect(page.getByRole("combobox").first()).toBeVisible();
-}
-async function type(page: Page, name: string) {
-  const input = page.getByRole("combobox").first();
-  await input.fill(name);
-  await input.press("Enter");
-}
-const expandSheet = async (page: Page) => {
-  const handle = page.getByRole("button", { name: "Ouvrir le panneau" });
-  if (await handle.isVisible()) await handle.click();
-};
 
 test.describe("changing direction", () => {
   test("a country linked to an earlier country and closer to the destination replaces the abandoned branch, without any penalty", async ({ page }) => {

@@ -336,6 +336,11 @@ export default function WorldMap(props: WorldMapProps) {
     }
     appliedStates.current = { ...next };
     shownRef.current = new Set(Object.keys(next));
+    // Read back what the map really holds (not what was requested): a test hook, cheap (a few dozen entries at most).
+    wrapRef.current?.setAttribute(
+      "data-applied",
+      Object.keys(next).sort().map((id) => `${id}:${String(map.getFeatureState({ source: "world", id }).s ?? "")}`).join(" "),
+    );
   }, [states, ready]);
 
   // ---------------------------------------------------------------- border visibility (presentation only)
@@ -379,6 +384,7 @@ export default function WorldMap(props: WorldMapProps) {
     const map = mapRef.current;
     if (!map || !ready) return;
     const coords = (route ?? []).filter((id) => graph.has(id)).map((id) => graph.country(id).center);
+    wrapRef.current?.setAttribute("data-route", (route ?? []).join(" "));
     (map.getSource("route") as GeoJSONSource | undefined)?.setData({
       type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: coords.length > 1 ? coords : [] },
     });

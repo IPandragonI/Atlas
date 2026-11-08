@@ -26,7 +26,7 @@ export interface GameRecord {
   finishedAt: number;
   /** Added with RULES_VERSION 2 (the destination is no longer part of the route). Optional for older data. */
   destination?: string;
-  /** "letter" | "borders" (older saves may contain the former "geographic" | "connectivity" | "discovery"). */
+  /** "letter" | "borders" | "reveal" (older saves may contain the former "geographic" | "connectivity" | "discovery"). */
   hintKinds?: string[];
 }
 export interface DiscoveredRecord {
@@ -219,7 +219,7 @@ export function validateImport(raw: unknown, knownCountries?: ReadonlySet<string
         optimal: r.optimal === true, mistakes: isNum(r.mistakes) ? r.mistakes : 0, hints: isNum(r.hints) ? r.hints : 0,
         durationMs: isNum(r.durationMs) ? r.durationMs : 0, route: r.route as string[], finishedAt: r.finishedAt,
         destination: okCountry(r.destination) ? r.destination : undefined,
-        hintKinds: Array.isArray(r.hintKinds) ? r.hintKinds.filter((k): k is string => typeof k === "string" && ["letter", "borders", "geographic", "connectivity", "discovery"].includes(k)) : undefined,
+        hintKinds: Array.isArray(r.hintKinds) ? r.hintKinds.filter((k): k is string => typeof k === "string" && ["letter", "borders", "reveal", "geographic", "connectivity", "discovery"].includes(k)) : undefined,
       });
     }
     const daily: DailyRecord[] = [];

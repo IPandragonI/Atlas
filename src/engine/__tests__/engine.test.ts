@@ -211,7 +211,7 @@ describe("hints", () => {
     st = useHint(graph, ch, st, "borders")!.state;
     expect(st.hints.map((h) => h.penalty)).toEqual([75, 150]);
     expect(st.attemptsLeft).toBe(ch.attempts);
-    expect(HINT_PENALTY).toEqual({ letter: 75, borders: 150 });
+    expect(HINT_PENALTY).toEqual({ letter: 75, borders: 150, reveal: 300 });
   });
   it("is deterministic: the same state always gives the same hint", () => {
     const x = createHint(graph, ch, ["FRA"], "letter");
@@ -243,9 +243,14 @@ describe("hints", () => {
   it("is handled gracefully when nothing can be determined: no hint, no penalty", () => {
     const tight = mk("FRA", "POL", { maxIntermediate: 1 });
     const stuck = { ...createGame(tight, 0), route: ["FRA", "CHE"] }; // budget used up, destination not reached
-    expect(createHint(graph, tight, stuck.route, "letter")).toBeNull();
-    expect(useHint(graph, tight, stuck, "letter")).toBeNull();
-    expect(stuck.hints).toHaveLength(0);
+    // the route can no longer be extended, but a change of direction is possible: the hint points to that way out
+    expect(hintCandidates(graph, tight, stuck.route)).toEqual(["DEU"]);
+    // a challenge with no possible solution at all gives no hint and costs nothing
+    const impossible = { ...tight, rules: { ...tight.rules, maxIntermediate: 0 } };
+    const dead = { ...createGame(impossible, 0), route: ["FRA", "CHE"] };
+    expect(createHint(graph, impossible, dead.route, "letter")).toBeNull();
+    expect(useHint(graph, impossible, dead, "letter")).toBeNull();
+    expect(dead.hints).toHaveLength(0);
   });
   it("is not available once the game is over", () => {
     const won = { ...createGame(ch, 0), status: "won" as const };

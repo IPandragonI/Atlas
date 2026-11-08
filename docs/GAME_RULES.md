@@ -23,13 +23,26 @@ A valid next move is: adjacent to the current country under the active connectio
 forbidden, not the start, not the destination, inside the allowed region, and (with `maxIntermediate`) within the
 intermediate budget.
 
+## Repeated wrong answers
+Submitting a country that was already rejected earlier in the same game is "repeated": no attempt is used, no penalty, nothing
+is added to the mistakes (`submitGuess` returns the same state), and a neutral toast says so. Only the first wrong submission
+of a country counts. A country rejected earlier is still accepted normally once it has become a valid move.
+
+## The game panel
+Top to bottom: mode/difficulty chips, from → to with the remaining mistakes, the route so far, the country input, a one-line
+row of the three hints with their costs (confirmation shows the penalty), the rules (collapsed unless the challenge has more
+than the basic land/sea rule), and the "give up" action. On mobile the collapsed sheet shows only the input; the expanded sheet
+shows everything.
+
 ## Changing direction (route branching)
 A guess that is **not** adjacent to the last country is still accepted when it is adjacent to an **earlier** country of the
 active route **and** strictly closer to the destination than that country (shortest-path distance in the active graph,
 `rules.resolveMove`; the latest qualifying earlier country wins). The active route becomes *route up to that country + the
 new country*; the abandoned tail leaves the route, the map highlight and the score, but its countries **stay discovered**
 (`GameState.visited` is the discovery history, `GameState.route` the active route). All other rules still apply (forbidden,
-mandatory, region, intermediate budget, no repeats). It costs nothing and is never reported as an error: a subtle toast
+region, intermediate budget, no repeats), and a change of direction may **not drop a mandatory country** from the route
+(it would leave an unwinnable route): such a guess is an ordinary wrong answer. When the new country also touches the last
+country but the intermediate budget is full, the change of direction is still tried. It costs nothing and is never reported as an error: a subtle toast
 ("New direction") and a short animation. A guess that is not closer is an ordinary wrong answer.
 
 ## Start next to the destination
@@ -97,17 +110,31 @@ Rule in `lib/visibility.ts`; the GeoJSON, the graph, validation and generation n
 the region diameter. Difficulty is chosen before the game and never changes mid-game.
 
 ## Hints (never consume attempts)
-Two progressive hints, **in this order**, **once each per game** (`engine/hints.ts`, `game.useHint`):
+Three hints, in this order, once each: first letter (−75), borders (−150), **full name of a valid next country (−300)**. The
+penalty is shown before confirming. They all describe the same country while it stays a valid candidate. Candidates come
+from the solver on prefixes of the active route and are filtered through `resolveMove`, so a hint always points at a move
+the player can make right now (including a change of direction out of a dead end) and never at the destination. A hint whose
+country is no longer a valid move (the route changed) is shown as *outdated*, a followed one as *followed*; the penalty is
+not refunded. (`engine/hints.ts`, `game.useHint`)
+
 1. **First letter (−75)**: the first letter of a valid next country.
 2. **Borders (−150)**, available once hint 1 was used: the shape and borders of the *same* country are drawn on the map (own
    "hint" colour), **without its name**. On a hidden map this is the only extra information revealed; it is shown only while
    that country is still a valid next step.
 
+3. **Country name (−300)**, available once hint 2 was used: the full name of the same country. It is never entered for the
+   player.
+
 The penalty is displayed on the button and again in a confirmation step, and is applied only when confirmed. The hinted
-country always comes from the real solver (`optimalContinuations` of the current partial route ∩ valid moves), so it belongs
-to an actual optimal solution and respects every constraint (forbidden, mandatory, region, coastal…). Selection is
+country always comes from the real solver, so it belongs to an actual optimal solution and respects every constraint
+(forbidden, mandatory, region, coastal…). Selection is
 deterministic for a given state. If nothing can be determined (e.g. the intermediate budget is exhausted), no hint is given,
 **no penalty is applied**, and a message says so.
+
+## Victory feedback
+A victory (never a defeat) plays one synthesized jingle (`lib/sound.ts`, no audio file, works offline) and a ~3.5 s particle
+burst (`VictoryBurst`, canvas, `pointer-events: none`, skipped with `prefers-reduced-motion`). Both fire once per win. The
+*Sound effects* setting (Settings, persisted) mutes the jingle and the other effects; the visual burst is independent.
 
 ## Score (0–1000)
 Victory +500, optimal route +300, no mistakes +100, no hints +100; −25 per mistake; hints −75 / −150. Clamped to

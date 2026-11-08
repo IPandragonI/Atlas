@@ -13,21 +13,23 @@ import type { Challenge, GameMode } from "@/engine/types";
 import { useRouter } from "@/i18n/navigation";
 import { graph } from "@/lib/atlas";
 import { loadDailyChallenge } from "@/lib/daily";
-import { nextMoves, startTouchesDestination } from "@/engine/rules";
+import { hintLiveness } from "@/engine/hints";
+import { startTouchesDestination } from "@/engine/rules";
 import { configFromChallenge, effectiveMap, parseConfig, PRESET_MAP, replayParams, type GameConfig } from "@/lib/config";
 import { generateForConfigAsync } from "@/lib/generate-client";
 import { suggestAfterDaily } from "@/lib/replay";
-import { playSound } from "@/lib/sound";
+import { playSound, unlockAudio } from "@/lib/sound";
 import { computeVisibility } from "@/lib/visibility";
 import { useGame } from "@/stores/game";
 import { useProgress } from "@/stores/progress";
 import { useSettings } from "@/stores/settings";
-import { ConstraintList } from "./ConstraintList";
+import { ConstraintList, constraintCount } from "./ConstraintList";
 import { CountryCombobox } from "./CountryCombobox";
 import { HintPanel } from "./HintPanel";
 import { HowToPlay, TUTORIAL_KEY } from "./HowToPlay";
 import { ResultsPanel, useRouteChoices } from "./ResultsPanel";
 import { RouteList } from "./RouteList";
+import { VictoryBurst } from "./VictoryBurst";
 
 type Phase = "loading" | "ready" | "error";
 
@@ -67,9 +69,12 @@ export function GameScreen() {
   const [expanded, setExpanded] = useState(false);
   const [confirmGiveUp, setConfirmGiveUp] = useState(false);
   const [selected, setSelected] = useState(0);
-  const [toast, setToast] = useState<{ text: string; kind: "ok" | "bad" } | null>(null);
+  const [toast, setToast] = useState<{ text: string; kind: "ok" | "bad" | "info" } | null>(null);
+  const [constraintsOpen, setConstraintsOpen] = useState<boolean | null>(null); // null: default (open only when there is more than the basic rule)
   const [errTick, setErrTick] = useState(0);
   const [showHelp, setShowHelp] = useState(false);
+  const [burst, setBurst] = useState<number | null>(null);
+  const celebrated = useRef(new Set<number>());
   const key = params.toString();
   const startedKey = useRef<string | null>(null);
 
@@ -140,10 +145,18 @@ export function GameScreen() {
       playSound(feedback.outcome === "lost" ? "lose" : "bad", sound);
       setErrTick((n) => n + 1);
       setToast({ text: t("game.wrong"), kind: "bad" });
+    } else if (feedback.outcome === "repeated") {
+      // the same wrong country again: a slip, not a mistake. No sound, no shake, nothing counted.
+      setToast({ text: t("game.repeated"), kind: "info" });
     } else if (feedback.outcome === "accepted") {
       playSound("ok", sound);
       setToast({ text: feedback.removed.length > 0 ? t("game.branch") : t("game.right"), kind: "ok" });
-    } else if (feedback.outcome === "won") playSound("win", sound);
+    } else if (feedback.outcome === "won" && !celebrated.current.has(feedback.n)) {
+      // Victory only: one jingle and one burst per win. Defeats get neither; leaving and re-opening the results does not replay them.
+      celebrated.current.add(feedback.n);
+      playSound("win", sound);
+      setBurst(feedback.n);
+    }
     const tm = setTimeout(() => setToast(null), 6000);
     return () => clearTimeout(tm);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -152,6 +165,17 @@ export function GameScreen() {
   useEffect(() => {
     if (result) setExpanded(true);
   }, [result]);
+
+  // Browsers only allow audio after a gesture: create/resume the audio context on the first one (it makes no sound).
+  useEffect(() => {
+    const unlock = () => unlockAudio();
+    window.addEventListener("pointerdown", unlock, { once: true, passive: true });
+    window.addEventListener("keydown", unlock, { once: true, passive: true });
+    return () => {
+      window.removeEventListener("pointerdown", unlock);
+      window.removeEventListener("keydown", unlock);
+    };
+  }, []);
 
   // ---------------------------------------------------------------- derived data
   const finished = !!result;
@@ -183,8 +207,8 @@ export function GameScreen() {
   const hintId = useMemo(() => {
     if (!state || finished) return null;
     const h = [...state.hints].reverse().find((x) => x.payload.kind === "borders");
-    // still shown only while that country is a valid next step for the CURRENT active route
-    return h && challenge && h.atMove === state.route.length - 1 && nextMoves(graph, challenge, state.route).includes(h.payload.countryId) ? h.payload.countryId : null;
+    // still shown only while that country is a move the player can make from the CURRENT active route (it follows changes of direction)
+    return h && challenge && hintLiveness(graph, challenge, state.route, state.visited, h) === "live" ? h.payload.countryId : null;
   }, [state, finished, challenge]);
 
   // Who can replay what: after a daily, suggest the other dailies, then a new Classic game.
@@ -265,6 +289,8 @@ export function GameScreen() {
   const playing = state.status === "playing";
   // non-blocking notice: costs nothing, and the destination can never be reached without entering a country
   const startTouches = startTouchesDestination(graph, challenge);
+  // the rules are collapsed unless the challenge has more than the basic connection rule (constraints and regional games need them)
+  const showConstraints = constraintsOpen ?? constraintCount(challenge.rules) > 1;
 
   const modeBadge = (
     <div className="flex flex-wrap items-center gap-1.5">
@@ -309,6 +335,8 @@ export function GameScreen() {
           padding={padding}
           tooltip={tooltip}
         />
+
+        <VictoryBurst runKey={burst} />
 
         {/* mobile top bar */}
         <div className="pointer-events-none absolute inset-x-0 top-0 z-10 p-2 md:hidden" style={{ paddingTop: "calc(var(--safe-top) + 8px)" }}>
@@ -375,31 +403,54 @@ export function GameScreen() {
                   {t("game.startAdjacent")}
                 </p>
               )}
-              <CountryCombobox
-                disabled={!playing}
-                errorTick={errTick}
-                autoFocus
-                onSubmit={(id) => guess(id)}
-              />
-              <p className={`min-h-5 text-sm ${toast?.kind === "bad" ? "text-error" : "text-success"}`} role="status" aria-live="polite" data-testid="toast">{toast?.text}</p>
 
-              {fresh.length > 0 && (
-                <p className="chip w-fit anim-glow"><Icon name="star" size={13} />{t("game.newDiscovery")} · {name(fresh[fresh.length - 1])}</p>
-              )}
-
-              <div className={expanded ? "grid gap-4" : "hidden gap-4 md:grid"}>
-                <section>
-                  <h3 className="eyebrow mb-1.5">{t("game.constraints")}</h3>
-                  <ConstraintList rules={challenge.rules} />
-                </section>
-                <section>
-                  <h3 className="eyebrow mb-1">{t("game.route")}</h3>
-                  <div key={feedback?.n ?? 0} className={feedback && feedback.removed.length > 0 ? "anim-branch" : undefined} data-testid="route-wrap" data-branched={feedback && feedback.removed.length > 0 ? "true" : "false"}>
-                    <RouteList route={state.route} destination={challenge.destination} finished={false} />
+              <section>
+                <button
+                  type="button"
+                  className="flex min-h-9 w-full items-center justify-between gap-2 text-left"
+                  aria-expanded={showConstraints}
+                  aria-controls="constraints-body"
+                  onClick={() => setConstraintsOpen(!showConstraints)}
+                  data-testid="constraints-toggle"
+                >
+                  <span className="eyebrow">{t("game.constraints")} · {constraintCount(challenge.rules)}</span>
+                  <span className={`muted transition-transform ${showConstraints ? "rotate-90" : ""}`} aria-hidden="true">›</span>
+                </button>
+                {showConstraints && (
+                  <div id="constraints-body" className="mt-1.5" data-testid="constraints-body">
+                    <ConstraintList rules={challenge.rules} />
                   </div>
-                  {state.route.length === 1 && <p className="mt-1 text-sm muted">{t("game.routeEmpty")}</p>}
-                </section>
-                <HintPanel hints={state.hints} disabled={!playing} onUse={hint} />
+                )}
+              </section>
+              
+              {/* 1. the one thing to do: type a country */}
+              <div className="grid gap-2">
+                <CountryCombobox
+                  disabled={!playing}
+                  errorTick={errTick}
+                  autoFocus
+                  onSubmit={(id) => guess(id)}
+                />
+                <p className={`min-h-5 text-sm ${toast?.kind === "bad" ? "text-error" : toast?.kind === "info" ? "text-text-2" : "text-success"}`} role="status" aria-live="polite" data-testid="toast">{toast?.text}</p>
+                {fresh.length > 0 && (
+                  <p className="chip w-fit anim-glow"><Icon name="star" size={13} />{t("game.newDiscovery")} · {name(fresh[fresh.length - 1])}</p>
+                )}
+              </div>
+
+              {/* 2. progress: the route so far (always on desktop, in the expanded sheet on mobile) */}
+              <section className={expanded ? "" : "max-md:hidden"} aria-label={t("game.route")}>
+                <h3 className="eyebrow mb-1">{t("game.route")}</h3>
+                <div key={feedback?.n ?? 0} className={feedback && feedback.removed.length > 0 ? "anim-branch" : undefined} data-testid="route-wrap" data-branched={feedback && feedback.removed.length > 0 ? "true" : "false"}>
+                  <RouteList route={state.route} destination={challenge.destination} finished={false} />
+                </div>
+                {state.route.length === 1 && <p className="mt-1 text-sm muted">{t("game.routeEmpty")}</p>}
+              </section>
+
+          
+
+              {/* 3. help, on one line with the costs; 4. secondary information, collapsed by default */}
+              <div className={expanded ? "grid gap-4" : "hidden gap-4 md:grid"}>
+                <HintPanel hints={state.hints} route={state.route} visited={state.visited} challenge={challenge} disabled={!playing} onUse={hint} />                
                 <div>
                   {confirmGiveUp ? (
                     <div className="grid gap-2 rounded-md border border-error/40 bg-error-soft p-3 text-sm">
