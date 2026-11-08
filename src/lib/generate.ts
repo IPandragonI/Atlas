@@ -1,10 +1,11 @@
 import { DATASET_VERSION, RULES_VERSION } from "@/data/version";
 import { REGION_DEFS } from "@/data/regions";
-import { configureRegionSea, generateChallenge, type GenContext, type GenRequest, type Generated } from "@/engine/generator/generator";
+import { configureRegionSea, generateChallenge, scopeInfo, type GenContext, type GenRequest, type Generated, type ScopeInfo } from "@/engine/generator/generator";
 import type { HistoryEntry } from "@/engine/generator/diversity";
 import { solve } from "@/engine/pathfinding";
 import type { Challenge } from "@/engine/types";
 import { graph } from "./atlas";
+import { genRequestFor, type GameConfig } from "./config";
 
 configureRegionSea(REGION_DEFS);
 
@@ -39,4 +40,23 @@ export function generateWithRetry(req: GenRequest, history: readonly HistoryEntr
     if (g) return g;
   }
   return null;
+}
+
+/** Generates a challenge for a game configuration (same settings, any seed). `exclude` = pair to avoid when possible. */
+export function generateForConfig(
+  cfg: GameConfig,
+  seed: string,
+  history: readonly HistoryEntry[] = [],
+  exclude?: readonly [string, string],
+  candidates = 300,
+): Generated | null {
+  const first = generateWithRetry(genRequestFor(cfg, seed, exclude, candidates), history);
+  // A very small scope can have a single possible start/destination pair: rather than failing a replay,
+  // fall back to allowing it again (the seed still differs, and so can the constraints).
+  return first ?? (exclude ? generateWithRetry(genRequestFor(cfg, seed, undefined, candidates), history) : null);
+}
+
+/** Size facts about the scope of a configuration (used to validate custom settings). */
+export function scopeFacts(cfg: Pick<GameConfig, "mode" | "scope" | "forbidden">): ScopeInfo {
+  return scopeInfo(makeContext(), cfg);
 }

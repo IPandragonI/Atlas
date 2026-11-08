@@ -3,26 +3,32 @@
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { Flag } from "@/components/ui/Flag";
-import { COUNTRIES, searchIndex } from "@/lib/atlas";
+import { searchIndex } from "@/lib/atlas";
 import { resolveCountry, searchCountries } from "@/engine/search";
 import type { Locale } from "@/engine/types";
 
 interface Props {
-  /** Ids that may be suggested (the valid next moves). Nothing else is ever listed. */
-  suggestions: readonly string[];
   disabled?: boolean;
   onSubmit: (countryId: string) => void;
   /** Increments when a wrong answer was just given (triggers the shake). */
   errorTick?: number;
   autoFocus?: boolean;
   onFocus?: () => void;
+  /** Texts (default: the in-game answer field). */
+  label?: string;
+  placeholder?: string;
+  submitLabel?: string;
+  /** Open the suggestion list above the field (when the field sits at the bottom of a scrolling container). */
+  dropUp?: boolean;
 }
 
 /**
- * Accessible autocomplete (ARIA 1.2 combobox). Suggestions are limited to valid next moves;
- * free text that matches any country can still be submitted (it then costs an attempt).
+ * Accessible autocomplete (ARIA 1.2 combobox) used ONLY to find and spell country names: it searches all
+ * playable countries (French + English names and aliases, accent/case-insensitive) from the typed text alone.
+ * It knows nothing about the route, adjacency, visited or forbidden countries, so it can never help solve the
+ * geographic puzzle. Whether a submitted country is correct is decided by the engine.
  */
-export function CountryCombobox({ suggestions, disabled, onSubmit, errorTick, autoFocus, onFocus }: Props) {
+export function CountryCombobox({ disabled, onSubmit, errorTick, autoFocus, onFocus, label, placeholder, submitLabel, dropUp }: Props) {
   const t = useTranslations("game");
   const locale = useLocale() as Locale;
   const id = useId();
@@ -32,8 +38,7 @@ export function CountryCombobox({ suggestions, disabled, onSubmit, errorTick, au
   const [active, setActive] = useState(0);
   const [shake, setShake] = useState(false);
 
-  const allowed = useMemo(() => new Set(suggestions), [suggestions]);
-  const results = useMemo(() => searchCountries(searchIndex, value, allowed, locale, 7), [value, allowed, locale]);
+  const results = useMemo(() => (value.trim() ? searchCountries(searchIndex, value, null, locale, 8) : []), [value, locale]);
 
   useEffect(() => {
     if (!errorTick) return;
@@ -68,19 +73,19 @@ export function CountryCombobox({ suggestions, disabled, onSubmit, errorTick, au
       e.preventDefault();
       if (disabled) return;
       if (open && results[active]) return submit(results[active].id);
-      // Free text: any known country can be submitted, even if it is not a valid move.
+      // Free text: any known country can be submitted; the engine decides whether it is correct.
       const any = resolveCountry(searchIndex, value, null, locale);
       if (any) submit(any.id);
     }
   };
 
   const listId = `${id}-list`;
-  const showList = open && value.length >= 0 && !disabled;
+  const showList = open && value.trim().length > 0 && !disabled;
   const canSubmit = !disabled && value.trim().length > 0 && (results.length > 0 || !!resolveCountry(searchIndex, value, null, locale));
 
   return (
     <div className="relative">
-      <label htmlFor={`${id}-input`} className="eyebrow mb-1.5 block">{t("inputLabel")}</label>
+      <label htmlFor={`${id}-input`} className="eyebrow mb-1.5 block">{label ?? t("inputLabel")}</label>
       <div className={`flex gap-2 ${shake ? "anim-shake" : ""}`}>
         <input
           id={`${id}-input`}
@@ -97,7 +102,7 @@ export function CountryCombobox({ suggestions, disabled, onSubmit, errorTick, au
           enterKeyHint="go"
           disabled={disabled}
           value={value}
-          placeholder={t("inputPlaceholder")}
+          placeholder={placeholder ?? t("inputPlaceholder")}
           onFocus={() => {
             setOpen(true);
             onFocus?.();
@@ -122,15 +127,14 @@ export function CountryCombobox({ suggestions, disabled, onSubmit, errorTick, au
             if (any) submit(any.id);
           }}
         >
-          {t("submit")}
+          {submitLabel ?? t("submit")}
         </button>
       </div>
       {showList && (
         <ul
           id={listId}
           role="listbox"
-          className="absolute left-0 right-0 z-20 mt-1 max-h-64 overflow-auto rounded-md border border-border-soft bg-surface p-1 shadow-lg anim-pop"
-          style={{ bottom: "auto" }}
+          className={`absolute left-0 right-0 z-20 max-h-56 overflow-auto rounded-md border border-border-soft bg-surface p-1 shadow-lg anim-pop ${dropUp ? "bottom-[calc(100%-1.75rem)] mb-1" : "mt-1"}`}
         >
           {results.length === 0 ? (
             <li className="px-3 py-2 text-sm muted" role="option" aria-selected="false" aria-disabled="true">{t("noSuggestions")}</li>
@@ -159,4 +163,3 @@ export function CountryCombobox({ suggestions, disabled, onSubmit, errorTick, au
   );
 }
 
-export { COUNTRIES };

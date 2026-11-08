@@ -2,6 +2,8 @@
 
 export type ConnectionType = "land" | "sea";
 export type Difficulty = "easy" | "normal" | "hard";
+/** Challenges can also be generated with player-defined ("custom") settings. */
+export type ChallengeDifficulty = Difficulty | "custom";
 export type GameMode = "classic" | "constraints" | "regional";
 export type Locale = "fr" | "en";
 
@@ -56,7 +58,7 @@ export interface ChallengeRules {
 export interface Challenge {
   id: string;
   mode: GameMode;
-  difficulty: Difficulty;
+  difficulty: ChallengeDifficulty;
   start: string;
   destination: string;
   rules: ChallengeRules;
@@ -68,12 +70,13 @@ export interface Challenge {
   datasetVersion: string;
 }
 
-export type HintKind = "geographic" | "connectivity" | "discovery";
+/** Two progressive hints, in this order: first letter, then the borders of the same country. */
+export type HintKind = "letter" | "borders";
 
+/** `countryId` is the hinted (valid next) country; the UI must never display its name. */
 export type HintPayload =
-  | { kind: "geographic"; region: string; continent: string }
-  | { kind: "connectivity"; borders: number }
-  | { kind: "discovery"; letter: { fr: string; en: string } };
+  | { kind: "letter"; letter: { fr: string; en: string }; countryId: string }
+  | { kind: "borders"; countryId: string };
 
 export interface HintRecord {
   payload: HintPayload;

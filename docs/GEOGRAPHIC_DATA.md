@@ -45,3 +45,34 @@ neighbours; main land component membership; 195 countries; metadata completeness
 ## Known limitations
 Natural Earth 1:50m is coarse for microstates (rendered as clickable dots when area < 12,000 km²). Antimeridian: geometries
 are used as shipped (Russia/Fiji are pre-split); route lines connect country centres and do not wrap the Pacific.
+
+## Display names, aliases and corrections
+**Identity vs display.** A country's identity is its ISO 3166-1 alpha-3 `id` (e.g. `SWZ`). Everything persistent (discoveries,
+history, daily challenges, exports, the graph) stores ids only, so renaming a *display* name can never break saved data.
+French name, English name and aliases are separate fields; aliases include former and common names.
+
+**Policy.** Use the name the country itself asks for (UN / national usage) when it is established; keep the common name when
+both are current (e.g. "Birmanie" with alias "Myanmar", "Türkiye" with alias "Turkey"); never use display names as keys.
+Every replaced name stays searchable as an alias. Corrections live in `src/data/countries-meta.ts` (`NAME_OVERRIDES`,
+`CAPITAL_OVERRIDES`, `ALIASES`) and are applied by `npm run data:build`, which also removes duplicate, redundant (equal to the
+country's own name) and ambiguous (shared by two countries) auto-imported aliases. Curated aliases are always kept.
+
+| id | field | before | after | why |
+|---|---|---|---|---|
+| SWZ | name (fr) | Swaziland | **Eswatini** | renamed 2018 |
+| CPV | name (fr) | Îles du Cap-Vert | **Cap-Vert** | the state, not the archipelago |
+| CPV | name (en) | Cape Verde | **Cabo Verde** | official name since 2013 |
+| CIV | name (fr, en) | Côte d'Ivoire / Ivory Coast | **Côte d’Ivoire** | the country's requested name in every language; typographic apostrophe |
+| PLW | name (fr) | Palaos (Palau) | **Palaos** | gloss removed |
+| SUR | name (fr) | Surinam | **Suriname** | old French spelling |
+| SAU | name (fr) | Arabie Saoudite | **Arabie saoudite** | French capitalisation |
+| COD | name (fr) | Congo (Rép. dém.) | **RD Congo** | catalogue abbreviation |
+| TLS | name (fr) | Timor oriental | **Timor-Leste** | official name since 2002 |
+| SWZ | capital (en) | Lobamba | **Mbabane** | fr/en disagreed; Mbabane is the administrative capital (Lobamba: legislative) |
+| LKA | capital (fr) | Sri Jayawardenapura Kotte | **Colombo** | fr/en disagreed; Colombo is the seat of government and commonly used |
+
+Reviewed and kept: Biélorussie (alias Bélarus), Birmanie / Myanmar, Türkiye / Turquie, Czechia / Tchéquie, North Macedonia /
+Macédoine du Nord, Cité du Vatican, Kiev (alias Kyiv), Viêt Nam, Salvador (alias El Salvador). Tests (`features.test.ts`)
+assert the corrections, that former names still resolve (Swaziland, Cape Verde, Ivory Coast, Surinam, Palau, Timor oriental,
+Turkey…), that names are unique per language and clean, that aliases never collide, that ids are unchanged, that a pre-rename
+save still imports, and that every published daily challenge still validates.

@@ -5,7 +5,6 @@
   },
   "nav": {
     "home": "Accueil",
-    "play": "Jouer",
     "collection": "Collection",
     "stats": "Statistiques",
     "settings": "Réglages",
@@ -69,6 +68,10 @@
     "hard": {
       "name": "Difficile",
       "desc": "Routes longues, 1 seul essai de marge"
+    },
+    "custom": {
+      "name": "Personnalisé",
+      "desc": "Tu règles toi-même la longueur, les essais et la carte"
     }
   },
   "home": {
@@ -90,18 +93,6 @@
     "openCollection": "Voir la collection",
     "dailyUnavailable": "Défi généré localement (fichier du jour indisponible)."
   },
-  "play": {
-    "title": "Nouvelle partie",
-    "step1": "Choisis un mode",
-    "step2": "Choisis une difficulté",
-    "step3": "Choisis une région",
-    "regionHint": "Sélectionne une région : seuls ses pays seront jouables.",
-    "continents": "Continents",
-    "subregions": "Sous-régions",
-    "generate": "Générer le défi",
-    "generating": "Génération du défi…",
-    "failed": "Impossible de générer un défi. Réessaie."
-  },
   "game": {
     "from": "Départ",
     "to": "Arrivée",
@@ -111,7 +102,7 @@
     "routeEmpty": "Saisis un pays voisin pour avancer.",
     "inputLabel": "Pays suivant",
     "inputPlaceholder": "Tape un pays voisin…",
-    "noSuggestions": "Aucun pays valide ne correspond.",
+    "noSuggestions": "Aucun pays ne correspond.",
     "submit": "Valider",
     "wrong": "Incorrect — un essai en moins.",
     "right": "Bien joué !",
@@ -122,7 +113,7 @@
     "hintsTitle": "Indices",
     "hintCost": "−{n} pts",
     "hintUse": "Indice",
-    "hintNone": "Aucun indice disponible pour le moment.",
+    "hintNone": "Aucun indice fiable n’est disponible pour le moment (aucune pénalité appliquée).",
     "giveUp": "Abandonner",
     "giveUpConfirm": "Abandonner cette partie ? Elle comptera comme une défaite.",
     "fullscreen": "Plein écran",
@@ -141,7 +132,12 @@
     "legendDestination": "Arrivée",
     "legendRoute": "Parcouru",
     "legendWrong": "Essai raté",
-    "minShown": "Objectif : relier avec le moins de pays intermédiaires possible."
+    "minShown": "Objectif : atteindre un pays voisin de l’arrivée avec le moins de pays possible.",
+    "mapHidden": "Le reste de la carte se dévoile au fil de tes découvertes.",
+    "menu": "Menu",
+    "hintConfirm": "Utiliser cet indice ? Pénalité immédiate : −{n} pts. Aucun essai n’est consommé.",
+    "hintLocked": "Utilise d’abord l’indice précédent",
+    "hintUsed": "Utilisé"
   },
   "constraint": {
     "forbidden": "Éviter : {countries}",
@@ -155,24 +151,18 @@
     "maritime": "Liaisons maritimes activées"
   },
   "hint": {
-    "geographic": {
-      "name": "Indice géographique",
-      "desc": "Où se trouve un prochain pays valide.",
-      "short": "Région"
-    },
-    "connectivity": {
-      "name": "Indice de connectivité",
-      "desc": "Le nombre de frontières d’un prochain pays valide.",
-      "short": "Frontières"
-    },
-    "discovery": {
-      "name": "Indice de découverte",
+    "letter": {
+      "name": "Première lettre",
       "desc": "La première lettre d’un prochain pays valide.",
       "short": "Lettre"
     },
-    "geographicText": "Un prochain pays valide se situe en : {region}.",
-    "connectivityText": "Un prochain pays valide possède {n, plural, =0 {aucune frontière terrestre} one {# frontière terrestre} other {# frontières terrestres}}.",
-    "discoveryText": "Un prochain pays valide commence par la lettre « {letter} »."
+    "borders": {
+      "name": "Frontières",
+      "desc": "La forme et les frontières d’un prochain pays valide s’affichent sur la carte.",
+      "short": "Frontières"
+    },
+    "letterText": "Un prochain pays valide commence par la lettre « {letter} ».",
+    "bordersText": "Les frontières d’un prochain pays valide sont affichées sur la carte (sans son nom)."
   },
   "results": {
     "won": "Destination atteinte !",
@@ -196,13 +186,22 @@
     "alternative": "Alternative {n}",
     "optimalBadge": "Optimale",
     "routes": "Routes possibles",
-    "playAgain": "Rejouer",
     "home": "Accueil",
     "share": "Partager",
     "copied": "Résumé copié !",
     "newCountries": "{n, plural, =0 {Aucun nouveau pays} one {# nouveau pays découvert} other {# nouveaux pays découverts}}",
     "moreRoutes": "Seules les routes les plus courtes sont affichées.",
-    "shareTitle": "Atlas — {date}"
+    "shareTitle": "Atlas — {date}",
+    "next": "Et maintenant ?",
+    "nextDaily": "Jouer le défi du jour : {mode}",
+    "nextDailyDesc": "Un autre défi quotidien, le même pour tout le monde.",
+    "newClassic": "Nouvelle partie Classique",
+    "newClassicDesc": "Tes trois défis du jour sont terminés : lance une partie libre.",
+    "replaySame": "Rejouer avec les mêmes paramètres",
+    "replaySameDesc": "Même mode, même difficulté, même zone — mais un nouveau trajet.",
+    "replaySameDailyDesc": "Partie libre avec le même mode et la même difficulté. Ton défi du jour reste enregistré.",
+    "showMoreRoutes": "Afficher les {n} autres routes",
+    "showFewerRoutes": "Masquer les autres routes"
   },
   "collection": {
     "title": "Ta collection",
@@ -356,5 +355,41 @@
   "notFound": {
     "title": "Page introuvable",
     "body": "Cette page n’existe pas sur la carte."
+  },
+  "config": {
+    "title": "Nouvelle partie · {mode}",
+    "difficulty": "Difficulté",
+    "custom": "Réglages personnalisés",
+    "minRoute": "Longueur minimale du trajet",
+    "minRouteHelp": "Nombre minimal de pays intermédiaires (maximum possible pour cette zone : {max}).",
+    "attempts": "Nombre d’essais",
+    "attemptsHelp": "Entre {min} et {max}.",
+    "map": "Apparence de la carte",
+    "mapStart": "Afficher le pays de départ",
+    "mapBorders": "Afficher les frontières",
+    "mapNames": "Afficher les noms",
+    "mapFull": "Carte complète dès le départ",
+    "mapFullHelp": "Désactivé : la carte se dévoile au fil de tes découvertes.",
+    "scope": "Zone de jeu",
+    "world": "Monde entier",
+    "continents": "Continents",
+    "subregions": "Sous-régions",
+    "forbid": "Sans passer par",
+    "forbidHelp": "Ces pays ne seront jamais traversés, et ne seront jamais le départ ni l’arrivée.",
+    "forbidLabel": "Ajouter un pays à éviter",
+    "forbidPlaceholder": "Chercher un pays…",
+    "forbidAdd": "Ajouter",
+    "forbidRemove": "Retirer {country}",
+    "forbidNone": "Aucun pays évité",
+    "start": "Lancer la partie",
+    "checking": "Recherche d’un trajet…",
+    "errors": {
+      "min": "La longueur minimale doit être comprise entre 1 et {max} pour cette zone.",
+      "attempts": "Le nombre d’essais doit être un entier entre 1 et 30.",
+      "forbidden": "Trop de pays évités (maximum 10).",
+      "scope": "Zone de jeu invalide.",
+      "noRoute": "Aucun trajet possible avec ces réglages. Retire un pays évité, choisis une zone plus grande ou réduis la longueur minimale.",
+      "failed": "Impossible de générer une partie. Réessaie."
+    }
   }
 }

@@ -8,25 +8,31 @@ export const CONTINENT_OVERRIDES: Record<string, string> = {
 export const ISLAND_OVERRIDES = new Set(["IRL", "GBR", "HTI", "DOM", "PNG", "IDN", "TLS", "BRN"]);
 
 export const ALIASES: Record<string, { fr: string[]; en: string[] }> = {
+  UKR: { fr: ["kyiv"], en: ["kyiv"] },
+  SLV: { fr: ["el salvador"], en: [] },
+  FSM: { fr: ["etats federes de micronesie"], en: ["federated states of micronesia"] },
+  TUR: { fr: ["turkiye", "türkiye"], en: ["turkey"] },
+  SUR: { fr: ["surinam"], en: ["surinam"] },
+  PLW: { fr: ["palau"], en: ["belau"] },
   USA: { fr: ["etats-unis", "états unis", "usa", "amerique"], en: ["usa", "us", "united states", "america"] },
   GBR: { fr: ["royaume uni", "angleterre", "grande-bretagne", "ecosse", "écosse"], en: ["uk", "great britain", "britain", "england", "scotland", "wales"] },
   ARE: { fr: ["emirats", "eau"], en: ["uae", "emirates"] },
-  COD: { fr: ["rdc", "congo kinshasa", "congo-kinshasa", "republique democratique du congo"], en: ["drc", "congo kinshasa"] },
+  COD: { fr: ["rdc", "congo kinshasa", "congo-kinshasa", "republique democratique du congo", "république démocratique du congo"], en: ["drc", "congo kinshasa", "democratic republic of the congo"] },
   COG: { fr: ["congo brazzaville", "congo-brazzaville"], en: ["congo brazzaville", "republic of the congo"] },
   CIV: { fr: ["cote d'ivoire", "côte d’ivoire"], en: ["ivory coast"] },
   CZE: { fr: ["tchequie", "république tchèque"], en: ["czechia", "czech"] },
   MMR: { fr: ["birmanie"], en: ["burma"] },
   SWZ: { fr: ["swaziland"], en: ["swaziland", "eswatini"] },
-  MKD: { fr: ["macedoine"], en: ["macedonia"] },
+  MKD: { fr: ["macedoine", "république de macédoine du nord"], en: ["macedonia"] },
   TLS: { fr: ["timor oriental"], en: ["east timor"] },
   KOR: { fr: ["coree du sud"], en: ["south korea"] },
   PRK: { fr: ["coree du nord"], en: ["north korea"] },
   VAT: { fr: ["vatican", "saint-siege", "saint siège"], en: ["vatican", "holy see"] },
   PSE: { fr: ["cisjordanie", "gaza"], en: ["west bank", "gaza"] },
   RUS: { fr: ["russie"], en: ["russia"] },
-  BLR: { fr: ["bielorussie"], en: ["belarus"] },
+  BLR: { fr: ["bielorussie", "bélarus"], en: ["belarus", "byelorussia"] },
   NLD: { fr: ["hollande"], en: ["holland"] },
-  CPV: { fr: ["cap vert"], en: ["cape verde"] },
+  CPV: { fr: ["cap vert", "cabo verde", "îles du cap-vert", "iles du cap vert"], en: ["cape verde"] },
 };
 
 export const CAPITAL_FR: Record<string, string> = {
@@ -44,7 +50,7 @@ export const CAPITAL_FR: Record<string, string> = {
   TUN: "Tunis", TUR: "Ankara", UKR: "Kiev", VNM: "Hanoï", FRA: "Paris", MLT: "La Valette",
   MCO: "Monaco", VAT: "Vatican", CUB: "La Havane", ETH: "Addis-Abeba", GEO: "Tbilissi", ARM: "Erevan",
   AZE: "Bakou", UZB: "Tachkent", TKM: "Achgabat", TJK: "Douchanbé", KGZ: "Bichkek", NPL: "Katmandou",
-  LKA: "Sri Jayawardenapura Kotte", MMR: "Naypyidaw", PRK: "Pyongyang", PHL: "Manille", IDN: "Jakarta",
+  LKA: "Colombo", MMR: "Naypyidaw", PRK: "Pyongyang", PHL: "Manille", IDN: "Jakarta",
   TLS: "Dili", SOM: "Mogadiscio", SDN: "Khartoum", SSD: "Djouba", COD: "Kinshasa", COG: "Brazzaville",
   CMR: "Yaoundé", CIV: "Yamoussoukro", GHA: "Accra", SEN: "Dakar", MLI: "Bamako", NER: "Niamey",
   TCD: "N'Djamena", MRT: "Nouakchott", AGO: "Luanda", ZMB: "Lusaka", ZWE: "Harare", MOZ: "Maputo",
@@ -64,4 +70,26 @@ export const CAPITAL_FR: Record<string, string> = {
   VUT: "Port-Vila", SLB: "Honiara", KIR: "Tarawa-Sud", MHL: "Majuro", FSM: "Palikir", PLW: "Ngerulmud",
   NRU: "Yaren", TUV: "Funafuti", MDV: "Malé", BTN: "Thimphou", BGD: "Dacca", LAO: "Vientiane",
   MYS: "Kuala Lumpur", BRN: "Bandar Seri Begawan", PSE: "Ramallah",
+};
+
+/**
+ * Reviewed display-name corrections (IDs, i.e. ISO 3166-1 alpha-3 codes, NEVER change, so saved progress, daily
+ * challenges, history and exports are unaffected). The replaced source name is automatically kept as a search alias.
+ * See docs/GEOGRAPHIC_DATA.md for the rationale of each entry.
+ */
+export const NAME_OVERRIDES: Record<string, { fr?: string; en?: string }> = {
+  SWZ: { fr: "Eswatini" }, // renamed in 2018 (French source still said "Swaziland")
+  CPV: { fr: "Cap-Vert", en: "Cabo Verde" }, // "Îles du Cap-Vert" is not the state name; official name Cabo Verde since 2013
+  CIV: { fr: "Côte d’Ivoire", en: "Côte d’Ivoire" }, // the country asked to use its French name in every language (typographic apostrophe)
+  PLW: { fr: "Palaos" }, // "Palaos (Palau)" was a gloss, not a name
+  SUR: { fr: "Suriname" }, // "Surinam" is the old spelling
+  SAU: { fr: "Arabie saoudite" }, // French capitalisation rule for adjectives
+  COD: { fr: "RD Congo" }, // "Congo (Rép. dém.)" was a catalogue abbreviation
+  TLS: { fr: "Timor-Leste" }, // official name since 2002
+};
+
+/** Capitals corrected so that French and English agree. */
+export const CAPITAL_OVERRIDES: Record<string, { fr?: string; en?: string }> = {
+  SWZ: { fr: "Mbabane", en: "Mbabane" }, // administrative capital (Lobamba is the legislative/royal one)
+  LKA: { fr: "Colombo", en: "Colombo" }, // largest city and seat of government (legislative: Sri Jayawardenepura Kotte)
 };

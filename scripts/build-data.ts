@@ -9,7 +9,8 @@ import fs from "node:fs";
 import path from "node:path";
 import worldCountries from "world-countries";
 import { LAND_ADDITIONS, LAND_REMOVALS, SEA_CONNECTIONS } from "../src/data/connections/overrides";
-import { ALIASES, CAPITAL_FR, CONTINENT_OVERRIDES, ISLAND_OVERRIDES } from "../src/data/countries-meta";
+import { ALIASES, CAPITAL_FR, CAPITAL_OVERRIDES, CONTINENT_OVERRIDES, ISLAND_OVERRIDES, NAME_OVERRIDES } from "../src/data/countries-meta";
+import { normalizeText } from "../src/engine/search";
 
 type Pos = number[];
 type Poly = Pos[][];
@@ -84,6 +85,15 @@ for (const f of ne.features) {
 }
 
 // ---- Countries
+type Src = (typeof worldCountries)[number];
+const sourceNames = (c: Src) => ({ fr: c.translations.fra?.common ?? c.name.common, en: c.name.common });
+const nameOf = (c: Src) => ({ ...sourceNames(c), ...NAME_OVERRIDES[c.cca3] });
+/** Source names replaced by a correction stay searchable (old names, spellings people still type). */
+const replaced = (c: Src) => {
+  const o = NAME_OVERRIDES[c.cca3];
+  const s = sourceNames(c);
+  return { fr: o?.fr && o.fr !== s.fr ? [s.fr] : [], en: o?.en && o.en !== s.en ? [s.en] : [] };
+};
 const countries = playable
   .map((c) => {
     const g = groups.get(c.cca3);
@@ -102,9 +112,12 @@ const countries = playable
     return {
       id: c.cca3,
       iso2: c.cca2,
-      name: { fr: c.translations.fra?.common ?? c.name.common, en: c.name.common },
-      aliases: { fr: [...al.fr], en: [...al.en, ...alt] },
-      capital: { en: c.capital[0] ?? "—", fr: CAPITAL_FR[c.cca3] ?? c.capital[0] ?? "—" },
+      name: nameOf(c),
+      aliases: { fr: [...al.fr, ...replaced(c).fr], en: [...al.en, ...alt, ...replaced(c).en] },
+      capital: {
+        en: CAPITAL_OVERRIDES[c.cca3]?.en ?? c.capital[0] ?? "—",
+        fr: CAPITAL_OVERRIDES[c.cca3]?.fr ?? CAPITAL_FR[c.cca3] ?? c.capital[0] ?? "—",
+      },
       continent: CONTINENT_OVERRIDES[c.cca3] ?? mapContinent(c.region, c.subregion),
       region: c.subregion || c.region,
       population: Math.round(g.pop) || 0,
@@ -116,6 +129,38 @@ const countries = playable
     };
   })
   .sort((a, b) => a.id.localeCompare(b.id));
+
+// ---- Alias hygiene: dedupe, drop redundant ones, drop ones that collide with another country
+{
+  const norm = normalizeText;
+  const primary = new Map<string, string>();
+  for (const c of countries) for (const n of [c.name.fr, c.name.en]) primary.set(norm(n), c.id);
+  const owners = new Map<string, Set<string>>();
+  for (const c of countries) for (const a of [...c.aliases.fr, ...c.aliases.en]) (owners.get(norm(a)) ?? owners.set(norm(a), new Set()).get(norm(a))!).add(c.id);
+  let dropped = 0;
+  for (const c of countries) {
+    const own = new Set([norm(c.name.fr), norm(c.name.en)]);
+    // curated aliases (ALIASES) are trusted: only the auto-imported alternate spellings get the length / ambiguity filters
+    const curated = new Set([...(ALIASES[c.id]?.fr ?? []), ...(ALIASES[c.id]?.en ?? [])].map(norm));
+    const clean = (list: string[]) => {
+      const seen = new Set<string>();
+      return list.filter((a) => {
+        const k = norm(a);
+        const keep = curated.has(k)
+          ? !own.has(k) && !seen.has(k)
+          : k.length >= 3 && !own.has(k) && !seen.has(k) && (primary.get(k) ?? c.id) === c.id && owners.get(k)!.size === 1;
+        seen.add(k);
+        if (!keep) dropped++;
+        return keep;
+      });
+    };
+    c.aliases = { fr: clean(c.aliases.fr), en: clean(c.aliases.en) };
+    // an alias listed in French is not repeated in English
+    const frKeys = new Set(c.aliases.fr.map(norm));
+    c.aliases.en = c.aliases.en.filter((x) => !frKeys.has(norm(x)));
+  }
+  console.log("aliases dropped (duplicates / redundant / ambiguous):", dropped);
+}
 
 // ---- Connections
 const norm = (a: string, b: string): [string, string] => (a < b ? [a, b] : [b, a]);

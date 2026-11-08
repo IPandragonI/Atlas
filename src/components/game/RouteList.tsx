@@ -32,7 +32,7 @@ export function RouteList({ route, destination, finished }: Props) {
             >
               {isStart ? "A" : isDest ? "B" : i}
             </span>
-            {i < full.length - 1 && <span className="absolute left-3 top-[26px] h-full w-px bg-border-soft" aria-hidden="true" />}
+            {i < full.length - 1 && <span className="absolute left-3 top-6.5 h-full w-px bg-border-soft" aria-hidden="true" />}
             <Flag country={c} className={pending ? "opacity-50" : ""} />
             <span className={`truncate text-sm ${pending ? "muted" : "font-medium"}`}>{pending ? "?" : c.name[locale]}</span>
           </li>

@@ -10,7 +10,8 @@ import type { Challenge, GameResult } from "@/engine/types";
 import { graph } from "@/lib/atlas";
 import { buildShareText } from "@/lib/share";
 import { Link } from "@/i18n/navigation";
-import type { HintRecord } from "@/engine/types";
+import type { GameMode, HintRecord } from "@/engine/types";
+import type { NextSuggestion } from "@/lib/replay";
 import { HintText } from "./HintPanel";
 
 export interface RouteChoice {
@@ -29,15 +30,24 @@ interface Props {
   achievements: readonly string[];
   selected: number;
   onSelect: (choice: RouteChoice, index: number) => void;
-  onPlayAgain: () => void;
+  /** True when the finished game is a Daily Challenge. */
+  daily: boolean;
+  /** After a daily: another daily to play, or a new Classic game once all three are done. */
+  suggestion: NextSuggestion | null;
+  /** Same configuration (mode, difficulty, scope, custom settings), brand-new challenge. */
+  onReplay: () => void;
+  onNextDaily: (mode: GameMode) => void;
+  onNewClassic: () => void;
   choices: RouteChoice[];
 }
 
-export function useRouteChoices(result: GameResult | null, solution: Solution | null): RouteChoice[] {
+/** The destination is never part of the engine route; it is appended here for display only (a win ends there). */
+export function useRouteChoices(result: GameResult | null, solution: Solution | null, destination: string | null): RouteChoice[] {
   const t = useTranslations("results");
   return useMemo(() => {
     if (!result) return [];
-    const list: RouteChoice[] = [{ id: "yours", kind: "yours", route: result.route, label: t("yourRoute") }];
+    const yours = result.status === "won" && destination ? [...result.route, destination] : result.route;
+    const list: RouteChoice[] = [{ id: "yours", kind: "yours", route: yours, label: t("yourRoute") }];
     if (solution?.feasible) {
       let alt = 0;
       solution.routes.forEach((r, i) => {
@@ -47,14 +57,16 @@ export function useRouteChoices(result: GameResult | null, solution: Solution | 
       });
     }
     return list;
-  }, [result, solution, t]);
+  }, [result, solution, destination, t]);
 }
 
-export function ResultsPanel({ challenge, result, solution, hints, fresh, achievements, selected, onSelect, onPlayAgain, choices }: Props) {
+export function ResultsPanel({ challenge, result, solution, hints, fresh, achievements, selected, onSelect, daily, suggestion, onReplay, onNextDaily, onNewClassic, choices }: Props) {
   const t = useTranslations();
   const locale = useLocale() as "fr" | "en";
   const name = useCountryName();
   const [copied, setCopied] = useState(false);
+  const [showAll, setShowAll] = useState(false);
+  const VISIBLE_ROUTES = 6;
   const won = result.status === "won";
   const s = result.score;
 
@@ -140,10 +152,34 @@ export function ResultsPanel({ challenge, result, solution, hints, fresh, achiev
         </section>
       )}
 
+      <section className="grid gap-2" aria-label={t("results.next")} data-testid="next-actions">
+        <h3 className="eyebrow">{t("results.next")}</h3>
+        {daily && suggestion?.kind === "daily" && (
+          <button type="button" className="btn btn-primary !h-auto !flex-col !items-start gap-0.5 !py-2.5 text-left" onClick={() => onNextDaily(suggestion.mode)} data-testid="next-daily">
+            <span className="font-semibold">{t("results.nextDaily", { mode: t(`modes.${suggestion.mode}.name`) })}</span>
+            <span className="text-xs font-normal opacity-90">{t("results.nextDailyDesc")}</span>
+          </button>
+        )}
+        {daily && suggestion?.kind === "classic" && (
+          <button type="button" className="btn btn-primary !h-auto !flex-col !items-start gap-0.5 !py-2.5 text-left" onClick={onNewClassic} data-testid="new-classic">
+            <span className="font-semibold">{t("results.newClassic")}</span>
+            <span className="text-xs font-normal opacity-90">{t("results.newClassicDesc")}</span>
+          </button>
+        )}
+        <button type="button" className={`btn !h-auto !flex-col !items-start gap-0.5 !py-2.5 text-left ${daily ? "" : "btn-primary"}`} onClick={onReplay} data-testid="replay-same">
+          <span className="font-semibold">{t("results.replaySame")}</span>
+          <span className="text-xs font-normal opacity-80">{daily ? t("results.replaySameDailyDesc") : t("results.replaySameDesc")}</span>
+        </button>
+        <div className="grid grid-cols-2 gap-2">
+          <button type="button" className="btn" onClick={share}><Icon name="share" size={16} />{copied ? t("results.copied") : t("results.share")}</button>
+          <Link href="/" className="btn btn-ghost">{t("results.home")}</Link>
+        </div>
+      </section>
+
       <section>
         <h3 className="eyebrow mb-2">{t("results.routes")}</h3>
         <ul className="grid gap-1.5" role="listbox" aria-label={t("results.routes")}>
-          {choices.map((c, i) => (
+          {choices.slice(0, showAll ? undefined : VISIBLE_ROUTES).map((c, i) => (
             <li key={c.id}>
               <button
                 type="button"
@@ -157,7 +193,7 @@ export function ResultsPanel({ challenge, result, solution, hints, fresh, achiev
                   {c.label}
                   <span className="flex items-center gap-1.5">
                     {(c.kind === "shortest" || c.kind === "optimal" || (c.kind === "yours" && result.optimal)) && <span className="chip !py-0">{t("results.optimalBadge")}</span>}
-                    <span className="text-xs font-normal muted">{c.route.length - 2 < 0 ? 0 : c.route.length - 2}</span>
+                    <span className="text-xs font-normal muted">{Math.max(0, c.route.length - (c.kind === "yours" && result.status === "lost" ? 1 : 2))}</span>
                   </span>
                 </span>
                 <span className="mt-0.5 block text-xs muted">{c.route.map((id) => graph.country(id).name[locale]).join(" → ")}</span>
@@ -165,14 +201,14 @@ export function ResultsPanel({ challenge, result, solution, hints, fresh, achiev
             </li>
           ))}
         </ul>
+        {choices.length > VISIBLE_ROUTES && (
+          <button type="button" className="btn btn-ghost mt-2 w-full text-sm" onClick={() => setShowAll((v) => !v)} data-testid="toggle-routes">
+            {showAll ? t("results.showFewerRoutes") : t("results.showMoreRoutes", { n: choices.length - VISIBLE_ROUTES })}
+          </button>
+        )}
         {solution?.truncated && <p className="mt-1 text-xs muted">{t("results.moreRoutes")}</p>}
       </section>
 
-      <div className="grid grid-cols-2 gap-2">
-        <button type="button" className="btn btn-primary" onClick={onPlayAgain}>{t("results.playAgain")}</button>
-        <button type="button" className="btn" onClick={share}><Icon name="share" size={16} />{copied ? t("results.copied") : t("results.share")}</button>
-        <Link href="/" className="btn col-span-2 btn-ghost">{t("results.home")}</Link>
-      </div>
     </div>
   );
 }

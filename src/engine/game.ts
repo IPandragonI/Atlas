@@ -1,6 +1,6 @@
 import type { AtlasGraph } from "./graph/graph";
-import { createHint } from "./hints";
-import { validateMove } from "./rules";
+import { createHint, hintStatus } from "./hints";
+import { reachesDestination, validateMove } from "./rules";
 import { HINT_PENALTY } from "./scoring";
 import type { Challenge, GameState, HintKind, HintRecord, MoveOutcome } from "./types";
 
@@ -28,10 +28,11 @@ export interface MoveResult {
  */
 export function submitGuess(graph: AtlasGraph, ch: Challenge, state: GameState, guess: string, now: number): MoveResult {
   if (state.status !== "playing") return { state, outcome: "ignored" };
-  const { valid, isDestination } = validateMove(graph, ch, state.route, guess);
+  const { valid } = validateMove(graph, ch, state.route, guess);
   if (valid) {
+    // The destination is never appended to the route; it only decides victory.
     const route = [...state.route, guess];
-    if (isDestination) return { state: { ...state, route, status: "won", endedAt: now }, outcome: "won" };
+    if (reachesDestination(graph, ch, route)) return { state: { ...state, route, status: "won", endedAt: now }, outcome: "won" };
     return { state: { ...state, route }, outcome: "accepted" };
   }
   const attemptsLeft = state.attemptsLeft - 1;
@@ -40,10 +41,14 @@ export function submitGuess(graph: AtlasGraph, ch: Challenge, state: GameState, 
   return { state: next, outcome: "rejected" };
 }
 
-/** Hints never consume attempts. */
+/**
+ * Hints never consume attempts. They must be used in order (letter, then borders), once each per game;
+ * out-of-order, repeated or undeterminable hints return null and cost nothing.
+ */
 export function useHint(graph: AtlasGraph, ch: Challenge, state: GameState, kind: HintKind): { state: GameState; hint: HintRecord } | null {
   if (state.status !== "playing") return null;
-  const payload = createHint(graph, ch, state.route, kind);
+  if (hintStatus(state.hints, kind) !== "available") return null;
+  const payload = createHint(graph, ch, state.route, kind, state.hints);
   if (!payload) return null;
   const hint: HintRecord = { payload, penalty: HINT_PENALTY[kind], atMove: state.route.length - 1 };
   return { state: { ...state, hints: [...state.hints, hint] }, hint };

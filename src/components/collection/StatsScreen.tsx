@@ -71,7 +71,7 @@ export function StatsScreen() {
               <li key={`${g.finishedAt}-${i}`} className="flex items-center gap-3 px-3 py-2 text-sm">
                 <span className={`h-2 w-2 flex-none rounded-full ${g.status === "won" ? "bg-success" : "bg-error"}`} aria-label={g.status === "won" ? t("won") : t("lost")} />
                 <span className="min-w-0 flex-1 truncate">
-                  {graph.country(g.route[0]).name[locale]} → {graph.country(g.route[g.route.length - 1]).name[locale]}
+                  {graph.country(g.route[0]).name[locale]} → {graph.country(g.destination ?? g.route[g.route.length - 1]).name[locale]}
                 </span>
                 <span className="muted">{new Intl.DateTimeFormat(locale, { dateStyle: "short" }).format(g.finishedAt)}</span>
                 <span className="w-12 text-right font-medium tabular-nums">{g.score}</span>

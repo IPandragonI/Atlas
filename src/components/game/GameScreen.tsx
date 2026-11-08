@@ -6,15 +6,18 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { MapView, type MapState } from "@/components/map/MapView";
 import { Flag } from "@/components/ui/Flag";
 import { Icon } from "@/components/ui/Icon";
+import { MobileMenu } from "@/components/ui/MobileMenu";
 import { useMedia } from "@/components/ui/useMedia";
 import { useCountryName } from "@/components/ui/useNames";
-import { nextMoves } from "@/engine/rules";
-import type { Challenge, GameMode, Difficulty } from "@/engine/types";
+import type { Challenge, GameMode } from "@/engine/types";
 import { useRouter } from "@/i18n/navigation";
 import { graph } from "@/lib/atlas";
 import { loadDailyChallenge } from "@/lib/daily";
-import { generateWithRetry } from "@/lib/generate";
+import { configFromChallenge, effectiveMap, parseConfig, PRESET_MAP, replayParams, type GameConfig } from "@/lib/config";
+import { generateForConfig } from "@/lib/generate";
+import { suggestAfterDaily } from "@/lib/replay";
 import { playSound } from "@/lib/sound";
+import { computeVisibility } from "@/lib/visibility";
 import { useGame } from "@/stores/game";
 import { useProgress } from "@/stores/progress";
 import { useSettings } from "@/stores/settings";
@@ -50,11 +53,12 @@ export function GameScreen() {
   const params = useSearchParams();
   const isDesktop = useMedia("(min-width: 768px)");
 
-  const { challenge, state, result, solution, fresh, newAchievements, feedback } = useGame();
-  const { start, guess, hint, giveUp, clear } = useGame.getState();
+  const { challenge, config, state, result, solution, fresh, newAchievements, feedback } = useGame();
+  const { start, restore, guess, hint, giveUp, clear } = useGame.getState();
   const labels = useSettings((s) => s.labels);
   const sound = useSettings((s) => s.sound);
   const progressLoaded = useProgress((s) => s.loaded);
+  const dailyRecs = useProgress((s) => s.daily);
 
   const [phase, setPhase] = useState<Phase>("loading");
   const [fallback, setFallback] = useState(false);
@@ -75,19 +79,23 @@ export function GameScreen() {
     const daily = params.get("daily");
     const mode = (params.get("mode") ?? "classic") as GameMode;
     let ch: Challenge | null = null;
+    let cfg: GameConfig | undefined;
     if (daily && /^\d{4}-\d{2}-\d{2}$/.test(daily)) {
       const d = await loadDailyChallenge(daily, mode, history);
       ch = d?.challenge ?? null;
       setFallback(d?.fallback ?? false);
     } else {
-      const difficulty = (params.get("difficulty") ?? "normal") as Difficulty;
-      const seed = params.get("seed") ?? String(Date.now());
-      const g = generateWithRetry({ mode, difficulty, region: params.get("region") ?? undefined, seed, candidates: 300 }, history);
+      const parsed = parseConfig(params);
+      cfg = parsed.config;
+      const g = generateForConfig(parsed.config, parsed.seed, history, parsed.exclude);
       ch = g?.challenge ?? null;
       setFallback(false);
     }
     if (ch) {
-      start(ch);
+      // An already completed daily is shown as completed (state + results): no new attempt.
+      const done = ch.date ? useProgress.getState().games.find((x) => x.challengeId === ch!.id && x.daily) : undefined;
+      if (done) restore(ch, done);
+      else start(ch, cfg);
       setPhase("ready");
     } else setPhase("error");
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -123,38 +131,82 @@ export function GameScreen() {
 
   // ---------------------------------------------------------------- derived data
   const finished = !!result;
-  const choices = useRouteChoices(result, solution);
+  const choices = useRouteChoices(result, solution, challenge?.destination ?? null);
   const viewRoute = useMemo(
     () => (finished ? (choices[selected]?.route ?? state?.route ?? []) : (state?.route ?? [])),
     [finished, choices, selected, state?.route],
   );
 
-  const suggestions = useMemo(
-    () => (challenge && state && state.status === "playing" ? nextMoves(graph, challenge, state.route) : []),
-    [challenge, state],
+  // The configuration this game was started with (restored dailies derive it from the challenge).
+  const cfg = useMemo(() => (challenge ? (config ?? configFromChallenge(challenge)) : null), [challenge, config]);
+  const appearance = useMemo(() => (cfg ? effectiveMap(cfg) : PRESET_MAP.easy), [cfg]);
+  const showStart = appearance.start || finished;
+
+  // Map visibility is a purely visual rule (see lib/visibility.ts); the engine and graph never see it.
+  const vis = useMemo(
+    () =>
+      computeVisibility({
+        appearance,
+        finished,
+        route: state?.route ?? [],
+        start: challenge?.start ?? "",
+        destination: challenge?.destination ?? "",
+      }),
+    [appearance, challenge?.start, challenge?.destination, finished, state?.route],
+  );
+
+  // Borders hint: the shape of ONE valid next country, drawn without its name, only while it is still a valid next step.
+  const hintId = useMemo(() => {
+    if (!state || finished) return null;
+    const h = [...state.hints].reverse().find((x) => x.payload.kind === "borders");
+    return h && h.atMove === state.route.length - 1 ? h.payload.countryId : null;
+  }, [state, finished]);
+
+  // Who can replay what: after a daily, suggest the other dailies, then a new Classic game.
+  const suggestion = useMemo(
+    () => (challenge?.date ? suggestAfterDaily(challenge.date, dailyRecs.map((d) => d.challengeId), challenge.mode) : null),
+    [challenge, dailyRecs],
   );
 
   const mapStates = useMemo(() => {
     if (!challenge) return {};
     const s: Record<string, MapState> = {};
+    if (vis.masked) {
+      for (const id of vis.shown) s[id] = "traversed";
+      if (appearance.start) s[challenge.start] = "start";
+      s[challenge.destination] = "destination";
+      if (hintId) s[hintId] = "hint";
+      return s;
+    }
     if (challenge.rules.allowedRegion) for (const id of graph.regionMembers(challenge.rules.allowedRegion)) s[id] = "region";
     if (state && (!finished || selected === 0)) for (const id of state.mistakes) if (graph.has(id)) s[id] = "wrong";
     for (const id of viewRoute) s[id] = "traversed";
-    s[challenge.start] = "start";
+    if (showStart) s[challenge.start] = "start";
     s[challenge.destination] = "destination";
+    if (hintId) s[hintId] = "hint";
     return s;
-  }, [challenge, state, viewRoute, finished, selected]);
+  }, [challenge, state, viewRoute, finished, selected, vis, appearance.start, showStart, hintId]);
 
-  const labelIds = useMemo(() => (challenge ? [...new Set([challenge.start, challenge.destination, ...viewRoute])] : []), [challenge, viewRoute]);
+  const labelIds = useMemo(
+    () =>
+      !challenge
+        ? []
+        : vis.masked
+          ? vis.shown
+          : [...new Set([challenge.start, challenge.destination, ...viewRoute])].filter((id) => showStart || id !== challenge.start),
+    [challenge, viewRoute, vis, showStart],
+  );
   const fitIds = useMemo(() => {
     if (!challenge) return undefined;
+    if (vis.masked) return hintId ? [...vis.shown, hintId] : vis.shown; // frame only what is displayed
     if (finished) return viewRoute;
     if (challenge.rules.allowedRegion) return [...graph.regionMembers(challenge.rules.allowedRegion)];
     return [challenge.start, challenge.destination];
-  }, [challenge, finished, viewRoute]);
+  }, [challenge, finished, viewRoute, vis, hintId]);
 
   const known = useMemo(() => new Set(labelIds), [labelIds]);
-  const tooltip = useCallback((id: string) => (known.has(id) ? name(id) : null), [known, name]);
+  const showNames = appearance.names || finished;
+  const tooltip = useCallback((id: string) => (showNames && known.has(id) ? name(id) : null), [known, name, showNames]);
   const padding = isDesktop ? { top: 60, bottom: 60, left: 60, right: 60 } : { top: 84, bottom: expanded ? 360 : 190, left: 20, right: 20 };
 
   // ---------------------------------------------------------------- render
@@ -164,7 +216,10 @@ export function GameScreen() {
         {phase === "error" ? (
           <div className="grid gap-3">
             <p>{t("play.failed")}</p>
-            <button type="button" className="btn btn-primary" onClick={() => { startedKey.current = null; void load(); }}>{t("common.retry")}</button>
+            <div className="flex flex-wrap justify-center gap-2">
+              <button type="button" className="btn btn-primary" onClick={() => { startedKey.current = null; void load(); }}>{t("common.retry")}</button>
+              <button type="button" className="btn" onClick={() => router.push("/")}>{t("nav.home")}</button>
+            </div>
           </div>
         ) : (
           <div className="grid justify-items-center gap-3">
@@ -203,25 +258,33 @@ export function GameScreen() {
         <MapView
           className="h-full w-full"
           states={mapStates}
+          masked={vis.masked}
+          controlsInset
           route={viewRoute}
           routeKey={viewRoute.length}
-          start={challenge.start}
+          start={showStart ? challenge.start : undefined}
           destination={challenge.destination}
-          labelMode={labels === "all" ? "all" : labels === "none" ? "none" : "route"}
+          showBorders={appearance.borders || finished}
+          labelMode={!showNames ? "none" : vis.masked ? "route" : labels === "all" ? "all" : labels === "none" ? "none" : "route"}
           labelIds={labelIds}
           fitIds={fitIds}
-          fitKey={`${challenge.id}-${finished ? `r${selected}` : "play"}`}
+          fitKey={`${challenge.id}-${vis.masked ? `m${vis.shown.length}${hintId ?? ""}` : finished ? `r${selected}` : "play"}`}
           padding={padding}
           tooltip={tooltip}
         />
 
         {/* mobile top bar */}
         <div className="pointer-events-none absolute inset-x-0 top-0 z-10 p-2 md:hidden" style={{ paddingTop: "calc(var(--safe-top) + 8px)" }}>
-          <div className="pointer-events-auto flex items-center justify-between gap-2 rounded-lg border border-border-soft bg-surface/95 px-3 py-2 shadow-sm backdrop-blur">
-            {fromTo}
+          <div className="pointer-events-auto flex items-center justify-between gap-2 rounded-lg border border-border-soft bg-surface/95 px-2 py-1.5 shadow-sm backdrop-blur">
+            <MobileMenu />
+            <div className="min-w-0 flex-1">{fromTo}</div>
             <Attempts left={state.attemptsLeft} total={state.attemptsTotal} />
           </div>
         </div>
+
+        {vis.masked && (
+          <p className="pointer-events-none absolute bottom-3 left-1/2 z-10 hidden -translate-x-1/2 rounded-full border border-border-soft bg-surface/90 px-3 py-1 text-xs muted md:block">{t("game.mapHidden")}</p>
+        )}
 
         {/* legend (desktop) */}
         <div className="pointer-events-none absolute bottom-3 left-3 z-10 hidden gap-3 rounded-md border border-border-soft bg-surface/90 px-3 py-1.5 text-xs md:flex" aria-label={t("game.mapLegend")}>
@@ -268,11 +331,9 @@ export function GameScreen() {
           {!finished && (
             <div className="mt-3 grid gap-4 md:mt-4">
               <CountryCombobox
-                suggestions={suggestions}
                 disabled={!playing}
                 errorTick={errTick}
                 autoFocus
-                onFocus={() => setExpanded(true)}
                 onSubmit={(id) => guess(id)}
               />
               <p className={`min-h-5 text-sm ${toast?.kind === "bad" ? "text-error" : "text-success"}`} role="status" aria-live="polite" data-testid="toast">{toast?.text}</p>
@@ -321,14 +382,11 @@ export function GameScreen() {
                 choices={choices}
                 selected={selected}
                 onSelect={(_, i) => setSelected(i)}
-                onPlayAgain={() => {
-                  if (challenge.date) router.push("/play");
-                  else {
-                    const q = new URLSearchParams(params.toString());
-                    q.set("seed", String(Date.now()));
-                    router.push(`/game?${q.toString()}` as "/game");
-                  }
-                }}
+                daily={!!challenge.date}
+                suggestion={suggestion}
+                onReplay={() => router.push(`/game?${replayParams(cfg ?? configFromChallenge(challenge), challenge).toString()}` as "/game")}
+                onNextDaily={(mode) => router.push(`/game?daily=${challenge.date}&mode=${mode}` as "/game")}
+                onNewClassic={() => router.push("/?mode=classic" as "/")}
               />
             </div>
           )}

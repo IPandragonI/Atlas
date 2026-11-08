@@ -3,7 +3,7 @@ import type { AtlasGraph, GraphView } from "../graph/graph";
 import { bfsDistances, countShortestRoutes, solve } from "../pathfinding";
 import { createRng, pick, shuffle, type Rng } from "../rng";
 import { isValidRoute } from "../rules";
-import type { Challenge, ChallengeRules, Difficulty, GameMode } from "../types";
+import type { Challenge, ChallengeDifficulty, ChallengeRules, Difficulty, GameMode } from "../types";
 import { DEFAULT_WEIGHTS, scoreCandidate, type DiversityWeights, type HistoryEntry } from "./diversity";
 
 export interface GenContext {
@@ -18,8 +18,19 @@ export interface GenContext {
 
 export interface GenRequest {
   mode: GameMode;
-  difficulty: Difficulty;
-  region?: string; // regional mode
+  /** "custom" uses minIntermediate / attempts below (constraint density behaves like "normal"). */
+  difficulty: ChallengeDifficulty;
+  region?: string; // regional mode: the playable region
+  /** Classic / Constraints: restrict the game to a continent (or any region id). Omitted or "world" = whole world. */
+  scope?: string;
+  /** Countries that must never be used. They are never picked as start or destination either. */
+  forbidden?: readonly string[];
+  /** Custom difficulty: minimum number of intermediate countries (the generated minimum is >= this). */
+  minIntermediate?: number;
+  /** Custom difficulty: maximum attempts (overrides minIntermediate + margin). */
+  attempts?: number;
+  /** Replay: this unordered start/destination pair is never generated again. */
+  exclude?: readonly [string, string];
   seed: string;
   id?: string;
   date?: string;
@@ -92,7 +103,14 @@ export function dailyId(date: string, mode: GameMode): string {
 export function generateChallenge(ctx: GenContext, req: GenRequest): Generated | null {
   const { graph } = ctx;
   const w = ctx.weights ?? DEFAULT_WEIGHTS;
-  const rng = createRng(`${req.mode}|${req.difficulty}|${req.region ?? ""}|${req.seed}`);
+  const effDiff: Difficulty = req.difficulty === "custom" ? "normal" : req.difficulty;
+  const scope = req.mode === "regional" ? req.region : req.scope && req.scope !== "world" ? req.scope : undefined;
+  if (scope && !graph.hasRegion(scope)) return null;
+  const forbidden = [...new Set(req.forbidden ?? [])].filter((id) => graph.has(id)).sort();
+  const forbiddenSet = new Set(forbidden);
+  const customMin = req.difficulty === "custom" ? Math.max(1, Math.floor(req.minIntermediate ?? 3)) : 0;
+  if (req.attempts !== undefined && (!Number.isInteger(req.attempts) || req.attempts < 1)) return null;
+  const rng = createRng(`${req.mode}|${req.difficulty}|${req.region ?? req.scope ?? ""}|${req.seed}`);
   const candidates = req.candidates ?? 300;
 
   // ---- universe, view and band per mode
@@ -107,19 +125,26 @@ export function generateChallenge(ctx: GenContext, req: GenRequest): Generated |
     ids = [...graph.regionMembers(req.region)].sort();
     const def = REGION_SEA.get(req.region) ?? "never";
     maritime = def === "always" ? true : def === "optional" ? rng() < 0.3 : false;
-    baseRules = { ...emptyRules(), maritime, allowedRegion: req.region };
-    view = graph.viewFor(baseRules);
-    bandsFor = (d) => regionBands(d)[req.difficulty];
+    baseRules = { ...emptyRules(), maritime, allowedRegion: req.region, forbidden: [...forbidden] };
   } else {
+    if (scope) ids = [...graph.regionMembers(scope)].sort();
     maritime = req.mode === "constraints" && rng() < 0.22;
-    baseRules = { ...emptyRules(), maritime };
-    view = graph.viewFor(baseRules);
-    bandsFor = () => WORLD_BANDS[req.difficulty];
+    baseRules = { ...emptyRules(), maritime, forbidden: [...forbidden], ...(scope ? { allowedRegion: scope } : {}) };
   }
+  // forbidden countries are neither crossed nor ever picked as start / destination
+  ids = ids.filter((id) => !forbiddenSet.has(id));
+  view = graph.viewFor(baseRules);
+  if (req.difficulty === "custom") bandsFor = () => ({ min: customMin, max: customMin + 2 });
+  else if (req.mode === "regional" || scope) bandsFor = (d) => regionBands(d)[effDiff];
+  else bandsFor = () => WORLD_BANDS[effDiff];
 
-  const table = pairTable(graph, view, ids, `${req.mode === "regional" ? req.region : "world"}|${maritime}`);
+  const table = pairTable(graph, view, ids, `${scope ?? "world"}|${maritime}|${forbidden.join(",")}`);
   const band = bandsFor(table.diameter);
   let eligible = table.pairs.filter((p) => p.d - 1 >= band.min && p.d - 1 <= band.max);
+  if (req.exclude) {
+    const [x, y] = req.exclude;
+    eligible = eligible.filter((p) => !((p.a === x && p.b === y) || (p.a === y && p.b === x)));
+  }
   if (maritime && req.mode === "constraints") {
     // maritime constraint must matter: keep pairs the land graph cannot link as well
     const landView = graph.viewFor(emptyRules());
@@ -147,7 +172,7 @@ export function generateChallenge(ctx: GenContext, req: GenRequest): Generated |
   for (const cand of scored.slice(0, maxTries)) {
     let rules: ChallengeRules = baseRules;
     if (req.mode === "constraints") {
-      const built = buildConstraints(ctx, rng, cand.a, cand.b, cand.route, req.difficulty, maritime, band.max);
+      const built = buildConstraints(ctx, rng, cand.a, cand.b, cand.route, effDiff, baseRules, band.max);
       if (!built) continue;
       rules = built;
     }
@@ -155,6 +180,8 @@ export function generateChallenge(ctx: GenContext, req: GenRequest): Generated |
     const sol = solve(graph, { start: cand.a, destination: cand.b, rules });
     if (!sol.feasible) continue;
     if (req.mode !== "constraints" && sol.minIntermediate !== cand.d - 1) continue;
+    if (req.difficulty === "custom" && sol.minIntermediate < customMin) continue;
+    if (rules.forbidden.includes(cand.a) || rules.forbidden.includes(cand.b)) continue;
     if (!isValidRoute(graph, { start: cand.a, destination: cand.b, rules }, sol.routes[0])) continue;
     const challenge: Challenge = {
       id,
@@ -164,7 +191,7 @@ export function generateChallenge(ctx: GenContext, req: GenRequest): Generated |
       destination: cand.b,
       rules,
       minIntermediate: sol.minIntermediate,
-      attempts: attemptsFor(sol.minIntermediate, req.difficulty),
+      attempts: req.attempts ?? attemptsFor(sol.minIntermediate, effDiff),
       ...(req.date ? { date: req.date } : {}),
       rulesVersion: ctx.rulesVersion,
       datasetVersion: ctx.datasetVersion,
@@ -206,14 +233,15 @@ function buildConstraints(
   b: string,
   route: string[],
   difficulty: Difficulty,
-  maritime: boolean,
+  baseRules: ChallengeRules,
   bandMax: number,
 ): ChallengeRules | null {
   const { graph } = ctx;
+  const maritime = baseRules.maritime;
   const want = constraintCount(difficulty, rng) - (maritime ? 1 : 0);
   const cap = Math.min(14, bandMax + (difficulty === "hard" ? 3 : 2));
   const mid = route.slice(1, -1);
-  const base: ChallengeRules = { ...emptyRules(), maritime };
+  const base: ChallengeRules = baseRules;
   const baseSol = solve(graph, { start: a, destination: b, rules: base }, undefined, { slack: 2, maxRoutes: 60 });
   if (!baseSol.feasible) return null;
 
@@ -280,4 +308,23 @@ function buildConstraints(
     if (landSol.feasible && landSol.minIntermediate <= finalSol.minIntermediate) return null;
   }
   return rules;
+}
+
+/** Facts about a game scope, used by the configuration UI to validate settings before generating anything. */
+export interface ScopeInfo {
+  /** Largest possible number of intermediate countries between two playable countries in this scope. */
+  diameter: number;
+  /** Playable countries once forbidden ones are removed. */
+  countries: number;
+}
+
+export function scopeInfo(ctx: GenContext, req: { mode: GameMode; scope?: string; forbidden?: readonly string[] }): ScopeInfo {
+  const { graph } = ctx;
+  const scope = req.scope && req.scope !== "world" && graph.hasRegion(req.scope) ? req.scope : undefined;
+  const forbidden = [...new Set(req.forbidden ?? [])].filter((id) => graph.has(id)).sort();
+  const maritime = req.mode === "regional" && !!scope && REGION_SEA.get(scope) === "always";
+  const rules: ChallengeRules = { ...emptyRules(), maritime, forbidden, ...(scope ? { allowedRegion: scope } : {}) };
+  const ids = (scope ? [...graph.regionMembers(scope)] : graph.ids()).filter((id) => !forbidden.includes(id)).sort();
+  const table = pairTable(graph, graph.viewFor(rules), ids, `${scope ?? "world"}|${maritime}|${forbidden.join(",")}`);
+  return { diameter: table.diameter, countries: ids.length };
 }

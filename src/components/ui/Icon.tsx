@@ -1,6 +1,7 @@
 import type { SVGProps } from "react";
 
 const PATHS = {
+  menu: "M4 7h16M4 12h16M4 17h16",
   plus: "M12 5v14M5 12h14",
   minus: "M5 12h14",
   target: "M12 3v3M12 18v3M3 12h3M18 12h3M12 8a4 4 0 100 8 4 4 0 000-8z",

@@ -2,17 +2,65 @@
 
 Source of truth in code: `src/engine/rules.ts`, `game.ts`, `scoring.ts`, `difficulty.ts`, `hints.ts`.
 
+## Entry point
+Opening Atlas (`/`) goes straight into **today's Classic daily challenge** (UTC date; language from the saved choice or the
+browser, FR default): no menu, mode, difficulty or confirmation step. If today's Classic daily was already completed, the
+completed game (route, score, results, alternative routes) is shown instead of a new attempt. The home screen, free play,
+other modes and difficulties stay in the navigation (a menu button on mobile).
+
 ## Core loop
-Connect a start country to a destination through intermediate countries. A guess is **accepted** if the country is a
-valid next move; otherwise it is **rejected** and consumes exactly one attempt. Rejections never say why and never reveal
-the optimal route. Reaching the destination wins; running out of attempts loses.
+Connect a start country to a destination through intermediate countries that you type. A guess is **accepted** if the
+country is a valid next move; otherwise it is **rejected** and consumes exactly one attempt. Rejections never say why and
+never reveal the optimal route.
+
+**Victory:** after each accepted move, the game ends in victory as soon as the current country has a valid connection to the
+destination under the active rules (land, or sea if enabled) **and** every route-level constraint is satisfied by the
+completed route (route + destination). Otherwise the game simply continues, without saying which constraint is missing.
+The destination is never typed and is never part of the player's route; typing it is just a wrong answer (it is not a valid
+move). Defeat: no attempts left. (`rules.reachesDestination`, `game.submitGuess`)
 
 A valid next move is: adjacent to the current country under the active connection rules, not already in the route, not
-forbidden, not the start, inside the allowed region, and (with `maxIntermediate`) within the intermediate budget.
+forbidden, not the start, not the destination, inside the allowed region, and (with `maxIntermediate`) within the
+intermediate budget.
 
-The autocomplete lists **only** valid next moves. Free text matching any country can still be submitted and, if invalid,
-costs an attempt. The destination is suggested whenever adjacent; if a route-level constraint (mandatory country, coastal
-minimum…) is not yet met, entering it is rejected *without explanation* (no leak of which constraint is missing).
+## Starting a game: the configuration modal
+There is no "Play" page. The home screen lists the three modes; each opens its own modal (`GameConfigModal`):
+- **Difficulty**: Easy / Normal / Hard (unchanged behaviour) or **Custom**.
+- **Custom only**: minimum route length (intermediate countries, ≥ 1 and ≤ the longest route of the chosen scope; the
+  generated minimum is *at least* this value), number of attempts (1–30, replaces `min + margin`), and map appearance:
+  starting country shown, borders shown, names shown, full map vs progressive discovery.
+- **Playing area**: whole world or a continent (Classic / Constraints, routes stay inside it); in Regional mode any
+  continent or subregion.
+- **Without going through**: up to 10 countries (same autocomplete). They are never crossed and never picked as start or
+  destination, in every mode.
+- The configuration is validated, then a challenge is generated *before* the game opens: an impossible combination (e.g. a
+  land-only game in Oceania, a route longer than any that exists, too many avoided countries) is explained in the modal.
+  The last settings of each mode are remembered.
+
+## Replay and what comes next
+A finished game offers **"Replay with the same settings"**: same mode, difficulty, area, forbidden countries and custom
+settings (the whole configuration travels in the game URL), a new seed, and the previous start/destination pair excluded.
+(In a scope with a single possible pair the exclusion is dropped rather than failing.) After a **daily** challenge the first
+suggestion is another daily not yet completed today (classic → constraints → regional); once all three are done a
+**new Classic game** (opens its modal) is suggested instead. A completed daily is never restarted or overwritten: reopening
+it shows the saved result, and replaying it launches a free game.
+
+## Autocomplete
+A name-search aid only. It searches **all 195 countries** from the typed text alone (French + English names, aliases,
+accents/case/spacing ignored) and shows nothing until something is typed. It knows nothing about the route, adjacency,
+visited, forbidden or constrained countries and never prioritises neighbours. Any country can be submitted; the engine
+(`rules.validateMove`) decides. Code: `engine/search.ts`, `components/game/CountryCombobox.tsx`.
+
+## Map visibility (visual only)
+Rule in `lib/visibility.ts`; the GeoJSON, the graph, validation and generation never see it.
+- **Easy**: the full map during the game (`full: true`).
+- **Normal / Hard**: the map is hidden while playing, except the **departure and arrival countries, which are always
+  displayed** (highlighted, with the A / B pins and names). A further country (shape, border, name) appears the moment it
+  is correctly entered. Wrong guesses are never drawn. The camera frames only what is displayed.
+- **Custom**: the player chooses `full` (full map or progressive), `start` (departure country displayed), `borders` and
+  `names`. These only change presentation. After the game everything is revealed regardless of these switches.
+- **Win or loss**: the whole map fades in (~1 s), discovered countries stay highlighted, and the route plus the optimal and
+  alternative routes are drawn through the results panel.
 
 ## Modes
 | Mode | Rules |
@@ -28,22 +76,27 @@ minimum…) is not yet met, entering it is rejected *without explanation* (no le
 `solve()`. Classic/Constraints use absolute bands (easy 2–3, normal 4–6, hard 7–12 intermediates); Regional scales bands by
 the region diameter. Difficulty is chosen before the game and never changes mid-game.
 
-## Hints (never consume attempts, shown with penalty before use)
-- Geographic (−50): subregion of one valid continuation.
-- Connectivity (−75): land-border count of one valid continuation.
-- Discovery (−125): first letter of one valid continuation.
+## Hints (never consume attempts)
+Two progressive hints, **in this order**, **once each per game** (`engine/hints.ts`, `game.useHint`):
+1. **First letter (−75)**: the first letter of a valid next country.
+2. **Borders (−150)**, available once hint 1 was used: the shape and borders of the *same* country are drawn on the map (own
+   "hint" colour), **without its name**. On a hidden map this is the only extra information revealed; it is shown only while
+   that country is still a valid next step.
 
-Candidates are all *optimal continuations of the current partial route* (fallback: all valid moves). Texts say "a valid next
-country…", never "the".
+The penalty is displayed on the button and again in a confirmation step, and is applied only when confirmed. The hinted
+country always comes from the real solver (`optimalContinuations` of the current partial route ∩ valid moves), so it belongs
+to an actual optimal solution and respects every constraint (forbidden, mandatory, region, coastal…). Selection is
+deterministic for a given state. If nothing can be determined (e.g. the intermediate budget is exhausted), no hint is given,
+**no penalty is applied**, and a message says so.
 
 ## Score (0–1000)
-Victory +500, optimal route +300, no mistakes +100, no hints +100; −25 per mistake; hints −50/−75/−125. Clamped to
+Victory +500, optimal route +300, no mistakes +100, no hints +100; −25 per mistake; hints −75 / −150. Clamped to
 [0, 1000]. All optimal routes earn the bonus. **A defeat scores 0** (every bonus is conditional on victory; the breakdown
 still lists penalties). Time is a statistic only.
 
 ## Discovery policy
-A country is discovered the moment the player correctly enters it, even if the game is lost later. The **start country is
-not** discovered (it is given); the **destination is** (the player enters it). Visits count each correct entry.
+A country is discovered the moment the player correctly enters it, even if the game is lost later. The **start country** and
+the **destination** are never entered by the player, so neither is discovered by playing. Visits count each correct entry.
 
 ## Alternatives
 After the game only: the player's route, the shortest route(s), and alternatives up to +2 hops (capped), selectable and

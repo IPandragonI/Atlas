@@ -1,6 +1,6 @@
 import Dexie, { type EntityTable } from "dexie";
 import type { HistoryEntry } from "@/engine/generator/diversity";
-import type { Difficulty, GameMode } from "@/engine/types";
+import type { ChallengeDifficulty, GameMode } from "@/engine/types";
 
 /** Bump when the IndexedDB structure changes, and add a `.version(n)` block with an upgrade. */
 export const DB_VERSION = 1;
@@ -11,7 +11,7 @@ export interface GameRecord {
   id?: number;
   challengeId: string;
   mode: GameMode;
-  difficulty: Difficulty;
+  difficulty: ChallengeDifficulty;
   daily?: string;
   status: "won" | "lost";
   score: number;
@@ -23,6 +23,10 @@ export interface GameRecord {
   durationMs: number;
   route: string[];
   finishedAt: number;
+  /** Added with RULES_VERSION 2 (the destination is no longer part of the route). Optional for older data. */
+  destination?: string;
+  /** "letter" | "borders" (older saves may contain the former "geographic" | "connectivity" | "discovery"). */
+  hintKinds?: string[];
 }
 export interface DiscoveredRecord {
   id: string;
@@ -205,14 +209,16 @@ export function validateImport(raw: unknown, knownCountries?: ReadonlySet<string
       if (!isObj(r) || !isStr(r.challengeId) || !isNum(r.finishedAt) || !isNum(r.score)) return { ok: false, reason: "invalid game entry" };
       if (r.status !== "won" && r.status !== "lost") return { ok: false, reason: "invalid game status" };
       if (!["classic", "constraints", "regional"].includes(r.mode as string)) return { ok: false, reason: "invalid game mode" };
-      if (!["easy", "normal", "hard"].includes(r.difficulty as string)) return { ok: false, reason: "invalid difficulty" };
+      if (!["easy", "normal", "hard", "custom"].includes(r.difficulty as string)) return { ok: false, reason: "invalid difficulty" };
       if (!Array.isArray(r.route) || !r.route.every(okCountry)) return { ok: false, reason: "invalid route" };
       games.push({
-        challengeId: r.challengeId, mode: r.mode as GameMode, difficulty: r.difficulty as Difficulty,
+        challengeId: r.challengeId, mode: r.mode as GameMode, difficulty: r.difficulty as ChallengeDifficulty,
         daily: isStr(r.daily) ? r.daily : undefined, status: r.status, score: r.score,
         intermediates: isNum(r.intermediates) ? r.intermediates : 0, minIntermediate: isNum(r.minIntermediate) ? r.minIntermediate : 0,
         optimal: r.optimal === true, mistakes: isNum(r.mistakes) ? r.mistakes : 0, hints: isNum(r.hints) ? r.hints : 0,
         durationMs: isNum(r.durationMs) ? r.durationMs : 0, route: r.route as string[], finishedAt: r.finishedAt,
+        destination: okCountry(r.destination) ? r.destination : undefined,
+        hintKinds: Array.isArray(r.hintKinds) ? r.hintKinds.filter((k): k is string => typeof k === "string" && ["letter", "borders", "geographic", "connectivity", "discovery"].includes(k)) : undefined,
       });
     }
     const daily: DailyRecord[] = [];

@@ -9,12 +9,14 @@ interface Props {
   onRecenter: () => void;
   onFullscreen: () => void;
   isFullscreen: boolean;
+  /** Pushes the controls below the mobile game top bar. */
+  inset?: boolean;
 }
 
-export function MapControls({ onZoomIn, onZoomOut, onRecenter, onFullscreen, isFullscreen }: Props) {
+export function MapControls({ onZoomIn, onZoomOut, onRecenter, onFullscreen, isFullscreen, inset }: Props) {
   const t = useTranslations("game");
   return (
-    <div className="absolute right-3 top-3 z-10 flex flex-col gap-1.5" role="group" aria-label="Map controls">
+    <div className={`absolute right-3 z-10 flex flex-col gap-1.5 ${inset ? "top-23 md:top-3" : "top-3"}`} role="group" aria-label="Map controls">
       <button type="button" className="map-ctl" onClick={onZoomIn} aria-label={t("zoomIn")} title={t("zoomIn")}>
         <Icon name="plus" />
       </button>

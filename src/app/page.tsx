@@ -1,8 +1,12 @@
 "use client";
 
 import { useEffect } from "react";
+import { utcDate } from "@/lib/daily-schedule";
 
-/** Static-export friendly root: sends visitors to their language (FR default). */
+/**
+ * Static-export friendly entry point: opening Atlas goes straight into today's Classic daily challenge, in the
+ * visitor's language (FR default). The home screen stays available from the navigation.
+ */
 export default function RootRedirect() {
   useEffect(() => {
     let locale = "fr";
@@ -13,12 +17,14 @@ export default function RootRedirect() {
     } catch {
       /* storage unavailable */
     }
-    window.location.replace(`/${locale}/`);
+    window.location.replace(`/${locale}/game/?daily=${utcDate()}&mode=classic`);
   }, []);
   return (
     <html lang="fr">
       <head>
-        <meta httpEquiv="refresh" content="0; url=/fr/" />
+        <noscript>
+          <meta httpEquiv="refresh" content="0; url=/fr/" />
+        </noscript>
         <title>Atlas</title>
       </head>
       <body />

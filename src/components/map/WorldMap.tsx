@@ -8,7 +8,7 @@ import { COUNTRIES, graph } from "@/lib/atlas";
 import { MapControls } from "./MapControls";
 
 /** Visual states a country can have (see docs/ARCHITECTURE.md). */
-export type MapState = "start" | "destination" | "traversed" | "wrong" | "discovered" | "new" | "region" | "dim";
+export type MapState = "start" | "destination" | "traversed" | "wrong" | "discovered" | "new" | "region" | "dim" | "hint";
 export type LabelMode = "none" | "route" | "all";
 
 export interface WorldMapProps {
@@ -26,6 +26,15 @@ export interface WorldMapProps {
   fitKey?: string | number;
   padding?: { top: number; bottom: number; left: number; right: number };
   selectedId?: string | null;
+  /**
+   * Visual-only masking: when true only countries present in `states` are drawn (shapes, borders, labels).
+   * Toggling it animates the reveal. It never touches the GeoJSON source or the country graph.
+   */
+  masked?: boolean;
+  /** Draw country borders (default true). Presentation only. */
+  showBorders?: boolean;
+  /** Moves the zoom controls below an overlaid top bar (mobile game screen). */
+  controlsInset?: boolean;
   onCountryClick?: (id: string) => void;
   /** Tooltip text on hover; return null to hide it (e.g. to avoid giving answers away). */
   tooltip?: (id: string) => string | null;
@@ -34,7 +43,7 @@ export interface WorldMapProps {
 
 interface Palette {
   water: string; land: string; landOff: string; border: string; accent: string; dest: string; route: string;
-  discovered: string; error: string; success: string; text: string; surface: string; region: string;
+  discovered: string; error: string; success: string; text: string; surface: string; region: string; hint: string;
 }
 
 // MapLibre 6 needs an explicit worker URL under bundlers (file vendored by scripts/copy-maplibre-worker.mjs).
@@ -50,7 +59,7 @@ function readPalette(): Palette {
   return {
     water: v("--water"), land, landOff: v("--land-off"), border: v("--border"), accent: v("--accent"), dest: v("--dest"),
     route: v("--route"), discovered: v("--discovered"), error: mix(v("--error"), land, 0.55), success: v("--success"),
-    text: v("--text"), surface: v("--surface"), region: v("--accent-soft"),
+    text: v("--text"), surface: v("--surface"), region: v("--accent-soft"), hint: v("--hint"),
   };
 }
 
@@ -80,6 +89,7 @@ function fillExpr(c: Palette): ExpressionSpecification {
       "discovered", c.discovered,
       "new", c.success,
       "region", c.region,
+      "hint", c.hint,
       "dim", c.landOff,
       c.land,
     ],
@@ -99,7 +109,7 @@ function boundsOf(ids: readonly string[]): LngLatBoundsLike | null {
 
 export default function WorldMap(props: WorldMapProps) {
   const {
-    states, route, routeKey, start, destination, labelMode = "route", labelIds, fitIds, fitKey, padding, selectedId, onCountryClick, tooltip, className,
+    states, route, routeKey, start, destination, labelMode = "route", labelIds, fitIds, fitKey, padding, selectedId, masked = false, showBorders = true, controlsInset = false, onCountryClick, tooltip, className,
   } = props;
   const t = useTranslations("common");
   const locale = useLocale() as "fr" | "en";
@@ -113,12 +123,34 @@ export default function WorldMap(props: WorldMapProps) {
   const appliedStates = useRef<Record<string, MapState>>({});
   const selectedRef = useRef<string | null>(null);
   const hoverRef = useRef<string | null>(null);
+  const maskedRef = useRef(masked);
+  maskedRef.current = masked;
+  const shownRef = useRef<Set<string>>(new Set());
+  const levelRef = useRef(masked ? 0 : 1); // opacity of NON-shown countries: 0 = hidden, 1 = fully revealed
   const markers = useRef<{ start?: maplibregl.Marker; dest?: maplibregl.Marker; labels: Map<string, maplibregl.Marker> }>({ labels: new Map() });
   const cb = useRef({ onCountryClick, tooltip });
   cb.current = { onCountryClick, tooltip };
   const lastFitKey = useRef<string | number | undefined>(undefined);
   const paddingRef = useRef(padding);
   paddingRef.current = padding;
+
+  /** Applies the opacity of non-shown countries (shown ones are always fully visible). */
+  const applyMask = useCallback((level: number) => {
+    const map = mapRef.current;
+    if (!map || !map.getLayer("country-fill")) return;
+    levelRef.current = level;
+    const show = ["boolean", ["feature-state", "show"], false];
+    const gate = (): ExpressionSpecification => ["case", show, 1, level] as unknown as ExpressionSpecification;
+    map.setPaintProperty("country-fill", "fill-opacity", gate());
+    map.setPaintProperty("country-borders", "line-opacity", gate());
+    if (level >= 1 && !maskedRef.current) {
+      map.setPaintProperty("country-dots", "circle-opacity", ["interpolate", ["linear"], ["zoom"], 5, 1, 7.5, 0]);
+      map.setPaintProperty("country-dots", "circle-stroke-opacity", ["interpolate", ["linear"], ["zoom"], 5, 1, 7.5, 0]);
+    } else {
+      map.setPaintProperty("country-dots", "circle-opacity", gate());
+      map.setPaintProperty("country-dots", "circle-stroke-opacity", gate());
+    }
+  }, []);
 
   // ---------------------------------------------------------------- init
   useEffect(() => {
@@ -206,6 +238,7 @@ export default function WorldMap(props: WorldMapProps) {
           "circle-opacity": ["case", ["boolean", ["feature-state", "hover"], false], 0.18, 0],
         },
       });
+      applyMask(maskedRef.current ? 0 : 1);
       setReady(true);
       // Reports when country polygons have really been parsed and drawn (guards against silent worker failures).
       const check = () => {
@@ -220,7 +253,7 @@ export default function WorldMap(props: WorldMapProps) {
     // --- interaction
     const pick = (point: maplibregl.PointLike): string | null => {
       const feats = map.queryRenderedFeatures(point, { layers: ["country-dots", "country-fill"] });
-      const f = feats.find((x) => x.properties?.playable === true || x.properties?.playable === "true");
+      const f = feats.find((x) => (x.properties?.playable === true || x.properties?.playable === "true") && (!maskedRef.current || shownRef.current.has(String(x.properties?.id ?? x.id))));
       return f ? String(f.properties?.id ?? f.id) : null;
     };
     const setHover = (id: string | null) => {
@@ -286,7 +319,7 @@ export default function WorldMap(props: WorldMapProps) {
       appliedStates.current = {};
       setReady(false);
     };
-  }, []);
+  }, [applyMask]); // applyMask is stable (useCallback with no deps): the map is created once
 
   // ---------------------------------------------------------------- feature states
   useEffect(() => {
@@ -295,13 +328,41 @@ export default function WorldMap(props: WorldMapProps) {
     const next = states ?? {};
     const prev = appliedStates.current;
     for (const id of Object.keys(prev)) {
-      if (next[id] !== prev[id]) for (const src of ["world", "dots"]) map.setFeatureState({ source: src, id }, { s: next[id] ?? null });
+      if (next[id] !== prev[id]) for (const src of ["world", "dots"]) map.setFeatureState({ source: src, id }, { s: next[id] ?? null, show: next[id] !== undefined });
     }
     for (const [id, s] of Object.entries(next)) {
-      if (prev[id] !== s) for (const src of ["world", "dots"]) map.setFeatureState({ source: src, id }, { s });
+      if (prev[id] !== s) for (const src of ["world", "dots"]) map.setFeatureState({ source: src, id }, { s, show: true });
     }
     appliedStates.current = { ...next };
+    shownRef.current = new Set(Object.keys(next));
   }, [states, ready]);
+
+  // ---------------------------------------------------------------- border visibility (presentation only)
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !ready) return;
+    map.setLayoutProperty("country-borders", "visibility", showBorders ? "visible" : "none");
+  }, [showBorders, ready]);
+
+  // ---------------------------------------------------------------- reveal / hide animation
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !ready) return;
+    const target = masked ? 0 : 1;
+    const from = levelRef.current;
+    if (from === target) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return applyMask(target);
+    let raf = 0;
+    const t0 = performance.now();
+    const step = (now: number) => {
+      const p = Math.min(1, (now - t0) / 1100);
+      const eased = p * p * (3 - 2 * p);
+      applyMask(from + (target - from) * eased);
+      if (p < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [masked, ready, applyMask]);
 
   // ---------------------------------------------------------------- selection
   useEffect(() => {
@@ -385,15 +446,6 @@ export default function WorldMap(props: WorldMapProps) {
     m.start?.remove();
     m.dest?.remove();
     m.start = m.dest = undefined;
-    const pin = (cls: string, text: string, id: string) => {
-      const el = document.createElement("div");
-      el.className = `atlas-pin ${cls}`;
-      el.innerHTML = `<span>${text}</span>`;
-      el.style.pointerEvents = "none";
-      return new maplibregl.Marker({ element: el }).setLngLat(graph.country(id).center).addTo(map);
-    };
-    if (start && graph.has(start)) m.start = pin("start", "A", start);
-    if (destination && graph.has(destination)) m.dest = pin("dest", "B", destination);
   }, [start, destination, ready]);
 
   // ---------------------------------------------------------------- camera
@@ -425,7 +477,7 @@ export default function WorldMap(props: WorldMapProps) {
   };
 
   return (
-    <div ref={wrapRef} className={`relative overflow-hidden atlas-map ${className ?? ""}`} data-testid="world-map" data-ready={ready} data-painted={painted}>
+    <div ref={wrapRef} className={`relative overflow-hidden atlas-map ${className ?? ""}`} data-testid="world-map" data-ready={ready} data-painted={painted} data-masked={masked} data-shown={masked ? Object.keys(states ?? {}).length : "all"}>
       <div ref={mapEl} style={{ position: "absolute", inset: 0 }} role="application" aria-label="Map" />
       <div ref={tipRef} className="atlas-tooltip" style={{ display: "none" }} />
       <MapControls
@@ -434,6 +486,7 @@ export default function WorldMap(props: WorldMapProps) {
         onRecenter={() => fit(fitIds)}
         onFullscreen={toggleFs}
         isFullscreen={isFs}
+        inset={controlsInset}
       />
       {!ready && !failed && (
         <div className="absolute inset-0 grid place-items-center text-sm muted" aria-live="polite">{t("mapLoading")}</div>

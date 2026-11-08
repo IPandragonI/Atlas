@@ -1,18 +1,20 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { MapView, type MapState } from "@/components/map/MapView";
 import { Flag } from "@/components/ui/Flag";
 import { Icon } from "@/components/ui/Icon";
 import { useRegionName } from "@/components/ui/useNames";
 import type { GameMode } from "@/engine/types";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import { COUNTRIES, graph } from "@/lib/atlas";
 import { dailyMeta } from "@/lib/daily";
 import { DAILY_MODES, utcDate } from "@/lib/daily-schedule";
 import { dailyStreak } from "@/lib/progress";
 import { useProgress } from "@/stores/progress";
+import { GameConfigModal } from "./GameConfigModal";
 
 const MODES: GameMode[] = ["classic", "constraints", "regional"];
 
@@ -24,6 +26,19 @@ export function HomeScreen() {
   const dailyRecs = useProgress((s) => s.daily);
   const [today, setToday] = useState<string | null>(null);
   useEffect(() => setToday(utcDate()), []);
+
+  // Each free-play mode opens its own configuration modal; "/?mode=classic" opens it directly (used after a daily).
+  const router = useRouter();
+  const params = useSearchParams();
+  const [openMode, setOpenMode] = useState<GameMode | null>(null);
+  useEffect(() => {
+    const m = params.get("mode");
+    if (m === "classic" || m === "constraints" || m === "regional") setOpenMode(m);
+  }, [params]);
+  const closeModal = () => {
+    setOpenMode(null);
+    if (params.get("mode")) router.replace("/");
+  };
 
   const ids = Object.keys(discovered);
   const pct = Math.round((ids.length / COUNTRIES.length) * 100);
@@ -47,7 +62,7 @@ export function HomeScreen() {
               return (
                 <Link
                   key={mode}
-                  href={today ? (`/game?daily=${today}&mode=${mode}` as "/game") : "/play"}
+                  href={today ? (`/game?daily=${today}&mode=${mode}` as "/game") : "/"}
                   className="card group flex flex-col gap-2 p-4 transition-colors hover:border-accent"
                   data-testid={`daily-${mode}`}
                 >
@@ -76,10 +91,10 @@ export function HomeScreen() {
           </div>
           <div className="grid gap-2 sm:grid-cols-3">
             {MODES.map((m) => (
-              <Link key={m} href={`/play?mode=${m}` as "/play"} className="card flex flex-col gap-1 p-3.5 transition-colors hover:border-accent" data-testid={`free-${m}`}>
+              <button key={m} type="button" onClick={() => setOpenMode(m)} className="card flex flex-col items-start gap-1 p-3.5 text-left transition-colors hover:border-accent" data-testid={`free-${m}`} aria-haspopup="dialog">
                 <span className="font-medium">{t(`modes.${m}.name`)}</span>
                 <span className="text-xs muted">{t(`modes.${m}.desc`)}</span>
-              </Link>
+              </button>
             ))}
           </div>
         </section>
@@ -111,6 +126,7 @@ export function HomeScreen() {
           <Link href="/collection" className="btn mt-3 w-full">{t("home.openCollection")}</Link>
         </div>
       </section>
+      {openMode && <GameConfigModal mode={openMode} onClose={closeModal} />}
     </div>
   );
 }

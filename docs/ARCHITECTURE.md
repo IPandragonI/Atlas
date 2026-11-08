@@ -31,6 +31,7 @@ MapLibre GL with a style object built in code: `background`, `country-fill`, `co
 Colours come from CSS variables and update on theme change (MutationObserver). No tile server, no glyph server: labels and
 A/B pins are DOM markers. MapLibre 6's worker is vendored to `public/vendor/` (`copy-maplibre-worker.mjs`) because bundlers
 cannot resolve it; `data-painted` on the map root proves polygons really rendered (asserted in e2e).
+**Masking** (hidden-map mode, see GAME_RULES): `WorldMap` takes `masked`; each country listed in `states` gets feature-state `show`, and fill / border / dot opacity is `case(show, 1, level)` where `level` animates 0↔1 on toggle. The source GeoJSON is never altered, hidden countries cannot be hovered or clicked, and which countries are shown comes from the pure `lib/visibility.ts`.
 Trade-off: DOM labels avoid shipping a font/glyph stack and work offline, at the cost of no label collision handling
 (thresholded by area/zoom instead).
 

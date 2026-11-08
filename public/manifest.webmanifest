@@ -18,7 +18,7 @@
     { "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
   ],
   "shortcuts": [
-    { "name": "Jouer / Play", "url": "/fr/play/" },
+    { "name": "Défi du jour / Daily", "url": "/" },
     { "name": "Collection", "url": "/fr/collection/" }
   ]
 }

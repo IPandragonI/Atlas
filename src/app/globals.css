@@ -24,6 +24,7 @@
   --dest-soft: #f1e4c8;
   --route: #55745c;
   --discovered: #8fb394;
+  --hint: #7da3c4;
   --radius: 10px;
   --radius-sm: 6px;
   --safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -51,6 +52,7 @@
   --dest-soft: #43361b;
   --route: #a1c69f;
   --discovered: #6e9873;
+  --hint: #6f9bbd;
   color-scheme: dark;
 }
 

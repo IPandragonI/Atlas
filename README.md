@@ -18,7 +18,7 @@ npm run dev            # http://localhost:3000  (service worker is production-on
 | `npm run dev` | dev server |
 | `npm run build` | vendor worker → generate missing daily JSON (idempotent) → `next build` (→ `out/`) → write `out/sw.js` |
 | `npm start` | serve `out/` |
-| `npm test` | Vitest (72 tests: graph, rules, pathfinding, hints, scoring, generator, dailies, persistence, i18n) |
+| `npm test` | Vitest (127 tests: graph, rules, pathfinding, hints, scoring, generator, configuration, replay, dailies, country data, persistence, i18n) |
 | `npm run test:e2e` | Playwright desktop + mobile (needs `npm run build` and `npx playwright install chromium`) |
 | `npm run typecheck` / `npm run lint` | TypeScript / ESLint |
 | `npm run data:build` | rebuild countries, connections, geometry from `data-src/` + overrides |

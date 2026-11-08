@@ -37,3 +37,18 @@ frequencies, length distribution and mean attempts. Observed (135 challenges): 0
 requests (retried), repeated pairs 5 %, 172/195 countries covered. Hub corridors in Africa/Middle-East still recur because
 long overland routes structurally funnel there; raise `corridor`/`intermediate` weights to trade geography for variety.
 Margins (+5/+3/+1) should be re-checked with `data:simulate` after any band change.
+
+## Game configuration (free play)
+`GenRequest` also accepts `scope` (continent for Classic/Constraints), `forbidden`, `difficulty: "custom"` with
+`minIntermediate` / `attempts`, and `exclude` (a start/destination pair not to repeat, used by "replay with the same settings").
+- **Scope / forbidden**: the universe of start/destination candidates is the scope minus forbidden countries; the traversal
+  view blocks forbidden countries and allows only the scope. Pair tables are cached per `(scope, sea, forbidden)`.
+  Standard difficulty inside a continent uses the region-scaled bands (the world bands would not fit a small continent).
+- **Custom**: band = `[min, min + 2]` intermediates; the final solver check rejects anything below `min`. `attempts`
+  overrides `minIntermediate + margin`; constraint density behaves like Normal.
+- **Never impossible**: no pair in the band, an invalid attempts value, or no route after all restrictions ⇒ `null` (no
+  challenge). `scopeInfo()` gives the longest possible route / playable country count so the form can validate before
+  generating; the modal then runs the real generator once (same inputs as the game) to report impossible setups.
+- **Replay**: `generateForConfig(cfg, seed, history, exclude)` retries without the exclusion only if the exclusion itself made
+  generation impossible (a scope with a single possible pair).
+- Daily generation is unaffected: the RNG seed string and consumption order are unchanged for requests without the new fields.

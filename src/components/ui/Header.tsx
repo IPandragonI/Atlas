@@ -6,9 +6,8 @@ import { useSettings, type ThemePref } from "@/stores/settings";
 import { Icon, type IconName } from "./Icon";
 import { LocaleSwitch } from "./LocaleSwitch";
 
-const NAV: { href: "/" | "/play" | "/collection" | "/stats"; key: "home" | "play" | "collection" | "stats"; icon: IconName }[] = [
+export const NAV: { href: "/" | "/collection" | "/stats"; key: "home" | "collection" | "stats"; icon: IconName }[] = [
   { href: "/", key: "home", icon: "home" },
-  { href: "/play", key: "play", icon: "play" },
   { href: "/collection", key: "collection", icon: "globe" },
   { href: "/stats", key: "stats", icon: "chart" },
 ];

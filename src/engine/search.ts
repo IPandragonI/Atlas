@@ -16,14 +16,16 @@ interface IndexEntry {
   country: Country;
   names: string[]; // primary names (both languages)
   aliases: string[];
+  /** Same strings without spaces, so "cote d ivoire" and "cote divoire" both match. */
+  compact: string[];
 }
 
 export function buildSearchIndex(countries: readonly Country[]): IndexEntry[] {
-  return countries.map((country) => ({
-    country,
-    names: [normalizeText(country.name.fr), normalizeText(country.name.en)],
-    aliases: [...(country.aliases?.fr ?? []), ...(country.aliases?.en ?? [])].map(normalizeText).filter(Boolean),
-  }));
+  return countries.map((country) => {
+    const names = [normalizeText(country.name.fr), normalizeText(country.name.en)];
+    const aliases = [...(country.aliases?.fr ?? []), ...(country.aliases?.en ?? [])].map(normalizeText).filter(Boolean);
+    return { country, names, aliases, compact: [...names, ...aliases].map((x) => x.replace(/ /g, "")) };
+  });
 }
 
 /**
@@ -58,6 +60,13 @@ export function searchCountries(
       else if (a.startsWith(q)) best = Math.max(best, 55);
       else if (q.length >= 3 && a.includes(q)) best = Math.max(best, 20);
     }
+    const qc = q.replace(/ /g, "");
+    if (qc.length >= 2) {
+      for (const n of e.compact) {
+        if (n === qc) best = Math.max(best, 95);
+        else if (n.startsWith(qc)) best = Math.max(best, 70);
+      }
+    }
     if (best >= 0) scored.push({ c: e.country, score: best, label });
   }
   scored.sort((a, b) => b.score - a.score || a.label.localeCompare(b.label, locale));
@@ -75,7 +84,7 @@ export function resolveCountry(
   if (!q) return null;
   for (const e of index) {
     if (allowed && !allowed.has(e.country.id)) continue;
-    if (e.names.includes(q) || e.aliases.includes(q)) return e.country;
+    if (e.names.includes(q) || e.aliases.includes(q) || e.compact.includes(q.replace(/ /g, ""))) return e.country;
   }
   const res = searchCountries(index, query, allowed, locale, 2);
   return res.length === 1 ? res[0] : null;

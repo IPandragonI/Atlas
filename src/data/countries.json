@@ -122,7 +122,6 @@
    "en": [
     "Principality of Andorra",
     "Principat d'Andorra",
-    "Principality of Andorra",
     "Principauté d'Andorre"
    ]
   },
@@ -161,11 +160,7 @@
    ],
    "en": [
     "uae",
-    "emirates",
-    "UAE",
-    "Emirates",
-    "United Arab Emirates",
-    "Émirats arabes unis"
+    "emirates"
    ]
   },
   "capital": {
@@ -201,7 +196,6 @@
    "en": [
     "Argentine Republic",
     "República Argentina",
-    "Argentine Republic",
     "République argentine"
    ]
   },
@@ -239,7 +233,6 @@
     "Hayastan",
     "Republic of Armenia",
     "Հայաստանի Հանրապետություն",
-    "Republic of Armenia",
     "République d'Arménie"
    ]
   },
@@ -273,10 +266,7 @@
   },
   "aliases": {
    "fr": [],
-   "en": [
-    "Antigua and Barbuda",
-    "Antigua -et-Barbuda"
-   ]
+   "en": []
   },
   "capital": {
    "en": "Saint John's",
@@ -309,8 +299,7 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Commonwealth of Australia",
-    "Australie"
+    "Commonwealth of Australia"
    ]
   },
   "capital": {
@@ -383,7 +372,6 @@
    "en": [
     "Republic of Azerbaijan",
     "Azərbaycan Respublikası",
-    "Republic of Azerbaijan",
     "République d'Azerbaïdjan"
    ]
   },
@@ -420,8 +408,6 @@
    "en": [
     "Republic of Burundi",
     "Republika y'Uburundi",
-    "République du Burundi",
-    "Republic of Burundi",
     "République du Burundi"
    ]
   },
@@ -457,15 +443,11 @@
    "fr": [],
    "en": [
     "België",
-    "Belgie",
     "Belgien",
-    "Belgique",
     "Kingdom of Belgium",
     "Koninkrijk België",
     "Royaume de Belgique",
-    "Königreich Belgien",
-    "Kingdom of Belgium",
-    "Royaume de Belgique"
+    "Königreich Belgien"
    ]
   },
   "capital": {
@@ -499,8 +481,6 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Republic of Benin",
-    "République du Bénin",
     "Republic of Benin",
     "République du Bénin"
    ]
@@ -536,7 +516,6 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Burkina Faso",
     "République du Burkina"
    ]
   },
@@ -573,7 +552,6 @@
    "en": [
     "People's Republic of Bangladesh",
     "Gônôprôjatôntri Bangladesh",
-    "People's Republic of Bangladesh",
     "La République populaire du Bangladesh"
    ]
   },
@@ -610,7 +588,6 @@
    "en": [
     "Republic of Bulgaria",
     "Република България",
-    "Republic of Bulgaria",
     "République de Bulgarie"
    ]
   },
@@ -647,7 +624,6 @@
    "en": [
     "Kingdom of Bahrain",
     "Mamlakat al-Baḥrayn",
-    "Kingdom of Bahrain",
     "Royaume de Bahreïn"
    ]
   },
@@ -682,7 +658,6 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Commonwealth of the Bahamas",
     "Commonwealth of the Bahamas",
     "Commonwealth des Bahamas"
    ]
@@ -720,7 +695,6 @@
    "en": [
     "Bosnia-Herzegovina",
     "Босна и Херцеговина",
-    "Bosnia and Herzegovina",
     "Bosnie-et-Herzégovine"
    ]
   },
@@ -753,16 +727,13 @@
    "en": "Belarus"
   },
   "aliases": {
-   "fr": [
-    "bielorussie"
-   ],
+   "fr": [],
    "en": [
-    "belarus",
+    "byelorussia",
     "Bielaruś",
     "Republic of Belarus",
     "Белоруссия",
     "Республика Белоруссия",
-    "Republic of Belarus",
     "République de Biélorussie"
    ]
   },
@@ -796,10 +767,7 @@
   },
   "aliases": {
    "fr": [],
-   "en": [
-    "Belize",
-    "Belize"
-   ]
+   "en": []
   },
   "capital": {
    "en": "Belmopan",
@@ -840,7 +808,6 @@
     "Buliwya Mamallaqta",
     "Wuliwya Suyu",
     "Tetã Volívia",
-    "Plurinational State of Bolivia",
     "État plurinational de Bolivie"
    ]
   },
@@ -878,7 +845,6 @@
     "Brasil",
     "Federative Republic of Brazil",
     "República Federativa do Brasil",
-    "Federative Republic of Brazil",
     "République fédérative du Brésil"
    ]
   },
@@ -912,10 +878,7 @@
   },
   "aliases": {
    "fr": [],
-   "en": [
-    "Barbados",
-    "Barbade"
-   ]
+   "en": []
   },
   "capital": {
    "en": "Bridgetown",
@@ -987,7 +950,6 @@
    "fr": [],
    "en": [
     "Kingdom of Bhutan",
-    "Kingdom of Bhutan",
     "Royaume du Bhoutan"
    ]
   },
@@ -1024,7 +986,6 @@
    "en": [
     "Republic of Botswana",
     "Lefatshe la Botswana",
-    "Republic of Botswana",
     "République du Botswana"
    ]
   },
@@ -1058,12 +1019,7 @@
   },
   "aliases": {
    "fr": [],
-   "en": [
-    "Central African Republic",
-    "République centrafricaine",
-    "Central African Republic",
-    "République centrafricaine"
-   ]
+   "en": []
   },
   "capital": {
    "en": "Bangui",
@@ -1095,10 +1051,7 @@
   },
   "aliases": {
    "fr": [],
-   "en": [
-    "Canada",
-    "Canada"
-   ]
+   "en": []
   },
   "capital": {
    "en": "Ottawa",
@@ -1133,10 +1086,8 @@
    "en": [
     "Swiss Confederation",
     "Schweiz",
-    "Suisse",
     "Svizzera",
     "Svizra",
-    "Swiss Confederation",
     "Confédération suisse"
    ]
   },
@@ -1173,7 +1124,6 @@
    "en": [
     "Republic of Chile",
     "República de Chile",
-    "Republic of Chile",
     "République du Chili"
    ]
   },
@@ -1209,12 +1159,10 @@
    "fr": [],
    "en": [
     "Zhōngguó",
-    "Zhongguo",
     "Zhonghua",
     "People's Republic of China",
     "中华人民共和国",
     "Zhōnghuá Rénmín Gònghéguó",
-    "People's Republic of China",
     "République populaire de Chine"
    ]
   },
@@ -1243,22 +1191,15 @@
   "id": "CIV",
   "iso2": "CI",
   "name": {
-   "fr": "Côte d'Ivoire",
-   "en": "Ivory Coast"
+   "fr": "Côte d’Ivoire",
+   "en": "Côte d’Ivoire"
   },
   "aliases": {
-   "fr": [
-    "cote d'ivoire",
-    "côte d’ivoire"
-   ],
+   "fr": [],
    "en": [
     "ivory coast",
-    "Côte d'Ivoire",
-    "Cote d'Ivoire",
-    "Ivory Coast",
     "Republic of Côte d'Ivoire",
     "République de Côte d'Ivoire",
-    "Republic of Côte d'Ivoire",
     "République de Côte d' Ivoire"
    ]
   },
@@ -1294,8 +1235,6 @@
    "fr": [],
    "en": [
     "Republic of Cameroon",
-    "République du Cameroun",
-    "Republic of Cameroon",
     "République du Cameroun"
    ]
   },
@@ -1324,26 +1263,21 @@
   "id": "COD",
   "iso2": "CD",
   "name": {
-   "fr": "Congo (Rép. dém.)",
+   "fr": "RD Congo",
    "en": "DR Congo"
   },
   "aliases": {
    "fr": [
     "rdc",
     "congo kinshasa",
-    "congo-kinshasa",
-    "republique democratique du congo"
+    "republique democratique du congo",
+    "Congo (Rép. dém.)"
    ],
    "en": [
     "drc",
-    "congo kinshasa",
-    "DR Congo",
-    "Congo-Kinshasa",
+    "democratic republic of the congo",
     "Congo, the Democratic Republic of the",
-    "Democratic Republic of Congo",
-    "DRC",
-    "Democratic Republic of the Congo",
-    "République démocratique du Congo"
+    "Democratic Republic of Congo"
    ]
   },
   "capital": {
@@ -1376,15 +1310,9 @@
   },
   "aliases": {
    "fr": [
-    "congo brazzaville",
-    "congo-brazzaville"
+    "congo brazzaville"
    ],
    "en": [
-    "congo brazzaville",
-    "republic of the congo",
-    "Congo",
-    "Congo-Brazzaville",
-    "Republic of the Congo",
     "République du Congo"
    ]
   },
@@ -1421,7 +1349,6 @@
    "en": [
     "Republic of Colombia",
     "República de Colombia",
-    "Republic of Colombia",
     "République de Colombie"
    ]
   },
@@ -1459,9 +1386,7 @@
     "Union of the Comoros",
     "Union des Comores",
     "Udzima wa Komori",
-    "al-Ittiḥād al-Qumurī",
-    "Union of the Comoros",
-    "Union des Comores"
+    "al-Ittiḥād al-Qumurī"
    ]
   },
   "capital": {
@@ -1489,18 +1414,17 @@
   "id": "CPV",
   "iso2": "CV",
   "name": {
-   "fr": "Îles du Cap-Vert",
-   "en": "Cape Verde"
+   "fr": "Cap-Vert",
+   "en": "Cabo Verde"
   },
   "aliases": {
    "fr": [
-    "cap vert"
+    "îles du cap-vert"
    ],
    "en": [
     "cape verde",
     "Republic of Cabo Verde",
     "República de Cabo Verde",
-    "Republic of Cabo Verde",
     "République du Cap-Vert"
    ]
   },
@@ -1537,7 +1461,6 @@
    "en": [
     "Republic of Costa Rica",
     "República de Costa Rica",
-    "Republic of Costa Rica",
     "République du Costa Rica"
    ]
   },
@@ -1574,7 +1497,6 @@
    "en": [
     "Republic of Cuba",
     "República de Cuba",
-    "Republic of Cuba",
     "République de Cuba"
    ]
   },
@@ -1614,7 +1536,6 @@
     "Republic of Cyprus",
     "Κυπριακή Δημοκρατία",
     "Kıbrıs Cumhuriyeti",
-    "Republic of Cyprus",
     "République de Chypre"
    ]
   },
@@ -1648,16 +1569,13 @@
   },
   "aliases": {
    "fr": [
-    "tchequie",
     "république tchèque"
    ],
    "en": [
-    "czechia",
     "czech",
     "Česká republika",
     "Česko",
-    "Czech Republic",
-    "République tchèque"
+    "Czech Republic"
    ]
   },
   "capital": {
@@ -1693,7 +1611,6 @@
    "en": [
     "Federal Republic of Germany",
     "Bundesrepublik Deutschland",
-    "Federal Republic of Germany",
     "République fédérale d'Allemagne"
    ]
   },
@@ -1733,9 +1650,7 @@
     "Republic of Djibouti",
     "République de Djibouti",
     "Gabuutih Ummuuno",
-    "Jamhuuriyadda Jabuuti",
-    "Republic of Djibouti",
-    "République de Djibouti"
+    "Jamhuuriyadda Jabuuti"
    ]
   },
   "capital": {
@@ -1769,9 +1684,7 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Dominique",
     "Wai‘tu kubuli",
-    "Commonwealth of Dominica",
     "Commonwealth of Dominica",
     "Commonwealth de la Dominique"
    ]
@@ -1810,7 +1723,6 @@
     "Danmark",
     "Kingdom of Denmark",
     "Kongeriget Danmark",
-    "Kingdom of Denmark",
     "Royaume du Danemark"
    ]
   },
@@ -1844,10 +1756,7 @@
   },
   "aliases": {
    "fr": [],
-   "en": [
-    "Dominican Republic",
-    "République Dominicaine"
-   ]
+   "en": []
   },
   "capital": {
    "en": "Santo Domingo",
@@ -1881,7 +1790,6 @@
    "fr": [],
    "en": [
     "Dzayer",
-    "Algérie",
     "People's Democratic Republic of Algeria",
     "République démocratique et populaire d'Algérie"
    ]
@@ -1919,7 +1827,6 @@
    "en": [
     "Republic of Ecuador",
     "República del Ecuador",
-    "Republic of Ecuador",
     "République de l'Équateur"
    ]
   },
@@ -1954,7 +1861,6 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Arab Republic of Egypt",
     "Arab Republic of Egypt",
     "République arabe d'Égypte"
    ]
@@ -1995,7 +1901,6 @@
     "Dawlat Iritriyá",
     "ʾErtrā",
     "Iritriyā",
-    "State of Eritrea",
     "État d'Érythrée"
    ]
   },
@@ -2032,7 +1937,6 @@
    "en": [
     "Kingdom of Spain",
     "Reino de España",
-    "Kingdom of Spain",
     "Royaume d'Espagne"
    ]
   },
@@ -2070,7 +1974,6 @@
     "Eesti",
     "Republic of Estonia",
     "Eesti Vabariik",
-    "Republic of Estonia",
     "République d'Estonie"
    ]
   },
@@ -2108,7 +2011,6 @@
     "ʾĪtyōṗṗyā",
     "Federal Democratic Republic of Ethiopia",
     "የኢትዮጵያ ፌዴራላዊ ዲሞክራሲያዊ ሪፐብሊክ",
-    "Federal Democratic Republic of Ethiopia",
     "République fédérale démocratique d'Éthiopie"
    ]
   },
@@ -2147,7 +2049,6 @@
     "Republic of Finland",
     "Suomen tasavalta",
     "Republiken Finland",
-    "Republic of Finland",
     "République de Finlande"
    ]
   },
@@ -2186,7 +2087,6 @@
     "Republic of Fiji",
     "Matanitu ko Viti",
     "Fijī Gaṇarājya",
-    "Republic of Fiji",
     "République des Fidji"
    ]
   },
@@ -2222,8 +2122,6 @@
    "fr": [],
    "en": [
     "French Republic",
-    "République française",
-    "French Republic",
     "République française"
    ]
   },
@@ -2256,12 +2154,12 @@
    "en": "Micronesia"
   },
   "aliases": {
-   "fr": [],
+   "fr": [
+    "etats federes de micronesie"
+   ],
    "en": [
-    "Federated States of Micronesia",
-    "Micronesia, Federated States of",
-    "Federated States of Micronesia",
-    "États fédérés de Micronésie"
+    "federated states of micronesia",
+    "Micronesia, Federated States of"
    ]
   },
   "capital": {
@@ -2296,9 +2194,7 @@
    "fr": [],
    "en": [
     "Gabonese Republic",
-    "République Gabonaise",
-    "Gabonese Republic",
-    "République gabonaise"
+    "République Gabonaise"
    ]
   },
   "capital": {
@@ -2331,11 +2227,9 @@
   },
   "aliases": {
    "fr": [
-    "royaume uni",
     "angleterre",
     "grande-bretagne",
-    "ecosse",
-    "écosse"
+    "ecosse"
    ],
    "en": [
     "uk",
@@ -2344,7 +2238,6 @@
     "england",
     "scotland",
     "wales",
-    "Great Britain",
     "United Kingdom of Great Britain and Northern Ireland",
     "Royaume-Uni de Grande-Bretagne et d'Irlande du Nord"
    ]
@@ -2381,7 +2274,6 @@
    "fr": [],
    "en": [
     "Sakartvelo",
-    "Georgia",
     "République de Géorgie"
    ]
   },
@@ -2452,8 +2344,6 @@
    "fr": [],
    "en": [
     "Republic of Guinea",
-    "République de Guinée",
-    "Republic of Guinea",
     "République de Guinée"
    ]
   },
@@ -2488,7 +2378,6 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Republic of the Gambia",
     "Republic of the Gambia",
     "République de Gambie"
    ]
@@ -2526,7 +2415,6 @@
    "en": [
     "Republic of Guinea-Bissau",
     "República da Guiné-Bissau",
-    "Republic of Guinea-Bissau",
     "République de Guinée-Bissau"
    ]
   },
@@ -2564,9 +2452,7 @@
     "Republic of Equatorial Guinea",
     "República de Guinea Ecuatorial",
     "République de Guinée équatoriale",
-    "República da Guiné Equatorial",
-    "Republic of Equatorial Guinea",
-    "République de Guinée équatoriale"
+    "República da Guiné Equatorial"
    ]
   },
   "capital": {
@@ -2603,7 +2489,6 @@
     "Elláda",
     "Hellenic Republic",
     "Ελληνική Δημοκρατία",
-    "Hellenic Republic",
     "République hellénique"
    ]
   },
@@ -2637,10 +2522,7 @@
   },
   "aliases": {
    "fr": [],
-   "en": [
-    "Grenada",
-    "Grenade"
-   ]
+   "en": []
   },
   "capital": {
    "en": "St. George's",
@@ -2709,7 +2591,6 @@
    "fr": [],
    "en": [
     "Co-operative Republic of Guyana",
-    "Co-operative Republic of Guyana",
     "République coopérative de Guyana"
    ]
   },
@@ -2746,7 +2627,6 @@
    "en": [
     "Republic of Honduras",
     "República de Honduras",
-    "Republic of Honduras",
     "République du Honduras"
    ]
   },
@@ -2784,7 +2664,6 @@
     "Hrvatska",
     "Republic of Croatia",
     "Republika Hrvatska",
-    "Republic of Croatia",
     "République de Croatie"
    ]
   },
@@ -2821,9 +2700,7 @@
    "en": [
     "Republic of Haiti",
     "République d'Haïti",
-    "Repiblik Ayiti",
-    "Republic of Haiti",
-    "République d'Haïti"
+    "Repiblik Ayiti"
    ]
   },
   "capital": {
@@ -2856,10 +2733,7 @@
   },
   "aliases": {
    "fr": [],
-   "en": [
-    "Hungary",
-    "Hongrie"
-   ]
+   "en": []
   },
   "capital": {
    "en": "Budapest",
@@ -2894,7 +2768,6 @@
    "en": [
     "Republic of Indonesia",
     "Republik Indonesia",
-    "Republic of Indonesia",
     "République d'Indonésie"
    ]
   },
@@ -2933,7 +2806,6 @@
     "Republic of India",
     "Bharat Ganrajya",
     "இந்தியா",
-    "Republic of India",
     "République de l'Inde"
    ]
   },
@@ -2971,7 +2843,6 @@
     "Éire",
     "Republic of Ireland",
     "Poblacht na hÉireann",
-    "Republic of Ireland",
     "République d'Irlande"
    ]
   },
@@ -3009,7 +2880,6 @@
     "Islamic Republic of Iran",
     "Iran, Islamic Republic of",
     "Jomhuri-ye Eslāmi-ye Irān",
-    "Islamic Republic of Iran",
     "République islamique d'Iran"
    ]
   },
@@ -3046,7 +2916,6 @@
    "en": [
     "Republic of Iraq",
     "Jumhūriyyat al-‘Irāq",
-    "Republic of Iraq",
     "République d'Irak"
    ]
   },
@@ -3084,7 +2953,6 @@
     "Island",
     "Republic of Iceland",
     "Lýðveldið Ísland",
-    "Iceland",
     "République d'Islande"
    ]
   },
@@ -3121,7 +2989,6 @@
    "en": [
     "State of Israel",
     "Medīnat Yisrā'el",
-    "State of Israel",
     "État d'Israël"
    ]
   },
@@ -3158,7 +3025,6 @@
    "en": [
     "Italian Republic",
     "Repubblica italiana",
-    "Italian Republic",
     "République italienne"
    ]
   },
@@ -3192,10 +3058,7 @@
   },
   "aliases": {
    "fr": [],
-   "en": [
-    "Jamaica",
-    "Jamaïque"
-   ]
+   "en": []
   },
   "capital": {
    "en": "Kingston",
@@ -3230,7 +3093,6 @@
    "en": [
     "Hashemite Kingdom of Jordan",
     "al-Mamlakah al-Urdunīyah al-Hāshimīyah",
-    "Hashemite Kingdom of Jordan",
     "Royaume hachémite de Jordanie"
    ]
   },
@@ -3266,9 +3128,7 @@
    "fr": [],
    "en": [
     "Nippon",
-    "Nihon",
-    "Japan",
-    "Japon"
+    "Nihon"
    ]
   },
   "capital": {
@@ -3309,7 +3169,6 @@
     "Qazaqstan Respublïkası",
     "Республика Казахстан",
     "Respublika Kazakhstan",
-    "Republic of Kazakhstan",
     "République du Kazakhstan"
    ]
   },
@@ -3346,7 +3205,6 @@
    "en": [
     "Republic of Kenya",
     "Jamhuri ya Kenya",
-    "Republic of Kenya",
     "République du Kenya"
    ]
   },
@@ -3385,7 +3243,6 @@
     "Kyrgyz Republic",
     "Кыргыз Республикасы",
     "Kyrgyz Respublikasy",
-    "Kyrgyz Republic",
     "République kirghize"
    ]
   },
@@ -3420,7 +3277,6 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Kingdom of Cambodia",
     "Kingdom of Cambodia",
     "Royaume du Cambodge"
    ]
@@ -3494,7 +3350,6 @@
    "fr": [],
    "en": [
     "Federation of Saint Christopher and Nevis",
-    "Federation of Saint Christopher and Nevis",
     "Fédération de Saint-Christophe-et-Niévès"
    ]
   },
@@ -3527,15 +3382,11 @@
    "en": "South Korea"
   },
   "aliases": {
-   "fr": [
-    "coree du sud"
-   ],
+   "fr": [],
    "en": [
-    "south korea",
     "Korea, Republic of",
     "Republic of Korea",
     "남조선",
-    "Republic of Korea",
     "République de Corée"
    ]
   },
@@ -3572,7 +3423,6 @@
    "en": [
     "State of Kuwait",
     "Dawlat al-Kuwait",
-    "State of Kuwait",
     "État du Koweït"
    ]
   },
@@ -3610,7 +3460,6 @@
     "Lao",
     "Lao People's Democratic Republic",
     "Sathalanalat Paxathipatai Paxaxon Lao",
-    "Lao People's Democratic Republic",
     "République démocratique populaire lao"
    ]
   },
@@ -3647,7 +3496,6 @@
    "en": [
     "Lebanese Republic",
     "Al-Jumhūrīyah Al-Libnānīyah",
-    "Lebanese Republic",
     "République libanaise"
    ]
   },
@@ -3682,7 +3530,6 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Republic of Liberia",
     "Republic of Liberia",
     "République du Libéria"
    ]
@@ -3720,7 +3567,6 @@
    "en": [
     "State of Libya",
     "Dawlat Libya",
-    "State of Libya",
     "Grande République arabe libyenne populaire et socialiste"
    ]
   },
@@ -3754,10 +3600,7 @@
   },
   "aliases": {
    "fr": [],
-   "en": [
-    "Saint Lucia",
-    "Sainte-Lucie"
-   ]
+   "en": []
   },
   "capital": {
    "en": "Castries",
@@ -3792,7 +3635,6 @@
    "en": [
     "Principality of Liechtenstein",
     "Fürstentum Liechtenstein",
-    "Principality of Liechtenstein",
     "Principauté du Liechtenstein"
    ]
   },
@@ -3829,13 +3671,12 @@
    "en": [
     "ilaṅkai",
     "Democratic Socialist Republic of Sri Lanka",
-    "Democratic Socialist Republic of Sri Lanka",
     "République démocratique socialiste du Sri Lanka"
    ]
   },
   "capital": {
    "en": "Colombo",
-   "fr": "Sri Jayawardenapura Kotte"
+   "fr": "Colombo"
   },
   "continent": "asia",
   "region": "Southern Asia",
@@ -3866,7 +3707,6 @@
    "en": [
     "Kingdom of Lesotho",
     "Muso oa Lesotho",
-    "Kingdom of Lesotho",
     "Royaume du Lesotho"
    ]
   },
@@ -3903,7 +3743,6 @@
    "en": [
     "Republic of Lithuania",
     "Lietuvos Respublika",
-    "Republic of Lithuania",
     "République de Lituanie"
    ]
   },
@@ -3941,9 +3780,7 @@
     "Grand Duchy of Luxembourg",
     "Grand-Duché de Luxembourg",
     "Großherzogtum Luxemburg",
-    "Groussherzogtum Lëtzebuerg",
-    "Grand Duchy of Luxembourg",
-    "Grand-Duché de Luxembourg"
+    "Groussherzogtum Lëtzebuerg"
    ]
   },
   "capital": {
@@ -3979,7 +3816,6 @@
    "en": [
     "Republic of Latvia",
     "Latvijas Republika",
-    "Republic of Latvia",
     "République de Lettonie"
    ]
   },
@@ -4016,7 +3852,6 @@
    "en": [
     "Kingdom of Morocco",
     "Al-Mamlakah al-Maġribiyah",
-    "Kingdom of Morocco",
     "Royaume du Maroc"
    ]
   },
@@ -4051,8 +3886,6 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Principality of Monaco",
-    "Principauté de Monaco",
     "Principality of Monaco",
     "Principauté de Monaco"
    ]
@@ -4091,7 +3924,6 @@
     "Moldova, Republic of",
     "Republic of Moldova",
     "Republica Moldova",
-    "Republic of Moldova",
     "République de Moldavie"
    ]
   },
@@ -4128,8 +3960,6 @@
    "en": [
     "Republic of Madagascar",
     "Repoblikan'i Madagasikara",
-    "République de Madagascar",
-    "Republic of Madagascar",
     "République de Madagascar"
    ]
   },
@@ -4167,7 +3997,6 @@
     "Maldive Islands",
     "Republic of the Maldives",
     "Dhivehi Raajjeyge Jumhooriyya",
-    "Republic of the Maldives",
     "République des Maldives"
    ]
   },
@@ -4205,7 +4034,6 @@
     "Mexicanos",
     "United Mexican States",
     "Estados Unidos Mexicanos",
-    "United Mexican States",
     "États-Unis du Mexique"
    ]
   },
@@ -4242,7 +4070,6 @@
    "en": [
     "Republic of the Marshall Islands",
     "Aolepān Aorōkin M̧ajeļ",
-    "Republic of the Marshall Islands",
     "République des Îles Marshall"
    ]
   },
@@ -4276,17 +4103,15 @@
   },
   "aliases": {
    "fr": [
-    "macedoine"
+    "macedoine",
+    "république de macédoine du nord"
    ],
    "en": [
     "macedonia",
     "The former Yugoslav Republic of Macedonia",
     "Republic of North Macedonia",
     "Macedonia, The Former Yugoslav Republic of",
-    "Република Северна Македонија",
-    "Macedonia",
-    "Republic of North Macedonia",
-    "République de Macédoine du Nord"
+    "Република Северна Македонија"
    ]
   },
   "capital": {
@@ -4320,8 +4145,6 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Republic of Mali",
-    "République du Mali",
     "Republic of Mali",
     "République du Mali"
    ]
@@ -4359,7 +4182,6 @@
    "en": [
     "Republic of Malta",
     "Repubblika ta' Malta",
-    "Republic of Malta",
     "République de Malte"
    ]
   },
@@ -4392,15 +4214,11 @@
    "en": "Myanmar"
   },
   "aliases": {
-   "fr": [
-    "birmanie"
-   ],
+   "fr": [],
    "en": [
     "burma",
-    "Burma",
     "Republic of the Union of Myanmar",
     "Pyidaunzu Thanmăda Myăma Nainngandaw",
-    "Republic of the Union of Myanmar",
     "République de l'Union du Myanmar"
    ]
   },
@@ -4435,9 +4253,7 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Crna Gora",
-    "Montenegro",
-    "Monténégro"
+    "Crna Gora"
    ]
   },
   "capital": {
@@ -4470,10 +4286,7 @@
   },
   "aliases": {
    "fr": [],
-   "en": [
-    "Mongolia",
-    "Mongolie"
-   ]
+   "en": []
   },
   "capital": {
    "en": "Ulan Bator",
@@ -4508,7 +4321,6 @@
    "en": [
     "Republic of Mozambique",
     "República de Moçambique",
-    "Republic of Mozambique",
     "République du Mozambique"
    ]
   },
@@ -4545,7 +4357,6 @@
    "en": [
     "Islamic Republic of Mauritania",
     "al-Jumhūriyyah al-ʾIslāmiyyah al-Mūrītāniyyah",
-    "Islamic Republic of Mauritania",
     "République islamique de Mauritanie"
    ]
   },
@@ -4580,8 +4391,6 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Republic of Mauritius",
-    "République de Maurice",
     "Republic of Mauritius",
     "République de Maurice"
    ]
@@ -4618,7 +4427,6 @@
    "fr": [],
    "en": [
     "Republic of Malawi",
-    "Republic of Malawi",
     "République du Malawi"
    ]
   },
@@ -4653,7 +4461,6 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Malaysia",
     "Fédération de Malaisie"
    ]
   },
@@ -4688,8 +4495,6 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Namibië",
-    "Republic of Namibia",
     "Republic of Namibia",
     "République de Namibie"
    ]
@@ -4764,7 +4569,6 @@
     "Nijeriya",
     "Naíjíríà",
     "Federal Republic of Nigeria",
-    "Federal Republic of Nigeria",
     "République fédérale du Nigeria"
    ]
   },
@@ -4801,7 +4605,6 @@
    "en": [
     "Republic of Nicaragua",
     "República de Nicaragua",
-    "Republic of Nicaragua",
     "République du Nicaragua"
    ]
   },
@@ -4839,11 +4642,9 @@
    ],
    "en": [
     "holland",
-    "Holland",
     "Nederland",
     "The Netherlands",
-    "Kingdom of the Netherlands",
-    "Pays-Bas"
+    "Kingdom of the Netherlands"
    ]
   },
   "capital": {
@@ -4882,7 +4683,6 @@
     "Kingdom of Norway",
     "Kongeriket Norge",
     "Kongeriket Noreg",
-    "Kingdom of Norway",
     "Royaume de Norvège"
    ]
   },
@@ -4919,7 +4719,6 @@
    "en": [
     "Federal Democratic Republic of Nepal",
     "Loktāntrik Ganatantra Nepāl",
-    "Federal Democratic Republic of Nepal",
     "République du Népal"
    ]
   },
@@ -4958,7 +4757,6 @@
     "Pleasant Island",
     "Republic of Nauru",
     "Ripublik Naoero",
-    "Republic of Nauru",
     "République de Nauru"
    ]
   },
@@ -4993,9 +4791,7 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Aotearoa",
-    "New Zealand",
-    "Nouvelle-Zélande"
+    "Aotearoa"
    ]
   },
   "capital": {
@@ -5031,7 +4827,6 @@
    "en": [
     "Sultanate of Oman",
     "Salṭanat ʻUmān",
-    "Sultanate of Oman",
     "Sultanat d'Oman"
    ]
   },
@@ -5066,10 +4861,8 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Pākistān",
     "Islamic Republic of Pakistan",
     "Islāmī Jumhūriya'eh Pākistān",
-    "Islamic Republic of Pakistan",
     "République islamique du Pakistan"
    ]
   },
@@ -5106,7 +4899,6 @@
    "en": [
     "Republic of Panama",
     "República de Panamá",
-    "Republic of Panama",
     "République du Panama"
    ]
   },
@@ -5143,7 +4935,6 @@
    "en": [
     "Republic of Peru",
     "República del Perú",
-    "Republic of Peru",
     "République du Pérou"
    ]
   },
@@ -5180,7 +4971,6 @@
    "en": [
     "Republic of the Philippines",
     "Repúblika ng Pilipinas",
-    "Republic of the Philippines",
     "République des Philippines"
    ]
   },
@@ -5209,15 +4999,17 @@
   "id": "PLW",
   "iso2": "PW",
   "name": {
-   "fr": "Palaos (Palau)",
+   "fr": "Palaos",
    "en": "Palau"
   },
   "aliases": {
-   "fr": [],
+   "fr": [
+    "Palaos (Palau)"
+   ],
    "en": [
+    "belau",
     "Republic of Palau",
     "Beluu er a Belau",
-    "Republic of Palau",
     "République des Palaos (Palau)"
    ]
   },
@@ -5254,7 +5046,6 @@
    "en": [
     "Independent State of Papua New Guinea",
     "Independen Stet bilong Papua Niugini",
-    "Independent State of Papua New Guinea",
     "État indépendant de Papouasie-Nouvelle-Guinée"
    ]
   },
@@ -5291,7 +5082,6 @@
    "en": [
     "Republic of Poland",
     "Rzeczpospolita Polska",
-    "Republic of Poland",
     "République de Pologne"
    ]
   },
@@ -5324,18 +5114,14 @@
    "en": "North Korea"
   },
   "aliases": {
-   "fr": [
-    "coree du nord"
-   ],
+   "fr": [],
    "en": [
-    "north korea",
     "Democratic People's Republic of Korea",
     "DPRK",
     "조선민주주의인민공화국",
     "Chosŏn Minjujuŭi Inmin Konghwaguk",
     "Korea, Democratic People's Republic of",
     "북조선",
-    "Democratic People's Republic of Korea",
     "République populaire démocratique de Corée"
    ]
   },
@@ -5373,7 +5159,6 @@
     "Portuguesa",
     "Portuguese Republic",
     "República Portuguesa",
-    "Portuguese Republic",
     "République portugaise"
    ]
   },
@@ -5411,7 +5196,6 @@
     "Republic of Paraguay",
     "República del Paraguay",
     "Tetã Paraguái",
-    "Republic of Paraguay",
     "République du Paraguay"
    ]
   },
@@ -5450,11 +5234,9 @@
    ],
    "en": [
     "west bank",
-    "gaza",
     "Palestine, State of",
     "State of Palestine",
     "Dawlat Filasṭin",
-    "State of Palestine",
     "État de Palestine"
    ]
   },
@@ -5491,7 +5273,6 @@
    "en": [
     "State of Qatar",
     "Dawlat Qaṭar",
-    "State of Qatar",
     "État du Qatar"
    ]
   },
@@ -5527,10 +5308,7 @@
    "fr": [],
    "en": [
     "Rumania",
-    "Roumania",
-    "România",
-    "Romania",
-    "Roumanie"
+    "Roumania"
    ]
   },
   "capital": {
@@ -5562,14 +5340,10 @@
    "en": "Russia"
   },
   "aliases": {
-   "fr": [
-    "russie"
-   ],
+   "fr": [],
    "en": [
-    "russia",
     "Russian Federation",
     "Российская Федерация",
-    "Russian Federation",
     "Fédération de Russie"
    ]
   },
@@ -5607,7 +5381,6 @@
     "Republic of Rwanda",
     "Repubulika y'u Rwanda",
     "République du Rwanda",
-    "Republic of Rwanda",
     "République rwandaise"
    ]
   },
@@ -5636,7 +5409,7 @@
   "id": "SAU",
   "iso2": "SA",
   "name": {
-   "fr": "Arabie Saoudite",
+   "fr": "Arabie saoudite",
    "en": "Saudi Arabia"
   },
   "aliases": {
@@ -5645,7 +5418,6 @@
     "Saudi",
     "Kingdom of Saudi Arabia",
     "Al-Mamlakah al-‘Arabiyyah as-Su‘ūdiyyah",
-    "Kingdom of Saudi Arabia",
     "Royaume d'Arabie Saoudite"
    ]
   },
@@ -5682,7 +5454,6 @@
    "en": [
     "Republic of the Sudan",
     "Jumhūrīyat as-Sūdān",
-    "Republic of the Sudan",
     "République du Soudan"
    ]
   },
@@ -5717,8 +5488,6 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Republic of Senegal",
-    "République du Sénégal",
     "Republic of Senegal",
     "République du Sénégal"
    ]
@@ -5791,10 +5560,7 @@
   },
   "aliases": {
    "fr": [],
-   "en": [
-    "Solomon Islands",
-    "Îles Salomon"
-   ]
+   "en": []
   },
   "capital": {
    "en": "Honiara",
@@ -5827,7 +5593,6 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Republic of Sierra Leone",
     "Republic of Sierra Leone",
     "République de Sierra Leone"
    ]
@@ -5865,7 +5630,6 @@
    "en": [
     "Republic of El Salvador",
     "República de El Salvador",
-    "Republic of El Salvador",
     "République du Salvador"
    ]
   },
@@ -5941,7 +5705,6 @@
     "Federal Republic of Somalia",
     "Jamhuuriyadda Federaalka Soomaaliya",
     "Jumhūriyyat aṣ-Ṣūmāl al-Fiderāliyya",
-    "Federal Republic of Somalia",
     "République fédérale de Somalie"
    ]
   },
@@ -5980,7 +5743,6 @@
     "Republika Srbija",
     "Србија",
     "Република Србија",
-    "Republic of Serbia",
     "Republic of Serbia",
     "République de Serbie"
    ]
@@ -6052,9 +5814,7 @@
    "fr": [],
    "en": [
     "Democratic Republic of São Tomé and Príncipe",
-    "Sao Tome and Principe",
     "República Democrática de São Tomé e Príncipe",
-    "Democratic Republic of São Tomé and Príncipe",
     "République démocratique de São Tomé et Príncipe"
    ]
   },
@@ -6083,17 +5843,18 @@
   "id": "SUR",
   "iso2": "SR",
   "name": {
-   "fr": "Surinam",
+   "fr": "Suriname",
    "en": "Suriname"
   },
   "aliases": {
-   "fr": [],
+   "fr": [
+    "surinam"
+   ],
    "en": [
     "Sarnam",
     "Sranangron",
     "Republic of Suriname",
     "Republiek Suriname",
-    "Republic of Suriname",
     "République du Suriname"
    ]
   },
@@ -6130,7 +5891,6 @@
    "en": [
     "Slovak Republic",
     "Slovenská republika",
-    "Slovak Republic",
     "République slovaque"
    ]
   },
@@ -6167,7 +5927,6 @@
    "en": [
     "Republic of Slovenia",
     "Republika Slovenija",
-    "Republic of Slovenia",
     "République de Slovénie"
    ]
   },
@@ -6204,7 +5963,6 @@
    "en": [
     "Kingdom of Sweden",
     "Konungariket Sverige",
-    "Kingdom of Sweden",
     "Royaume de Suède"
    ]
   },
@@ -6233,7 +5991,7 @@
   "id": "SWZ",
   "iso2": "SZ",
   "name": {
-   "fr": "Swaziland",
+   "fr": "Eswatini",
    "en": "Eswatini"
   },
   "aliases": {
@@ -6241,20 +5999,16 @@
     "swaziland"
    ],
    "en": [
-    "swaziland",
-    "eswatini",
-    "Swaziland",
     "weSwatini",
     "Swatini",
     "Ngwane",
     "Kingdom of Eswatini",
     "Umbuso weSwatini",
-    "Kingdom of Eswatini",
     "Royaume d’Eswatini"
    ]
   },
   "capital": {
-   "en": "Lobamba",
+   "en": "Mbabane",
    "fr": "Mbabane"
   },
   "continent": "africa",
@@ -6286,8 +6040,6 @@
    "en": [
     "Republic of Seychelles",
     "Repiblik Sesel",
-    "République des Seychelles",
-    "Republic of Seychelles",
     "République des Seychelles"
    ]
   },
@@ -6324,7 +6076,6 @@
    "en": [
     "Syrian Arab Republic",
     "Al-Jumhūrīyah Al-ʻArabīyah As-Sūrīyah",
-    "Syrian Arab Republic",
     "République arabe syrienne"
    ]
   },
@@ -6359,9 +6110,6 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Tchad",
-    "Republic of Chad",
-    "République du Tchad",
     "Republic of Chad",
     "République du Tchad"
    ]
@@ -6399,9 +6147,7 @@
    "en": [
     "Togolese",
     "Togolese Republic",
-    "République Togolaise",
-    "Togolese Republic",
-    "République togolaise"
+    "République Togolaise"
    ]
   },
   "capital": {
@@ -6440,7 +6186,6 @@
     "Kingdom of Thailand",
     "ราชอาณาจักรไทย",
     "Ratcha Anachak Thai",
-    "Kingdom of Thailand",
     "Royaume de Thaïlande"
    ]
   },
@@ -6479,7 +6224,6 @@
     "Republic of Tajikistan",
     "Ҷумҳурии Тоҷикистон",
     "Çumhuriyi Toçikiston",
-    "Republic of Tajikistan",
     "République du Tadjikistan"
    ]
   },
@@ -6513,10 +6257,7 @@
   },
   "aliases": {
    "fr": [],
-   "en": [
-    "Turkmenistan",
-    "Turkménistan"
-   ]
+   "en": []
   },
   "capital": {
    "en": "Ashgabat",
@@ -6543,7 +6284,7 @@
   "id": "TLS",
   "iso2": "TL",
   "name": {
-   "fr": "Timor oriental",
+   "fr": "Timor-Leste",
    "en": "Timor-Leste"
   },
   "aliases": {
@@ -6552,14 +6293,11 @@
    ],
    "en": [
     "east timor",
-    "East Timor",
     "Timor",
     "Democratic Republic of Timor-Leste",
     "República Democrática de Timor-Leste",
     "Repúblika Demokrátika Timór-Leste",
     "Timór Lorosa'e",
-    "Timor Lorosae",
-    "Democratic Republic of Timor-Leste",
     "République démocratique du Timor oriental"
    ]
   },
@@ -6629,7 +6367,6 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Republic of Trinidad and Tobago",
     "Republic of Trinidad and Tobago",
     "République de Trinité-et-Tobago"
    ]
@@ -6702,7 +6439,7 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Turkiye",
+    "turkey",
     "Republic of Turkey",
     "Türkiye Cumhuriyeti",
     "Republic of Türkiye",
@@ -6739,10 +6476,7 @@
   },
   "aliases": {
    "fr": [],
-   "en": [
-    "Tuvalu",
-    "Tuvalu"
-   ]
+   "en": []
   },
   "capital": {
    "en": "Funafuti",
@@ -6778,7 +6512,6 @@
     "Tanzania, United Republic of",
     "United Republic of Tanzania",
     "Jamhuri ya Muungano wa Tanzania",
-    "United Republic of Tanzania",
     "République -Unie de Tanzanie"
    ]
   },
@@ -6815,7 +6548,6 @@
    "en": [
     "Republic of Uganda",
     "Jamhuri ya Uganda",
-    "Republic of Uganda",
     "République de l'Ouganda"
    ]
   },
@@ -6848,11 +6580,11 @@
    "en": "Ukraine"
   },
   "aliases": {
-   "fr": [],
+   "fr": [
+    "kyiv"
+   ],
    "en": [
-    "Ukrayina",
-    "Ukraine",
-    "Ukraine"
+    "Ukrayina"
    ]
   },
   "capital": {
@@ -6888,7 +6620,6 @@
    "en": [
     "Oriental Republic of Uruguay",
     "República Oriental del Uruguay",
-    "Oriental Republic of Uruguay",
     "République orientale de l'Uruguay"
    ]
   },
@@ -6922,18 +6653,12 @@
   },
   "aliases": {
    "fr": [
-    "etats-unis",
-    "états unis",
     "usa",
     "amerique"
    ],
    "en": [
-    "usa",
     "us",
-    "united states",
     "america",
-    "USA",
-    "United States of America",
     "United States of America",
     "Les états-unis d'Amérique"
    ]
@@ -6972,7 +6697,6 @@
     "Republic of Uzbekistan",
     "O‘zbekiston Respublikasi",
     "Ўзбекистон Республикаси",
-    "Republic of Uzbekistan",
     "République d'Ouzbékistan"
    ]
   },
@@ -7007,18 +6731,13 @@
   "aliases": {
    "fr": [
     "vatican",
-    "saint-siege",
-    "saint siège"
+    "saint-siege"
    ],
    "en": [
-    "vatican",
     "holy see",
     "Holy See (Vatican City State)",
     "Vatican City State",
-    "Vatican",
-    "Stato della Città del Vaticano",
-    "Vatican City State",
-    "Cité du Vatican"
+    "Stato della Città del Vaticano"
    ]
   },
   "capital": {
@@ -7051,10 +6770,7 @@
   },
   "aliases": {
    "fr": [],
-   "en": [
-    "Saint Vincent and the Grenadines",
-    "Saint-Vincent-et-les Grenadines"
-   ]
+   "en": []
   },
   "capital": {
    "en": "Kingstown",
@@ -7090,7 +6806,6 @@
     "Bolivarian Republic of Venezuela",
     "Venezuela, Bolivarian Republic of",
     "República Bolivariana de Venezuela",
-    "Bolivarian Republic of Venezuela",
     "République bolivarienne du Venezuela"
    ]
   },
@@ -7127,8 +6842,6 @@
    "en": [
     "Socialist Republic of Vietnam",
     "Cộng hòa Xã hội chủ nghĩa Việt Nam",
-    "Viet Nam",
-    "Socialist Republic of Vietnam",
     "République socialiste du Viêt Nam"
    ]
   },
@@ -7165,8 +6878,6 @@
    "en": [
     "Republic of Vanuatu",
     "Ripablik blong Vanuatu",
-    "République de Vanuatu",
-    "Republic of Vanuatu",
     "République de Vanuatu"
    ]
   },
@@ -7202,9 +6913,7 @@
    "fr": [],
    "en": [
     "Independent State of Samoa",
-    "Malo Saʻoloto Tutoʻatasi o Sāmoa",
-    "Independent State of Samoa",
-    "Samoa"
+    "Malo Saʻoloto Tutoʻatasi o Sāmoa"
    ]
   },
   "capital": {
@@ -7278,7 +6987,6 @@
     "RSA",
     "Suid-Afrika",
     "Republic of South Africa",
-    "Republic of South Africa",
     "République d'Afrique du Sud"
    ]
   },
@@ -7314,7 +7022,6 @@
    "fr": [],
    "en": [
     "Republic of Zambia",
-    "Republic of Zambia",
     "République de Zambie"
    ]
   },
@@ -7349,7 +7056,6 @@
   "aliases": {
    "fr": [],
    "en": [
-    "Republic of Zimbabwe",
     "Republic of Zimbabwe",
     "République du Zimbabwe"
    ]

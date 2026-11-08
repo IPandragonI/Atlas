@@ -10,9 +10,8 @@ export const SCORE = {
 } as const;
 
 export const HINT_PENALTY: Record<HintKind, number> = {
-  geographic: 50,
-  connectivity: 75,
-  discovery: 125,
+  letter: 75,
+  borders: 150,
 };
 
 export interface ScoreInput {
@@ -44,7 +43,8 @@ export function computeScore(input: ScoreInput): ScoreBreakdown {
 export function buildResult(state: GameState, minIntermediate: number): GameResult {
   if (state.status === "playing") throw new Error("Game still in progress");
   const won = state.status === "won";
-  const intermediates = Math.max(0, state.route.length - (won ? 2 : 1));
+  // The route holds start + entered countries only (the destination is never part of it).
+  const intermediates = Math.max(0, state.route.length - 1);
   const optimal = won && intermediates === minIntermediate;
   const hintsUsed = state.hints.map((h) => h.payload.kind);
   return {

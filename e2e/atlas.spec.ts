@@ -1,6 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import { graph } from "../src/lib/atlas";
 import { generateWithRetry } from "../src/lib/generate";
+import { optimalContinuations } from "../src/engine/pathfinding";
 import { nextMoves } from "../src/engine/rules";
 
 const fr = (id: string) => graph.country(id).name.fr;
@@ -40,9 +41,9 @@ test.describe("home & i18n", () => {
     await expect(page.getByRole("heading", { name: "Daily challenges" })).toBeVisible();
   });
 
-  test("root redirects to a locale", async ({ page }) => {
-    await page.goto("/");
-    await expect(page).toHaveURL(/\/(fr|en)\/$/);
+  test("home screen is still reachable from the navigation", async ({ page }) => {
+    await page.goto("/fr/");
+    await expect(page.getByRole("heading", { name: "Défis du jour" })).toBeVisible();
   });
 });
 
@@ -51,7 +52,8 @@ test.describe("gameplay", () => {
     const g = challengeFor("e2e-win");
     await open(page, "e2e-win");
     await expect(page.getByTestId("from-to").first()).toContainText(fr(g.challenge.start));
-    for (const id of g.route.slice(1)) await type(page, fr(id));
+    // the destination is never typed: the last intermediate borders it and ends the game
+    for (const id of g.route.slice(1, -1)) await type(page, fr(id));
     const results = page.getByTestId("results");
     await expect(results).toBeVisible();
     await expect(results).toHaveAttribute("data-status", "won");
@@ -74,30 +76,58 @@ test.describe("gameplay", () => {
     await expect(page.getByTestId("route-list").locator("li")).toHaveCount(2); // start + destination slot
   });
 
-  test("autocomplete only suggests valid next moves", async ({ page }) => {
+  test("autocomplete is a pure name search over all countries (no geographic help)", async ({ page }) => {
     const g = challengeFor("e2e-auto");
     await open(page, "e2e-auto");
-    const valid = nextMoves(graph, g.challenge, [g.challenge.start]);
     const input = page.getByRole("combobox");
     await input.click();
+    await expect(page.getByRole("option")).toHaveCount(0); // nothing is suggested before typing
+    await input.fill("g");
     const options = page.getByRole("option");
     await expect(options.first()).toBeVisible();
-    const shown = await options.allTextContents();
-    for (const s of shown) expect(valid.map(fr)).toContain(s.trim());
-    // accents / case are ignored and English names work too
-    const target = valid[0];
-    await input.fill(graph.country(target).name.en.toUpperCase());
-    await expect(page.getByRole("option").first()).toContainText(fr(target));
+    const shown = (await options.allTextContents()).map((s) => s.trim());
+    expect(shown.length).toBeGreaterThanOrEqual(5);
+    // includes countries that are NOT neighbours of the start country
+    const near = new Set(graph.neighbors(g.challenge.start, { maritime: true, blocked: new Set() }).map(fr));
+    expect(shown.some((s) => !near.has(s))).toBe(true);
+    // accents, case, English names, spacing
+    await input.fill("ALLEMAGNE");
+    await expect(page.getByRole("option").first()).toContainText("Allemagne");
+    await input.fill("germany");
+    await expect(page.getByRole("option").first()).toContainText("Allemagne");
+    await input.fill("cote d ivoire");
+    await expect(page.getByRole("option").first()).toContainText(/Côte d.Ivoire/);
   });
 
-  test("hints show their penalty and never consume attempts", async ({ page }) => {
+  test("two ordered hints: penalty shown before confirming, never consume attempts", async ({ page }) => {
+    const g = challengeFor("e2e-hint");
     await open(page, "e2e-hint");
     const attempts = page.getByTestId("attempts").first();
     const before = await attempts.getAttribute("data-left");
     await expandSheet(page);
-    await expect(page.getByTestId("hint-discovery")).toContainText("125");
-    await page.getByTestId("hint-discovery").click();
+    // order: the borders hint is locked until the first-letter hint was used
+    await expect(page.getByTestId("hint-letter")).toContainText("75");
+    await expect(page.getByTestId("hint-borders")).toContainText("150");
+    await expect(page.getByTestId("hint-borders")).toBeDisabled();
+    // the penalty is displayed in a confirmation step; cancelling costs nothing
+    await page.getByTestId("hint-letter").click();
+    await expect(page.getByTestId("hint-confirm-box")).toContainText("75");
+    await page.getByTestId("hint-cancel").click();
+    await expect(page.getByTestId("hint-list")).toHaveCount(0);
+    await page.getByTestId("hint-letter").click();
+    await page.getByTestId("hint-confirm").click();
     await expect(page.getByText(/commence par la lettre/)).toBeVisible();
+    // the letter belongs to a valid next country (first letter, French or English name)
+    const text = (await page.getByTestId("hint-list").textContent()) ?? "";
+    const letter = /« (.) »|“(.)”/.exec(text)?.slice(1).find(Boolean);
+    const valid = optimalContinuations(graph, g.challenge, [g.challenge.start]); // real solver: part of an optimal solution
+    expect(valid.map((id) => fr(id).normalize("NFD").replace(/[̀-ͯ]/g, "")[0].toUpperCase())).toContain(letter);
+    await expect(page.getByTestId("hint-letter")).toBeDisabled(); // once per game
+    await expect(page.getByTestId("hint-borders")).toBeEnabled();
+    await page.getByTestId("hint-borders").click();
+    await page.getByTestId("hint-confirm").click();
+    await expect(page.getByTestId("hint-borders")).toBeDisabled();
+    await expect(page.getByText(/sans son nom/)).toBeVisible();
     await expect(attempts).toHaveAttribute("data-left", before!);
   });
 });

@@ -5,7 +5,6 @@
   },
   "nav": {
     "home": "Home",
-    "play": "Play",
     "collection": "Collection",
     "stats": "Statistics",
     "settings": "Settings",
@@ -69,6 +68,10 @@
     "hard": {
       "name": "Hard",
       "desc": "Long routes, only 1 spare attempt"
+    },
+    "custom": {
+      "name": "Custom",
+      "desc": "Set the route length, attempts and map yourself"
     }
   },
   "home": {
@@ -90,18 +93,6 @@
     "openCollection": "View collection",
     "dailyUnavailable": "Generated locally (today’s file is unavailable)."
   },
-  "play": {
-    "title": "New game",
-    "step1": "Choose a mode",
-    "step2": "Choose a difficulty",
-    "step3": "Choose a region",
-    "regionHint": "Pick a region: only its countries will be playable.",
-    "continents": "Continents",
-    "subregions": "Subregions",
-    "generate": "Generate challenge",
-    "generating": "Generating challenge…",
-    "failed": "Could not generate a challenge. Try again."
-  },
   "game": {
     "from": "From",
     "to": "To",
@@ -111,7 +102,7 @@
     "routeEmpty": "Enter a neighbouring country to move on.",
     "inputLabel": "Next country",
     "inputPlaceholder": "Type a neighbouring country…",
-    "noSuggestions": "No valid country matches.",
+    "noSuggestions": "No country matches.",
     "submit": "Submit",
     "wrong": "Incorrect — one attempt used.",
     "right": "Nice!",
@@ -122,7 +113,7 @@
     "hintsTitle": "Hints",
     "hintCost": "−{n} pts",
     "hintUse": "Hint",
-    "hintNone": "No hint available right now.",
+    "hintNone": "No reliable hint is available right now (no penalty applied).",
     "giveUp": "Give up",
     "giveUpConfirm": "Give up this game? It will count as a defeat.",
     "fullscreen": "Fullscreen",
@@ -141,7 +132,12 @@
     "legendDestination": "Destination",
     "legendRoute": "Travelled",
     "legendWrong": "Missed guess",
-    "minShown": "Goal: connect with as few intermediate countries as possible."
+    "minShown": "Goal: reach a country bordering the destination with as few countries as possible.",
+    "mapHidden": "The rest of the map reveals itself as you discover countries.",
+    "menu": "Menu",
+    "hintConfirm": "Use this hint? Immediate penalty: −{n} pts. No attempt is consumed.",
+    "hintLocked": "Use the previous hint first",
+    "hintUsed": "Used"
   },
   "constraint": {
     "forbidden": "Avoid: {countries}",
@@ -155,24 +151,18 @@
     "maritime": "Sea links enabled"
   },
   "hint": {
-    "geographic": {
-      "name": "Geographic hint",
-      "desc": "Where a valid next country is located.",
-      "short": "Region"
-    },
-    "connectivity": {
-      "name": "Connectivity hint",
-      "desc": "The border count of a valid next country.",
-      "short": "Borders"
-    },
-    "discovery": {
-      "name": "Discovery hint",
+    "letter": {
+      "name": "First letter",
       "desc": "The first letter of a valid next country.",
       "short": "Letter"
     },
-    "geographicText": "A valid next country is located in: {region}.",
-    "connectivityText": "A valid next country has {n, plural, =0 {no land borders} one {# land border} other {# land borders}}.",
-    "discoveryText": "A valid next country starts with the letter “{letter}”."
+    "borders": {
+      "name": "Borders",
+      "desc": "The shape and borders of a valid next country appear on the map.",
+      "short": "Borders"
+    },
+    "letterText": "A valid next country starts with the letter “{letter}”.",
+    "bordersText": "The borders of a valid next country are shown on the map (without its name)."
   },
   "results": {
     "won": "Destination reached!",
@@ -196,13 +186,22 @@
     "alternative": "Alternative {n}",
     "optimalBadge": "Optimal",
     "routes": "Possible routes",
-    "playAgain": "Play again",
     "home": "Home",
     "share": "Share",
     "copied": "Summary copied!",
     "newCountries": "{n, plural, =0 {No new country} one {# new country discovered} other {# new countries discovered}}",
     "moreRoutes": "Only the shortest routes are shown.",
-    "shareTitle": "Atlas — {date}"
+    "shareTitle": "Atlas — {date}",
+    "next": "What next?",
+    "nextDaily": "Play the daily challenge: {mode}",
+    "nextDailyDesc": "Another daily challenge, the same for everyone.",
+    "newClassic": "New Classic game",
+    "newClassicDesc": "All three daily challenges are done: start a free game.",
+    "replaySame": "Replay with the same settings",
+    "replaySameDesc": "Same mode, same difficulty, same area — but a new route.",
+    "replaySameDailyDesc": "Free game with the same mode and difficulty. Your daily result stays saved.",
+    "showMoreRoutes": "Show the {n} other routes",
+    "showFewerRoutes": "Hide the other routes"
   },
   "collection": {
     "title": "Your collection",
@@ -356,5 +355,41 @@
   "notFound": {
     "title": "Page not found",
     "body": "This page is not on the map."
+  },
+  "config": {
+    "title": "New game · {mode}",
+    "difficulty": "Difficulty",
+    "custom": "Custom settings",
+    "minRoute": "Minimum route length",
+    "minRouteHelp": "Minimum number of intermediate countries (maximum possible for this area: {max}).",
+    "attempts": "Number of attempts",
+    "attemptsHelp": "Between {min} and {max}.",
+    "map": "Map appearance",
+    "mapStart": "Show the starting country",
+    "mapBorders": "Show country borders",
+    "mapNames": "Show country names",
+    "mapFull": "Full map from the start",
+    "mapFullHelp": "Off: the map reveals itself as you discover countries.",
+    "scope": "Playing area",
+    "world": "Whole world",
+    "continents": "Continents",
+    "subregions": "Subregions",
+    "forbid": "Without going through",
+    "forbidHelp": "These countries are never crossed, and are never the start or the destination.",
+    "forbidLabel": "Add a country to avoid",
+    "forbidPlaceholder": "Search a country…",
+    "forbidAdd": "Add",
+    "forbidRemove": "Remove {country}",
+    "forbidNone": "No country avoided",
+    "start": "Start game",
+    "checking": "Looking for a route…",
+    "errors": {
+      "min": "The minimum length must be between 1 and {max} for this area.",
+      "attempts": "Attempts must be a whole number between 1 and 30.",
+      "forbidden": "Too many avoided countries (maximum 10).",
+      "scope": "Invalid playing area.",
+      "noRoute": "No route is possible with these settings. Remove an avoided country, pick a larger area or lower the minimum length.",
+      "failed": "Could not generate a game. Try again."
+    }
   }
 }

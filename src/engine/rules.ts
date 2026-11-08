@@ -47,33 +47,40 @@ export function isValidRoute(graph: AtlasGraph, ch: Pick<Challenge, "start" | "d
 }
 
 /**
- * Countries the player may type right now (also drives autocomplete):
- * adjacent under the active connection rules, unused, not forbidden, inside the region.
- * The destination is listed whenever it is adjacent; whether finishing is allowed also depends
- * on route-level constraints, which are intentionally not revealed here.
+ * Countries that are valid next moves right now: adjacent under the active connection rules, unused,
+ * not forbidden, inside the region, within the intermediate budget. The destination is NEVER a move:
+ * it is only used internally to decide victory (see {@link reachesDestination}).
+ * Engine/hints only: the autocomplete UI deliberately does NOT use this (it would leak geography).
  */
 export function nextMoves(graph: AtlasGraph, ch: Challenge, route: readonly string[]): string[] {
   const current = route[route.length - 1];
   const view = graph.viewFor(ch.rules, [ch.start, ch.destination]);
   const used = new Set(route);
-  const moves = graph.neighbors(current, view).filter((id) => !used.has(id) && id !== ch.start);
-  const intermediates = route.length - 1;
+  const moves = graph.neighbors(current, view).filter((id) => !used.has(id) && id !== ch.start && id !== ch.destination);
   const max = ch.rules.maxIntermediate;
-  return moves.filter((id) => id === ch.destination || max === undefined || intermediates + 1 <= max);
+  // every accepted move adds one intermediate country
+  return max === undefined || route.length <= max ? moves : [];
+}
+
+/**
+ * Victory test, run after each accepted move: the current country must connect to the destination under
+ * the active connection rules AND the completed route (route + destination) must satisfy every route-level
+ * constraint. Otherwise the game simply continues (which constraint is missing is never revealed).
+ */
+export function reachesDestination(graph: AtlasGraph, ch: Challenge, route: readonly string[]): boolean {
+  const current = route[route.length - 1];
+  if (current === ch.destination) return false;
+  const view = graph.viewFor(ch.rules, [ch.start, ch.destination]);
+  if (!graph.neighbors(current, view).includes(ch.destination)) return false;
+  return routeSatisfies(graph, [...route, ch.destination], ch.rules);
 }
 
 export interface MoveValidation {
   valid: boolean;
-  isDestination: boolean;
 }
 
 /** Single source of truth for accepting a guess. The reason for rejection is never exposed. */
 export function validateMove(graph: AtlasGraph, ch: Challenge, route: readonly string[], guess: string): MoveValidation {
-  if (!graph.has(guess)) return { valid: false, isDestination: false };
-  if (!nextMoves(graph, ch, route).includes(guess)) return { valid: false, isDestination: false };
-  if (guess === ch.destination) {
-    const full = [...route, guess];
-    return { valid: routeSatisfies(graph, full, ch.rules), isDestination: true };
-  }
-  return { valid: true, isDestination: false };
+  if (!graph.has(guess)) return { valid: false };
+  return { valid: nextMoves(graph, ch, route).includes(guess) };
 }
