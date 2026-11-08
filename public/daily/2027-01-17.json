@@ -1,0 +1,64 @@
+{
+ "date": "2027-01-17",
+ "rulesVersion": "1",
+ "datasetVersion": "2026.1",
+ "challenges": [
+  {
+   "id": "daily-2027-01-17-classic",
+   "mode": "classic",
+   "difficulty": "normal",
+   "start": "PRT",
+   "destination": "SEN",
+   "rules": {
+    "maritime": false,
+    "forbidden": [],
+    "mandatory": []
+   },
+   "minIntermediate": 4,
+   "attempts": 7,
+   "date": "2027-01-17",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2027-01-17-constraints",
+   "mode": "constraints",
+   "difficulty": "hard",
+   "start": "MNE",
+   "destination": "SWZ",
+   "rules": {
+    "maritime": false,
+    "forbidden": [
+     "SDN"
+    ],
+    "mandatory": [
+     "ZAF"
+    ],
+    "avoidRegion": "caucasus"
+   },
+   "minIntermediate": 14,
+   "attempts": 15,
+   "date": "2027-01-17",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2027-01-17-regional",
+   "mode": "regional",
+   "difficulty": "normal",
+   "start": "LVA",
+   "destination": "VAT",
+   "rules": {
+    "maritime": false,
+    "forbidden": [],
+    "mandatory": [],
+    "allowedRegion": "europe"
+   },
+   "minIntermediate": 5,
+   "attempts": 8,
+   "date": "2027-01-17",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  }
+ ]
+}

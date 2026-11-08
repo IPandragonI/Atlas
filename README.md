@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Atlas
 
-## Getting Started
+A geography game: connect a start country to a destination through neighbouring countries, in as few steps as possible.
+French (default) and English. Installable PWA, fully offline, no backend, no account — progress lives in IndexedDB.
 
-First, run the development server:
+Stack: Next.js (static export), React, TypeScript strict, Tailwind 4, MapLibre GL (own GeoJSON, no tiles), Zustand, Dexie,
+next-intl, Vitest, Playwright.
 
+## Setup
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install            # also vendors the MapLibre worker into public/vendor
+npm run dev            # http://localhost:3000  (service worker is production-only)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Commands
+| Command | What it does |
+|---|---|
+| `npm run dev` | dev server |
+| `npm run build` | vendor worker → generate missing daily JSON (idempotent) → `next build` (→ `out/`) → write `out/sw.js` |
+| `npm start` | serve `out/` |
+| `npm test` | Vitest (72 tests: graph, rules, pathfinding, hints, scoring, generator, dailies, persistence, i18n) |
+| `npm run test:e2e` | Playwright desktop + mobile (needs `npm run build` and `npx playwright install chromium`) |
+| `npm run typecheck` / `npm run lint` | TypeScript / ESLint |
+| `npm run data:build` | rebuild countries, connections, geometry from `data-src/` + overrides |
+| `npm run data:daily` | precompute missing daily challenges (never overwrites) |
+| `npm run data:simulate` | generator diagnostics report |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`data-src/ne_50m_admin_0_map_units.geojson` (Natural Earth, public domain) is the only raw input; download it from
+`nvkelso/natural-earth-vector` if missing.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Geographic data & country policy
+195 playable states (193 UN + Holy See + Palestine); Kosovo and Taiwan are excluded (drawn neutral); dependencies are not
+playable. Adjacency is a reviewed list, not derived from polygons (French Guiana never links France to Brazil). Details:
+[docs/GEOGRAPHIC_DATA.md](docs/GEOGRAPHIC_DATA.md).
 
-## Learn More
+## Documentation
+- [docs/GAME_RULES.md](docs/GAME_RULES.md) · [docs/GEOGRAPHIC_DATA.md](docs/GEOGRAPHIC_DATA.md)
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/CHALLENGE_GENERATION.md](docs/CHALLENGE_GENERATION.md)
 
-To learn more about Next.js, take a look at the following resources:
+## Challenge generation
+Free play is generated in the browser from a seeded, diversity-weighted candidate search with mandatory feasibility
+validation. Daily challenges (3 per UTC day) are precomputed JSON bundled with the app. See the doc above.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## PWA / offline
+`out/sw.js` precaches the whole export (shell, assets, geometry, graph, all daily files, MapLibre worker). Verified by an
+e2e test that goes offline and plays the daily challenge on a painted map. Deploy `out/` on any static host at the **domain
+root** (paths are absolute, e.g. `/data/world.geojson`).

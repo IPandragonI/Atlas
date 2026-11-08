@@ -1,0 +1,62 @@
+{
+ "date": "2027-12-05",
+ "rulesVersion": "1",
+ "datasetVersion": "2026.1",
+ "challenges": [
+  {
+   "id": "daily-2027-12-05-classic",
+   "mode": "classic",
+   "difficulty": "normal",
+   "start": "MNE",
+   "destination": "LTU",
+   "rules": {
+    "maritime": false,
+    "forbidden": [],
+    "mandatory": []
+   },
+   "minIntermediate": 4,
+   "attempts": 7,
+   "date": "2027-12-05",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2027-12-05-constraints",
+   "mode": "constraints",
+   "difficulty": "hard",
+   "start": "TTO",
+   "destination": "SSD",
+   "rules": {
+    "maritime": true,
+    "forbidden": [
+     "BHR"
+    ],
+    "mandatory": [],
+    "avoidRegion": "south-america"
+   },
+   "minIntermediate": 13,
+   "attempts": 14,
+   "date": "2027-12-05",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2027-12-05-regional",
+   "mode": "regional",
+   "difficulty": "normal",
+   "start": "ATG",
+   "destination": "GRD",
+   "rules": {
+    "maritime": true,
+    "forbidden": [],
+    "mandatory": [],
+    "allowedRegion": "caribbean"
+   },
+   "minIntermediate": 3,
+   "attempts": 6,
+   "date": "2027-12-05",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  }
+ ]
+}

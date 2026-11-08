@@ -1,0 +1,360 @@
+{
+  "app": {
+    "name": "Atlas",
+    "tagline": "Relie deux pays, frontière après frontière."
+  },
+  "nav": {
+    "home": "Accueil",
+    "play": "Jouer",
+    "collection": "Collection",
+    "stats": "Statistiques",
+    "settings": "Réglages",
+    "skip": "Aller au contenu",
+    "menu": "Navigation principale"
+  },
+  "common": {
+    "close": "Fermer",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "back": "Retour",
+    "continue": "Continuer",
+    "start": "Commencer",
+    "retry": "Réessayer",
+    "loading": "Chargement…",
+    "offline": "Hors ligne",
+    "offlineReady": "Disponible hors ligne",
+    "language": "Langue",
+    "theme": "Thème",
+    "yes": "Oui",
+    "no": "Non",
+    "none": "Aucun",
+    "all": "Tous",
+    "points": "{n} pts",
+    "error": "Une erreur est survenue.",
+    "mapLoading": "Chargement de la carte…",
+    "mapError": "La carte n’a pas pu être affichée."
+  },
+  "themes": {
+    "light": "Clair",
+    "dark": "Sombre",
+    "system": "Système"
+  },
+  "modes": {
+    "classic": {
+      "name": "Classique",
+      "short": "Frontières terrestres",
+      "desc": "Relie deux pays par la route la plus courte, uniquement par voie terrestre."
+    },
+    "constraints": {
+      "name": "Contraintes",
+      "short": "Règles géographiques",
+      "desc": "Même objectif, mais avec des règles : pays interdits, passages obligatoires, liaisons maritimes…"
+    },
+    "regional": {
+      "name": "Régional",
+      "short": "Une région du monde",
+      "desc": "Joue à l’intérieur d’un continent ou d’une région : seuls ses pays sont autorisés."
+    }
+  },
+  "difficulty": {
+    "label": "Difficulté",
+    "easy": {
+      "name": "Facile",
+      "desc": "Routes courtes, 5 essais de marge"
+    },
+    "normal": {
+      "name": "Normal",
+      "desc": "Routes variées, 3 essais de marge"
+    },
+    "hard": {
+      "name": "Difficile",
+      "desc": "Routes longues, 1 seul essai de marge"
+    }
+  },
+  "home": {
+    "dailyTitle": "Défis du jour",
+    "dailySubtitle": "Les mêmes pour tout le monde · {date}",
+    "freeTitle": "Partie libre",
+    "freeSubtitle": "Choisis un mode et une difficulté.",
+    "progressTitle": "Ta carte du monde",
+    "discovered": "Pays découverts",
+    "worldPercent": "{pct} % du monde exploré",
+    "streak": "Série quotidienne",
+    "streakDays": "{n, plural, =0 {Aucune série} one {# jour} other {# jours}}",
+    "recent": "Dernières découvertes",
+    "noneYet": "Aucune découverte pour l’instant. Lance une partie !",
+    "dailyDone": "Terminé · {score} pts",
+    "dailyLost": "Échoué",
+    "dailyTodo": "À jouer",
+    "playNow": "Jouer",
+    "openCollection": "Voir la collection",
+    "dailyUnavailable": "Défi généré localement (fichier du jour indisponible)."
+  },
+  "play": {
+    "title": "Nouvelle partie",
+    "step1": "Choisis un mode",
+    "step2": "Choisis une difficulté",
+    "step3": "Choisis une région",
+    "regionHint": "Sélectionne une région : seuls ses pays seront jouables.",
+    "continents": "Continents",
+    "subregions": "Sous-régions",
+    "generate": "Générer le défi",
+    "generating": "Génération du défi…",
+    "failed": "Impossible de générer un défi. Réessaie."
+  },
+  "game": {
+    "from": "Départ",
+    "to": "Arrivée",
+    "attempts": "Essais restants",
+    "attemptsShort": "{n} essais",
+    "route": "Ton itinéraire",
+    "routeEmpty": "Saisis un pays voisin pour avancer.",
+    "inputLabel": "Pays suivant",
+    "inputPlaceholder": "Tape un pays voisin…",
+    "noSuggestions": "Aucun pays valide ne correspond.",
+    "submit": "Valider",
+    "wrong": "Incorrect — un essai en moins.",
+    "right": "Bien joué !",
+    "constraints": "Règles actives",
+    "noConstraints": "Aucune règle particulière",
+    "maritime": "Liaisons maritimes autorisées",
+    "landOnly": "Frontières terrestres uniquement",
+    "hintsTitle": "Indices",
+    "hintCost": "−{n} pts",
+    "hintUse": "Indice",
+    "hintNone": "Aucun indice disponible pour le moment.",
+    "giveUp": "Abandonner",
+    "giveUpConfirm": "Abandonner cette partie ? Elle comptera comme une défaite.",
+    "fullscreen": "Plein écran",
+    "exitFullscreen": "Quitter le plein écran",
+    "recenter": "Recentrer",
+    "zoomIn": "Zoomer",
+    "zoomOut": "Dézoomer",
+    "openPanel": "Ouvrir le panneau",
+    "closePanel": "Réduire le panneau",
+    "loadingChallenge": "Préparation du défi…",
+    "newDiscovery": "Nouveau pays découvert",
+    "daily": "Défi du jour",
+    "free": "Partie libre",
+    "mapLegend": "Légende de la carte",
+    "legendStart": "Départ",
+    "legendDestination": "Arrivée",
+    "legendRoute": "Parcouru",
+    "legendWrong": "Essai raté",
+    "minShown": "Objectif : relier avec le moins de pays intermédiaires possible."
+  },
+  "constraint": {
+    "forbidden": "Éviter : {countries}",
+    "mandatory": "Passer par : {countries}",
+    "minCoastal": "Au moins {n} pays côtiers sur le trajet",
+    "minIsland": "Au moins {n} pays insulaires sur le trajet",
+    "maxIntermediate": "Au plus {n} pays intermédiaires",
+    "requireRegion": "Traverser au moins un pays de : {region}",
+    "avoidRegion": "Éviter la région : {region}",
+    "allowedRegion": "Région : {region}",
+    "maritime": "Liaisons maritimes activées"
+  },
+  "hint": {
+    "geographic": {
+      "name": "Indice géographique",
+      "desc": "Où se trouve un prochain pays valide.",
+      "short": "Région"
+    },
+    "connectivity": {
+      "name": "Indice de connectivité",
+      "desc": "Le nombre de frontières d’un prochain pays valide.",
+      "short": "Frontières"
+    },
+    "discovery": {
+      "name": "Indice de découverte",
+      "desc": "La première lettre d’un prochain pays valide.",
+      "short": "Lettre"
+    },
+    "geographicText": "Un prochain pays valide se situe en : {region}.",
+    "connectivityText": "Un prochain pays valide possède {n, plural, =0 {aucune frontière terrestre} one {# frontière terrestre} other {# frontières terrestres}}.",
+    "discoveryText": "Un prochain pays valide commence par la lettre « {letter} »."
+  },
+  "results": {
+    "won": "Destination atteinte !",
+    "lost": "Plus d’essais…",
+    "wonSub": "Tu as relié {from} à {to}.",
+    "lostSub": "Tu n’as pas pu relier {from} à {to}. Voici les routes possibles.",
+    "score": "Score",
+    "outOf": "sur 1 000",
+    "breakdown": "Détail du score",
+    "victory": "Victoire",
+    "optimal": "Route optimale",
+    "noMistakes": "Sans erreur",
+    "noHints": "Sans indice",
+    "mistakes": "Erreurs ({n})",
+    "hints": "Indices",
+    "intermediates": "{n, plural, =0 {Aucun pays intermédiaire} one {# pays intermédiaire} other {# pays intermédiaires}}",
+    "time": "Temps",
+    "explore": "Explorer les routes",
+    "yourRoute": "Ta route",
+    "shortest": "Route la plus courte",
+    "alternative": "Alternative {n}",
+    "optimalBadge": "Optimale",
+    "routes": "Routes possibles",
+    "playAgain": "Rejouer",
+    "home": "Accueil",
+    "share": "Partager",
+    "copied": "Résumé copié !",
+    "newCountries": "{n, plural, =0 {Aucun nouveau pays} one {# nouveau pays découvert} other {# nouveaux pays découverts}}",
+    "moreRoutes": "Seules les routes les plus courtes sont affichées.",
+    "shareTitle": "Atlas — {date}"
+  },
+  "collection": {
+    "title": "Ta collection",
+    "subtitle": "{n} pays sur {total} découverts",
+    "filterAll": "Tout le monde",
+    "filterContinent": "Continent",
+    "progress": "Progression",
+    "country": "Pays",
+    "capital": "Capitale",
+    "population": "Population",
+    "area": "Superficie",
+    "continent": "Continent",
+    "region": "Région",
+    "firstDiscovery": "Première découverte",
+    "visits": "Traversées",
+    "undiscovered": "Pays non découvert",
+    "undiscoveredHint": "Traverse ce pays pendant une partie pour le débloquer.",
+    "fact1": "Il partage {n, plural, =0 {aucune frontière terrestre} one {# frontière terrestre} other {# frontières terrestres}} avec ses voisins.",
+    "factIsland": "C’est un pays insulaire.",
+    "factLandlocked": "Il n’a aucun accès à la mer.",
+    "factRank": "Il se classe n° {rank} mondial par superficie parmi les 195 pays.",
+    "factDensity": "Densité moyenne : {n} hab./km².",
+    "areaValue": "{n} km²",
+    "searchPlaceholder": "Chercher un pays…",
+    "list": "Liste des pays",
+    "closeDetail": "Fermer la fiche",
+    "achievements": "Succès",
+    "unlocked": "Succès débloqué"
+  },
+  "achievements": {
+    "first-journey": {
+      "name": "Premier voyage",
+      "desc": "Découvre 5 pays."
+    },
+    "european-explorer": {
+      "name": "Explorateur européen",
+      "desc": "Découvre tous les pays d’Europe."
+    },
+    "island-hopper": {
+      "name": "Saute-île",
+      "desc": "Découvre 10 pays insulaires."
+    },
+    "around-the-world": {
+      "name": "Tour du monde",
+      "desc": "Découvre au moins un pays sur chaque continent."
+    },
+    "globe-trotter": {
+      "name": "Globe-trotter",
+      "desc": "Découvre 50 pays."
+    },
+    "geographer": {
+      "name": "Géographe",
+      "desc": "Réussis 10 routes optimales."
+    }
+  },
+  "stats": {
+    "title": "Statistiques",
+    "played": "Parties jouées",
+    "wins": "Victoires",
+    "losses": "Défaites",
+    "optimal": "Routes optimales",
+    "discovered": "Pays découverts",
+    "traversed": "Traversées",
+    "continents": "Continents explorés",
+    "islands": "Pays insulaires",
+    "avgScore": "Score moyen",
+    "avgTime": "Temps moyen",
+    "hintsUsed": "Indices utilisés",
+    "errors": "Erreurs",
+    "streak": "Série quotidienne",
+    "bestStreak": "Meilleure série",
+    "history": "Historique",
+    "emptyHistory": "Aucune partie jouée pour l’instant.",
+    "won": "Victoire",
+    "lost": "Défaite",
+    "perContinent": "Découverte par continent"
+  },
+  "settings": {
+    "title": "Réglages",
+    "appearance": "Apparence",
+    "sound": "Effets sonores",
+    "labels": "Étiquettes de la carte",
+    "labelsAll": "Tous les pays (selon le zoom)",
+    "labelsRoute": "Pays de l’itinéraire seulement",
+    "labelsNone": "Aucune étiquette",
+    "data": "Données",
+    "dataDesc": "Ta progression est enregistrée uniquement sur cet appareil.",
+    "export": "Exporter mes données",
+    "import": "Importer des données",
+    "importOk": "Données importées.",
+    "importError": "Fichier invalide : {reason}",
+    "reset": "Réinitialiser la progression",
+    "resetConfirmTitle": "Tout effacer ?",
+    "resetConfirmBody": "Pays découverts, historique et succès seront supprimés. Cette action est définitive.",
+    "resetTypeToConfirm": "Écris « {word} » pour confirmer",
+    "resetWord": "EFFACER",
+    "resetDone": "Progression réinitialisée.",
+    "install": "Installer l’application",
+    "installed": "Application installée",
+    "about": "À propos",
+    "aboutBody": "Atlas fonctionne sans compte et sans serveur. Géométries : Natural Earth (domaine public)."
+  },
+  "regions": {
+    "europe": "Europe",
+    "africa": "Afrique",
+    "asia": "Asie",
+    "north-america": "Amérique du Nord",
+    "south-america": "Amérique du Sud",
+    "oceania": "Océanie",
+    "balkans": "Balkans",
+    "scandinavia": "Scandinavie",
+    "caucasus": "Caucase",
+    "central-asia": "Asie centrale",
+    "southeast-asia": "Asie du Sud-Est",
+    "south-asia": "Asie du Sud",
+    "central-america": "Amérique centrale",
+    "caribbean": "Caraïbes",
+    "middle-east": "Moyen-Orient"
+  },
+  "subregions": {
+    "australia-and-new-zealand": "Australie et Nouvelle-Zélande",
+    "caribbean": "Caraïbes",
+    "central-america": "Amérique centrale",
+    "central-asia": "Asie centrale",
+    "central-europe": "Europe centrale",
+    "eastern-africa": "Afrique de l’Est",
+    "eastern-asia": "Asie de l’Est",
+    "eastern-europe": "Europe de l’Est",
+    "melanesia": "Mélanésie",
+    "micronesia": "Micronésie",
+    "middle-africa": "Afrique centrale",
+    "north-america": "Amérique du Nord",
+    "northern-africa": "Afrique du Nord",
+    "northern-europe": "Europe du Nord",
+    "polynesia": "Polynésie",
+    "south-america": "Amérique du Sud",
+    "south-eastern-asia": "Asie du Sud-Est",
+    "southeast-europe": "Europe du Sud-Est",
+    "southern-africa": "Afrique australe",
+    "southern-asia": "Asie du Sud",
+    "southern-europe": "Europe du Sud",
+    "western-africa": "Afrique de l’Ouest",
+    "western-asia": "Asie de l’Ouest",
+    "western-europe": "Europe de l’Ouest"
+  },
+  "pwa": {
+    "updateReady": "Nouvelle version disponible",
+    "reload": "Recharger",
+    "offlineBanner": "Hors ligne — le jeu reste jouable."
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "body": "Cette page n’existe pas sur la carte."
+  }
+}

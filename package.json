@@ -4,23 +4,52 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "build": "node scripts/copy-maplibre-worker.mjs && npm run data:daily && next build && node scripts/build-sw.mjs",
+    "start": "npx serve out",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "data:build": "tsx scripts/build-data.ts",
+    "data:daily": "tsx scripts/generate-daily.ts",
+    "data:simulate": "tsx scripts/simulate.ts",
+    "predev": "node scripts/copy-maplibre-worker.mjs",
+    "postinstall": "node scripts/copy-maplibre-worker.mjs"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
+    "dexie": "^4.4.7",
+    "flag-icons": "^7.6.0",
+    "maplibre-gl": "^6.17.0",
     "next": "16.4.5",
+    "next-intl": "^4.14.9",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "tailwind-merge": "^3.7.0",
+    "zustand": "^5.1.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.65.0",
     "@tailwindcss/turbopack": "^4",
+    "@types/geojson": "^7946.0.16",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/topojson-client": "^3.1.5",
+    "@vitest/coverage-v8": "^5.1.0",
     "eslint": "^9",
     "eslint-config-next": "16.4.5",
+    "fake-indexeddb": "^6.2.7",
+    "serve": "^14.2.7",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "topojson-client": "^3.1.0",
+    "topojson-server": "^3.0.1",
+    "tsx": "^4.23.15",
+    "typescript": "^5",
+    "vite": "^8.3.6",
+    "vitest": "^5.1.0",
+    "world-atlas": "^2.0.2",
+    "world-countries": "^5.1.0"
   }
 }

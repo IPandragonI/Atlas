@@ -1,0 +1,62 @@
+{
+ "date": "2027-01-07",
+ "rulesVersion": "1",
+ "datasetVersion": "2026.1",
+ "challenges": [
+  {
+   "id": "daily-2027-01-07-classic",
+   "mode": "classic",
+   "difficulty": "normal",
+   "start": "AUT",
+   "destination": "KOR",
+   "rules": {
+    "maritime": false,
+    "forbidden": [],
+    "mandatory": []
+   },
+   "minIntermediate": 4,
+   "attempts": 7,
+   "date": "2027-01-07",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2027-01-07-constraints",
+   "mode": "constraints",
+   "difficulty": "normal",
+   "start": "SWE",
+   "destination": "BIH",
+   "rules": {
+    "maritime": false,
+    "forbidden": [
+     "UKR"
+    ],
+    "mandatory": [],
+    "minCoastal": 4
+   },
+   "minIntermediate": 5,
+   "attempts": 8,
+   "date": "2027-01-07",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2027-01-07-regional",
+   "mode": "regional",
+   "difficulty": "normal",
+   "start": "AUS",
+   "destination": "KIR",
+   "rules": {
+    "maritime": true,
+    "forbidden": [],
+    "mandatory": [],
+    "allowedRegion": "oceania"
+   },
+   "minIntermediate": 3,
+   "attempts": 6,
+   "date": "2027-01-07",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  }
+ ]
+}

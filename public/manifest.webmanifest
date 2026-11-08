@@ -1,0 +1,24 @@
+{
+  "name": "Atlas",
+  "short_name": "Atlas",
+  "description": "Relie deux pays, frontière après frontière. / Connect two countries, border by border.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f5f3eb",
+  "theme_color": "#55745c",
+  "lang": "fr",
+  "categories": ["games", "education"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "Jouer / Play", "url": "/fr/play/" },
+    { "name": "Collection", "url": "/fr/collection/" }
+  ]
+}

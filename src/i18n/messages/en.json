@@ -1,0 +1,360 @@
+{
+  "app": {
+    "name": "Atlas",
+    "tagline": "Connect two countries, border by border."
+  },
+  "nav": {
+    "home": "Home",
+    "play": "Play",
+    "collection": "Collection",
+    "stats": "Statistics",
+    "settings": "Settings",
+    "skip": "Skip to content",
+    "menu": "Main navigation"
+  },
+  "common": {
+    "close": "Close",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "back": "Back",
+    "continue": "Continue",
+    "start": "Start",
+    "retry": "Retry",
+    "loading": "Loading…",
+    "offline": "Offline",
+    "offlineReady": "Available offline",
+    "language": "Language",
+    "theme": "Theme",
+    "yes": "Yes",
+    "no": "No",
+    "none": "None",
+    "all": "All",
+    "points": "{n} pts",
+    "error": "Something went wrong.",
+    "mapLoading": "Loading the map…",
+    "mapError": "The map could not be displayed."
+  },
+  "themes": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "modes": {
+    "classic": {
+      "name": "Classic",
+      "short": "Land borders",
+      "desc": "Connect two countries by the shortest route, overland only."
+    },
+    "constraints": {
+      "name": "Constraints",
+      "short": "Geographic rules",
+      "desc": "Same goal, with rules: forbidden countries, mandatory stops, sea links…"
+    },
+    "regional": {
+      "name": "Regional",
+      "short": "One part of the world",
+      "desc": "Play inside a continent or region: only its countries are allowed."
+    }
+  },
+  "difficulty": {
+    "label": "Difficulty",
+    "easy": {
+      "name": "Easy",
+      "desc": "Short routes, 5 spare attempts"
+    },
+    "normal": {
+      "name": "Normal",
+      "desc": "Varied routes, 3 spare attempts"
+    },
+    "hard": {
+      "name": "Hard",
+      "desc": "Long routes, only 1 spare attempt"
+    }
+  },
+  "home": {
+    "dailyTitle": "Daily challenges",
+    "dailySubtitle": "The same for everyone · {date}",
+    "freeTitle": "Free play",
+    "freeSubtitle": "Pick a mode and a difficulty.",
+    "progressTitle": "Your world map",
+    "discovered": "Countries discovered",
+    "worldPercent": "{pct}% of the world explored",
+    "streak": "Daily streak",
+    "streakDays": "{n, plural, =0 {No streak} one {# day} other {# days}}",
+    "recent": "Recent discoveries",
+    "noneYet": "Nothing discovered yet. Start a game!",
+    "dailyDone": "Done · {score} pts",
+    "dailyLost": "Failed",
+    "dailyTodo": "To play",
+    "playNow": "Play",
+    "openCollection": "View collection",
+    "dailyUnavailable": "Generated locally (today’s file is unavailable)."
+  },
+  "play": {
+    "title": "New game",
+    "step1": "Choose a mode",
+    "step2": "Choose a difficulty",
+    "step3": "Choose a region",
+    "regionHint": "Pick a region: only its countries will be playable.",
+    "continents": "Continents",
+    "subregions": "Subregions",
+    "generate": "Generate challenge",
+    "generating": "Generating challenge…",
+    "failed": "Could not generate a challenge. Try again."
+  },
+  "game": {
+    "from": "From",
+    "to": "To",
+    "attempts": "Attempts left",
+    "attemptsShort": "{n} attempts",
+    "route": "Your route",
+    "routeEmpty": "Enter a neighbouring country to move on.",
+    "inputLabel": "Next country",
+    "inputPlaceholder": "Type a neighbouring country…",
+    "noSuggestions": "No valid country matches.",
+    "submit": "Submit",
+    "wrong": "Incorrect — one attempt used.",
+    "right": "Nice!",
+    "constraints": "Active rules",
+    "noConstraints": "No special rules",
+    "maritime": "Sea links allowed",
+    "landOnly": "Land borders only",
+    "hintsTitle": "Hints",
+    "hintCost": "−{n} pts",
+    "hintUse": "Hint",
+    "hintNone": "No hint available right now.",
+    "giveUp": "Give up",
+    "giveUpConfirm": "Give up this game? It will count as a defeat.",
+    "fullscreen": "Fullscreen",
+    "exitFullscreen": "Exit fullscreen",
+    "recenter": "Recenter",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "openPanel": "Open panel",
+    "closePanel": "Collapse panel",
+    "loadingChallenge": "Preparing the challenge…",
+    "newDiscovery": "New country discovered",
+    "daily": "Daily challenge",
+    "free": "Free play",
+    "mapLegend": "Map legend",
+    "legendStart": "Start",
+    "legendDestination": "Destination",
+    "legendRoute": "Travelled",
+    "legendWrong": "Missed guess",
+    "minShown": "Goal: connect with as few intermediate countries as possible."
+  },
+  "constraint": {
+    "forbidden": "Avoid: {countries}",
+    "mandatory": "Go through: {countries}",
+    "minCoastal": "At least {n} coastal countries on the route",
+    "minIsland": "At least {n} island countries on the route",
+    "maxIntermediate": "At most {n} intermediate countries",
+    "requireRegion": "Cross at least one country of: {region}",
+    "avoidRegion": "Avoid the region: {region}",
+    "allowedRegion": "Region: {region}",
+    "maritime": "Sea links enabled"
+  },
+  "hint": {
+    "geographic": {
+      "name": "Geographic hint",
+      "desc": "Where a valid next country is located.",
+      "short": "Region"
+    },
+    "connectivity": {
+      "name": "Connectivity hint",
+      "desc": "The border count of a valid next country.",
+      "short": "Borders"
+    },
+    "discovery": {
+      "name": "Discovery hint",
+      "desc": "The first letter of a valid next country.",
+      "short": "Letter"
+    },
+    "geographicText": "A valid next country is located in: {region}.",
+    "connectivityText": "A valid next country has {n, plural, =0 {no land borders} one {# land border} other {# land borders}}.",
+    "discoveryText": "A valid next country starts with the letter “{letter}”."
+  },
+  "results": {
+    "won": "Destination reached!",
+    "lost": "Out of attempts…",
+    "wonSub": "You connected {from} to {to}.",
+    "lostSub": "You could not connect {from} to {to}. Here are the possible routes.",
+    "score": "Score",
+    "outOf": "out of 1,000",
+    "breakdown": "Score breakdown",
+    "victory": "Victory",
+    "optimal": "Optimal route",
+    "noMistakes": "No mistakes",
+    "noHints": "No hints",
+    "mistakes": "Mistakes ({n})",
+    "hints": "Hints",
+    "intermediates": "{n, plural, =0 {No intermediate country} one {# intermediate country} other {# intermediate countries}}",
+    "time": "Time",
+    "explore": "Explore routes",
+    "yourRoute": "Your route",
+    "shortest": "Shortest route",
+    "alternative": "Alternative {n}",
+    "optimalBadge": "Optimal",
+    "routes": "Possible routes",
+    "playAgain": "Play again",
+    "home": "Home",
+    "share": "Share",
+    "copied": "Summary copied!",
+    "newCountries": "{n, plural, =0 {No new country} one {# new country discovered} other {# new countries discovered}}",
+    "moreRoutes": "Only the shortest routes are shown.",
+    "shareTitle": "Atlas — {date}"
+  },
+  "collection": {
+    "title": "Your collection",
+    "subtitle": "{n} of {total} countries discovered",
+    "filterAll": "Whole world",
+    "filterContinent": "Continent",
+    "progress": "Progress",
+    "country": "Country",
+    "capital": "Capital",
+    "population": "Population",
+    "area": "Area",
+    "continent": "Continent",
+    "region": "Region",
+    "firstDiscovery": "First discovered",
+    "visits": "Times visited",
+    "undiscovered": "Undiscovered country",
+    "undiscoveredHint": "Travel through this country during a game to unlock it.",
+    "fact1": "It shares {n, plural, =0 {no land borders} one {# land border} other {# land borders}} with its neighbours.",
+    "factIsland": "It is an island country.",
+    "factLandlocked": "It has no access to the sea.",
+    "factRank": "It ranks #{rank} in the world by area among the 195 countries.",
+    "factDensity": "Average density: {n} people/km².",
+    "areaValue": "{n} km²",
+    "searchPlaceholder": "Search a country…",
+    "list": "Country list",
+    "closeDetail": "Close card",
+    "achievements": "Achievements",
+    "unlocked": "Achievement unlocked"
+  },
+  "achievements": {
+    "first-journey": {
+      "name": "First Journey",
+      "desc": "Discover 5 countries."
+    },
+    "european-explorer": {
+      "name": "European Explorer",
+      "desc": "Discover every country in Europe."
+    },
+    "island-hopper": {
+      "name": "Island Hopper",
+      "desc": "Discover 10 island countries."
+    },
+    "around-the-world": {
+      "name": "Around the World",
+      "desc": "Discover a country on every continent."
+    },
+    "globe-trotter": {
+      "name": "Globe-Trotter",
+      "desc": "Discover 50 countries."
+    },
+    "geographer": {
+      "name": "Geographer",
+      "desc": "Complete 10 optimal routes."
+    }
+  },
+  "stats": {
+    "title": "Statistics",
+    "played": "Games played",
+    "wins": "Victories",
+    "losses": "Defeats",
+    "optimal": "Optimal routes",
+    "discovered": "Countries discovered",
+    "traversed": "Countries traversed",
+    "continents": "Continents explored",
+    "islands": "Island countries",
+    "avgScore": "Average score",
+    "avgTime": "Average time",
+    "hintsUsed": "Hints used",
+    "errors": "Mistakes",
+    "streak": "Daily streak",
+    "bestStreak": "Best streak",
+    "history": "History",
+    "emptyHistory": "No games played yet.",
+    "won": "Victory",
+    "lost": "Defeat",
+    "perContinent": "Discovery by continent"
+  },
+  "settings": {
+    "title": "Settings",
+    "appearance": "Appearance",
+    "sound": "Sound effects",
+    "labels": "Map labels",
+    "labelsAll": "All countries (depending on zoom)",
+    "labelsRoute": "Route countries only",
+    "labelsNone": "No labels",
+    "data": "Data",
+    "dataDesc": "Your progress is stored on this device only.",
+    "export": "Export my data",
+    "import": "Import data",
+    "importOk": "Data imported.",
+    "importError": "Invalid file: {reason}",
+    "reset": "Reset progress",
+    "resetConfirmTitle": "Erase everything?",
+    "resetConfirmBody": "Discovered countries, history and achievements will be deleted. This cannot be undone.",
+    "resetTypeToConfirm": "Type “{word}” to confirm",
+    "resetWord": "ERASE",
+    "resetDone": "Progress reset.",
+    "install": "Install the app",
+    "installed": "App installed",
+    "about": "About",
+    "aboutBody": "Atlas works without an account or a server. Geometries: Natural Earth (public domain)."
+  },
+  "regions": {
+    "europe": "Europe",
+    "africa": "Africa",
+    "asia": "Asia",
+    "north-america": "North America",
+    "south-america": "South America",
+    "oceania": "Oceania",
+    "balkans": "Balkans",
+    "scandinavia": "Scandinavia",
+    "caucasus": "Caucasus",
+    "central-asia": "Central Asia",
+    "southeast-asia": "Southeast Asia",
+    "south-asia": "South Asia",
+    "central-america": "Central America",
+    "caribbean": "Caribbean",
+    "middle-east": "Middle East"
+  },
+  "subregions": {
+    "australia-and-new-zealand": "Australia and New Zealand",
+    "caribbean": "the Caribbean",
+    "central-america": "Central America",
+    "central-asia": "Central Asia",
+    "central-europe": "Central Europe",
+    "eastern-africa": "Eastern Africa",
+    "eastern-asia": "Eastern Asia",
+    "eastern-europe": "Eastern Europe",
+    "melanesia": "Melanesia",
+    "micronesia": "Micronesia",
+    "middle-africa": "Middle Africa",
+    "north-america": "North America",
+    "northern-africa": "Northern Africa",
+    "northern-europe": "Northern Europe",
+    "polynesia": "Polynesia",
+    "south-america": "South America",
+    "south-eastern-asia": "South-Eastern Asia",
+    "southeast-europe": "South-Eastern Europe",
+    "southern-africa": "Southern Africa",
+    "southern-asia": "Southern Asia",
+    "southern-europe": "Southern Europe",
+    "western-africa": "Western Africa",
+    "western-asia": "Western Asia",
+    "western-europe": "Western Europe"
+  },
+  "pwa": {
+    "updateReady": "A new version is available",
+    "reload": "Reload",
+    "offlineBanner": "Offline — the game stays playable."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "This page is not on the map."
+  }
+}

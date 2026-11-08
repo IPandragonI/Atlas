@@ -1,0 +1,60 @@
+{
+ "date": "2026-11-21",
+ "rulesVersion": "1",
+ "datasetVersion": "2026.1",
+ "challenges": [
+  {
+   "id": "daily-2026-11-21-classic",
+   "mode": "classic",
+   "difficulty": "normal",
+   "start": "GRC",
+   "destination": "VAT",
+   "rules": {
+    "maritime": false,
+    "forbidden": [],
+    "mandatory": []
+   },
+   "minIntermediate": 5,
+   "attempts": 8,
+   "date": "2026-11-21",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2026-11-21-constraints",
+   "mode": "constraints",
+   "difficulty": "normal",
+   "start": "HUN",
+   "destination": "TGO",
+   "rules": {
+    "maritime": true,
+    "forbidden": [],
+    "mandatory": [],
+    "avoidRegion": "balkans"
+   },
+   "minIntermediate": 6,
+   "attempts": 9,
+   "date": "2026-11-21",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2026-11-21-regional",
+   "mode": "regional",
+   "difficulty": "normal",
+   "start": "NIC",
+   "destination": "MEX",
+   "rules": {
+    "maritime": false,
+    "forbidden": [],
+    "mandatory": [],
+    "allowedRegion": "central-america"
+   },
+   "minIntermediate": 2,
+   "attempts": 5,
+   "date": "2026-11-21",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  }
+ ]
+}

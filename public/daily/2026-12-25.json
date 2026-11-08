@@ -1,0 +1,64 @@
+{
+ "date": "2026-12-25",
+ "rulesVersion": "1",
+ "datasetVersion": "2026.1",
+ "challenges": [
+  {
+   "id": "daily-2026-12-25-classic",
+   "mode": "classic",
+   "difficulty": "hard",
+   "start": "BTN",
+   "destination": "GAB",
+   "rules": {
+    "maritime": false,
+    "forbidden": [],
+    "mandatory": []
+   },
+   "minIntermediate": 10,
+   "attempts": 11,
+   "date": "2026-12-25",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2026-12-25-constraints",
+   "mode": "constraints",
+   "difficulty": "hard",
+   "start": "MLI",
+   "destination": "LSO",
+   "rules": {
+    "maritime": false,
+    "forbidden": [
+     "CMR"
+    ],
+    "mandatory": [
+     "BEN"
+    ],
+    "minCoastal": 4
+   },
+   "minIntermediate": 9,
+   "attempts": 10,
+   "date": "2026-12-25",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2026-12-25-regional",
+   "mode": "regional",
+   "difficulty": "hard",
+   "start": "GRD",
+   "destination": "CUB",
+   "rules": {
+    "maritime": true,
+    "forbidden": [],
+    "mandatory": [],
+    "allowedRegion": "caribbean"
+   },
+   "minIntermediate": 7,
+   "attempts": 8,
+   "date": "2026-12-25",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  }
+ ]
+}

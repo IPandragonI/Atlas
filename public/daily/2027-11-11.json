@@ -1,0 +1,62 @@
+{
+ "date": "2027-11-11",
+ "rulesVersion": "1",
+ "datasetVersion": "2026.1",
+ "challenges": [
+  {
+   "id": "daily-2027-11-11-classic",
+   "mode": "classic",
+   "difficulty": "normal",
+   "start": "PNG",
+   "destination": "BTN",
+   "rules": {
+    "maritime": false,
+    "forbidden": [],
+    "mandatory": []
+   },
+   "minIntermediate": 5,
+   "attempts": 8,
+   "date": "2027-11-11",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2027-11-11-constraints",
+   "mode": "constraints",
+   "difficulty": "normal",
+   "start": "LSO",
+   "destination": "DJI",
+   "rules": {
+    "maritime": false,
+    "forbidden": [],
+    "mandatory": [
+     "SDN"
+    ],
+    "minCoastal": 4
+   },
+   "minIntermediate": 7,
+   "attempts": 10,
+   "date": "2027-11-11",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2027-11-11-regional",
+   "mode": "regional",
+   "difficulty": "normal",
+   "start": "FIN",
+   "destination": "DNK",
+   "rules": {
+    "maritime": true,
+    "forbidden": [],
+    "mandatory": [],
+    "allowedRegion": "scandinavia"
+   },
+   "minIntermediate": 1,
+   "attempts": 4,
+   "date": "2027-11-11",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  }
+ ]
+}

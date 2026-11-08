@@ -1,0 +1,7378 @@
+[
+ {
+  "id": "AFG",
+  "iso2": "AF",
+  "name": {
+   "fr": "Afghanistan",
+   "en": "Afghanistan"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Afġānistān",
+    "Islamic Republic of Afghanistan",
+    "République islamique d'Afghanistan"
+   ]
+  },
+  "capital": {
+   "en": "Kabul",
+   "fr": "Kaboul"
+  },
+  "continent": "asia",
+  "region": "Southern Asia",
+  "population": 38041754,
+  "area": 652230,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   66.005,
+   33.835
+  ],
+  "bbox": [
+   60.486,
+   29.392,
+   74.891,
+   38.456
+  ]
+ },
+ {
+  "id": "AGO",
+  "iso2": "AO",
+  "name": {
+   "fr": "Angola",
+   "en": "Angola"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "República de Angola",
+    "ʁɛpublika de an'ɡɔla",
+    "Republic of Angola",
+    "République d'Angola"
+   ]
+  },
+  "capital": {
+   "en": "Luanda",
+   "fr": "Luanda"
+  },
+  "continent": "africa",
+  "region": "Middle Africa",
+  "population": 31825295,
+  "area": 1246700,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   17.564,
+   -12.332
+  ],
+  "bbox": [
+   11.743,
+   -18.02,
+   24.047,
+   -5.855
+  ]
+ },
+ {
+  "id": "ALB",
+  "iso2": "AL",
+  "name": {
+   "fr": "Albanie",
+   "en": "Albania"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Shqipëri",
+    "Shqipëria",
+    "Shqipnia",
+    "Republic of Albania",
+    "République d'Albanie"
+   ]
+  },
+  "capital": {
+   "en": "Tirana",
+   "fr": "Tirana"
+  },
+  "continent": "europe",
+  "region": "Southeast Europe",
+  "population": 2854191,
+  "area": 28748,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   20.05,
+   41.143
+  ],
+  "bbox": [
+   19.281,
+   39.654,
+   21.031,
+   42.648
+  ]
+ },
+ {
+  "id": "AND",
+  "iso2": "AD",
+  "name": {
+   "fr": "Andorre",
+   "en": "Andorra"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Principality of Andorra",
+    "Principat d'Andorra",
+    "Principality of Andorra",
+    "Principauté d'Andorre"
+   ]
+  },
+  "capital": {
+   "en": "Andorra la Vella",
+   "fr": "Andorre-la-Vieille"
+  },
+  "continent": "europe",
+  "region": "Southern Europe",
+  "population": 77142,
+  "area": 468,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   1.56,
+   42.542
+  ],
+  "bbox": [
+   1.415,
+   42.434,
+   1.74,
+   42.643
+  ]
+ },
+ {
+  "id": "ARE",
+  "iso2": "AE",
+  "name": {
+   "fr": "Émirats arabes unis",
+   "en": "United Arab Emirates"
+  },
+  "aliases": {
+   "fr": [
+    "emirats",
+    "eau"
+   ],
+   "en": [
+    "uae",
+    "emirates",
+    "UAE",
+    "Emirates",
+    "United Arab Emirates",
+    "Émirats arabes unis"
+   ]
+  },
+  "capital": {
+   "en": "Abu Dhabi",
+   "fr": "Abou Dabi"
+  },
+  "continent": "asia",
+  "region": "Western Asia",
+  "population": 9770529,
+  "area": 83600,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   54.307,
+   23.904
+  ],
+  "bbox": [
+   51.568,
+   22.621,
+   56.388,
+   26.068
+  ]
+ },
+ {
+  "id": "ARG",
+  "iso2": "AR",
+  "name": {
+   "fr": "Argentine",
+   "en": "Argentina"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Argentine Republic",
+    "República Argentina",
+    "Argentine Republic",
+    "République argentine"
+   ]
+  },
+  "capital": {
+   "en": "Buenos Aires",
+   "fr": "Buenos Aires"
+  },
+  "continent": "south-america",
+  "region": "South America",
+  "population": 44938712,
+  "area": 2780400,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -65.156,
+   -35.18
+  ],
+  "bbox": [
+   -73.576,
+   -52.357,
+   -53.669,
+   -21.803
+  ]
+ },
+ {
+  "id": "ARM",
+  "iso2": "AM",
+  "name": {
+   "fr": "Arménie",
+   "en": "Armenia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Hayastan",
+    "Republic of Armenia",
+    "Հայաստանի Հանրապետություն",
+    "Republic of Armenia",
+    "République d'Arménie"
+   ]
+  },
+  "capital": {
+   "en": "Yerevan",
+   "fr": "Erevan"
+  },
+  "continent": "asia",
+  "region": "Western Asia",
+  "population": 2957731,
+  "area": 29743,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   44.929,
+   40.29
+  ],
+  "bbox": [
+   43.439,
+   38.869,
+   46.585,
+   41.291
+  ]
+ },
+ {
+  "id": "ATG",
+  "iso2": "AG",
+  "name": {
+   "fr": "Antigua-et-Barbuda",
+   "en": "Antigua and Barbuda"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Antigua and Barbuda",
+    "Antigua -et-Barbuda"
+   ]
+  },
+  "capital": {
+   "en": "Saint John's",
+   "fr": "Saint John's"
+  },
+  "continent": "north-america",
+  "region": "Caribbean",
+  "population": 97347,
+  "area": 442,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   -61.79,
+   17.078
+  ],
+  "bbox": [
+   -61.887,
+   16.997,
+   -61.686,
+   17.714
+  ]
+ },
+ {
+  "id": "AUS",
+  "iso2": "AU",
+  "name": {
+   "fr": "Australie",
+   "en": "Australia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Commonwealth of Australia",
+    "Australie"
+   ]
+  },
+  "capital": {
+   "en": "Canberra",
+   "fr": "Canberra"
+  },
+  "continent": "oceania",
+  "region": "Australia and New Zealand",
+  "population": 25364307,
+  "area": 7692024,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   134.355,
+   -25.573
+  ],
+  "bbox": [
+   113.185,
+   -39.146,
+   153.617,
+   -10.707
+  ]
+ },
+ {
+  "id": "AUT",
+  "iso2": "AT",
+  "name": {
+   "fr": "Autriche",
+   "en": "Austria"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Osterreich",
+    "Oesterreich",
+    "Republic of Austria",
+    "République d'Autriche"
+   ]
+  },
+  "capital": {
+   "en": "Vienna",
+   "fr": "Vienne"
+  },
+  "continent": "europe",
+  "region": "Central Europe",
+  "population": 8877067,
+  "area": 83871,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   14.126,
+   47.585
+  ],
+  "bbox": [
+   9.524,
+   46.4,
+   17.147,
+   49.001
+  ]
+ },
+ {
+  "id": "AZE",
+  "iso2": "AZ",
+  "name": {
+   "fr": "Azerbaïdjan",
+   "en": "Azerbaijan"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Azerbaijan",
+    "Azərbaycan Respublikası",
+    "Republic of Azerbaijan",
+    "République d'Azerbaïdjan"
+   ]
+  },
+  "capital": {
+   "en": "Baku",
+   "fr": "Bakou"
+  },
+  "continent": "asia",
+  "region": "Western Asia",
+  "population": 10023318,
+  "area": 86600,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   47.664,
+   40.344
+  ],
+  "bbox": [
+   45.001,
+   38.399,
+   50.366,
+   41.891
+  ]
+ },
+ {
+  "id": "BDI",
+  "iso2": "BI",
+  "name": {
+   "fr": "Burundi",
+   "en": "Burundi"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Burundi",
+    "Republika y'Uburundi",
+    "République du Burundi",
+    "Republic of Burundi",
+    "République du Burundi"
+   ]
+  },
+  "capital": {
+   "en": "Gitega",
+   "fr": "Gitega"
+  },
+  "continent": "africa",
+  "region": "Eastern Africa",
+  "population": 11530580,
+  "area": 27834,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   29.875,
+   -3.359
+  ],
+  "bbox": [
+   29.014,
+   -4.456,
+   30.811,
+   -2.313
+  ]
+ },
+ {
+  "id": "BEL",
+  "iso2": "BE",
+  "name": {
+   "fr": "Belgique",
+   "en": "Belgium"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "België",
+    "Belgie",
+    "Belgien",
+    "Belgique",
+    "Kingdom of Belgium",
+    "Koninkrijk België",
+    "Royaume de Belgique",
+    "Königreich Belgien",
+    "Kingdom of Belgium",
+    "Royaume de Belgique"
+   ]
+  },
+  "capital": {
+   "en": "Brussels",
+   "fr": "Bruxelles"
+  },
+  "continent": "europe",
+  "region": "Western Europe",
+  "population": 11471480,
+  "area": 30528,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   4.992,
+   50.314
+  ],
+  "bbox": [
+   2.525,
+   49.511,
+   6.364,
+   51.491
+  ]
+ },
+ {
+  "id": "BEN",
+  "iso2": "BJ",
+  "name": {
+   "fr": "Bénin",
+   "en": "Benin"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Benin",
+    "République du Bénin",
+    "Republic of Benin",
+    "République du Bénin"
+   ]
+  },
+  "capital": {
+   "en": "Porto-Novo",
+   "fr": "Porto-Novo"
+  },
+  "continent": "africa",
+  "region": "Western Africa",
+  "population": 11801151,
+  "area": 112622,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   2.328,
+   9.642
+  ],
+  "bbox": [
+   0.763,
+   6.217,
+   3.834,
+   12.384
+  ]
+ },
+ {
+  "id": "BFA",
+  "iso2": "BF",
+  "name": {
+   "fr": "Burkina Faso",
+   "en": "Burkina Faso"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Burkina Faso",
+    "République du Burkina"
+   ]
+  },
+  "capital": {
+   "en": "Ouagadougou",
+   "fr": "Ouagadougou"
+  },
+  "continent": "africa",
+  "region": "Western Africa",
+  "population": 20321378,
+  "area": 272967,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   -1.755,
+   12.27
+  ],
+  "bbox": [
+   -5.524,
+   9.425,
+   2.389,
+   15.078
+  ]
+ },
+ {
+  "id": "BGD",
+  "iso2": "BD",
+  "name": {
+   "fr": "Bangladesh",
+   "en": "Bangladesh"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "People's Republic of Bangladesh",
+    "Gônôprôjatôntri Bangladesh",
+    "People's Republic of Bangladesh",
+    "La République populaire du Bangladesh"
+   ]
+  },
+  "capital": {
+   "en": "Dhaka",
+   "fr": "Dacca"
+  },
+  "continent": "asia",
+  "region": "Southern Asia",
+  "population": 163046161,
+  "area": 147570,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   90.224,
+   23.898
+  ],
+  "bbox": [
+   88.023,
+   20.79,
+   92.632,
+   26.572
+  ]
+ },
+ {
+  "id": "BGR",
+  "iso2": "BG",
+  "name": {
+   "fr": "Bulgarie",
+   "en": "Bulgaria"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Bulgaria",
+    "Република България",
+    "Republic of Bulgaria",
+    "République de Bulgarie"
+   ]
+  },
+  "capital": {
+   "en": "Sofia",
+   "fr": "Sofia"
+  },
+  "continent": "europe",
+  "region": "Southeast Europe",
+  "population": 6975761,
+  "area": 110879,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   25.215,
+   42.769
+  ],
+  "bbox": [
+   22.344,
+   41.244,
+   28.585,
+   44.238
+  ]
+ },
+ {
+  "id": "BHR",
+  "iso2": "BH",
+  "name": {
+   "fr": "Bahreïn",
+   "en": "Bahrain"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Kingdom of Bahrain",
+    "Mamlakat al-Baḥrayn",
+    "Kingdom of Bahrain",
+    "Royaume de Bahreïn"
+   ]
+  },
+  "capital": {
+   "en": "Manama",
+   "fr": "Manama"
+  },
+  "continent": "asia",
+  "region": "Western Asia",
+  "population": 1641172,
+  "area": 765,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   50.542,
+   26.042
+  ],
+  "bbox": [
+   50.452,
+   25.807,
+   50.617,
+   26.246
+  ]
+ },
+ {
+  "id": "BHS",
+  "iso2": "BS",
+  "name": {
+   "fr": "Bahamas",
+   "en": "Bahamas"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Commonwealth of the Bahamas",
+    "Commonwealth of the Bahamas",
+    "Commonwealth des Bahamas"
+   ]
+  },
+  "capital": {
+   "en": "Nassau",
+   "fr": "Nassau"
+  },
+  "continent": "north-america",
+  "region": "Caribbean",
+  "population": 389482,
+  "area": 13943,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   -78.038,
+   24.701
+  ],
+  "bbox": [
+   -78.986,
+   20.937,
+   -73.012,
+   26.94
+  ]
+ },
+ {
+  "id": "BIH",
+  "iso2": "BA",
+  "name": {
+   "fr": "Bosnie-Herzégovine",
+   "en": "Bosnia and Herzegovina"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Bosnia-Herzegovina",
+    "Босна и Херцеговина",
+    "Bosnia and Herzegovina",
+    "Bosnie-et-Herzégovine"
+   ]
+  },
+  "capital": {
+   "en": "Sarajevo",
+   "fr": "Sarajevo"
+  },
+  "continent": "europe",
+  "region": "Southeast Europe",
+  "population": 3208376,
+  "area": 51209,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   17.504,
+   44.089
+  ],
+  "bbox": [
+   15.737,
+   42.56,
+   19.584,
+   45.277
+  ]
+ },
+ {
+  "id": "BLR",
+  "iso2": "BY",
+  "name": {
+   "fr": "Biélorussie",
+   "en": "Belarus"
+  },
+  "aliases": {
+   "fr": [
+    "bielorussie"
+   ],
+   "en": [
+    "belarus",
+    "Bielaruś",
+    "Republic of Belarus",
+    "Белоруссия",
+    "Республика Белоруссия",
+    "Republic of Belarus",
+    "République de Biélorussie"
+   ]
+  },
+  "capital": {
+   "en": "Minsk",
+   "fr": "Minsk"
+  },
+  "continent": "europe",
+  "region": "Eastern Europe",
+  "population": 9466856,
+  "area": 207600,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   28.032,
+   53.531
+  ],
+  "bbox": [
+   23.175,
+   51.265,
+   32.71,
+   56.146
+  ]
+ },
+ {
+  "id": "BLZ",
+  "iso2": "BZ",
+  "name": {
+   "fr": "Belize",
+   "en": "Belize"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Belize",
+    "Belize"
+   ]
+  },
+  "capital": {
+   "en": "Belmopan",
+   "fr": "Belmopan"
+  },
+  "continent": "north-america",
+  "region": "Central America",
+  "population": 390353,
+  "area": 22966,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -88.718,
+   17.195
+  ],
+  "bbox": [
+   -89.237,
+   15.889,
+   -88.085,
+   18.482
+  ]
+ },
+ {
+  "id": "BOL",
+  "iso2": "BO",
+  "name": {
+   "fr": "Bolivie",
+   "en": "Bolivia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Buliwya",
+    "Wuliwya",
+    "Bolivia, Plurinational State of",
+    "Plurinational State of Bolivia",
+    "Estado Plurinacional de Bolivia",
+    "Buliwya Mamallaqta",
+    "Wuliwya Suyu",
+    "Tetã Volívia",
+    "Plurinational State of Bolivia",
+    "État plurinational de Bolivie"
+   ]
+  },
+  "capital": {
+   "en": "Sucre",
+   "fr": "Sucre"
+  },
+  "continent": "south-america",
+  "region": "South America",
+  "population": 11513100,
+  "area": 1098581,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   -64.685,
+   -16.708
+  ],
+  "bbox": [
+   -69.646,
+   -22.892,
+   -57.496,
+   -9.71
+  ]
+ },
+ {
+  "id": "BRA",
+  "iso2": "BR",
+  "name": {
+   "fr": "Brésil",
+   "en": "Brazil"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Brasil",
+    "Federative Republic of Brazil",
+    "República Federativa do Brasil",
+    "Federative Republic of Brazil",
+    "République fédérative du Brésil"
+   ]
+  },
+  "capital": {
+   "en": "Brasília",
+   "fr": "Brasilia"
+  },
+  "continent": "south-america",
+  "region": "South America",
+  "population": 211049527,
+  "area": 8515767,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -53.117,
+   -10.84
+  ],
+  "bbox": [
+   -74.002,
+   -33.742,
+   -34.805,
+   5.258
+  ]
+ },
+ {
+  "id": "BRB",
+  "iso2": "BB",
+  "name": {
+   "fr": "Barbade",
+   "en": "Barbados"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Barbados",
+    "Barbade"
+   ]
+  },
+  "capital": {
+   "en": "Bridgetown",
+   "fr": "Bridgetown"
+  },
+  "continent": "north-america",
+  "region": "Caribbean",
+  "population": 287025,
+  "area": 430,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   -59.56,
+   13.182
+  ],
+  "bbox": [
+   -59.647,
+   13.062,
+   -59.428,
+   13.318
+  ]
+ },
+ {
+  "id": "BRN",
+  "iso2": "BN",
+  "name": {
+   "fr": "Brunei",
+   "en": "Brunei"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Brunei Darussalam",
+    "Nation of Brunei",
+    "the Abode of Peace",
+    "Nation of Brunei, Abode of Peace",
+    "État de Brunei Darussalam"
+   ]
+  },
+  "capital": {
+   "en": "Bandar Seri Begawan",
+   "fr": "Bandar Seri Begawan"
+  },
+  "continent": "asia",
+  "region": "South-Eastern Asia",
+  "population": 433285,
+  "area": 5765,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   114.592,
+   4.491
+  ],
+  "bbox": [
+   114.064,
+   4.024,
+   115.327,
+   5.022
+  ]
+ },
+ {
+  "id": "BTN",
+  "iso2": "BT",
+  "name": {
+   "fr": "Bhoutan",
+   "en": "Bhutan"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Kingdom of Bhutan",
+    "Kingdom of Bhutan",
+    "Royaume du Bhoutan"
+   ]
+  },
+  "capital": {
+   "en": "Thimphu",
+   "fr": "Thimphou"
+  },
+  "continent": "asia",
+  "region": "Southern Asia",
+  "population": 763092,
+  "area": 38394,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   90.402,
+   27.411
+  ],
+  "bbox": [
+   88.739,
+   26.702,
+   92.083,
+   28.311
+  ]
+ },
+ {
+  "id": "BWA",
+  "iso2": "BW",
+  "name": {
+   "fr": "Botswana",
+   "en": "Botswana"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Botswana",
+    "Lefatshe la Botswana",
+    "Republic of Botswana",
+    "République du Botswana"
+   ]
+  },
+  "capital": {
+   "en": "Gaborone",
+   "fr": "Gaborone"
+  },
+  "continent": "africa",
+  "region": "Southern Africa",
+  "population": 2303697,
+  "area": 582000,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   23.799,
+   -22.184
+  ],
+  "bbox": [
+   19.977,
+   -26.854,
+   29.365,
+   -17.788
+  ]
+ },
+ {
+  "id": "CAF",
+  "iso2": "CF",
+  "name": {
+   "fr": "République centrafricaine",
+   "en": "Central African Republic"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Central African Republic",
+    "République centrafricaine",
+    "Central African Republic",
+    "République centrafricaine"
+   ]
+  },
+  "capital": {
+   "en": "Bangui",
+   "fr": "Bangui"
+  },
+  "continent": "africa",
+  "region": "Middle Africa",
+  "population": 4745185,
+  "area": 622984,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   20.468,
+   6.568
+  ],
+  "bbox": [
+   14.431,
+   2.27,
+   27.403,
+   10.996
+  ]
+ },
+ {
+  "id": "CAN",
+  "iso2": "CA",
+  "name": {
+   "fr": "Canada",
+   "en": "Canada"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Canada",
+    "Canada"
+   ]
+  },
+  "capital": {
+   "en": "Ottawa",
+   "fr": "Ottawa"
+  },
+  "continent": "north-america",
+  "region": "North America",
+  "population": 37589262,
+  "area": 9984670,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -102.366,
+   57.935
+  ],
+  "bbox": [
+   -141.002,
+   41.675,
+   -55.673,
+   71.987
+  ]
+ },
+ {
+  "id": "CHE",
+  "iso2": "CH",
+  "name": {
+   "fr": "Suisse",
+   "en": "Switzerland"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Swiss Confederation",
+    "Schweiz",
+    "Suisse",
+    "Svizzera",
+    "Svizra",
+    "Swiss Confederation",
+    "Confédération suisse"
+   ]
+  },
+  "capital": {
+   "en": "Bern",
+   "fr": "Berne"
+  },
+  "continent": "europe",
+  "region": "Western Europe",
+  "population": 8574832,
+  "area": 41284,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   8.209,
+   46.798
+  ],
+  "bbox": [
+   5.97,
+   45.83,
+   10.455,
+   47.776
+  ]
+ },
+ {
+  "id": "CHL",
+  "iso2": "CL",
+  "name": {
+   "fr": "Chili",
+   "en": "Chile"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Chile",
+    "República de Chile",
+    "Republic of Chile",
+    "République du Chili"
+   ]
+  },
+  "capital": {
+   "en": "Santiago",
+   "fr": "Santiago"
+  },
+  "continent": "south-america",
+  "region": "South America",
+  "population": 18952038,
+  "area": 756102,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -71.311,
+   -35.748
+  ],
+  "bbox": [
+   -75.708,
+   -53.883,
+   -67.009,
+   -17.506
+  ]
+ },
+ {
+  "id": "CHN",
+  "iso2": "CN",
+  "name": {
+   "fr": "Chine",
+   "en": "China"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Zhōngguó",
+    "Zhongguo",
+    "Zhonghua",
+    "People's Republic of China",
+    "中华人民共和国",
+    "Zhōnghuá Rénmín Gònghéguó",
+    "People's Republic of China",
+    "République populaire de Chine"
+   ]
+  },
+  "capital": {
+   "en": "Beijing",
+   "fr": "Pékin"
+  },
+  "continent": "asia",
+  "region": "Eastern Asia",
+  "population": 1397715000,
+  "area": 9706961,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   103.797,
+   36.617
+  ],
+  "bbox": [
+   73.607,
+   20.264,
+   134.752,
+   53.556
+  ]
+ },
+ {
+  "id": "CIV",
+  "iso2": "CI",
+  "name": {
+   "fr": "Côte d'Ivoire",
+   "en": "Ivory Coast"
+  },
+  "aliases": {
+   "fr": [
+    "cote d'ivoire",
+    "côte d’ivoire"
+   ],
+   "en": [
+    "ivory coast",
+    "Côte d'Ivoire",
+    "Cote d'Ivoire",
+    "Ivory Coast",
+    "Republic of Côte d'Ivoire",
+    "République de Côte d'Ivoire",
+    "Republic of Côte d'Ivoire",
+    "République de Côte d' Ivoire"
+   ]
+  },
+  "capital": {
+   "en": "Yamoussoukro",
+   "fr": "Yamoussoukro"
+  },
+  "continent": "africa",
+  "region": "Western Africa",
+  "population": 25716544,
+  "area": 322463,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -5.57,
+   7.629
+  ],
+  "bbox": [
+   -8.604,
+   4.351,
+   -2.506,
+   10.724
+  ]
+ },
+ {
+  "id": "CMR",
+  "iso2": "CM",
+  "name": {
+   "fr": "Cameroun",
+   "en": "Cameroon"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Cameroon",
+    "République du Cameroun",
+    "Republic of Cameroon",
+    "République du Cameroun"
+   ]
+  },
+  "capital": {
+   "en": "Yaoundé",
+   "fr": "Yaoundé"
+  },
+  "continent": "africa",
+  "region": "Middle Africa",
+  "population": 25876380,
+  "area": 475442,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   12.74,
+   5.691
+  ],
+  "bbox": [
+   8.533,
+   1.676,
+   16.183,
+   13.079
+  ]
+ },
+ {
+  "id": "COD",
+  "iso2": "CD",
+  "name": {
+   "fr": "Congo (Rép. dém.)",
+   "en": "DR Congo"
+  },
+  "aliases": {
+   "fr": [
+    "rdc",
+    "congo kinshasa",
+    "congo-kinshasa",
+    "republique democratique du congo"
+   ],
+   "en": [
+    "drc",
+    "congo kinshasa",
+    "DR Congo",
+    "Congo-Kinshasa",
+    "Congo, the Democratic Republic of the",
+    "Democratic Republic of Congo",
+    "DRC",
+    "Democratic Republic of the Congo",
+    "République démocratique du Congo"
+   ]
+  },
+  "capital": {
+   "en": "Kinshasa",
+   "fr": "Kinshasa"
+  },
+  "continent": "africa",
+  "region": "Middle Africa",
+  "population": 86790567,
+  "area": 2344858,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   23.644,
+   -2.877
+  ],
+  "bbox": [
+   12.214,
+   -13.454,
+   31.274,
+   5.312
+  ]
+ },
+ {
+  "id": "COG",
+  "iso2": "CG",
+  "name": {
+   "fr": "Congo",
+   "en": "Republic of the Congo"
+  },
+  "aliases": {
+   "fr": [
+    "congo brazzaville",
+    "congo-brazzaville"
+   ],
+   "en": [
+    "congo brazzaville",
+    "republic of the congo",
+    "Congo",
+    "Congo-Brazzaville",
+    "Republic of the Congo",
+    "République du Congo"
+   ]
+  },
+  "capital": {
+   "en": "Brazzaville",
+   "fr": "Brazzaville"
+  },
+  "continent": "africa",
+  "region": "Middle Africa",
+  "population": 5380508,
+  "area": 342000,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   15.22,
+   -0.838
+  ],
+  "bbox": [
+   11.13,
+   -5.004,
+   18.622,
+   3.687
+  ]
+ },
+ {
+  "id": "COL",
+  "iso2": "CO",
+  "name": {
+   "fr": "Colombie",
+   "en": "Colombia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Colombia",
+    "República de Colombia",
+    "Republic of Colombia",
+    "République de Colombie"
+   ]
+  },
+  "capital": {
+   "en": "Bogotá",
+   "fr": "Bogota"
+  },
+  "continent": "south-america",
+  "region": "South America",
+  "population": 50339443,
+  "area": 1141748,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -73.081,
+   3.914
+  ],
+  "bbox": [
+   -79.025,
+   -4.236,
+   -66.876,
+   12.434
+  ]
+ },
+ {
+  "id": "COM",
+  "iso2": "KM",
+  "name": {
+   "fr": "Comores",
+   "en": "Comoros"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Union of the Comoros",
+    "Union des Comores",
+    "Udzima wa Komori",
+    "al-Ittiḥād al-Qumurī",
+    "Union of the Comoros",
+    "Union des Comores"
+   ]
+  },
+  "capital": {
+   "en": "Moroni",
+   "fr": "Moroni"
+  },
+  "continent": "africa",
+  "region": "Eastern Africa",
+  "population": 850886,
+  "area": 1862,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   43.339,
+   -11.655
+  ],
+  "bbox": [
+   43.227,
+   -12.368,
+   44.527,
+   -11.368
+  ]
+ },
+ {
+  "id": "CPV",
+  "iso2": "CV",
+  "name": {
+   "fr": "Îles du Cap-Vert",
+   "en": "Cape Verde"
+  },
+  "aliases": {
+   "fr": [
+    "cap vert"
+   ],
+   "en": [
+    "cape verde",
+    "Republic of Cabo Verde",
+    "República de Cabo Verde",
+    "Republic of Cabo Verde",
+    "République du Cap-Vert"
+   ]
+  },
+  "capital": {
+   "en": "Praia",
+   "fr": "Praia"
+  },
+  "continent": "africa",
+  "region": "Western Africa",
+  "population": 549935,
+  "area": 4033,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   -23.637,
+   15.082
+  ],
+  "bbox": [
+   -25.342,
+   14.818,
+   -22.682,
+   17.194
+  ]
+ },
+ {
+  "id": "CRI",
+  "iso2": "CR",
+  "name": {
+   "fr": "Costa Rica",
+   "en": "Costa Rica"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Costa Rica",
+    "República de Costa Rica",
+    "Republic of Costa Rica",
+    "République du Costa Rica"
+   ]
+  },
+  "capital": {
+   "en": "San José",
+   "fr": "San José"
+  },
+  "continent": "north-america",
+  "region": "Central America",
+  "population": 5047561,
+  "area": 51100,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -84.192,
+   9.976
+  ],
+  "bbox": [
+   -85.908,
+   8.071,
+   -82.564,
+   11.189
+  ]
+ },
+ {
+  "id": "CUB",
+  "iso2": "CU",
+  "name": {
+   "fr": "Cuba",
+   "en": "Cuba"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Cuba",
+    "República de Cuba",
+    "Republic of Cuba",
+    "République de Cuba"
+   ]
+  },
+  "capital": {
+   "en": "Havana",
+   "fr": "La Havane"
+  },
+  "continent": "north-america",
+  "region": "Caribbean",
+  "population": 11333483,
+  "area": 109884,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   -78.944,
+   21.614
+  ],
+  "bbox": [
+   -84.887,
+   19.855,
+   -74.137,
+   23.19
+  ]
+ },
+ {
+  "id": "CYP",
+  "iso2": "CY",
+  "name": {
+   "fr": "Chypre",
+   "en": "Cyprus"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Kýpros",
+    "Kıbrıs",
+    "Republic of Cyprus",
+    "Κυπριακή Δημοκρατία",
+    "Kıbrıs Cumhuriyeti",
+    "Republic of Cyprus",
+    "République de Chypre"
+   ]
+  },
+  "capital": {
+   "en": "Nicosia",
+   "fr": "Nicosie"
+  },
+  "continent": "europe",
+  "region": "Southern Europe",
+  "population": 1198575,
+  "area": 9251,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   33.006,
+   34.917
+  ],
+  "bbox": [
+   32.301,
+   34.57,
+   34.05,
+   35.183
+  ]
+ },
+ {
+  "id": "CZE",
+  "iso2": "CZ",
+  "name": {
+   "fr": "Tchéquie",
+   "en": "Czechia"
+  },
+  "aliases": {
+   "fr": [
+    "tchequie",
+    "république tchèque"
+   ],
+   "en": [
+    "czechia",
+    "czech",
+    "Česká republika",
+    "Česko",
+    "Czech Republic",
+    "République tchèque"
+   ]
+  },
+  "capital": {
+   "en": "Prague",
+   "fr": "Prague"
+  },
+  "continent": "europe",
+  "region": "Central Europe",
+  "population": 10669709,
+  "area": 78865,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   15.313,
+   49.733
+  ],
+  "bbox": [
+   12.09,
+   48.576,
+   18.832,
+   51.038
+  ]
+ },
+ {
+  "id": "DEU",
+  "iso2": "DE",
+  "name": {
+   "fr": "Allemagne",
+   "en": "Germany"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Federal Republic of Germany",
+    "Bundesrepublik Deutschland",
+    "Federal Republic of Germany",
+    "République fédérale d'Allemagne"
+   ]
+  },
+  "capital": {
+   "en": "Berlin",
+   "fr": "Berlin"
+  },
+  "continent": "europe",
+  "region": "Western Europe",
+  "population": 83132799,
+  "area": 357114,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   10.372,
+   51.088
+  ],
+  "bbox": [
+   5.858,
+   47.279,
+   15.017,
+   54.903
+  ]
+ },
+ {
+  "id": "DJI",
+  "iso2": "DJ",
+  "name": {
+   "fr": "Djibouti",
+   "en": "Djibouti"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Jabuuti",
+    "Gabuuti",
+    "Republic of Djibouti",
+    "République de Djibouti",
+    "Gabuutih Ummuuno",
+    "Jamhuuriyadda Jabuuti",
+    "Republic of Djibouti",
+    "République de Djibouti"
+   ]
+  },
+  "capital": {
+   "en": "Djibouti",
+   "fr": "Djibouti"
+  },
+  "continent": "africa",
+  "region": "Eastern Africa",
+  "population": 973560,
+  "area": 23200,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   42.561,
+   11.749
+  ],
+  "bbox": [
+   41.765,
+   10.941,
+   43.41,
+   12.709
+  ]
+ },
+ {
+  "id": "DMA",
+  "iso2": "DM",
+  "name": {
+   "fr": "Dominique",
+   "en": "Dominica"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Dominique",
+    "Wai‘tu kubuli",
+    "Commonwealth of Dominica",
+    "Commonwealth of Dominica",
+    "Commonwealth de la Dominique"
+   ]
+  },
+  "capital": {
+   "en": "Roseau",
+   "fr": "Roseau"
+  },
+  "continent": "north-america",
+  "region": "Caribbean",
+  "population": 71808,
+  "area": 751,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   -61.358,
+   15.439
+  ],
+  "bbox": [
+   -61.481,
+   15.227,
+   -61.251,
+   15.633
+  ]
+ },
+ {
+  "id": "DNK",
+  "iso2": "DK",
+  "name": {
+   "fr": "Danemark",
+   "en": "Denmark"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Danmark",
+    "Kingdom of Denmark",
+    "Kongeriget Danmark",
+    "Kingdom of Denmark",
+    "Royaume du Danemark"
+   ]
+  },
+  "capital": {
+   "en": "Copenhagen",
+   "fr": "Copenhague"
+  },
+  "continent": "europe",
+  "region": "Northern Europe",
+  "population": 5818553,
+  "area": 43094,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   9.356,
+   56.24
+  ],
+  "bbox": [
+   8.121,
+   54.773,
+   12.608,
+   57.737
+  ]
+ },
+ {
+  "id": "DOM",
+  "iso2": "DO",
+  "name": {
+   "fr": "République dominicaine",
+   "en": "Dominican Republic"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Dominican Republic",
+    "République Dominicaine"
+   ]
+  },
+  "capital": {
+   "en": "Santo Domingo",
+   "fr": "Saint-Domingue"
+  },
+  "continent": "north-america",
+  "region": "Caribbean",
+  "population": 10738958,
+  "area": 48671,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   -70.506,
+   18.894
+  ],
+  "bbox": [
+   -72,
+   17.636,
+   -68.339,
+   19.914
+  ]
+ },
+ {
+  "id": "DZA",
+  "iso2": "DZ",
+  "name": {
+   "fr": "Algérie",
+   "en": "Algeria"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Dzayer",
+    "Algérie",
+    "People's Democratic Republic of Algeria",
+    "République démocratique et populaire d'Algérie"
+   ]
+  },
+  "capital": {
+   "en": "Algiers",
+   "fr": "Alger"
+  },
+  "continent": "africa",
+  "region": "Northern Africa",
+  "population": 43053054,
+  "area": 2381741,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   2.617,
+   28.159
+  ],
+  "bbox": [
+   -8.683,
+   18.987,
+   11.968,
+   37.092
+  ]
+ },
+ {
+  "id": "ECU",
+  "iso2": "EC",
+  "name": {
+   "fr": "Équateur",
+   "en": "Ecuador"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Ecuador",
+    "República del Ecuador",
+    "Republic of Ecuador",
+    "République de l'Équateur"
+   ]
+  },
+  "capital": {
+   "en": "Quito",
+   "fr": "Quito"
+  },
+  "continent": "south-america",
+  "region": "South America",
+  "population": 17373662,
+  "area": 276841,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -78.39,
+   -1.445
+  ],
+  "bbox": [
+   -80.963,
+   -4.991,
+   -75.25,
+   1.455
+  ]
+ },
+ {
+  "id": "EGY",
+  "iso2": "EG",
+  "name": {
+   "fr": "Égypte",
+   "en": "Egypt"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Arab Republic of Egypt",
+    "Arab Republic of Egypt",
+    "République arabe d'Égypte"
+   ]
+  },
+  "capital": {
+   "en": "Cairo",
+   "fr": "Le Caire"
+  },
+  "continent": "africa",
+  "region": "Northern Africa",
+  "population": 100388073,
+  "area": 1002450,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   29.862,
+   26.496
+  ],
+  "bbox": [
+   24.703,
+   21.995,
+   36.871,
+   31.655
+  ]
+ },
+ {
+  "id": "ERI",
+  "iso2": "ER",
+  "name": {
+   "fr": "Érythrée",
+   "en": "Eritrea"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "State of Eritrea",
+    "ሃገረ ኤርትራ",
+    "Dawlat Iritriyá",
+    "ʾErtrā",
+    "Iritriyā",
+    "State of Eritrea",
+    "État d'Érythrée"
+   ]
+  },
+  "capital": {
+   "en": "Asmara",
+   "fr": "Asmara"
+  },
+  "continent": "africa",
+  "region": "Eastern Africa",
+  "population": 6081196,
+  "area": 117600,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   38.838,
+   15.36
+  ],
+  "bbox": [
+   36.427,
+   12.377,
+   43.117,
+   18.005
+  ]
+ },
+ {
+  "id": "ESP",
+  "iso2": "ES",
+  "name": {
+   "fr": "Espagne",
+   "en": "Spain"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Kingdom of Spain",
+    "Reino de España",
+    "Kingdom of Spain",
+    "Royaume d'Espagne"
+   ]
+  },
+  "capital": {
+   "en": "Madrid",
+   "fr": "Madrid"
+  },
+  "continent": "europe",
+  "region": "Southern Europe",
+  "population": 47076781,
+  "area": 505992,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -3.563,
+   40.4
+  ],
+  "bbox": [
+   -9.236,
+   36.026,
+   3.307,
+   43.765
+  ]
+ },
+ {
+  "id": "EST",
+  "iso2": "EE",
+  "name": {
+   "fr": "Estonie",
+   "en": "Estonia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Eesti",
+    "Republic of Estonia",
+    "Eesti Vabariik",
+    "Republic of Estonia",
+    "République d'Estonie"
+   ]
+  },
+  "capital": {
+   "en": "Tallinn",
+   "fr": "Tallinn"
+  },
+  "continent": "europe",
+  "region": "Northern Europe",
+  "population": 1326590,
+  "area": 45227,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   25.832,
+   58.686
+  ],
+  "bbox": [
+   23.432,
+   57.525,
+   28.151,
+   59.639
+  ]
+ },
+ {
+  "id": "ETH",
+  "iso2": "ET",
+  "name": {
+   "fr": "Éthiopie",
+   "en": "Ethiopia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "ʾĪtyōṗṗyā",
+    "Federal Democratic Republic of Ethiopia",
+    "የኢትዮጵያ ፌዴራላዊ ዲሞክራሲያዊ ሪፐብሊክ",
+    "Federal Democratic Republic of Ethiopia",
+    "République fédérale démocratique d'Éthiopie"
+   ]
+  },
+  "capital": {
+   "en": "Addis Ababa",
+   "fr": "Addis-Abeba"
+  },
+  "continent": "africa",
+  "region": "Eastern Africa",
+  "population": 112078730,
+  "area": 1104300,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   39.601,
+   8.623
+  ],
+  "bbox": [
+   32.999,
+   3.456,
+   47.978,
+   14.852
+  ]
+ },
+ {
+  "id": "FIN",
+  "iso2": "FI",
+  "name": {
+   "fr": "Finlande",
+   "en": "Finland"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Suomi",
+    "Republic of Finland",
+    "Suomen tasavalta",
+    "Republiken Finland",
+    "Republic of Finland",
+    "République de Finlande"
+   ]
+  },
+  "capital": {
+   "en": "Helsinki",
+   "fr": "Helsinki"
+  },
+  "continent": "europe",
+  "region": "Northern Europe",
+  "population": 5520314,
+  "area": 338424,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   26.284,
+   64.505
+  ],
+  "bbox": [
+   20.622,
+   59.816,
+   31.537,
+   70.065
+  ]
+ },
+ {
+  "id": "FJI",
+  "iso2": "FJ",
+  "name": {
+   "fr": "Fidji",
+   "en": "Fiji"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Viti",
+    "Republic of Fiji",
+    "Matanitu ko Viti",
+    "Fijī Gaṇarājya",
+    "Republic of Fiji",
+    "République des Fidji"
+   ]
+  },
+  "capital": {
+   "en": "Suva",
+   "fr": "Suva"
+  },
+  "continent": "oceania",
+  "region": "Melanesia",
+  "population": 889953,
+  "area": 18272,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   177.973,
+   -17.823
+  ],
+  "bbox": [
+   177.255,
+   -18.264,
+   180,
+   -16.153
+  ]
+ },
+ {
+  "id": "FRA",
+  "iso2": "FR",
+  "name": {
+   "fr": "France",
+   "en": "France"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "French Republic",
+    "République française",
+    "French Republic",
+    "République française"
+   ]
+  },
+  "capital": {
+   "en": "Paris",
+   "fr": "Paris"
+  },
+  "continent": "europe",
+  "region": "Western Europe",
+  "population": 64829667,
+  "area": 551695,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   2.453,
+   46.62
+  ],
+  "bbox": [
+   -4.762,
+   42.34,
+   8.14,
+   51.097
+  ]
+ },
+ {
+  "id": "FSM",
+  "iso2": "FM",
+  "name": {
+   "fr": "Micronésie",
+   "en": "Micronesia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Federated States of Micronesia",
+    "Micronesia, Federated States of",
+    "Federated States of Micronesia",
+    "États fédérés de Micronésie"
+   ]
+  },
+  "capital": {
+   "en": "Palikir",
+   "fr": "Palikir"
+  },
+  "continent": "oceania",
+  "region": "Micronesia",
+  "population": 113815,
+  "area": 702,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   158.233,
+   6.886
+  ],
+  "bbox": [
+   138.062,
+   6.791,
+   158.335,
+   9.593
+  ]
+ },
+ {
+  "id": "GAB",
+  "iso2": "GA",
+  "name": {
+   "fr": "Gabon",
+   "en": "Gabon"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Gabonese Republic",
+    "République Gabonaise",
+    "Gabonese Republic",
+    "République gabonaise"
+   ]
+  },
+  "capital": {
+   "en": "Libreville",
+   "fr": "Libreville"
+  },
+  "continent": "africa",
+  "region": "Middle Africa",
+  "population": 2172579,
+  "area": 267668,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   11.789,
+   -0.587
+  ],
+  "bbox": [
+   8.703,
+   -3.916,
+   14.481,
+   2.302
+  ]
+ },
+ {
+  "id": "GBR",
+  "iso2": "GB",
+  "name": {
+   "fr": "Royaume-Uni",
+   "en": "United Kingdom"
+  },
+  "aliases": {
+   "fr": [
+    "royaume uni",
+    "angleterre",
+    "grande-bretagne",
+    "ecosse",
+    "écosse"
+   ],
+   "en": [
+    "uk",
+    "great britain",
+    "britain",
+    "england",
+    "scotland",
+    "wales",
+    "Great Britain",
+    "United Kingdom of Great Britain and Northern Ireland",
+    "Royaume-Uni de Grande-Bretagne et d'Irlande du Nord"
+   ]
+  },
+  "capital": {
+   "en": "London",
+   "fr": "Londres"
+  },
+  "continent": "europe",
+  "region": "Northern Europe",
+  "population": 66796961,
+  "area": 242900,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   -1.46,
+   52.604
+  ],
+  "bbox": [
+   -8.145,
+   50.021,
+   1.747,
+   58.65
+  ]
+ },
+ {
+  "id": "GEO",
+  "iso2": "GE",
+  "name": {
+   "fr": "Géorgie",
+   "en": "Georgia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Sakartvelo",
+    "Georgia",
+    "République de Géorgie"
+   ]
+  },
+  "capital": {
+   "en": "Tbilisi",
+   "fr": "Tbilissi"
+  },
+  "continent": "asia",
+  "region": "Western Asia",
+  "population": 3371382,
+  "area": 69700,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   43.508,
+   42.169
+  ],
+  "bbox": [
+   39.978,
+   41.07,
+   46.673,
+   43.57
+  ]
+ },
+ {
+  "id": "GHA",
+  "iso2": "GH",
+  "name": {
+   "fr": "Ghana",
+   "en": "Ghana"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Ghana",
+    "République du Ghana"
+   ]
+  },
+  "capital": {
+   "en": "Accra",
+   "fr": "Accra"
+  },
+  "continent": "africa",
+  "region": "Western Africa",
+  "population": 30417856,
+  "area": 238533,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -1.217,
+   7.953
+  ],
+  "bbox": [
+   -3.244,
+   4.762,
+   1.187,
+   11.167
+  ]
+ },
+ {
+  "id": "GIN",
+  "iso2": "GN",
+  "name": {
+   "fr": "Guinée",
+   "en": "Guinea"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Guinea",
+    "République de Guinée",
+    "Republic of Guinea",
+    "République de Guinée"
+   ]
+  },
+  "capital": {
+   "en": "Conakry",
+   "fr": "Conakry"
+  },
+  "continent": "africa",
+  "region": "Western Africa",
+  "population": 12771246,
+  "area": 245857,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -10.941,
+   10.436
+  ],
+  "bbox": [
+   -15.051,
+   7.216,
+   -7.681,
+   12.674
+  ]
+ },
+ {
+  "id": "GMB",
+  "iso2": "GM",
+  "name": {
+   "fr": "Gambie",
+   "en": "Gambia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of the Gambia",
+    "Republic of the Gambia",
+    "République de Gambie"
+   ]
+  },
+  "capital": {
+   "en": "Banjul",
+   "fr": "Banjul"
+  },
+  "continent": "africa",
+  "region": "Western Africa",
+  "population": 2347706,
+  "area": 10689,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -15.396,
+   13.45
+  ],
+  "bbox": [
+   -16.825,
+   13.064,
+   -13.827,
+   13.812
+  ]
+ },
+ {
+  "id": "GNB",
+  "iso2": "GW",
+  "name": {
+   "fr": "Guinée-Bissau",
+   "en": "Guinea-Bissau"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Guinea-Bissau",
+    "República da Guiné-Bissau",
+    "Republic of Guinea-Bissau",
+    "République de Guinée-Bissau"
+   ]
+  },
+  "capital": {
+   "en": "Bissau",
+   "fr": "Bissau"
+  },
+  "continent": "africa",
+  "region": "Western Africa",
+  "population": 1920922,
+  "area": 36125,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -14.924,
+   12.064
+  ],
+  "bbox": [
+   -16.712,
+   10.94,
+   -13.674,
+   12.68
+  ]
+ },
+ {
+  "id": "GNQ",
+  "iso2": "GQ",
+  "name": {
+   "fr": "Guinée équatoriale",
+   "en": "Equatorial Guinea"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Equatorial Guinea",
+    "República de Guinea Ecuatorial",
+    "République de Guinée équatoriale",
+    "República da Guiné Equatorial",
+    "Republic of Equatorial Guinea",
+    "République de Guinée équatoriale"
+   ]
+  },
+  "capital": {
+   "en": "Malabo",
+   "fr": "Malabo"
+  },
+  "continent": "africa",
+  "region": "Middle Africa",
+  "population": 1355986,
+  "area": 28051,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   10.471,
+   1.565
+  ],
+  "bbox": [
+   9.386,
+   0.96,
+   11.335,
+   2.304
+  ]
+ },
+ {
+  "id": "GRC",
+  "iso2": "GR",
+  "name": {
+   "fr": "Grèce",
+   "en": "Greece"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Elláda",
+    "Hellenic Republic",
+    "Ελληνική Δημοκρατία",
+    "Hellenic Republic",
+    "République hellénique"
+   ]
+  },
+  "capital": {
+   "en": "Athens",
+   "fr": "Athènes"
+  },
+  "continent": "europe",
+  "region": "Southern Europe",
+  "population": 10716322,
+  "area": 131990,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   22.585,
+   39.479
+  ],
+  "bbox": [
+   20.001,
+   36.447,
+   26.625,
+   41.744
+  ]
+ },
+ {
+  "id": "GRD",
+  "iso2": "GD",
+  "name": {
+   "fr": "Grenade",
+   "en": "Grenada"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Grenada",
+    "Grenade"
+   ]
+  },
+  "capital": {
+   "en": "St. George's",
+   "fr": "Saint-Georges"
+  },
+  "continent": "north-america",
+  "region": "Caribbean",
+  "population": 112003,
+  "area": 344,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   -61.682,
+   12.117
+  ],
+  "bbox": [
+   -61.782,
+   12.008,
+   -61.607,
+   12.237
+  ]
+ },
+ {
+  "id": "GTM",
+  "iso2": "GT",
+  "name": {
+   "fr": "Guatemala",
+   "en": "Guatemala"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Guatemala",
+    "République du Guatemala"
+   ]
+  },
+  "capital": {
+   "en": "Guatemala City",
+   "fr": "Guatemala"
+  },
+  "continent": "north-america",
+  "region": "Central America",
+  "population": 16604026,
+  "area": 108889,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -90.365,
+   15.694
+  ],
+  "bbox": [
+   -92.235,
+   13.737,
+   -88.228,
+   17.816
+  ]
+ },
+ {
+  "id": "GUY",
+  "iso2": "GY",
+  "name": {
+   "fr": "Guyana",
+   "en": "Guyana"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Co-operative Republic of Guyana",
+    "Co-operative Republic of Guyana",
+    "République coopérative de Guyana"
+   ]
+  },
+  "capital": {
+   "en": "Georgetown",
+   "fr": "Georgetown"
+  },
+  "continent": "south-america",
+  "region": "South America",
+  "population": 782766,
+  "area": 214969,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -58.982,
+   4.794
+  ],
+  "bbox": [
+   -61.391,
+   1.201,
+   -56.483,
+   8.549
+  ]
+ },
+ {
+  "id": "HND",
+  "iso2": "HN",
+  "name": {
+   "fr": "Honduras",
+   "en": "Honduras"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Honduras",
+    "República de Honduras",
+    "Republic of Honduras",
+    "République du Honduras"
+   ]
+  },
+  "capital": {
+   "en": "Tegucigalpa",
+   "fr": "Tegucigalpa"
+  },
+  "continent": "north-america",
+  "region": "Central America",
+  "population": 9746117,
+  "area": 112492,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -86.616,
+   14.824
+  ],
+  "bbox": [
+   -89.363,
+   12.979,
+   -83.158,
+   16.024
+  ]
+ },
+ {
+  "id": "HRV",
+  "iso2": "HR",
+  "name": {
+   "fr": "Croatie",
+   "en": "Croatia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Hrvatska",
+    "Republic of Croatia",
+    "Republika Hrvatska",
+    "Republic of Croatia",
+    "République de Croatie"
+   ]
+  },
+  "capital": {
+   "en": "Zagreb",
+   "fr": "Zagreb"
+  },
+  "continent": "europe",
+  "region": "Southeast Europe",
+  "population": 4067500,
+  "area": 56594,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   16.424,
+   45.159
+  ],
+  "bbox": [
+   13.517,
+   42.938,
+   19.401,
+   46.535
+  ]
+ },
+ {
+  "id": "HTI",
+  "iso2": "HT",
+  "name": {
+   "fr": "Haïti",
+   "en": "Haiti"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Haiti",
+    "République d'Haïti",
+    "Repiblik Ayiti",
+    "Republic of Haiti",
+    "République d'Haïti"
+   ]
+  },
+  "capital": {
+   "en": "Port-au-Prince",
+   "fr": "Port-au-Prince"
+  },
+  "continent": "north-america",
+  "region": "Caribbean",
+  "population": 11263077,
+  "area": 27750,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   -72.675,
+   18.928
+  ],
+  "bbox": [
+   -74.478,
+   18.039,
+   -71.645,
+   19.928
+  ]
+ },
+ {
+  "id": "HUN",
+  "iso2": "HU",
+  "name": {
+   "fr": "Hongrie",
+   "en": "Hungary"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Hungary",
+    "Hongrie"
+   ]
+  },
+  "capital": {
+   "en": "Budapest",
+   "fr": "Budapest"
+  },
+  "continent": "europe",
+  "region": "Central Europe",
+  "population": 9769949,
+  "area": 93028,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   19.395,
+   47.163
+  ],
+  "bbox": [
+   16.093,
+   45.753,
+   22.877,
+   48.553
+  ]
+ },
+ {
+  "id": "IDN",
+  "iso2": "ID",
+  "name": {
+   "fr": "Indonésie",
+   "en": "Indonesia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Indonesia",
+    "Republik Indonesia",
+    "Republic of Indonesia",
+    "République d'Indonésie"
+   ]
+  },
+  "capital": {
+   "en": "Jakarta",
+   "fr": "Jakarta"
+  },
+  "continent": "asia",
+  "region": "South-Eastern Asia",
+  "population": 270625568,
+  "area": 1904569,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   114.014,
+   -0.191
+  ],
+  "bbox": [
+   95.207,
+   -9.119,
+   140.976,
+   5.629
+  ]
+ },
+ {
+  "id": "IND",
+  "iso2": "IN",
+  "name": {
+   "fr": "Inde",
+   "en": "India"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Bhārat",
+    "Republic of India",
+    "Bharat Ganrajya",
+    "இந்தியா",
+    "Republic of India",
+    "République de l'Inde"
+   ]
+  },
+  "capital": {
+   "en": "New Delhi",
+   "fr": "New Delhi"
+  },
+  "continent": "asia",
+  "region": "Southern Asia",
+  "population": 1366417754,
+  "area": 3287590,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   79.586,
+   22.909
+  ],
+  "bbox": [
+   68.165,
+   8.078,
+   97.344,
+   35.496
+  ]
+ },
+ {
+  "id": "IRL",
+  "iso2": "IE",
+  "name": {
+   "fr": "Irlande",
+   "en": "Ireland"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Éire",
+    "Republic of Ireland",
+    "Poblacht na hÉireann",
+    "Republic of Ireland",
+    "République d'Irlande"
+   ]
+  },
+  "capital": {
+   "en": "Dublin",
+   "fr": "Dublin"
+  },
+  "continent": "europe",
+  "region": "Northern Europe",
+  "population": 4941444,
+  "area": 70273,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   -8.135,
+   53.174
+  ],
+  "bbox": [
+   -10.39,
+   51.474,
+   -6.027,
+   55.366
+  ]
+ },
+ {
+  "id": "IRN",
+  "iso2": "IR",
+  "name": {
+   "fr": "Iran",
+   "en": "Iran"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Islamic Republic of Iran",
+    "Iran, Islamic Republic of",
+    "Jomhuri-ye Eslāmi-ye Irān",
+    "Islamic Republic of Iran",
+    "République islamique d'Iran"
+   ]
+  },
+  "capital": {
+   "en": "Tehran",
+   "fr": "Téhéran"
+  },
+  "continent": "asia",
+  "region": "Southern Asia",
+  "population": 82913906,
+  "area": 1648195,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   54.273,
+   32.58
+  ],
+  "bbox": [
+   44.023,
+   25.102,
+   63.305,
+   39.769
+  ]
+ },
+ {
+  "id": "IRQ",
+  "iso2": "IQ",
+  "name": {
+   "fr": "Irak",
+   "en": "Iraq"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Iraq",
+    "Jumhūriyyat al-‘Irāq",
+    "Republic of Iraq",
+    "République d'Irak"
+   ]
+  },
+  "capital": {
+   "en": "Baghdad",
+   "fr": "Bagdad"
+  },
+  "continent": "asia",
+  "region": "Western Asia",
+  "population": 39309783,
+  "area": 438317,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   43.743,
+   33.04
+  ],
+  "bbox": [
+   38.774,
+   29.064,
+   48.546,
+   37.372
+  ]
+ },
+ {
+  "id": "ISL",
+  "iso2": "IS",
+  "name": {
+   "fr": "Islande",
+   "en": "Iceland"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Island",
+    "Republic of Iceland",
+    "Lýðveldið Ísland",
+    "Iceland",
+    "République d'Islande"
+   ]
+  },
+  "capital": {
+   "en": "Reykjavik",
+   "fr": "Reykjavik"
+  },
+  "continent": "europe",
+  "region": "Northern Europe",
+  "population": 361313,
+  "area": 103000,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   -18.574,
+   64.996
+  ],
+  "bbox": [
+   -24.476,
+   63.407,
+   -13.556,
+   66.526
+  ]
+ },
+ {
+  "id": "ISR",
+  "iso2": "IL",
+  "name": {
+   "fr": "Israël",
+   "en": "Israel"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "State of Israel",
+    "Medīnat Yisrā'el",
+    "State of Israel",
+    "État d'Israël"
+   ]
+  },
+  "capital": {
+   "en": "Jerusalem",
+   "fr": "Jérusalem"
+  },
+  "continent": "asia",
+  "region": "Western Asia",
+  "population": 9053300,
+  "area": 20770,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   34.995,
+   31.443
+  ],
+  "bbox": [
+   34.245,
+   29.477,
+   35.888,
+   33.416
+  ]
+ },
+ {
+  "id": "ITA",
+  "iso2": "IT",
+  "name": {
+   "fr": "Italie",
+   "en": "Italy"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Italian Republic",
+    "Repubblica italiana",
+    "Italian Republic",
+    "République italienne"
+   ]
+  },
+  "capital": {
+   "en": "Rome",
+   "fr": "Rome"
+  },
+  "continent": "europe",
+  "region": "Southern Europe",
+  "population": 60297396,
+  "area": 301336,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   12.149,
+   43.53
+  ],
+  "bbox": [
+   6.628,
+   37.939,
+   18.486,
+   47.082
+  ]
+ },
+ {
+  "id": "JAM",
+  "iso2": "JM",
+  "name": {
+   "fr": "Jamaïque",
+   "en": "Jamaica"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Jamaica",
+    "Jamaïque"
+   ]
+  },
+  "capital": {
+   "en": "Kingston",
+   "fr": "Kingston"
+  },
+  "continent": "north-america",
+  "region": "Caribbean",
+  "population": 2948279,
+  "area": 10991,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   -77.315,
+   18.157
+  ],
+  "bbox": [
+   -78.34,
+   17.715,
+   -76.211,
+   18.522
+  ]
+ },
+ {
+  "id": "JOR",
+  "iso2": "JO",
+  "name": {
+   "fr": "Jordanie",
+   "en": "Jordan"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Hashemite Kingdom of Jordan",
+    "al-Mamlakah al-Urdunīyah al-Hāshimīyah",
+    "Hashemite Kingdom of Jordan",
+    "Royaume hachémite de Jordanie"
+   ]
+  },
+  "capital": {
+   "en": "Amman",
+   "fr": "Amman"
+  },
+  "continent": "asia",
+  "region": "Western Asia",
+  "population": 10101694,
+  "area": 89342,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   36.771,
+   31.246
+  ],
+  "bbox": [
+   34.951,
+   29.19,
+   39.293,
+   33.372
+  ]
+ },
+ {
+  "id": "JPN",
+  "iso2": "JP",
+  "name": {
+   "fr": "Japon",
+   "en": "Japan"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Nippon",
+    "Nihon",
+    "Japan",
+    "Japon"
+   ]
+  },
+  "capital": {
+   "en": "Tokyo",
+   "fr": "Tokyo"
+  },
+  "continent": "asia",
+  "region": "Eastern Asia",
+  "population": 126264931,
+  "area": 377930,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   137.985,
+   36.65
+  ],
+  "bbox": [
+   129.58,
+   31.015,
+   145.833,
+   45.51
+  ]
+ },
+ {
+  "id": "KAZ",
+  "iso2": "KZ",
+  "name": {
+   "fr": "Kazakhstan",
+   "en": "Kazakhstan"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Qazaqstan",
+    "Казахстан",
+    "Republic of Kazakhstan",
+    "Қазақстан Республикасы",
+    "Qazaqstan Respublïkası",
+    "Республика Казахстан",
+    "Respublika Kazakhstan",
+    "Republic of Kazakhstan",
+    "République du Kazakhstan"
+   ]
+  },
+  "capital": {
+   "en": "Astana",
+   "fr": "Astana"
+  },
+  "continent": "asia",
+  "region": "Central Asia",
+  "population": 18513930,
+  "area": 2724900,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   67.293,
+   48.157
+  ],
+  "bbox": [
+   46.609,
+   40.609,
+   87.323,
+   55.39
+  ]
+ },
+ {
+  "id": "KEN",
+  "iso2": "KE",
+  "name": {
+   "fr": "Kenya",
+   "en": "Kenya"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Kenya",
+    "Jamhuri ya Kenya",
+    "Republic of Kenya",
+    "République du Kenya"
+   ]
+  },
+  "capital": {
+   "en": "Nairobi",
+   "fr": "Nairobi"
+  },
+  "continent": "africa",
+  "region": "Eastern Africa",
+  "population": 52573973,
+  "area": 580367,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   37.795,
+   0.6
+  ],
+  "bbox": [
+   33.9,
+   -4.692,
+   41.884,
+   5.492
+  ]
+ },
+ {
+  "id": "KGZ",
+  "iso2": "KG",
+  "name": {
+   "fr": "Kirghizistan",
+   "en": "Kyrgyzstan"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Киргизия",
+    "Kyrgyz Republic",
+    "Кыргыз Республикасы",
+    "Kyrgyz Respublikasy",
+    "Kyrgyz Republic",
+    "République kirghize"
+   ]
+  },
+  "capital": {
+   "en": "Bishkek",
+   "fr": "Bichkek"
+  },
+  "continent": "asia",
+  "region": "Central Asia",
+  "population": 6456900,
+  "area": 199951,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   74.532,
+   41.458
+  ],
+  "bbox": [
+   69.229,
+   39.208,
+   80.246,
+   43.24
+  ]
+ },
+ {
+  "id": "KHM",
+  "iso2": "KH",
+  "name": {
+   "fr": "Cambodge",
+   "en": "Cambodia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Kingdom of Cambodia",
+    "Kingdom of Cambodia",
+    "Royaume du Cambodge"
+   ]
+  },
+  "capital": {
+   "en": "Phnom Penh",
+   "fr": "Phnom Penh"
+  },
+  "continent": "asia",
+  "region": "South-Eastern Asia",
+  "population": 16486542,
+  "area": 181035,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   104.908,
+   12.721
+  ],
+  "bbox": [
+   102.32,
+   10.411,
+   107.605,
+   14.705
+  ]
+ },
+ {
+  "id": "KIR",
+  "iso2": "KI",
+  "name": {
+   "fr": "Kiribati",
+   "en": "Kiribati"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Kiribati",
+    "Ribaberiki Kiribati",
+    "Independent and Sovereign Republic of Kiribati",
+    "République de Kiribati"
+   ]
+  },
+  "capital": {
+   "en": "South Tarawa",
+   "fr": "Tarawa-Sud"
+  },
+  "continent": "oceania",
+  "region": "Micronesia",
+  "population": 117606,
+  "area": 811,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   -157.374,
+   1.855
+  ],
+  "bbox": [
+   -157.579,
+   1.732,
+   -157.176,
+   2.029
+  ]
+ },
+ {
+  "id": "KNA",
+  "iso2": "KN",
+  "name": {
+   "fr": "Saint-Christophe-et-Niévès",
+   "en": "Saint Kitts and Nevis"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Federation of Saint Christopher and Nevis",
+    "Federation of Saint Christopher and Nevis",
+    "Fédération de Saint-Christophe-et-Niévès"
+   ]
+  },
+  "capital": {
+   "en": "Basseterre",
+   "fr": "Basseterre"
+  },
+  "continent": "north-america",
+  "region": "Caribbean",
+  "population": 52834,
+  "area": 261,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   -62.748,
+   17.327
+  ],
+  "bbox": [
+   -62.84,
+   17.101,
+   -62.532,
+   17.403
+  ]
+ },
+ {
+  "id": "KOR",
+  "iso2": "KR",
+  "name": {
+   "fr": "Corée du Sud",
+   "en": "South Korea"
+  },
+  "aliases": {
+   "fr": [
+    "coree du sud"
+   ],
+   "en": [
+    "south korea",
+    "Korea, Republic of",
+    "Republic of Korea",
+    "남조선",
+    "Republic of Korea",
+    "République de Corée"
+   ]
+  },
+  "capital": {
+   "en": "Seoul",
+   "fr": "Séoul"
+  },
+  "continent": "asia",
+  "region": "Eastern Asia",
+  "population": 51709098,
+  "area": 100210,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   127.871,
+   36.461
+  ],
+  "bbox": [
+   126.161,
+   34.314,
+   129.573,
+   38.623
+  ]
+ },
+ {
+  "id": "KWT",
+  "iso2": "KW",
+  "name": {
+   "fr": "Koweït",
+   "en": "Kuwait"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "State of Kuwait",
+    "Dawlat al-Kuwait",
+    "State of Kuwait",
+    "État du Koweït"
+   ]
+  },
+  "capital": {
+   "en": "Kuwait City",
+   "fr": "Koweït"
+  },
+  "continent": "asia",
+  "region": "Western Asia",
+  "population": 4207083,
+  "area": 17818,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   47.562,
+   29.317
+  ],
+  "bbox": [
+   46.531,
+   28.533,
+   48.442,
+   30.097
+  ]
+ },
+ {
+  "id": "LAO",
+  "iso2": "LA",
+  "name": {
+   "fr": "Laos",
+   "en": "Laos"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Lao",
+    "Lao People's Democratic Republic",
+    "Sathalanalat Paxathipatai Paxaxon Lao",
+    "Lao People's Democratic Republic",
+    "République démocratique populaire lao"
+   ]
+  },
+  "capital": {
+   "en": "Vientiane",
+   "fr": "Vientiane"
+  },
+  "continent": "asia",
+  "region": "South-Eastern Asia",
+  "population": 7169455,
+  "area": 236800,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   103.738,
+   18.502
+  ],
+  "bbox": [
+   100.115,
+   13.921,
+   107.653,
+   22.495
+  ]
+ },
+ {
+  "id": "LBN",
+  "iso2": "LB",
+  "name": {
+   "fr": "Liban",
+   "en": "Lebanon"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Lebanese Republic",
+    "Al-Jumhūrīyah Al-Libnānīyah",
+    "Lebanese Republic",
+    "République libanaise"
+   ]
+  },
+  "capital": {
+   "en": "Beirut",
+   "fr": "Beyrouth"
+  },
+  "continent": "asia",
+  "region": "Western Asia",
+  "population": 6855713,
+  "area": 10452,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   35.88,
+   33.923
+  ],
+  "bbox": [
+   35.109,
+   33.076,
+   36.585,
+   34.679
+  ]
+ },
+ {
+  "id": "LBR",
+  "iso2": "LR",
+  "name": {
+   "fr": "Liberia",
+   "en": "Liberia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Liberia",
+    "Republic of Liberia",
+    "République du Libéria"
+   ]
+  },
+  "capital": {
+   "en": "Monrovia",
+   "fr": "Monrovia"
+  },
+  "continent": "africa",
+  "region": "Western Africa",
+  "population": 4937374,
+  "area": 111369,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -9.322,
+   6.453
+  ],
+  "bbox": [
+   -11.508,
+   4.351,
+   -7.4,
+   8.538
+  ]
+ },
+ {
+  "id": "LBY",
+  "iso2": "LY",
+  "name": {
+   "fr": "Libye",
+   "en": "Libya"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "State of Libya",
+    "Dawlat Libya",
+    "State of Libya",
+    "Grande République arabe libyenne populaire et socialiste"
+   ]
+  },
+  "capital": {
+   "en": "Tripoli",
+   "fr": "Tripoli"
+  },
+  "continent": "africa",
+  "region": "Northern Africa",
+  "population": 6777452,
+  "area": 1759540,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   18.009,
+   27.031
+  ],
+  "bbox": [
+   9.31,
+   19.497,
+   25.15,
+   33.182
+  ]
+ },
+ {
+  "id": "LCA",
+  "iso2": "LC",
+  "name": {
+   "fr": "Sainte-Lucie",
+   "en": "Saint Lucia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Saint Lucia",
+    "Sainte-Lucie"
+   ]
+  },
+  "capital": {
+   "en": "Castries",
+   "fr": "Castries"
+  },
+  "continent": "north-america",
+  "region": "Caribbean",
+  "population": 182790,
+  "area": 616,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   -60.97,
+   13.895
+  ],
+  "bbox": [
+   -61.073,
+   13.718,
+   -60.887,
+   14.093
+  ]
+ },
+ {
+  "id": "LIE",
+  "iso2": "LI",
+  "name": {
+   "fr": "Liechtenstein",
+   "en": "Liechtenstein"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Principality of Liechtenstein",
+    "Fürstentum Liechtenstein",
+    "Principality of Liechtenstein",
+    "Principauté du Liechtenstein"
+   ]
+  },
+  "capital": {
+   "en": "Vaduz",
+   "fr": "Vaduz"
+  },
+  "continent": "europe",
+  "region": "Western Europe",
+  "population": 38019,
+  "area": 160,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   9.536,
+   47.137
+  ],
+  "bbox": [
+   9.479,
+   47.057,
+   9.611,
+   47.271
+  ]
+ },
+ {
+  "id": "LKA",
+  "iso2": "LK",
+  "name": {
+   "fr": "Sri Lanka",
+   "en": "Sri Lanka"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "ilaṅkai",
+    "Democratic Socialist Republic of Sri Lanka",
+    "Democratic Socialist Republic of Sri Lanka",
+    "République démocratique socialiste du Sri Lanka"
+   ]
+  },
+  "capital": {
+   "en": "Colombo",
+   "fr": "Sri Jayawardenapura Kotte"
+  },
+  "continent": "asia",
+  "region": "Southern Asia",
+  "population": 21803000,
+  "area": 65610,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   80.703,
+   7.608
+  ],
+  "bbox": [
+   79.708,
+   5.949,
+   81.877,
+   9.813
+  ]
+ },
+ {
+  "id": "LSO",
+  "iso2": "LS",
+  "name": {
+   "fr": "Lesotho",
+   "en": "Lesotho"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Kingdom of Lesotho",
+    "Muso oa Lesotho",
+    "Kingdom of Lesotho",
+    "Royaume du Lesotho"
+   ]
+  },
+  "capital": {
+   "en": "Maseru",
+   "fr": "Maseru"
+  },
+  "continent": "africa",
+  "region": "Southern Africa",
+  "population": 2125268,
+  "area": 30355,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   28.227,
+   -29.58
+  ],
+  "bbox": [
+   27.052,
+   -30.642,
+   29.391,
+   -28.582
+  ]
+ },
+ {
+  "id": "LTU",
+  "iso2": "LT",
+  "name": {
+   "fr": "Lituanie",
+   "en": "Lithuania"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Lithuania",
+    "Lietuvos Respublika",
+    "Republic of Lithuania",
+    "République de Lituanie"
+   ]
+  },
+  "capital": {
+   "en": "Vilnius",
+   "fr": "Vilnius"
+  },
+  "continent": "europe",
+  "region": "Northern Europe",
+  "population": 2786844,
+  "area": 65300,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   23.892,
+   55.326
+  ],
+  "bbox": [
+   21.046,
+   53.893,
+   26.776,
+   56.411
+  ]
+ },
+ {
+  "id": "LUX",
+  "iso2": "LU",
+  "name": {
+   "fr": "Luxembourg",
+   "en": "Luxembourg"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Grand Duchy of Luxembourg",
+    "Grand-Duché de Luxembourg",
+    "Großherzogtum Luxemburg",
+    "Groussherzogtum Lëtzebuerg",
+    "Grand Duchy of Luxembourg",
+    "Grand-Duché de Luxembourg"
+   ]
+  },
+  "capital": {
+   "en": "Luxembourg",
+   "fr": "Luxembourg"
+  },
+  "continent": "europe",
+  "region": "Western Europe",
+  "population": 619896,
+  "area": 2586,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   6.072,
+   49.767
+  ],
+  "bbox": [
+   5.725,
+   49.445,
+   6.494,
+   50.167
+  ]
+ },
+ {
+  "id": "LVA",
+  "iso2": "LV",
+  "name": {
+   "fr": "Lettonie",
+   "en": "Latvia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Latvia",
+    "Latvijas Republika",
+    "Republic of Latvia",
+    "République de Lettonie"
+   ]
+  },
+  "capital": {
+   "en": "Riga",
+   "fr": "Riga"
+  },
+  "continent": "europe",
+  "region": "Northern Europe",
+  "population": 1912789,
+  "area": 64559,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   24.912,
+   56.851
+  ],
+  "bbox": [
+   21.015,
+   55.668,
+   28.202,
+   58.063
+  ]
+ },
+ {
+  "id": "MAR",
+  "iso2": "MA",
+  "name": {
+   "fr": "Maroc",
+   "en": "Morocco"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Kingdom of Morocco",
+    "Al-Mamlakah al-Maġribiyah",
+    "Kingdom of Morocco",
+    "Royaume du Maroc"
+   ]
+  },
+  "capital": {
+   "en": "Rabat",
+   "fr": "Rabat"
+  },
+  "continent": "africa",
+  "region": "Northern Africa",
+  "population": 36471769,
+  "area": 446550,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -8.456,
+   29.837
+  ],
+  "bbox": [
+   -17.003,
+   21.421,
+   -1.066,
+   35.93
+  ]
+ },
+ {
+  "id": "MCO",
+  "iso2": "MC",
+  "name": {
+   "fr": "Monaco",
+   "en": "Monaco"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Principality of Monaco",
+    "Principauté de Monaco",
+    "Principality of Monaco",
+    "Principauté de Monaco"
+   ]
+  },
+  "capital": {
+   "en": "Monaco",
+   "fr": "Monaco"
+  },
+  "continent": "europe",
+  "region": "Western Europe",
+  "population": 38964,
+  "area": 2.02,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   7.406,
+   43.753
+  ],
+  "bbox": [
+   7.378,
+   43.732,
+   7.439,
+   43.771
+  ]
+ },
+ {
+  "id": "MDA",
+  "iso2": "MD",
+  "name": {
+   "fr": "Moldavie",
+   "en": "Moldova"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Moldova, Republic of",
+    "Republic of Moldova",
+    "Republica Moldova",
+    "Republic of Moldova",
+    "République de Moldavie"
+   ]
+  },
+  "capital": {
+   "en": "Chișinău",
+   "fr": "Chisinau"
+  },
+  "continent": "europe",
+  "region": "Eastern Europe",
+  "population": 2657637,
+  "area": 33846,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   28.457,
+   47.195
+  ],
+  "bbox": [
+   26.619,
+   45.45,
+   30.131,
+   48.478
+  ]
+ },
+ {
+  "id": "MDG",
+  "iso2": "MG",
+  "name": {
+   "fr": "Madagascar",
+   "en": "Madagascar"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Madagascar",
+    "Repoblikan'i Madagasikara",
+    "République de Madagascar",
+    "Republic of Madagascar",
+    "République de Madagascar"
+   ]
+  },
+  "capital": {
+   "en": "Antananarivo",
+   "fr": "Antananarivo"
+  },
+  "continent": "africa",
+  "region": "Eastern Africa",
+  "population": 26969307,
+  "area": 587041,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   46.703,
+   -19.375
+  ],
+  "bbox": [
+   43.257,
+   -25.571,
+   50.483,
+   -12.08
+  ]
+ },
+ {
+  "id": "MDV",
+  "iso2": "MV",
+  "name": {
+   "fr": "Maldives",
+   "en": "Maldives"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Maldive Islands",
+    "Republic of the Maldives",
+    "Dhivehi Raajjeyge Jumhooriyya",
+    "Republic of the Maldives",
+    "République des Maldives"
+   ]
+  },
+  "capital": {
+   "en": "Malé",
+   "fr": "Malé"
+  },
+  "continent": "asia",
+  "region": "Southern Asia",
+  "population": 530953,
+  "area": 300,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   73.411,
+   3.261
+  ],
+  "bbox": [
+   73.382,
+   3.229,
+   73.528,
+   4.248
+  ]
+ },
+ {
+  "id": "MEX",
+  "iso2": "MX",
+  "name": {
+   "fr": "Mexique",
+   "en": "Mexico"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Mexicanos",
+    "United Mexican States",
+    "Estados Unidos Mexicanos",
+    "United Mexican States",
+    "États-Unis du Mexique"
+   ]
+  },
+  "capital": {
+   "en": "Mexico City",
+   "fr": "Mexico"
+  },
+  "continent": "north-america",
+  "region": "North America",
+  "population": 127575529,
+  "area": 1964375,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -102.505,
+   23.941
+  ],
+  "bbox": [
+   -117.128,
+   14.545,
+   -86.772,
+   32.715
+  ]
+ },
+ {
+  "id": "MHL",
+  "iso2": "MH",
+  "name": {
+   "fr": "Îles Marshall",
+   "en": "Marshall Islands"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of the Marshall Islands",
+    "Aolepān Aorōkin M̧ajeļ",
+    "Republic of the Marshall Islands",
+    "République des Îles Marshall"
+   ]
+  },
+  "capital": {
+   "en": "Majuro",
+   "fr": "Majuro"
+  },
+  "continent": "oceania",
+  "region": "Micronesia",
+  "population": 58791,
+  "area": 181,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   171.186,
+   7.106
+  ],
+  "bbox": [
+   166.845,
+   5.8,
+   171.757,
+   11.169
+  ]
+ },
+ {
+  "id": "MKD",
+  "iso2": "MK",
+  "name": {
+   "fr": "Macédoine du Nord",
+   "en": "North Macedonia"
+  },
+  "aliases": {
+   "fr": [
+    "macedoine"
+   ],
+   "en": [
+    "macedonia",
+    "The former Yugoslav Republic of Macedonia",
+    "Republic of North Macedonia",
+    "Macedonia, The Former Yugoslav Republic of",
+    "Република Северна Македонија",
+    "Macedonia",
+    "Republic of North Macedonia",
+    "République de Macédoine du Nord"
+   ]
+  },
+  "capital": {
+   "en": "Skopje",
+   "fr": "Skopje"
+  },
+  "continent": "europe",
+  "region": "Southeast Europe",
+  "population": 2083459,
+  "area": 25713,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   21.682,
+   41.595
+  ],
+  "bbox": [
+   20.449,
+   40.85,
+   23.006,
+   42.358
+  ]
+ },
+ {
+  "id": "MLI",
+  "iso2": "ML",
+  "name": {
+   "fr": "Mali",
+   "en": "Mali"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Mali",
+    "République du Mali",
+    "Republic of Mali",
+    "République du Mali"
+   ]
+  },
+  "capital": {
+   "en": "Bamako",
+   "fr": "Bamako"
+  },
+  "continent": "africa",
+  "region": "Western Africa",
+  "population": 19658031,
+  "area": 1240192,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   -3.543,
+   17.346
+  ],
+  "bbox": [
+   -12.281,
+   10.143,
+   4.235,
+   24.996
+  ]
+ },
+ {
+  "id": "MLT",
+  "iso2": "MT",
+  "name": {
+   "fr": "Malte",
+   "en": "Malta"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Malta",
+    "Repubblika ta' Malta",
+    "Republic of Malta",
+    "République de Malte"
+   ]
+  },
+  "capital": {
+   "en": "Valletta",
+   "fr": "La Valette"
+  },
+  "continent": "europe",
+  "region": "Southern Europe",
+  "population": 502653,
+  "area": 316,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   14.443,
+   35.89
+  ],
+  "bbox": [
+   14.18,
+   35.82,
+   14.566,
+   36.076
+  ]
+ },
+ {
+  "id": "MMR",
+  "iso2": "MM",
+  "name": {
+   "fr": "Birmanie",
+   "en": "Myanmar"
+  },
+  "aliases": {
+   "fr": [
+    "birmanie"
+   ],
+   "en": [
+    "burma",
+    "Burma",
+    "Republic of the Union of Myanmar",
+    "Pyidaunzu Thanmăda Myăma Nainngandaw",
+    "Republic of the Union of Myanmar",
+    "République de l'Union du Myanmar"
+   ]
+  },
+  "capital": {
+   "en": "Naypyidaw",
+   "fr": "Naypyidaw"
+  },
+  "continent": "asia",
+  "region": "South-Eastern Asia",
+  "population": 54045420,
+  "area": 676578,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   96.489,
+   21.221
+  ],
+  "bbox": [
+   92.18,
+   10.035,
+   101.147,
+   28.517
+  ]
+ },
+ {
+  "id": "MNE",
+  "iso2": "ME",
+  "name": {
+   "fr": "Monténégro",
+   "en": "Montenegro"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Crna Gora",
+    "Montenegro",
+    "Monténégro"
+   ]
+  },
+  "capital": {
+   "en": "Podgorica",
+   "fr": "Podgorica"
+  },
+  "continent": "europe",
+  "region": "Southeast Europe",
+  "population": 622137,
+  "area": 13812,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   19.239,
+   42.789
+  ],
+  "bbox": [
+   18.436,
+   41.869,
+   20.348,
+   43.542
+  ]
+ },
+ {
+  "id": "MNG",
+  "iso2": "MN",
+  "name": {
+   "fr": "Mongolie",
+   "en": "Mongolia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Mongolia",
+    "Mongolie"
+   ]
+  },
+  "capital": {
+   "en": "Ulan Bator",
+   "fr": "Oulan-Bator"
+  },
+  "continent": "asia",
+  "region": "Eastern Asia",
+  "population": 3225167,
+  "area": 1564110,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   103.053,
+   46.827
+  ],
+  "bbox": [
+   87.743,
+   41.596,
+   119.898,
+   52.117
+  ]
+ },
+ {
+  "id": "MOZ",
+  "iso2": "MZ",
+  "name": {
+   "fr": "Mozambique",
+   "en": "Mozambique"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Mozambique",
+    "República de Moçambique",
+    "Republic of Mozambique",
+    "République du Mozambique"
+   ]
+  },
+  "capital": {
+   "en": "Maputo",
+   "fr": "Maputo"
+  },
+  "continent": "africa",
+  "region": "Eastern Africa",
+  "population": 30366036,
+  "area": 801590,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   35.534,
+   -17.273
+  ],
+  "bbox": [
+   30.222,
+   -26.862,
+   40.845,
+   -10.464
+  ]
+ },
+ {
+  "id": "MRT",
+  "iso2": "MR",
+  "name": {
+   "fr": "Mauritanie",
+   "en": "Mauritania"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Islamic Republic of Mauritania",
+    "al-Jumhūriyyah al-ʾIslāmiyyah al-Mūrītāniyyah",
+    "Islamic Republic of Mauritania",
+    "République islamique de Mauritanie"
+   ]
+  },
+  "capital": {
+   "en": "Nouakchott",
+   "fr": "Nouakchott"
+  },
+  "continent": "africa",
+  "region": "Western Africa",
+  "population": 4525696,
+  "area": 1030700,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -10.347,
+   20.257
+  ],
+  "bbox": [
+   -17.064,
+   14.745,
+   -4.823,
+   27.286
+  ]
+ },
+ {
+  "id": "MUS",
+  "iso2": "MU",
+  "name": {
+   "fr": "Île Maurice",
+   "en": "Mauritius"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Mauritius",
+    "République de Maurice",
+    "Republic of Mauritius",
+    "République de Maurice"
+   ]
+  },
+  "capital": {
+   "en": "Port Louis",
+   "fr": "Port-Louis"
+  },
+  "continent": "africa",
+  "region": "Eastern Africa",
+  "population": 1265711,
+  "area": 2040,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   57.571,
+   -20.278
+  ],
+  "bbox": [
+   57.318,
+   -20.513,
+   57.792,
+   -19.99
+  ]
+ },
+ {
+  "id": "MWI",
+  "iso2": "MW",
+  "name": {
+   "fr": "Malawi",
+   "en": "Malawi"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Malawi",
+    "Republic of Malawi",
+    "République du Malawi"
+   ]
+  },
+  "capital": {
+   "en": "Lilongwe",
+   "fr": "Lilongwe"
+  },
+  "continent": "africa",
+  "region": "Eastern Africa",
+  "population": 18628747,
+  "area": 118484,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   34.289,
+   -13.22
+  ],
+  "bbox": [
+   32.67,
+   -17.131,
+   35.893,
+   -9.395
+  ]
+ },
+ {
+  "id": "MYS",
+  "iso2": "MY",
+  "name": {
+   "fr": "Malaisie",
+   "en": "Malaysia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Malaysia",
+    "Fédération de Malaisie"
+   ]
+  },
+  "capital": {
+   "en": "Kuala Lumpur",
+   "fr": "Kuala Lumpur"
+  },
+  "continent": "asia",
+  "region": "South-Eastern Asia",
+  "population": 31949777,
+  "area": 330803,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   114.724,
+   3.615
+  ],
+  "bbox": [
+   100.119,
+   0.862,
+   119.266,
+   6.99
+  ]
+ },
+ {
+  "id": "NAM",
+  "iso2": "NA",
+  "name": {
+   "fr": "Namibie",
+   "en": "Namibia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Namibië",
+    "Republic of Namibia",
+    "Republic of Namibia",
+    "République de Namibie"
+   ]
+  },
+  "capital": {
+   "en": "Windhoek",
+   "fr": "Windhoek"
+  },
+  "continent": "africa",
+  "region": "Southern Africa",
+  "population": 2494530,
+  "area": 825615,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   17.21,
+   -22.13
+  ],
+  "bbox": [
+   11.722,
+   -28.939,
+   25.259,
+   -16.968
+  ]
+ },
+ {
+  "id": "NER",
+  "iso2": "NE",
+  "name": {
+   "fr": "Niger",
+   "en": "Niger"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Nijar",
+    "Republic of Niger",
+    "République du Niger"
+   ]
+  },
+  "capital": {
+   "en": "Niamey",
+   "fr": "Niamey"
+  },
+  "continent": "africa",
+  "region": "Western Africa",
+  "population": 23310715,
+  "area": 1267000,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   9.385,
+   17.419
+  ],
+  "bbox": [
+   0.164,
+   11.696,
+   15.963,
+   23.518
+  ]
+ },
+ {
+  "id": "NGA",
+  "iso2": "NG",
+  "name": {
+   "fr": "Nigéria",
+   "en": "Nigeria"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Nijeriya",
+    "Naíjíríà",
+    "Federal Republic of Nigeria",
+    "Federal Republic of Nigeria",
+    "République fédérale du Nigeria"
+   ]
+  },
+  "capital": {
+   "en": "Abuja",
+   "fr": "Abuja"
+  },
+  "continent": "africa",
+  "region": "Western Africa",
+  "population": 200963599,
+  "area": 923768,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   8.09,
+   9.595
+  ],
+  "bbox": [
+   2.686,
+   4.277,
+   14.627,
+   13.873
+  ]
+ },
+ {
+  "id": "NIC",
+  "iso2": "NI",
+  "name": {
+   "fr": "Nicaragua",
+   "en": "Nicaragua"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Nicaragua",
+    "República de Nicaragua",
+    "Republic of Nicaragua",
+    "République du Nicaragua"
+   ]
+  },
+  "capital": {
+   "en": "Managua",
+   "fr": "Managua"
+  },
+  "continent": "north-america",
+  "region": "Central America",
+  "population": 6545502,
+  "area": 130373,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -85.031,
+   12.847
+  ],
+  "bbox": [
+   -87.67,
+   10.735,
+   -83.158,
+   15.008
+  ]
+ },
+ {
+  "id": "NLD",
+  "iso2": "NL",
+  "name": {
+   "fr": "Pays-Bas",
+   "en": "Netherlands"
+  },
+  "aliases": {
+   "fr": [
+    "hollande"
+   ],
+   "en": [
+    "holland",
+    "Holland",
+    "Nederland",
+    "The Netherlands",
+    "Kingdom of the Netherlands",
+    "Pays-Bas"
+   ]
+  },
+  "capital": {
+   "en": "Amsterdam",
+   "fr": "Amsterdam"
+  },
+  "continent": "europe",
+  "region": "Western Europe",
+  "population": 17332850,
+  "area": 41850,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   5.642,
+   52.282
+  ],
+  "bbox": [
+   3.449,
+   50.75,
+   7.197,
+   53.441
+  ]
+ },
+ {
+  "id": "NOR",
+  "iso2": "NO",
+  "name": {
+   "fr": "Norvège",
+   "en": "Norway"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Norge",
+    "Noreg",
+    "Kingdom of Norway",
+    "Kongeriket Norge",
+    "Kongeriket Noreg",
+    "Kingdom of Norway",
+    "Royaume de Norvège"
+   ]
+  },
+  "capital": {
+   "en": "Oslo",
+   "fr": "Oslo"
+  },
+  "continent": "europe",
+  "region": "Northern Europe",
+  "population": 5347896,
+  "area": 323802,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   13.909,
+   64.238
+  ],
+  "bbox": [
+   4.91,
+   58.021,
+   30.961,
+   71.091
+  ]
+ },
+ {
+  "id": "NPL",
+  "iso2": "NP",
+  "name": {
+   "fr": "Népal",
+   "en": "Nepal"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Federal Democratic Republic of Nepal",
+    "Loktāntrik Ganatantra Nepāl",
+    "Federal Democratic Republic of Nepal",
+    "République du Népal"
+   ]
+  },
+  "capital": {
+   "en": "Kathmandu",
+   "fr": "Katmandou"
+  },
+  "continent": "asia",
+  "region": "Southern Asia",
+  "population": 28608710,
+  "area": 147181,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   83.916,
+   28.249
+  ],
+  "bbox": [
+   80.052,
+   26.36,
+   88.162,
+   30.388
+  ]
+ },
+ {
+  "id": "NRU",
+  "iso2": "NR",
+  "name": {
+   "fr": "Nauru",
+   "en": "Nauru"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Naoero",
+    "Pleasant Island",
+    "Republic of Nauru",
+    "Ripublik Naoero",
+    "Republic of Nauru",
+    "République de Nauru"
+   ]
+  },
+  "capital": {
+   "en": "Yaren",
+   "fr": "Yaren"
+  },
+  "continent": "oceania",
+  "region": "Micronesia",
+  "population": 12581,
+  "area": 21,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   166.933,
+   -0.519
+  ],
+  "bbox": [
+   166.907,
+   -0.551,
+   166.958,
+   -0.489
+  ]
+ },
+ {
+  "id": "NZL",
+  "iso2": "NZ",
+  "name": {
+   "fr": "Nouvelle-Zélande",
+   "en": "New Zealand"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Aotearoa",
+    "New Zealand",
+    "Nouvelle-Zélande"
+   ]
+  },
+  "capital": {
+   "en": "Wellington",
+   "fr": "Wellington"
+  },
+  "continent": "oceania",
+  "region": "Australia and New Zealand",
+  "population": 4917000,
+  "area": 270467,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   170.528,
+   -43.973
+  ],
+  "bbox": [
+   166.478,
+   -46.631,
+   178.536,
+   -34.429
+  ]
+ },
+ {
+  "id": "OMN",
+  "iso2": "OM",
+  "name": {
+   "fr": "Oman",
+   "en": "Oman"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Sultanate of Oman",
+    "Salṭanat ʻUmān",
+    "Sultanate of Oman",
+    "Sultanat d'Oman"
+   ]
+  },
+  "capital": {
+   "en": "Muscat",
+   "fr": "Mascate"
+  },
+  "continent": "asia",
+  "region": "Western Asia",
+  "population": 4974986,
+  "area": 309500,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   56.085,
+   20.575
+  ],
+  "bbox": [
+   51.978,
+   16.648,
+   59.838,
+   24.979
+  ]
+ },
+ {
+  "id": "PAK",
+  "iso2": "PK",
+  "name": {
+   "fr": "Pakistan",
+   "en": "Pakistan"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Pākistān",
+    "Islamic Republic of Pakistan",
+    "Islāmī Jumhūriya'eh Pākistān",
+    "Islamic Republic of Pakistan",
+    "République islamique du Pakistan"
+   ]
+  },
+  "capital": {
+   "en": "Islamabad",
+   "fr": "Islamabad"
+  },
+  "continent": "asia",
+  "region": "Southern Asia",
+  "population": 216565318,
+  "area": 881912,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   69.34,
+   29.95
+  ],
+  "bbox": [
+   60.843,
+   23.753,
+   77.049,
+   37.037
+  ]
+ },
+ {
+  "id": "PAN",
+  "iso2": "PA",
+  "name": {
+   "fr": "Panama",
+   "en": "Panama"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Panama",
+    "República de Panamá",
+    "Republic of Panama",
+    "République du Panama"
+   ]
+  },
+  "capital": {
+   "en": "Panama City",
+   "fr": "Panama"
+  },
+  "continent": "north-america",
+  "region": "Central America",
+  "population": 4246439,
+  "area": 75417,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -80.112,
+   8.524
+  ],
+  "bbox": [
+   -83.027,
+   7.22,
+   -77.196,
+   9.598
+  ]
+ },
+ {
+  "id": "PER",
+  "iso2": "PE",
+  "name": {
+   "fr": "Pérou",
+   "en": "Peru"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Peru",
+    "República del Perú",
+    "Republic of Peru",
+    "République du Pérou"
+   ]
+  },
+  "capital": {
+   "en": "Lima",
+   "fr": "Lima"
+  },
+  "continent": "south-america",
+  "region": "South America",
+  "population": 32510453,
+  "area": 1285216,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -74.382,
+   -9.153
+  ],
+  "bbox": [
+   -81.337,
+   -18.346,
+   -68.685,
+   -0.042
+  ]
+ },
+ {
+  "id": "PHL",
+  "iso2": "PH",
+  "name": {
+   "fr": "Philippines",
+   "en": "Philippines"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of the Philippines",
+    "Repúblika ng Pilipinas",
+    "Republic of the Philippines",
+    "République des Philippines"
+   ]
+  },
+  "capital": {
+   "en": "Manila",
+   "fr": "Manille"
+  },
+  "continent": "asia",
+  "region": "South-Eastern Asia",
+  "population": 108116615,
+  "area": 342353,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   121.415,
+   15.957
+  ],
+  "bbox": [
+   117.219,
+   5.599,
+   126.593,
+   18.615
+  ]
+ },
+ {
+  "id": "PLW",
+  "iso2": "PW",
+  "name": {
+   "fr": "Palaos (Palau)",
+   "en": "Palau"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Palau",
+    "Beluu er a Belau",
+    "Republic of Palau",
+    "République des Palaos (Palau)"
+   ]
+  },
+  "capital": {
+   "en": "Ngerulmud",
+   "fr": "Ngerulmud"
+  },
+  "continent": "oceania",
+  "region": "Micronesia",
+  "population": 18008,
+  "area": 459,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   134.581,
+   7.513
+  ],
+  "bbox": [
+   134.506,
+   7.361,
+   134.66,
+   7.712
+  ]
+ },
+ {
+  "id": "PNG",
+  "iso2": "PG",
+  "name": {
+   "fr": "Papouasie-Nouvelle-Guinée",
+   "en": "Papua New Guinea"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Independent State of Papua New Guinea",
+    "Independen Stet bilong Papua Niugini",
+    "Independent State of Papua New Guinea",
+    "État indépendant de Papouasie-Nouvelle-Guinée"
+   ]
+  },
+  "capital": {
+   "en": "Port Moresby",
+   "fr": "Port Moresby"
+  },
+  "continent": "oceania",
+  "region": "Melanesia",
+  "population": 8776109,
+  "area": 462840,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   144.244,
+   -6.606
+  ],
+  "bbox": [
+   140.862,
+   -10.655,
+   150.85,
+   -2.61
+  ]
+ },
+ {
+  "id": "POL",
+  "iso2": "PL",
+  "name": {
+   "fr": "Pologne",
+   "en": "Poland"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Poland",
+    "Rzeczpospolita Polska",
+    "Republic of Poland",
+    "République de Pologne"
+   ]
+  },
+  "capital": {
+   "en": "Warsaw",
+   "fr": "Varsovie"
+  },
+  "continent": "europe",
+  "region": "Central Europe",
+  "population": 37970874,
+  "area": 312679,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   19.39,
+   52.128
+  ],
+  "bbox": [
+   14.129,
+   49.021,
+   24.106,
+   54.838
+  ]
+ },
+ {
+  "id": "PRK",
+  "iso2": "KP",
+  "name": {
+   "fr": "Corée du Nord",
+   "en": "North Korea"
+  },
+  "aliases": {
+   "fr": [
+    "coree du nord"
+   ],
+   "en": [
+    "north korea",
+    "Democratic People's Republic of Korea",
+    "DPRK",
+    "조선민주주의인민공화국",
+    "Chosŏn Minjujuŭi Inmin Konghwaguk",
+    "Korea, Democratic People's Republic of",
+    "북조선",
+    "Democratic People's Republic of Korea",
+    "République populaire démocratique de Corée"
+   ]
+  },
+  "capital": {
+   "en": "Pyongyang",
+   "fr": "Pyongyang"
+  },
+  "continent": "asia",
+  "region": "Eastern Asia",
+  "population": 25666161,
+  "area": 120538,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   127.193,
+   40.154
+  ],
+  "bbox": [
+   124.349,
+   37.719,
+   130.687,
+   42.998
+  ]
+ },
+ {
+  "id": "PRT",
+  "iso2": "PT",
+  "name": {
+   "fr": "Portugal",
+   "en": "Portugal"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Portuguesa",
+    "Portuguese Republic",
+    "República Portuguesa",
+    "Portuguese Republic",
+    "République portugaise"
+   ]
+  },
+  "capital": {
+   "en": "Lisbon",
+   "fr": "Lisbonne"
+  },
+  "continent": "europe",
+  "region": "Southern Europe",
+  "population": 10269417,
+  "area": 92090,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -7.978,
+   39.677
+  ],
+  "bbox": [
+   -9.48,
+   37.005,
+   -6.212,
+   42.137
+  ]
+ },
+ {
+  "id": "PRY",
+  "iso2": "PY",
+  "name": {
+   "fr": "Paraguay",
+   "en": "Paraguay"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Paraguay",
+    "República del Paraguay",
+    "Tetã Paraguái",
+    "Republic of Paraguay",
+    "République du Paraguay"
+   ]
+  },
+  "capital": {
+   "en": "Asunción",
+   "fr": "Asunción"
+  },
+  "continent": "south-america",
+  "region": "South America",
+  "population": 7044636,
+  "area": 406752,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   -58.4,
+   -23.228
+  ],
+  "bbox": [
+   -62.651,
+   -27.554,
+   -54.242,
+   -19.286
+  ]
+ },
+ {
+  "id": "PSE",
+  "iso2": "PS",
+  "name": {
+   "fr": "Palestine",
+   "en": "Palestine"
+  },
+  "aliases": {
+   "fr": [
+    "cisjordanie",
+    "gaza"
+   ],
+   "en": [
+    "west bank",
+    "gaza",
+    "Palestine, State of",
+    "State of Palestine",
+    "Dawlat Filasṭin",
+    "State of Palestine",
+    "État de Palestine"
+   ]
+  },
+  "capital": {
+   "en": "Ramallah",
+   "fr": "Ramallah"
+  },
+  "continent": "asia",
+  "region": "Western Asia",
+  "population": 4685306,
+  "area": 6220,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   35.248,
+   31.948
+  ],
+  "bbox": [
+   34.873,
+   31.351,
+   35.572,
+   32.534
+  ]
+ },
+ {
+  "id": "QAT",
+  "iso2": "QA",
+  "name": {
+   "fr": "Qatar",
+   "en": "Qatar"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "State of Qatar",
+    "Dawlat Qaṭar",
+    "State of Qatar",
+    "État du Qatar"
+   ]
+  },
+  "capital": {
+   "en": "Doha",
+   "fr": "Doha"
+  },
+  "continent": "asia",
+  "region": "Western Asia",
+  "population": 2832067,
+  "area": 11586,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   51.185,
+   25.306
+  ],
+  "bbox": [
+   50.755,
+   24.565,
+   51.609,
+   26.153
+  ]
+ },
+ {
+  "id": "ROU",
+  "iso2": "RO",
+  "name": {
+   "fr": "Roumanie",
+   "en": "Romania"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Rumania",
+    "Roumania",
+    "România",
+    "Romania",
+    "Roumanie"
+   ]
+  },
+  "capital": {
+   "en": "Bucharest",
+   "fr": "Bucarest"
+  },
+  "continent": "europe",
+  "region": "Southeast Europe",
+  "population": 19356544,
+  "area": 238391,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   24.973,
+   45.852
+  ],
+  "bbox": [
+   20.242,
+   43.671,
+   29.706,
+   48.263
+  ]
+ },
+ {
+  "id": "RUS",
+  "iso2": "RU",
+  "name": {
+   "fr": "Russie",
+   "en": "Russia"
+  },
+  "aliases": {
+   "fr": [
+    "russie"
+   ],
+   "en": [
+    "russia",
+    "Russian Federation",
+    "Российская Федерация",
+    "Russian Federation",
+    "Fédération de Russie"
+   ]
+  },
+  "capital": {
+   "en": "Moscow",
+   "fr": "Moscou"
+  },
+  "continent": "europe",
+  "region": "Eastern Europe",
+  "population": 144373535,
+  "area": 17098242,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   99.062,
+   61.662
+  ],
+  "bbox": [
+   27.352,
+   41.199,
+   180,
+   77.73
+  ]
+ },
+ {
+  "id": "RWA",
+  "iso2": "RW",
+  "name": {
+   "fr": "Rwanda",
+   "en": "Rwanda"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Rwanda",
+    "Repubulika y'u Rwanda",
+    "République du Rwanda",
+    "Republic of Rwanda",
+    "République rwandaise"
+   ]
+  },
+  "capital": {
+   "en": "Kigali",
+   "fr": "Kigali"
+  },
+  "continent": "africa",
+  "region": "Eastern Africa",
+  "population": 12626950,
+  "area": 26338,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   29.92,
+   -1.99
+  ],
+  "bbox": [
+   28.858,
+   -2.809,
+   30.877,
+   -1.063
+  ]
+ },
+ {
+  "id": "SAU",
+  "iso2": "SA",
+  "name": {
+   "fr": "Arabie Saoudite",
+   "en": "Saudi Arabia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Saudi",
+    "Kingdom of Saudi Arabia",
+    "Al-Mamlakah al-‘Arabiyyah as-Su‘ūdiyyah",
+    "Kingdom of Saudi Arabia",
+    "Royaume d'Arabie Saoudite"
+   ]
+  },
+  "capital": {
+   "en": "Riyadh",
+   "fr": "Riyad"
+  },
+  "continent": "asia",
+  "region": "Western Asia",
+  "population": 34268528,
+  "area": 2149690,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   44.539,
+   24.125
+  ],
+  "bbox": [
+   34.616,
+   16.372,
+   55.641,
+   32.125
+  ]
+ },
+ {
+  "id": "SDN",
+  "iso2": "SD",
+  "name": {
+   "fr": "Soudan",
+   "en": "Sudan"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of the Sudan",
+    "Jumhūrīyat as-Sūdān",
+    "Republic of the Sudan",
+    "République du Soudan"
+   ]
+  },
+  "capital": {
+   "en": "Khartoum",
+   "fr": "Khartoum"
+  },
+  "continent": "africa",
+  "region": "Northern Africa",
+  "population": 42813238,
+  "area": 1886068,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   29.94,
+   15.99
+  ],
+  "bbox": [
+   21.825,
+   8.666,
+   38.609,
+   22.202
+  ]
+ },
+ {
+  "id": "SEN",
+  "iso2": "SN",
+  "name": {
+   "fr": "Sénégal",
+   "en": "Senegal"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Senegal",
+    "République du Sénégal",
+    "Republic of Senegal",
+    "République du Sénégal"
+   ]
+  },
+  "capital": {
+   "en": "Dakar",
+   "fr": "Dakar"
+  },
+  "continent": "africa",
+  "region": "Western Africa",
+  "population": 16296364,
+  "area": 196722,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -14.473,
+   14.366
+  ],
+  "bbox": [
+   -17.536,
+   12.328,
+   -11.382,
+   16.679
+  ]
+ },
+ {
+  "id": "SGP",
+  "iso2": "SG",
+  "name": {
+   "fr": "Singapour",
+   "en": "Singapore"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Singapura",
+    "Republik Singapura",
+    "新加坡共和国",
+    "Republic of Singapore",
+    "République de Singapour"
+   ]
+  },
+  "capital": {
+   "en": "Singapore",
+   "fr": "Singapour"
+  },
+  "continent": "asia",
+  "region": "South-Eastern Asia",
+  "population": 5703569,
+  "area": 710,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   103.817,
+   1.359
+  ],
+  "bbox": [
+   103.65,
+   1.265,
+   103.996,
+   1.447
+  ]
+ },
+ {
+  "id": "SLB",
+  "iso2": "SB",
+  "name": {
+   "fr": "Îles Salomon",
+   "en": "Solomon Islands"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Solomon Islands",
+    "Îles Salomon"
+   ]
+  },
+  "capital": {
+   "en": "Honiara",
+   "fr": "Honiara"
+  },
+  "continent": "oceania",
+  "region": "Melanesia",
+  "population": 669823,
+  "area": 28896,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   160.169,
+   -9.624
+  ],
+  "bbox": [
+   156.453,
+   -11.832,
+   162.373,
+   -6.609
+  ]
+ },
+ {
+  "id": "SLE",
+  "iso2": "SL",
+  "name": {
+   "fr": "Sierra Leone",
+   "en": "Sierra Leone"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Sierra Leone",
+    "Republic of Sierra Leone",
+    "République de Sierra Leone"
+   ]
+  },
+  "capital": {
+   "en": "Freetown",
+   "fr": "Freetown"
+  },
+  "continent": "africa",
+  "region": "Western Africa",
+  "population": 7813215,
+  "area": 71740,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -11.785,
+   8.572
+  ],
+  "bbox": [
+   -13.293,
+   6.907,
+   -10.283,
+   9.997
+  ]
+ },
+ {
+  "id": "SLV",
+  "iso2": "SV",
+  "name": {
+   "fr": "Salvador",
+   "en": "El Salvador"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of El Salvador",
+    "República de El Salvador",
+    "Republic of El Salvador",
+    "République du Salvador"
+   ]
+  },
+  "capital": {
+   "en": "San Salvador",
+   "fr": "San Salvador"
+  },
+  "continent": "north-america",
+  "region": "Central America",
+  "population": 6453553,
+  "area": 21041,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -88.872,
+   13.739
+  ],
+  "bbox": [
+   -90.106,
+   13.164,
+   -87.715,
+   14.431
+  ]
+ },
+ {
+  "id": "SMR",
+  "iso2": "SM",
+  "name": {
+   "fr": "Saint-Marin",
+   "en": "San Marino"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of San Marino",
+    "Repubblica di San Marino",
+    "Most Serene Republic of San Marino",
+    "République de Saint-Marin"
+   ]
+  },
+  "capital": {
+   "en": "City of San Marino",
+   "fr": "Saint-Marin"
+  },
+  "continent": "europe",
+  "region": "Southern Europe",
+  "population": 33860,
+  "area": 61,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   12.459,
+   43.942
+  ],
+  "bbox": [
+   12.397,
+   43.894,
+   12.515,
+   43.99
+  ]
+ },
+ {
+  "id": "SOM",
+  "iso2": "SO",
+  "name": {
+   "fr": "Somalie",
+   "en": "Somalia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "aṣ-Ṣūmāl",
+    "Federal Republic of Somalia",
+    "Jamhuuriyadda Federaalka Soomaaliya",
+    "Jumhūriyyat aṣ-Ṣūmāl al-Fiderāliyya",
+    "Federal Republic of Somalia",
+    "République fédérale de Somalie"
+   ]
+  },
+  "capital": {
+   "en": "Mogadishu",
+   "fr": "Mogadiscio"
+  },
+  "continent": "africa",
+  "region": "Eastern Africa",
+  "population": 10192317,
+  "area": 637657,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   45.707,
+   4.751
+  ],
+  "bbox": [
+   40.964,
+   -1.695,
+   51.39,
+   11.984
+  ]
+ },
+ {
+  "id": "SRB",
+  "iso2": "RS",
+  "name": {
+   "fr": "Serbie",
+   "en": "Serbia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Srbija",
+    "Republika Srbija",
+    "Србија",
+    "Република Србија",
+    "Republic of Serbia",
+    "Republic of Serbia",
+    "République de Serbie"
+   ]
+  },
+  "capital": {
+   "en": "Belgrade",
+   "fr": "Belgrade"
+  },
+  "continent": "europe",
+  "region": "Southeast Europe",
+  "population": 6944975,
+  "area": 88361,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   21.066,
+   43.774
+  ],
+  "bbox": [
+   18.839,
+   42.242,
+   22.977,
+   46.169
+  ]
+ },
+ {
+  "id": "SSD",
+  "iso2": "SS",
+  "name": {
+   "fr": "Soudan du Sud",
+   "en": "South Sudan"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of South Sudan",
+    "République du Soudan du Sud"
+   ]
+  },
+  "capital": {
+   "en": "Juba",
+   "fr": "Djouba"
+  },
+  "continent": "africa",
+  "region": "Middle Africa",
+  "population": 11062113,
+  "area": 619745,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   30.248,
+   7.309
+  ],
+  "bbox": [
+   24.147,
+   3.491,
+   35.268,
+   12.223
+  ]
+ },
+ {
+  "id": "STP",
+  "iso2": "ST",
+  "name": {
+   "fr": "São Tomé et Príncipe",
+   "en": "São Tomé and Príncipe"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Democratic Republic of São Tomé and Príncipe",
+    "Sao Tome and Principe",
+    "República Democrática de São Tomé e Príncipe",
+    "Democratic Republic of São Tomé and Príncipe",
+    "République démocratique de São Tomé et Príncipe"
+   ]
+  },
+  "capital": {
+   "en": "São Tomé",
+   "fr": "São Tomé"
+  },
+  "continent": "africa",
+  "region": "Middle Africa",
+  "population": 215056,
+  "area": 964,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   6.607,
+   0.238
+  ],
+  "bbox": [
+   6.468,
+   0.047,
+   7.452,
+   1.699
+  ]
+ },
+ {
+  "id": "SUR",
+  "iso2": "SR",
+  "name": {
+   "fr": "Surinam",
+   "en": "Suriname"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Sarnam",
+    "Sranangron",
+    "Republic of Suriname",
+    "Republiek Suriname",
+    "Republic of Suriname",
+    "République du Suriname"
+   ]
+  },
+  "capital": {
+   "en": "Paramaribo",
+   "fr": "Paramaribo"
+  },
+  "continent": "south-america",
+  "region": "South America",
+  "population": 581363,
+  "area": 163820,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -55.912,
+   4.131
+  ],
+  "bbox": [
+   -58.054,
+   1.842,
+   -53.99,
+   5.993
+  ]
+ },
+ {
+  "id": "SVK",
+  "iso2": "SK",
+  "name": {
+   "fr": "Slovaquie",
+   "en": "Slovakia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Slovak Republic",
+    "Slovenská republika",
+    "Slovak Republic",
+    "République slovaque"
+   ]
+  },
+  "capital": {
+   "en": "Bratislava",
+   "fr": "Bratislava"
+  },
+  "continent": "europe",
+  "region": "Central Europe",
+  "population": 5454073,
+  "area": 49037,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   19.479,
+   48.705
+  ],
+  "bbox": [
+   16.863,
+   47.763,
+   22.539,
+   49.598
+  ]
+ },
+ {
+  "id": "SVN",
+  "iso2": "SI",
+  "name": {
+   "fr": "Slovénie",
+   "en": "Slovenia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Slovenia",
+    "Republika Slovenija",
+    "Republic of Slovenia",
+    "République de Slovénie"
+   ]
+  },
+  "capital": {
+   "en": "Ljubljana",
+   "fr": "Ljubljana"
+  },
+  "continent": "europe",
+  "region": "Central Europe",
+  "population": 2087946,
+  "area": 20273,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   14.804,
+   46.116
+  ],
+  "bbox": [
+   13.378,
+   45.428,
+   16.516,
+   46.863
+  ]
+ },
+ {
+  "id": "SWE",
+  "iso2": "SE",
+  "name": {
+   "fr": "Suède",
+   "en": "Sweden"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Kingdom of Sweden",
+    "Konungariket Sverige",
+    "Kingdom of Sweden",
+    "Royaume de Suède"
+   ]
+  },
+  "capital": {
+   "en": "Stockholm",
+   "fr": "Stockholm"
+  },
+  "continent": "europe",
+  "region": "Northern Europe",
+  "population": 10285453,
+  "area": 450295,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   16.735,
+   62.825
+  ],
+  "bbox": [
+   11.147,
+   55.346,
+   24.155,
+   69.037
+  ]
+ },
+ {
+  "id": "SWZ",
+  "iso2": "SZ",
+  "name": {
+   "fr": "Swaziland",
+   "en": "Eswatini"
+  },
+  "aliases": {
+   "fr": [
+    "swaziland"
+   ],
+   "en": [
+    "swaziland",
+    "eswatini",
+    "Swaziland",
+    "weSwatini",
+    "Swatini",
+    "Ngwane",
+    "Kingdom of Eswatini",
+    "Umbuso weSwatini",
+    "Kingdom of Eswatini",
+    "Royaume d’Eswatini"
+   ]
+  },
+  "capital": {
+   "en": "Lobamba",
+   "fr": "Mbabane"
+  },
+  "continent": "africa",
+  "region": "Southern Africa",
+  "population": 1148130,
+  "area": 17364,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   31.482,
+   -26.558
+  ],
+  "bbox": [
+   30.788,
+   -27.31,
+   32.113,
+   -25.743
+  ]
+ },
+ {
+  "id": "SYC",
+  "iso2": "SC",
+  "name": {
+   "fr": "Seychelles",
+   "en": "Seychelles"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Seychelles",
+    "Repiblik Sesel",
+    "République des Seychelles",
+    "Republic of Seychelles",
+    "République des Seychelles"
+   ]
+  },
+  "capital": {
+   "en": "Victoria",
+   "fr": "Victoria"
+  },
+  "continent": "africa",
+  "region": "Eastern Africa",
+  "population": 97625,
+  "area": 452,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   55.476,
+   -4.661
+  ],
+  "bbox": [
+   55.383,
+   -4.786,
+   55.543,
+   -4.559
+  ]
+ },
+ {
+  "id": "SYR",
+  "iso2": "SY",
+  "name": {
+   "fr": "Syrie",
+   "en": "Syria"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Syrian Arab Republic",
+    "Al-Jumhūrīyah Al-ʻArabīyah As-Sūrīyah",
+    "Syrian Arab Republic",
+    "République arabe syrienne"
+   ]
+  },
+  "capital": {
+   "en": "Damascus",
+   "fr": "Damas"
+  },
+  "continent": "asia",
+  "region": "Western Asia",
+  "population": 17070135,
+  "area": 185180,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   38.505,
+   35.023
+  ],
+  "bbox": [
+   35.764,
+   32.317,
+   42.359,
+   37.297
+  ]
+ },
+ {
+  "id": "TCD",
+  "iso2": "TD",
+  "name": {
+   "fr": "Tchad",
+   "en": "Chad"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Tchad",
+    "Republic of Chad",
+    "République du Tchad",
+    "Republic of Chad",
+    "République du Tchad"
+   ]
+  },
+  "capital": {
+   "en": "N'Djamena",
+   "fr": "N'Djamena"
+  },
+  "continent": "africa",
+  "region": "Middle Africa",
+  "population": 15946876,
+  "area": 1284000,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   18.645,
+   15.333
+  ],
+  "bbox": [
+   13.448,
+   7.475,
+   23.983,
+   23.445
+  ]
+ },
+ {
+  "id": "TGO",
+  "iso2": "TG",
+  "name": {
+   "fr": "Togo",
+   "en": "Togo"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Togolese",
+    "Togolese Republic",
+    "République Togolaise",
+    "Togolese Republic",
+    "République togolaise"
+   ]
+  },
+  "capital": {
+   "en": "Lomé",
+   "fr": "Lomé"
+  },
+  "continent": "africa",
+  "region": "Western Africa",
+  "population": 8082366,
+  "area": 56785,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   0.962,
+   8.525
+  ],
+  "bbox": [
+   -0.09,
+   6.089,
+   1.778,
+   11.116
+  ]
+ },
+ {
+  "id": "THA",
+  "iso2": "TH",
+  "name": {
+   "fr": "Thaïlande",
+   "en": "Thailand"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Prathet",
+    "Thai",
+    "Kingdom of Thailand",
+    "ราชอาณาจักรไทย",
+    "Ratcha Anachak Thai",
+    "Kingdom of Thailand",
+    "Royaume de Thaïlande"
+   ]
+  },
+  "capital": {
+   "en": "Bangkok",
+   "fr": "Bangkok"
+  },
+  "continent": "asia",
+  "region": "South-Eastern Asia",
+  "population": 69625582,
+  "area": 513120,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   101.006,
+   15.134
+  ],
+  "bbox": [
+   97.374,
+   5.637,
+   105.641,
+   20.424
+  ]
+ },
+ {
+  "id": "TJK",
+  "iso2": "TJ",
+  "name": {
+   "fr": "Tadjikistan",
+   "en": "Tajikistan"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Toçikiston",
+    "Republic of Tajikistan",
+    "Ҷумҳурии Тоҷикистон",
+    "Çumhuriyi Toçikiston",
+    "Republic of Tajikistan",
+    "République du Tadjikistan"
+   ]
+  },
+  "capital": {
+   "en": "Dushanbe",
+   "fr": "Douchanbé"
+  },
+  "continent": "asia",
+  "region": "Central Asia",
+  "population": 9321018,
+  "area": 143100,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   71.014,
+   38.529
+  ],
+  "bbox": [
+   67.35,
+   36.684,
+   75.119,
+   41.035
+  ]
+ },
+ {
+  "id": "TKM",
+  "iso2": "TM",
+  "name": {
+   "fr": "Turkménistan",
+   "en": "Turkmenistan"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Turkmenistan",
+    "Turkménistan"
+   ]
+  },
+  "capital": {
+   "en": "Ashgabat",
+   "fr": "Achgabat"
+  },
+  "continent": "asia",
+  "region": "Central Asia",
+  "population": 5942089,
+  "area": 488100,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   59.373,
+   39.116
+  ],
+  "bbox": [
+   52.494,
+   35.171,
+   66.629,
+   42.778
+  ]
+ },
+ {
+  "id": "TLS",
+  "iso2": "TL",
+  "name": {
+   "fr": "Timor oriental",
+   "en": "Timor-Leste"
+  },
+  "aliases": {
+   "fr": [
+    "timor oriental"
+   ],
+   "en": [
+    "east timor",
+    "East Timor",
+    "Timor",
+    "Democratic Republic of Timor-Leste",
+    "República Democrática de Timor-Leste",
+    "Repúblika Demokrátika Timór-Leste",
+    "Timór Lorosa'e",
+    "Timor Lorosae",
+    "Democratic Republic of Timor-Leste",
+    "République démocratique du Timor oriental"
+   ]
+  },
+  "capital": {
+   "en": "Dili",
+   "fr": "Dili"
+  },
+  "continent": "asia",
+  "region": "South-Eastern Asia",
+  "population": 1293119,
+  "area": 14874,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   125.923,
+   -8.81
+  ],
+  "bbox": [
+   124.915,
+   -9.512,
+   127.296,
+   -8.316
+  ]
+ },
+ {
+  "id": "TON",
+  "iso2": "TO",
+  "name": {
+   "fr": "Tonga",
+   "en": "Tonga"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Kingdom of Tonga",
+    "Royaume des Tonga"
+   ]
+  },
+  "capital": {
+   "en": "Nuku'alofa",
+   "fr": "Nukuʻalofa"
+  },
+  "continent": "oceania",
+  "region": "Polynesia",
+  "population": 104494,
+  "area": 747,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   -175.217,
+   -21.167
+  ],
+  "bbox": [
+   -175.362,
+   -21.451,
+   -173.922,
+   -18.565
+  ]
+ },
+ {
+  "id": "TTO",
+  "iso2": "TT",
+  "name": {
+   "fr": "Trinité-et-Tobago",
+   "en": "Trinidad and Tobago"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Trinidad and Tobago",
+    "Republic of Trinidad and Tobago",
+    "République de Trinité-et-Tobago"
+   ]
+  },
+  "capital": {
+   "en": "Port of Spain",
+   "fr": "Port-d'Espagne"
+  },
+  "continent": "north-america",
+  "region": "Caribbean",
+  "population": 1394973,
+  "area": 5130,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   -61.293,
+   10.421
+  ],
+  "bbox": [
+   -61.906,
+   10.065,
+   -60.918,
+   10.84
+  ]
+ },
+ {
+  "id": "TUN",
+  "iso2": "TN",
+  "name": {
+   "fr": "Tunisie",
+   "en": "Tunisia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Tunisia",
+    "al-Jumhūriyyah at-Tūnisiyyah",
+    "Tunisian Republic",
+    "République tunisienne"
+   ]
+  },
+  "capital": {
+   "en": "Tunis",
+   "fr": "Tunis"
+  },
+  "continent": "africa",
+  "region": "Northern Africa",
+  "population": 11694719,
+  "area": 163610,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   9.548,
+   34.12
+  ],
+  "bbox": [
+   7.496,
+   30.229,
+   11.536,
+   37.34
+  ]
+ },
+ {
+  "id": "TUR",
+  "iso2": "TR",
+  "name": {
+   "fr": "Turquie",
+   "en": "Türkiye"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Turkiye",
+    "Republic of Turkey",
+    "Türkiye Cumhuriyeti",
+    "Republic of Türkiye",
+    "République de Turquie"
+   ]
+  },
+  "capital": {
+   "en": "Ankara",
+   "fr": "Ankara"
+  },
+  "continent": "asia",
+  "region": "Western Asia",
+  "population": 83429615,
+  "area": 783562,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   35.422,
+   38.991
+  ],
+  "bbox": [
+   26.096,
+   35.831,
+   44.817,
+   42.063
+  ]
+ },
+ {
+  "id": "TUV",
+  "iso2": "TV",
+  "name": {
+   "fr": "Tuvalu",
+   "en": "Tuvalu"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Tuvalu",
+    "Tuvalu"
+   ]
+  },
+  "capital": {
+   "en": "Funafuti",
+   "fr": "Funafuti"
+  },
+  "continent": "oceania",
+  "region": "Polynesia",
+  "population": 11646,
+  "area": 26,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   179.206,
+   -8.503
+  ],
+  "bbox": [
+   179.196,
+   -8.535,
+   179.217,
+   -8.466
+  ]
+ },
+ {
+  "id": "TZA",
+  "iso2": "TZ",
+  "name": {
+   "fr": "Tanzanie",
+   "en": "Tanzania"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Tanzania, United Republic of",
+    "United Republic of Tanzania",
+    "Jamhuri ya Muungano wa Tanzania",
+    "United Republic of Tanzania",
+    "République -Unie de Tanzanie"
+   ]
+  },
+  "capital": {
+   "en": "Dodoma",
+   "fr": "Dodoma"
+  },
+  "continent": "africa",
+  "region": "Eastern Africa",
+  "population": 59509032,
+  "area": 945087,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   34.798,
+   -6.276
+  ],
+  "bbox": [
+   29.323,
+   -11.716,
+   40.464,
+   -0.995
+  ]
+ },
+ {
+  "id": "UGA",
+  "iso2": "UG",
+  "name": {
+   "fr": "Ouganda",
+   "en": "Uganda"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Uganda",
+    "Jamhuri ya Uganda",
+    "Republic of Uganda",
+    "République de l'Ouganda"
+   ]
+  },
+  "capital": {
+   "en": "Kampala",
+   "fr": "Kampala"
+  },
+  "continent": "africa",
+  "region": "Eastern Africa",
+  "population": 44269594,
+  "area": 241550,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   32.369,
+   1.275
+  ],
+  "bbox": [
+   29.562,
+   -1.47,
+   34.978,
+   4.22
+  ]
+ },
+ {
+  "id": "UKR",
+  "iso2": "UA",
+  "name": {
+   "fr": "Ukraine",
+   "en": "Ukraine"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Ukrayina",
+    "Ukraine",
+    "Ukraine"
+   ]
+  },
+  "capital": {
+   "en": "Kyiv",
+   "fr": "Kiev"
+  },
+  "continent": "europe",
+  "region": "Eastern Europe",
+  "population": 44385155,
+  "area": 603500,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   31.253,
+   49.16
+  ],
+  "bbox": [
+   22.132,
+   45.234,
+   40.128,
+   52.354
+  ]
+ },
+ {
+  "id": "URY",
+  "iso2": "UY",
+  "name": {
+   "fr": "Uruguay",
+   "en": "Uruguay"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Oriental Republic of Uruguay",
+    "República Oriental del Uruguay",
+    "Oriental Republic of Uruguay",
+    "République orientale de l'Uruguay"
+   ]
+  },
+  "capital": {
+   "en": "Montevideo",
+   "fr": "Montevideo"
+  },
+  "continent": "south-america",
+  "region": "South America",
+  "population": 3461734,
+  "area": 181034,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -56.018,
+   -32.799
+  ],
+  "bbox": [
+   -58.438,
+   -34.933,
+   -53.126,
+   -30.101
+  ]
+ },
+ {
+  "id": "USA",
+  "iso2": "US",
+  "name": {
+   "fr": "États-Unis",
+   "en": "United States"
+  },
+  "aliases": {
+   "fr": [
+    "etats-unis",
+    "états unis",
+    "usa",
+    "amerique"
+   ],
+   "en": [
+    "usa",
+    "us",
+    "united states",
+    "america",
+    "USA",
+    "United States of America",
+    "United States of America",
+    "Les états-unis d'Amérique"
+   ]
+  },
+  "capital": {
+   "en": "Washington D.C.",
+   "fr": "Washington"
+  },
+  "continent": "north-america",
+  "region": "North America",
+  "population": 328239523,
+  "area": 9372610,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -99.144,
+   39.527
+  ],
+  "bbox": [
+   -168.088,
+   25.133,
+   -66.987,
+   71.408
+  ]
+ },
+ {
+  "id": "UZB",
+  "iso2": "UZ",
+  "name": {
+   "fr": "Ouzbékistan",
+   "en": "Uzbekistan"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Uzbekistan",
+    "O‘zbekiston Respublikasi",
+    "Ўзбекистон Республикаси",
+    "Republic of Uzbekistan",
+    "République d'Ouzbékistan"
+   ]
+  },
+  "capital": {
+   "en": "Tashkent",
+   "fr": "Tachkent"
+  },
+  "continent": "asia",
+  "region": "Central Asia",
+  "population": 33580650,
+  "area": 447400,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   63.133,
+   41.757
+  ],
+  "bbox": [
+   55.976,
+   37.172,
+   73.137,
+   45.555
+  ]
+ },
+ {
+  "id": "VAT",
+  "iso2": "VA",
+  "name": {
+   "fr": "Cité du Vatican",
+   "en": "Vatican City"
+  },
+  "aliases": {
+   "fr": [
+    "vatican",
+    "saint-siege",
+    "saint siège"
+   ],
+   "en": [
+    "vatican",
+    "holy see",
+    "Holy See (Vatican City State)",
+    "Vatican City State",
+    "Vatican",
+    "Stato della Città del Vaticano",
+    "Vatican City State",
+    "Cité du Vatican"
+   ]
+  },
+  "capital": {
+   "en": "Vatican City",
+   "fr": "Vatican"
+  },
+  "continent": "europe",
+  "region": "Southern Europe",
+  "population": 825,
+  "area": 0.44,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   12.434,
+   41.902
+  ],
+  "bbox": [
+   12.428,
+   41.898,
+   12.439,
+   41.906
+  ]
+ },
+ {
+  "id": "VCT",
+  "iso2": "VC",
+  "name": {
+   "fr": "Saint-Vincent-et-les-Grenadines",
+   "en": "Saint Vincent and the Grenadines"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Saint Vincent and the Grenadines",
+    "Saint-Vincent-et-les Grenadines"
+   ]
+  },
+  "capital": {
+   "en": "Kingstown",
+   "fr": "Kingstown"
+  },
+  "continent": "north-america",
+  "region": "Caribbean",
+  "population": 110589,
+  "area": 389,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   -61.196,
+   13.254
+  ],
+  "bbox": [
+   -61.277,
+   13.142,
+   -61.124,
+   13.359
+  ]
+ },
+ {
+  "id": "VEN",
+  "iso2": "VE",
+  "name": {
+   "fr": "Venezuela",
+   "en": "Venezuela"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Bolivarian Republic of Venezuela",
+    "Venezuela, Bolivarian Republic of",
+    "República Bolivariana de Venezuela",
+    "Bolivarian Republic of Venezuela",
+    "République bolivarienne du Venezuela"
+   ]
+  },
+  "capital": {
+   "en": "Caracas",
+   "fr": "Caracas"
+  },
+  "continent": "south-america",
+  "region": "South America",
+  "population": 28515829,
+  "area": 916445,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   -66.187,
+   7.118
+  ],
+  "bbox": [
+   -73.366,
+   0.688,
+   -59.829,
+   12.178
+  ]
+ },
+ {
+  "id": "VNM",
+  "iso2": "VN",
+  "name": {
+   "fr": "Viêt Nam",
+   "en": "Vietnam"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Socialist Republic of Vietnam",
+    "Cộng hòa Xã hội chủ nghĩa Việt Nam",
+    "Viet Nam",
+    "Socialist Republic of Vietnam",
+    "République socialiste du Viêt Nam"
+   ]
+  },
+  "capital": {
+   "en": "Hanoi",
+   "fr": "Hanoï"
+  },
+  "continent": "asia",
+  "region": "South-Eastern Asia",
+  "population": 96462106,
+  "area": 331212,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   106.301,
+   16.652
+  ],
+  "bbox": [
+   102.127,
+   8.583,
+   109.445,
+   23.345
+  ]
+ },
+ {
+  "id": "VUT",
+  "iso2": "VU",
+  "name": {
+   "fr": "Vanuatu",
+   "en": "Vanuatu"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Vanuatu",
+    "Ripablik blong Vanuatu",
+    "République de Vanuatu",
+    "Republic of Vanuatu",
+    "République de Vanuatu"
+   ]
+  },
+  "capital": {
+   "en": "Port Vila",
+   "fr": "Port-Vila"
+  },
+  "continent": "oceania",
+  "region": "Melanesia",
+  "population": 299882,
+  "area": 12189,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   166.85,
+   -15.225
+  ],
+  "bbox": [
+   166.526,
+   -19.649,
+   169.491,
+   -14.637
+  ]
+ },
+ {
+  "id": "WSM",
+  "iso2": "WS",
+  "name": {
+   "fr": "Samoa",
+   "en": "Samoa"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Independent State of Samoa",
+    "Malo Saʻoloto Tutoʻatasi o Sāmoa",
+    "Independent State of Samoa",
+    "Samoa"
+   ]
+  },
+  "capital": {
+   "en": "Apia",
+   "fr": "Apia"
+  },
+  "continent": "oceania",
+  "region": "Polynesia",
+  "population": 197097,
+  "area": 2842,
+  "isCoastal": true,
+  "isIsland": true,
+  "center": [
+   -172.438,
+   -13.631
+  ],
+  "bbox": [
+   -172.779,
+   -14.047,
+   -171.45,
+   -13.465
+  ]
+ },
+ {
+  "id": "YEM",
+  "iso2": "YE",
+  "name": {
+   "fr": "Yémen",
+   "en": "Yemen"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Yemeni Republic",
+    "al-Jumhūriyyah al-Yamaniyyah",
+    "Republic of Yemen",
+    "République du Yémen"
+   ]
+  },
+  "capital": {
+   "en": "Sana'a",
+   "fr": "Sanaa"
+  },
+  "continent": "asia",
+  "region": "Western Asia",
+  "population": 29161922,
+  "area": 527968,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   47.541,
+   15.936
+  ],
+  "bbox": [
+   42.658,
+   12.608,
+   53.086,
+   18.996
+  ]
+ },
+ {
+  "id": "ZAF",
+  "iso2": "ZA",
+  "name": {
+   "fr": "Afrique du Sud",
+   "en": "South Africa"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "RSA",
+    "Suid-Afrika",
+    "Republic of South Africa",
+    "Republic of South Africa",
+    "République d'Afrique du Sud"
+   ]
+  },
+  "capital": {
+   "en": "Pretoria",
+   "fr": "Pretoria"
+  },
+  "continent": "africa",
+  "region": "Southern Africa",
+  "population": 58558270,
+  "area": 1221037,
+  "isCoastal": true,
+  "isIsland": false,
+  "center": [
+   25.156,
+   -29.01
+  ],
+  "bbox": [
+   16.448,
+   -34.786,
+   32.886,
+   -22.146
+  ]
+ },
+ {
+  "id": "ZMB",
+  "iso2": "ZM",
+  "name": {
+   "fr": "Zambie",
+   "en": "Zambia"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Zambia",
+    "Republic of Zambia",
+    "République de Zambie"
+   ]
+  },
+  "capital": {
+   "en": "Lusaka",
+   "fr": "Lusaka"
+  },
+  "continent": "africa",
+  "region": "Eastern Africa",
+  "population": 17861030,
+  "area": 752612,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   27.775,
+   -13.458
+  ],
+  "bbox": [
+   21.979,
+   -18.042,
+   33.662,
+   -8.194
+  ]
+ },
+ {
+  "id": "ZWE",
+  "iso2": "ZW",
+  "name": {
+   "fr": "Zimbabwe",
+   "en": "Zimbabwe"
+  },
+  "aliases": {
+   "fr": [],
+   "en": [
+    "Republic of Zimbabwe",
+    "Republic of Zimbabwe",
+    "République du Zimbabwe"
+   ]
+  },
+  "capital": {
+   "en": "Harare",
+   "fr": "Harare"
+  },
+  "continent": "africa",
+  "region": "Eastern Africa",
+  "population": 14645468,
+  "area": 390757,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   29.852,
+   -19.004
+  ],
+  "bbox": [
+   25.224,
+   -22.402,
+   33.007,
+   -15.643
+  ]
+ }
+]

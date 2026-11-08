@@ -1,0 +1,61 @@
+{
+ "date": "2027-09-28",
+ "rulesVersion": "1",
+ "datasetVersion": "2026.1",
+ "challenges": [
+  {
+   "id": "daily-2027-09-28-classic",
+   "mode": "classic",
+   "difficulty": "easy",
+   "start": "DZA",
+   "destination": "GNB",
+   "rules": {
+    "maritime": false,
+    "forbidden": [],
+    "mandatory": []
+   },
+   "minIntermediate": 2,
+   "attempts": 7,
+   "date": "2027-09-28",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2027-09-28-constraints",
+   "mode": "constraints",
+   "difficulty": "normal",
+   "start": "UGA",
+   "destination": "IRN",
+   "rules": {
+    "maritime": true,
+    "forbidden": [],
+    "mandatory": [
+     "ETH"
+    ]
+   },
+   "minIntermediate": 5,
+   "attempts": 8,
+   "date": "2027-09-28",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2027-09-28-regional",
+   "mode": "regional",
+   "difficulty": "easy",
+   "start": "NPL",
+   "destination": "BTN",
+   "rules": {
+    "maritime": false,
+    "forbidden": [],
+    "mandatory": [],
+    "allowedRegion": "south-asia"
+   },
+   "minIntermediate": 1,
+   "attempts": 6,
+   "date": "2027-09-28",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  }
+ ]
+}

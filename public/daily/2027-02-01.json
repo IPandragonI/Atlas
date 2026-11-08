@@ -1,0 +1,61 @@
+{
+ "date": "2027-02-01",
+ "rulesVersion": "1",
+ "datasetVersion": "2026.1",
+ "challenges": [
+  {
+   "id": "daily-2027-02-01-classic",
+   "mode": "classic",
+   "difficulty": "easy",
+   "start": "ECU",
+   "destination": "ARG",
+   "rules": {
+    "maritime": false,
+    "forbidden": [],
+    "mandatory": []
+   },
+   "minIntermediate": 2,
+   "attempts": 7,
+   "date": "2027-02-01",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2027-02-01-constraints",
+   "mode": "constraints",
+   "difficulty": "easy",
+   "start": "TLS",
+   "destination": "WSM",
+   "rules": {
+    "maritime": true,
+    "forbidden": [],
+    "mandatory": [
+     "VUT"
+    ]
+   },
+   "minIntermediate": 5,
+   "attempts": 10,
+   "date": "2027-02-01",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2027-02-01-regional",
+   "mode": "regional",
+   "difficulty": "easy",
+   "start": "ITA",
+   "destination": "DEU",
+   "rules": {
+    "maritime": false,
+    "forbidden": [],
+    "mandatory": [],
+    "allowedRegion": "europe"
+   },
+   "minIntermediate": 1,
+   "attempts": 6,
+   "date": "2027-02-01",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  }
+ ]
+}

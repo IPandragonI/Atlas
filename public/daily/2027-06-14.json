@@ -1,0 +1,62 @@
+{
+ "date": "2027-06-14",
+ "rulesVersion": "1",
+ "datasetVersion": "2026.1",
+ "challenges": [
+  {
+   "id": "daily-2027-06-14-classic",
+   "mode": "classic",
+   "difficulty": "easy",
+   "start": "HUN",
+   "destination": "LVA",
+   "rules": {
+    "maritime": false,
+    "forbidden": [],
+    "mandatory": []
+   },
+   "minIntermediate": 2,
+   "attempts": 7,
+   "date": "2027-06-14",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2027-06-14-constraints",
+   "mode": "constraints",
+   "difficulty": "easy",
+   "start": "CRI",
+   "destination": "GUY",
+   "rules": {
+    "maritime": false,
+    "forbidden": [
+     "VEN"
+    ],
+    "mandatory": [],
+    "minCoastal": 4
+   },
+   "minIntermediate": 4,
+   "attempts": 9,
+   "date": "2027-06-14",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2027-06-14-regional",
+   "mode": "regional",
+   "difficulty": "easy",
+   "start": "FIN",
+   "destination": "DNK",
+   "rules": {
+    "maritime": true,
+    "forbidden": [],
+    "mandatory": [],
+    "allowedRegion": "scandinavia"
+   },
+   "minIntermediate": 1,
+   "attempts": 6,
+   "date": "2027-06-14",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  }
+ ]
+}

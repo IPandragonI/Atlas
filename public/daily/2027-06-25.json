@@ -1,0 +1,62 @@
+{
+ "date": "2027-06-25",
+ "rulesVersion": "1",
+ "datasetVersion": "2026.1",
+ "challenges": [
+  {
+   "id": "daily-2027-06-25-classic",
+   "mode": "classic",
+   "difficulty": "hard",
+   "start": "PNG",
+   "destination": "TCD",
+   "rules": {
+    "maritime": false,
+    "forbidden": [],
+    "mandatory": []
+   },
+   "minIntermediate": 12,
+   "attempts": 13,
+   "date": "2027-06-25",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2027-06-25-constraints",
+   "mode": "constraints",
+   "difficulty": "hard",
+   "start": "MYS",
+   "destination": "NAM",
+   "rules": {
+    "maritime": true,
+    "forbidden": [
+     "GRC"
+    ],
+    "mandatory": [],
+    "minIsland": 2
+   },
+   "minIntermediate": 10,
+   "attempts": 11,
+   "date": "2027-06-25",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2027-06-25-regional",
+   "mode": "regional",
+   "difficulty": "hard",
+   "start": "SVN",
+   "destination": "GRC",
+   "rules": {
+    "maritime": false,
+    "forbidden": [],
+    "mandatory": [],
+    "allowedRegion": "balkans"
+   },
+   "minIntermediate": 3,
+   "attempts": 4,
+   "date": "2027-06-25",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  }
+ ]
+}

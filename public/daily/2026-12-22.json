@@ -1,0 +1,63 @@
+{
+ "date": "2026-12-22",
+ "rulesVersion": "1",
+ "datasetVersion": "2026.1",
+ "challenges": [
+  {
+   "id": "daily-2026-12-22-classic",
+   "mode": "classic",
+   "difficulty": "easy",
+   "start": "IND",
+   "destination": "KHM",
+   "rules": {
+    "maritime": false,
+    "forbidden": [],
+    "mandatory": []
+   },
+   "minIntermediate": 2,
+   "attempts": 7,
+   "date": "2026-12-22",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2026-12-22-constraints",
+   "mode": "constraints",
+   "difficulty": "normal",
+   "start": "PNG",
+   "destination": "UZB",
+   "rules": {
+    "maritime": false,
+    "forbidden": [
+     "MMR"
+    ],
+    "mandatory": [
+     "IND"
+    ]
+   },
+   "minIntermediate": 8,
+   "attempts": 11,
+   "date": "2026-12-22",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2026-12-22-regional",
+   "mode": "regional",
+   "difficulty": "easy",
+   "start": "CAF",
+   "destination": "ETH",
+   "rules": {
+    "maritime": false,
+    "forbidden": [],
+    "mandatory": [],
+    "allowedRegion": "africa"
+   },
+   "minIntermediate": 1,
+   "attempts": 6,
+   "date": "2026-12-22",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  }
+ ]
+}

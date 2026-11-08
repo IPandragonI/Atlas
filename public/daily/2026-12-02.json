@@ -1,0 +1,62 @@
+{
+ "date": "2026-12-02",
+ "rulesVersion": "1",
+ "datasetVersion": "2026.1",
+ "challenges": [
+  {
+   "id": "daily-2026-12-02-classic",
+   "mode": "classic",
+   "difficulty": "normal",
+   "start": "GTM",
+   "destination": "COL",
+   "rules": {
+    "maritime": false,
+    "forbidden": [],
+    "mandatory": []
+   },
+   "minIntermediate": 4,
+   "attempts": 7,
+   "date": "2026-12-02",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2026-12-02-constraints",
+   "mode": "constraints",
+   "difficulty": "normal",
+   "start": "MWI",
+   "destination": "NGA",
+   "rules": {
+    "maritime": false,
+    "forbidden": [
+     "COG"
+    ],
+    "mandatory": [],
+    "minCoastal": 4
+   },
+   "minIntermediate": 5,
+   "attempts": 8,
+   "date": "2026-12-02",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2026-12-02-regional",
+   "mode": "regional",
+   "difficulty": "normal",
+   "start": "AFG",
+   "destination": "NPL",
+   "rules": {
+    "maritime": true,
+    "forbidden": [],
+    "mandatory": [],
+    "allowedRegion": "south-asia"
+   },
+   "minIntermediate": 2,
+   "attempts": 5,
+   "date": "2026-12-02",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  }
+ ]
+}

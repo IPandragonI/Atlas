@@ -1,0 +1,63 @@
+{
+ "date": "2027-02-14",
+ "rulesVersion": "1",
+ "datasetVersion": "2026.1",
+ "challenges": [
+  {
+   "id": "daily-2027-02-14-classic",
+   "mode": "classic",
+   "difficulty": "normal",
+   "start": "ITA",
+   "destination": "NOR",
+   "rules": {
+    "maritime": false,
+    "forbidden": [],
+    "mandatory": []
+   },
+   "minIntermediate": 4,
+   "attempts": 7,
+   "date": "2027-02-14",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2027-02-14-constraints",
+   "mode": "constraints",
+   "difficulty": "hard",
+   "start": "SRB",
+   "destination": "VCT",
+   "rules": {
+    "maritime": true,
+    "forbidden": [
+     "JAM"
+    ],
+    "mandatory": [
+     "AZE"
+    ]
+   },
+   "minIntermediate": 11,
+   "attempts": 12,
+   "date": "2027-02-14",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  },
+  {
+   "id": "daily-2027-02-14-regional",
+   "mode": "regional",
+   "difficulty": "normal",
+   "start": "ISL",
+   "destination": "FIN",
+   "rules": {
+    "maritime": true,
+    "forbidden": [],
+    "mandatory": [],
+    "allowedRegion": "scandinavia"
+   },
+   "minIntermediate": 1,
+   "attempts": 4,
+   "date": "2027-02-14",
+   "rulesVersion": "1",
+   "datasetVersion": "2026.1"
+  }
+ ]
+}
