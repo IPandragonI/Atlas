@@ -1,6 +1,12 @@
 /** Shared engine types. The engine never imports React, MapLibre or browser APIs. */
 
-export type ConnectionType = "land" | "sea";
+/**
+ * land: ordinary borders (always usable).
+ * sea: curated maritime links (usable with `rules.maritime`).
+ * strait: curated strait crossings (usable with `rules.straits`, independent of `maritime`).
+ * dispute: connections that exist only through disputed or contested territory (usable with `rules.disputes`).
+ */
+export type ConnectionType = "land" | "sea" | "strait" | "dispute";
 export type Difficulty = "easy" | "normal" | "hard";
 /** Challenges can also be generated with player-defined ("custom") settings. */
 export type ChallengeDifficulty = Difficulty | "custom";
@@ -42,6 +48,10 @@ export interface RegionDef {
 /** Rules a challenge applies on top of the shared geographic graph. */
 export interface ChallengeRules {
   maritime: boolean;
+  /** Strait crossings are usable. Absent = false (every challenge published before this option keeps its meaning). */
+  straits?: boolean;
+  /** Connections through disputed territory are usable. Absent = false. */
+  disputes?: boolean;
   forbidden: string[];
   mandatory: string[];
   minCoastal?: number;

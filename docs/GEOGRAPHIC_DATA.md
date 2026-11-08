@@ -38,6 +38,40 @@ Playable geometry uses *map units* and excludes overseas units (`FRA`: Guiana, G
 chain, Pacific micro-states…). Land supersedes sea. Never auto-generated from proximity. A test asserts every country is
 reachable when sea links are enabled.
 
+### Strait crossings and territorial disputes (two independent game options)
+Both are **explicit lists** in `src/data/connections/overrides.ts` (`STRAIT_CONNECTIONS`, `DISPUTED_CONNECTIONS`), copied by
+`npm run data:build` into `connections.json` (`strait`, `dispute`). A test fails if the JSON and the lists drift. In the graph a
+pair can have several types; each option enables **exactly its own list**:
+
+| Option | Rule field | Enables | Default |
+|---|---|---|---|
+| Maritime (existing, set by the mode) | `maritime` | the curated sea links | per mode |
+| Strait crossings | `straits` | `STRAIT_CONNECTIONS` only (independent of `maritime`) | off |
+| Territorial disputes | `disputes` | `DISPUTED_CONNECTIONS` only | off |
+
+Fields are written into a challenge's rules **only when on**; an absent field means off, so every published daily keeps its
+meaning. A daily's options come from its file, never from the player's preferences.
+
+**Supported straits (21):** Dover GBR–FRA, Otranto ITA–ALB, Sicily ITA–TUN, Hormuz IRN–OMN, Bab-el-Mandeb YEM–DJI, Tiran
+EGY–SAU, Palk IND–LKA, Singapore SGP–IDN, Torres AUS–PNG, Korea JPN–KOR, Nemuro/La Pérouse JPN–RUS (?), Bering USA–RUS,
+Florida USA–CUB, Windward CUB–HTI, Yucatán CUB–MEX, Jamaica Channel JAM–HTI, Columbus Channel TTO–VEN, Skagerrak DNK–NOR,
+Balabac PHL–MYS (?), Martinique Channel DMA–LCA, Saint Vincent Passage LCA–VCT. Rule: a named strait/channel/passage between
+two playable countries, short crossing, and not already a land link (so Øresund, Fehmarn, Åland and Gibraltar are **not**
+listed: they are land links here). Every strait is also a sea link, so `maritime` still covers it.
+
+**Disputed connections (3), additions to the baseline:** Morocco–Mauritania (Western Sahara, Guerguerat crossing), Spain–UK
+(Gibraltar land border), Serbia–Albania (via Kosovo, which is not a node of this dataset).
+
+**Uncertain, flagged (?) and decisions for the project owner:**
+1. *Baseline land links on disputed land* (Ceuta/Melilla ESP–MAR, Golan ISR–SYR, Aksai Chin CHN–IND, Kashmir IND–PAK,
+   Abkhazia/South Ossetia GEO–RUS, Nagorno-Karabakh ARM–AZE, Crimea RUS–UKR) stay ordinary land links in every game, because
+   removing them would rewrite published dailies. They are documented in `DISPUTED_BASELINE_LAND`. Moving any of them to the
+   disputes list (so that *Disabled* also cuts it) is a one-line change plus a regeneration of the affected future dailies.
+2. *Considered and rejected:* India–Afghanistan (a claim over Gilgit-Baltistan with no border crossing), Canada–Denmark /
+   Hans Island (settled in 2022), Cyprus–Turkey (no shared boundary).
+3. *Kuril Islands* (JPN–RUS strait) and *Sabah* (PHL–MYS strait) are themselves territorial claims; they are listed as straits
+   because the strait exists regardless of the claim.
+
 ### Sea-link audit (`npm run data:audit-sea`)
 Each curated sea pair is measured on the real coastlines (`sea-audit.json`). Crossings over `SEA_DISTANCE_LIMIT_KM` must be
 a documented entry of `SEA_DISTANCE_EXCEPTIONS` (with a reason): remote island states and links required by already-published

@@ -57,7 +57,7 @@ export function generateForConfig(
 }
 
 /** Size facts about the scope of a configuration (used to validate custom settings). */
-export function scopeFacts(cfg: Pick<GameConfig, "mode" | "scope" | "forbidden">): ScopeInfo {
+export function scopeFacts(cfg: Pick<GameConfig, "mode" | "scope" | "forbidden"> & Partial<Pick<GameConfig, "straits" | "disputes">>): ScopeInfo {
   return scopeInfo(makeContext(), cfg);
 }
 

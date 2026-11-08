@@ -8,10 +8,12 @@ import type { Country, CountryConnection } from "@/engine/types";
 /** Typed dataset + the single shared graph instance (engine-level, no UI dependencies). */
 export const COUNTRIES = countriesJson as unknown as Country[];
 
-const raw = connectionsJson as unknown as { land: [string, string][]; sea: [string, string][] };
+const raw = connectionsJson as unknown as { land: [string, string][]; sea: [string, string][]; strait: [string, string][]; dispute: [string, string][] };
 export const CONNECTIONS: CountryConnection[] = [
   ...raw.land.map(([from, to]) => ({ from, to, type: "land" as const })),
   ...raw.sea.map(([from, to]) => ({ from, to, type: "sea" as const })),
+  ...raw.strait.map(([from, to]) => ({ from, to, type: "strait" as const })),
+  ...raw.dispute.map(([from, to]) => ({ from, to, type: "dispute" as const })),
 ];
 
 export const graph = new AtlasGraph(COUNTRIES, CONNECTIONS, REGION_DEFS);

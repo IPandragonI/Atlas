@@ -3,7 +3,7 @@
 import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { MapView, type MapState } from "@/components/map/MapView";
+import { MapView, type MapLink, type MapState } from "@/components/map/MapView";
 import { Flag } from "@/components/ui/Flag";
 import { Icon } from "@/components/ui/Icon";
 import { MobileMenu } from "@/components/ui/MobileMenu";
@@ -13,12 +13,14 @@ import type { Challenge, GameMode } from "@/engine/types";
 import { useRouter } from "@/i18n/navigation";
 import { graph } from "@/lib/atlas";
 import { loadDailyChallenge } from "@/lib/daily";
-import { hintLiveness } from "@/engine/hints";
+import { HINT_PENALTY, hintLiveness } from "@/engine/hints";
+import type { HintKind } from "@/engine/types";
 import { startTouchesDestination } from "@/engine/rules";
 import { configFromChallenge, effectiveMap, parseConfig, PRESET_MAP, replayParams, type GameConfig } from "@/lib/config";
 import { generateForConfigAsync } from "@/lib/generate-client";
 import { suggestAfterDaily } from "@/lib/replay";
 import { playSound, unlockAudio } from "@/lib/sound";
+import { gameIdOf, isVictoryTransition, type GameSnapshot } from "@/lib/victory";
 import { computeVisibility } from "@/lib/visibility";
 import { useGame } from "@/stores/game";
 import { useProgress } from "@/stores/progress";
@@ -73,8 +75,12 @@ export function GameScreen() {
   const [constraintsOpen, setConstraintsOpen] = useState<boolean | null>(null); // null: default (open only when there is more than the basic rule)
   const [errTick, setErrTick] = useState(0);
   const [showHelp, setShowHelp] = useState(false);
-  const [burst, setBurst] = useState<number | null>(null);
-  const celebrated = useRef(new Set<number>());
+  // Victory effects: bound to ONE game. `fx.gameId` is compared with the game on screen at render time, so a stale trigger can
+  // never show on another game (restart, new game, resume...).
+  const [fx, setFx] = useState<{ gameId: string; n: number } | null>(null);
+  const prevGame = useRef<GameSnapshot | null>(null);
+  const celebrated = useRef(new Set<string>());
+  const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const key = params.toString();
   const startedKey = useRef<string | null>(null);
 
@@ -138,29 +144,54 @@ export function GameScreen() {
     }
   }, [phase]);
 
-  // ---------------------------------------------------------------- feedback (sounds, toast)
+  // ---------------------------------------------------------------- toast, feedback (sounds)
+  const flash = useCallback((text: string, kind: "ok" | "bad" | "info", ms = 6000) => {
+    if (toastTimer.current) clearTimeout(toastTimer.current);
+    setToast({ text, kind });
+    toastTimer.current = setTimeout(() => setToast(null), ms);
+  }, []);
+  useEffect(() => () => { if (toastTimer.current) clearTimeout(toastTimer.current); }, []);
+
   useEffect(() => {
     if (!feedback) return;
     if (feedback.outcome === "rejected" || feedback.outcome === "lost") {
       playSound(feedback.outcome === "lost" ? "lose" : "bad", sound);
       setErrTick((n) => n + 1);
-      setToast({ text: t("game.wrong"), kind: "bad" });
+      flash(t("game.wrong"), "bad");
     } else if (feedback.outcome === "repeated") {
       // the same wrong country again: a slip, not a mistake. No sound, no shake, nothing counted.
-      setToast({ text: t("game.repeated"), kind: "info" });
+      flash(t("game.repeated"), "info");
     } else if (feedback.outcome === "accepted") {
       playSound("ok", sound);
-      setToast({ text: feedback.removed.length > 0 ? t("game.branch") : t("game.right"), kind: "ok" });
-    } else if (feedback.outcome === "won" && !celebrated.current.has(feedback.n)) {
-      // Victory only: one jingle and one burst per win. Defeats get neither; leaving and re-opening the results does not replay them.
-      celebrated.current.add(feedback.n);
-      playSound("win", sound);
-      setBurst(feedback.n);
+      flash(feedback.removed.length > 0 ? t("game.branch") : t("game.right"), "ok");
     }
-    const tm = setTimeout(() => setToast(null), 6000);
-    return () => clearTimeout(tm);
+    // a victory is handled below, from the game's own status transition
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [feedback?.n]);
+
+  // Which game is on screen. Everything that belongs to one game (toast, victory effects, panel state) is reset when it changes.
+  const gameId = gameIdOf(challenge?.id, state?.startedAt);
+  useEffect(() => {
+    if (toastTimer.current) clearTimeout(toastTimer.current);
+    setToast(null);
+    setConfirmGiveUp(false);
+    setConstraintsOpen(null);
+  }, [gameId]);
+
+  // Victory effects (jingle + sparkles): ONLY on a genuine playing -> won transition of the same game, and once per game.
+  const status = state?.status;
+  useEffect(() => {
+    const next: GameSnapshot | null = gameId && status ? { gameId, status } : null;
+    const prev = prevGame.current;
+    prevGame.current = next;
+    if (next && isVictoryTransition(prev, next) && !celebrated.current.has(next.gameId)) {
+      celebrated.current.add(next.gameId);
+      playSound("win", sound);
+      setFx({ gameId: next.gameId, n: celebrated.current.size });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gameId, status]);
+  const burst = fx && fx.gameId === gameId ? fx.n : null; // derived: another game on screen => no burst, whatever happened before
 
   useEffect(() => {
     if (result) setExpanded(true);
@@ -203,13 +234,36 @@ export function GameScreen() {
     [appearance, challenge?.start, challenge?.destination, finished, state?.visited],
   );
 
-  // Borders hint: the shape of ONE valid next country, drawn without its name, only while it is still a valid next step.
-  const hintId = useMemo(() => {
-    if (!state || finished) return null;
-    const h = [...state.hints].reverse().find((x) => x.payload.kind === "borders");
-    // still shown only while that country is a move the player can make from the CURRENT active route (it follows changes of direction)
-    return h && challenge && hintLiveness(graph, challenge, state.route, state.visited, h) === "live" ? h.payload.countryId : null;
-  }, [state, finished, challenge]);
+  // Contextual hints. Each one is shown where it is useful, and only while it still describes a move the player can make from
+  // the CURRENT active route (after a change of direction an outdated hint simply disappears from the interface).
+  const liveHint = useCallback(
+    (kind: HintKind) => {
+      if (!state || !challenge || finished) return null;
+      const h = [...state.hints].reverse().find((x) => x.payload.kind === kind);
+      return h && hintLiveness(graph, challenge, state.route, state.visited, h) === "live" ? h.payload : null;
+    },
+    [state, challenge, finished],
+  );
+  // Hint 2: the shape and outline of ONE valid next country on the map (no name).
+  const hintId = useMemo(() => liveHint("borders")?.countryId ?? null, [liveHint]);
+  // Hints 1 and 3: written in the input's placeholder (never in the field itself: the player's text is untouched).
+  const hintPlaceholder = useMemo(() => {
+    const reveal = liveHint("reveal");
+    if (reveal) return t("hint.placeholderReveal", { name: name(reveal.countryId) });
+    const letter = liveHint("letter");
+    return letter && letter.kind === "letter" ? t("hint.placeholderLetter", { letter: letter.letter[locale as "fr" | "en"] }) : undefined;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [liveHint, locale]);
+  // Using a hint: immediate, with a short confirmation (the cost is on the button beforehand).
+  const activateHint = useCallback(
+    (kind: HintKind) => {
+      const ok = hint(kind);
+      flash(ok ? t("game.hintUsedToast", { n: HINT_PENALTY[kind] }) : t("game.hintNone"), "info", 4500);
+      return ok;
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [hint, flash],
+  );
 
   // Who can replay what: after a daily, suggest the other dailies, then a new Classic game.
   const suggestion = useMemo(
@@ -249,12 +303,25 @@ export function GameScreen() {
           : [...new Set([challenge.start, challenge.destination, ...viewRoute])].filter((id) => showStart || id !== challenge.start),
     [challenge, viewRoute, vis, showStart],
   );
+  // Strait and disputed connections that are usable in THIS game (its rules, never the player's global preferences), drawn on the map.
+  // On a hidden map only links between countries that are already shown appear, so they never give the geography away.
+  const links = useMemo<MapLink[]>(() => {
+    if (!challenge || (!challenge.rules.straits && !challenge.rules.disputes)) return [];
+    const view = graph.viewFor(challenge.rules, [challenge.start, challenge.destination]);
+    const visible = (id: string) => (!vis.masked || vis.shown.includes(id) || id === challenge.destination || (appearance.start && id === challenge.start)) && !view.blocked.has(id) && (!view.allowed || view.allowed.has(id));
+    return graph
+      .edges()
+      .filter((e): e is typeof e & { type: "strait" | "dispute" } => (e.type === "strait" && challenge.rules.straits === true) || (e.type === "dispute" && challenge.rules.disputes === true))
+      .filter((e) => !graph.connectionTypes(e.from, e.to).includes("land") && visible(e.from) && visible(e.to))
+      .map((e) => ({ a: e.from, b: e.to, type: e.type }));
+  }, [challenge, vis, appearance.start]);
+
   const fitIds = useMemo(() => {
     if (!challenge) return undefined;
     if (vis.masked) return hintId ? [...vis.shown, hintId] : vis.shown; // frame only what is displayed
     if (finished) return viewRoute;
-    if (challenge.rules.allowedRegion) return [...graph.regionMembers(challenge.rules.allowedRegion)];
-    return [challenge.start, challenge.destination];
+    const framed = challenge.rules.allowedRegion ? [...graph.regionMembers(challenge.rules.allowedRegion)] : [challenge.start, challenge.destination];
+    return hintId ? [...framed, hintId] : framed; // the country a hint points at must be on screen
   }, [challenge, finished, viewRoute, vis, hintId]);
 
   const known = useMemo(() => new Set(labelIds), [labelIds]);
@@ -321,6 +388,7 @@ export function GameScreen() {
         <MapView
           className="h-full w-full"
           states={mapStates}
+          links={links}
           masked={vis.masked}
           controlsInset
           route={viewRoute}
@@ -331,7 +399,7 @@ export function GameScreen() {
           labelMode={!showNames ? "none" : vis.masked ? "route" : labels === "all" ? "all" : labels === "none" ? "none" : "route"}
           labelIds={labelIds}
           fitIds={fitIds}
-          fitKey={`${challenge.id}-${vis.masked ? `m${vis.shown.length}${hintId ?? ""}` : finished ? `r${selected}` : "play"}`}
+          fitKey={`${challenge.id}-${vis.masked ? `m${vis.shown.length}${hintId ?? ""}` : finished ? `r${selected}` : `play${hintId ?? ""}`}`}
           padding={padding}
           tooltip={tooltip}
         />
@@ -359,6 +427,12 @@ export function GameScreen() {
           {([["accent", "legendStart"], ["dest", "legendDestination"], ["discovered", "legendRoute"], ["error", "legendWrong"]] as const).map(([c, k]) => (
             <span key={k} className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm" style={{ background: `var(--${c})` }} />{t(`game.${k}`)}</span>
           ))}
+          {links.some((l) => l.type === "strait") && (
+            <span className="flex items-center gap-1.5" data-testid="legend-strait"><span className="h-0 w-4 border-t-2 border-dotted" style={{ borderColor: "var(--link-strait)" }} />{t("game.legendStrait")}</span>
+          )}
+          {links.some((l) => l.type === "dispute") && (
+            <span className="flex items-center gap-1.5" data-testid="legend-dispute"><span className="h-0 w-4 border-t-2 border-dashed" style={{ borderColor: "var(--link-dispute)" }} />{t("game.legendDispute")}</span>
+          )}
         </div>
       </div>
 
@@ -426,6 +500,8 @@ export function GameScreen() {
               {/* 1. the one thing to do: type a country */}
               <div className="grid gap-2">
                 <CountryCombobox
+                  key={gameId ?? "none"}
+                  placeholder={hintPlaceholder}
                   disabled={!playing}
                   errorTick={errTick}
                   autoFocus
@@ -440,7 +516,9 @@ export function GameScreen() {
               {/* 2. progress: the route so far (always on desktop, in the expanded sheet on mobile) */}
               <section className={expanded ? "" : "max-md:hidden"} aria-label={t("game.route")}>
                 <h3 className="eyebrow mb-1">{t("game.route")}</h3>
-                <div key={feedback?.n ?? 0} className={feedback && feedback.removed.length > 0 ? "anim-branch" : undefined} data-testid="route-wrap" data-branched={feedback && feedback.removed.length > 0 ? "true" : "false"}>
+                {/* the list is never remounted (it keeps its scroll position); only this overlay restarts the "new direction" animation */}
+                <div className="relative" data-testid="route-wrap" data-branched={feedback && feedback.removed.length > 0 ? "true" : "false"}>
+                  {feedback && feedback.removed.length > 0 && <div key={feedback.n} className="anim-branch pointer-events-none absolute inset-0 z-10" aria-hidden="true" />}
                   <RouteList route={state.route} destination={challenge.destination} finished={false} />
                 </div>
                 {state.route.length === 1 && <p className="mt-1 text-sm muted">{t("game.routeEmpty")}</p>}
@@ -450,7 +528,7 @@ export function GameScreen() {
 
               {/* 3. help, on one line with the costs; 4. secondary information, collapsed by default */}
               <div className={expanded ? "grid gap-4" : "hidden gap-4 md:grid"}>
-                <HintPanel hints={state.hints} route={state.route} visited={state.visited} challenge={challenge} disabled={!playing} onUse={hint} />                
+                <HintPanel hints={state.hints} disabled={!playing} onUse={activateHint} />                
                 <div>
                   {confirmGiveUp ? (
                     <div className="grid gap-2 rounded-md border border-error/40 bg-error-soft p-3 text-sm">

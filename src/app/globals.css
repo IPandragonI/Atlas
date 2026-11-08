@@ -28,6 +28,10 @@
   --route: #55745c;
   --discovered: #8fb394;
   --hint: #7da3c4;
+  --brand: #1f4538;
+  --hint-edge: #1f5f9e;
+  --link-strait: #17707f;
+  --link-dispute: #9a4f86;
   --radius: 10px;
   --radius-sm: 6px;
   --safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -58,6 +62,10 @@
   --route: #a1c69f;
   --discovered: #6e9873;
   --hint: #6f9bbd;
+  --brand: #b9d8bd;
+  --hint-edge: #a9d2f5;
+  --link-strait: #5fbdcc;
+  --link-dispute: #d494c2;
   color-scheme: dark;
 }
 
@@ -123,6 +131,10 @@ button:disabled { cursor: not-allowed; opacity: 0.5; }
   font-size: 12px; font-weight: 500; background: var(--accent-soft); color: var(--text);
 }
 .muted { color: var(--text-2); }
+/* The Atlas logo (public/logo/*.png are transparent): tinted with the theme's brand colour so it stays readable in light and dark. */
+.brand-mark, .brand-word { display: inline-block; flex: none; background-color: var(--brand); }
+.brand-mark { height: 1.75rem; aspect-ratio: 460 / 326; -webkit-mask: url(/logo/mark.png) center / contain no-repeat; mask: url(/logo/mark.png) center / contain no-repeat; }
+.brand-word { height: 0.8rem; aspect-ratio: 774 / 134; -webkit-mask: url(/logo/wordmark.png) center / contain no-repeat; mask: url(/logo/wordmark.png) center / contain no-repeat; }
 .eyebrow { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-2); font-weight: 600; }
 
 /* Flags: soft rounded rectangles */

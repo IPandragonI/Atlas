@@ -28,11 +28,10 @@ export function Header() {
       className={`sticky top-0 z-30 items-center gap-2 border-b border-border-soft bg-bg/95 px-3 backdrop-blur md:px-5 ${inGame ? "hidden md:flex" : "flex"}`}
       style={{ height: "var(--header-h)", paddingTop: inGame ? 0 : "var(--safe-top)" }}
     >
-      <Link href="/" className="mr-2 flex items-center gap-2 font-serif text-lg font-semibold tracking-tight" aria-label="Atlas">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.6" aria-hidden="true">
-          <circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.6 2.6 3.6 5.6 3.6 9S14.600 18.400 12 21c-2.600-2.600-3.600-5.600-3.600-9S9.400 5.600 12 3z" />
-        </svg>
-        <span className="hidden sm:inline">{t("app.name")}</span>
+      <Link href="/" className="mr-2 flex items-center gap-2.5" aria-label="Atlas">
+        {/* the logo: the stylized A, then the wordmark (from sm up); both are tinted with the theme's brand colour */}
+        <span className="brand-mark" data-testid="brand-mark" aria-hidden="true" />
+        <span className="brand-word hidden sm:inline-block" data-testid="brand-word" aria-hidden="true" />
       </Link>
       <nav aria-label={t("nav.menu")} className="flex flex-1 items-center gap-0.5">
         {NAV.map((n) => {

@@ -18,6 +18,7 @@
     "postinstall": "node scripts/copy-maplibre-worker.mjs",
     "worker:build": "node scripts/build-worker.mjs",
     "data:audit-sea": "tsx scripts/audit-sea.ts",
+    "brand:build": "node scripts/build-brand.mjs",
     "data:revalidate-daily": "tsx scripts/revalidate-daily.ts"
   },
   "dependencies": {
@@ -48,6 +49,7 @@
     "fake-indexeddb": "^6.2.7",
     "picomatch": "^4.0.7",
     "serve": "^14.2.7",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4",
     "topojson-client": "^3.1.0",
     "topojson-server": "^3.0.1",

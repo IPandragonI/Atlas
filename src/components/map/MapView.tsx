@@ -13,4 +13,4 @@ export function MapView(props: WorldMapProps) {
   return <WorldMap {...props} />;
 }
 
-export type { MapState, WorldMapProps } from "./WorldMap";
+export type { MapLink, MapState, WorldMapProps } from "./WorldMap";

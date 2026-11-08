@@ -23,6 +23,10 @@ export interface GameConfig {
   scope: string;
   /** Countries the route must never go through. */
   forbidden: string[];
+  /** Strait crossings (an explicit list, see `STRAIT_CONNECTIONS`) are valid links. Default: off. */
+  straits: boolean;
+  /** Connections through disputed territory (an explicit list, see `DISPUTED_CONNECTIONS`) are valid links. Default: off. */
+  disputes: boolean;
   /** Custom difficulty only: minimum number of intermediate countries. */
   minIntermediate: number;
   /** Custom difficulty only: maximum number of attempts. */
@@ -47,6 +51,8 @@ export function defaultConfig(mode: GameMode): GameConfig {
     difficulty: "normal",
     scope: mode === "regional" ? "europe" : WORLD,
     forbidden: [],
+    straits: false,
+    disputes: false,
     minIntermediate: 4,
     attempts: 8,
     map: { ...PRESET_MAP.normal },
@@ -102,6 +108,8 @@ export function parseConfig(params: URLSearchParams): ParsedGame {
     difficulty,
     scope,
     forbidden,
+    straits: bool(params.get("straits"), false),
+    disputes: bool(params.get("disputes"), false),
     minIntermediate: int(params.get("min"), base.minIntermediate),
     attempts: int(params.get("att"), base.attempts),
     map: {
@@ -120,6 +128,9 @@ export function parseConfig(params: URLSearchParams): ParsedGame {
 export function configToParams(cfg: GameConfig, seed: string, exclude?: readonly [string, string]): URLSearchParams {
   const q = new URLSearchParams({ mode: cfg.mode, difficulty: cfg.difficulty, scope: cfg.scope, seed });
   if (cfg.forbidden.length) q.set("forbid", cfg.forbidden.join(","));
+  // written only when ON: URLs (and the seeds derived from them) of games without the options stay exactly as before
+  if (cfg.straits) q.set("straits", "1");
+  if (cfg.disputes) q.set("disputes", "1");
   if (cfg.difficulty === "custom") {
     q.set("min", String(cfg.minIntermediate));
     q.set("att", String(cfg.attempts));
@@ -141,6 +152,9 @@ export function configFromChallenge(ch: Challenge): GameConfig {
     scope: ch.rules.allowedRegion ?? base.scope,
     // Only user-chosen forbidden countries belong to a configuration; generated constraints are regenerated.
     forbidden: ch.mode === "constraints" ? [] : [...ch.rules.forbidden],
+    // a challenge carries its own options: they decide what "the same settings" means, never the player's preferences
+    straits: ch.rules.straits === true,
+    disputes: ch.rules.disputes === true,
     minIntermediate: Math.max(LIMITS.minRoute, ch.minIntermediate),
     attempts: ch.attempts,
   };
@@ -161,6 +175,8 @@ export function genRequestFor(cfg: GameConfig, seed: string, exclude?: readonly 
     candidates,
     ...(regional ? { region: cfg.scope } : cfg.scope !== WORLD ? { scope: cfg.scope } : {}),
     ...(cfg.forbidden.length ? { forbidden: cfg.forbidden } : {}),
+    ...(cfg.straits ? { straits: true } : {}),
+    ...(cfg.disputes ? { disputes: true } : {}),
     ...(cfg.difficulty === "custom" ? { minIntermediate: cfg.minIntermediate, attempts: cfg.attempts } : {}),
     ...(exclude ? { exclude } : {}),
   };

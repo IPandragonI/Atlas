@@ -11,8 +11,17 @@ import { MapControls } from "./MapControls";
 export type MapState = "start" | "destination" | "traversed" | "wrong" | "discovered" | "new" | "region" | "dim" | "hint" | "abandoned";
 export type LabelMode = "none" | "route" | "all";
 
+/** A special connection drawn between two country centres (never an ordinary land border). */
+export interface MapLink {
+  a: string;
+  b: string;
+  type: "strait" | "dispute";
+}
+
 export interface WorldMapProps {
   states?: Record<string, MapState>;
+  /** Strait / disputed connections currently usable in the game, drawn as thin dotted / dashed lines. */
+  links?: MapLink[];
   /** Ordered country ids drawn as a line between country centres. */
   route?: string[];
   /** Changing this key plays the subtle "route extended" animation. */
@@ -44,6 +53,7 @@ export interface WorldMapProps {
 interface Palette {
   water: string; land: string; landOff: string; border: string; accent: string; dest: string; route: string;
   discovered: string; abandoned: string; error: string; success: string; text: string; surface: string; region: string; hint: string;
+  hintEdge: string; strait: string; dispute: string;
 }
 
 // MapLibre 6 needs an explicit worker URL under bundlers (file vendored by scripts/copy-maplibre-worker.mjs).
@@ -60,6 +70,7 @@ function readPalette(): Palette {
     water: v("--water"), land, landOff: v("--land-off"), border: v("--map-border"), accent: v("--accent"), dest: v("--dest"),
     route: v("--route"), discovered: v("--discovered"), abandoned: mix(v("--discovered"), land, 0.5), error: mix(v("--error"), land, 0.55), success: v("--success"),
     text: v("--text"), surface: v("--surface"), region: v("--map-region"), hint: v("--hint"),
+    hintEdge: v("--hint-edge"), strait: v("--link-strait"), dispute: v("--link-dispute"),
   };
 }
 
@@ -110,7 +121,7 @@ function boundsOf(ids: readonly string[]): LngLatBoundsLike | null {
 
 export default function WorldMap(props: WorldMapProps) {
   const {
-    states, route, routeKey, start, destination, labelMode = "route", labelIds, fitIds, fitKey, padding, selectedId, masked = false, showBorders = true, controlsInset = false, onCountryClick, tooltip, className,
+    states, links, route, routeKey, start, destination, labelMode = "route", labelIds, fitIds, fitKey, padding, selectedId, masked = false, showBorders = true, controlsInset = false, onCountryClick, tooltip, className,
   } = props;
   const t = useTranslations("common");
   const locale = useLocale() as "fr" | "en";
@@ -201,6 +212,7 @@ export default function WorldMap(props: WorldMapProps) {
           })),
         },
       });
+      map.addSource("links", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
       map.addSource("route", { type: "geojson", data: { type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: [] } } });
       map.addLayer({ id: "country-fill", type: "fill", source: "world", paint: { "fill-color": fillExpr(pal), "fill-antialias": true } });
       map.addLayer({
@@ -218,6 +230,23 @@ export default function WorldMap(props: WorldMapProps) {
           "line-opacity": ["case", ["boolean", ["feature-state", "selected"], false], 0.9, 0],
         },
       });
+      // the borders of the country a hint points at: a distinctive, restrained outline (the fill colour comes from the "hint" state)
+      map.addLayer({
+        id: "country-hint-edge", type: "line", source: "world", layout: { "line-join": "round" },
+        paint: {
+          "line-color": pal.hintEdge, "line-width": ["interpolate", ["linear"], ["zoom"], 1, 2, 5, 3.2],
+          "line-opacity": ["case", ["==", ["coalesce", ["feature-state", "s"], "none"], "hint"], 1, 0],
+        },
+      });
+      // special connections: straits are dotted, connections through disputed territory are dashed (neither looks like a border or the route)
+      map.addLayer({
+        id: "links-strait", type: "line", source: "links", filter: ["==", ["get", "type"], "strait"], layout: { "line-cap": "round" },
+        paint: { "line-color": pal.strait, "line-width": 2.2, "line-dasharray": [0.1, 2], "line-opacity": 0.95 },
+      });
+      map.addLayer({
+        id: "links-dispute", type: "line", source: "links", filter: ["==", ["get", "type"], "dispute"], layout: { "line-cap": "butt" },
+        paint: { "line-color": pal.dispute, "line-width": 2, "line-dasharray": [3, 2], "line-opacity": 0.95 },
+      });
       map.addLayer({ id: "route-glow", type: "line", source: "route", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": pal.route, "line-width": 10, "line-opacity": 0, "line-blur": 4 } });
       map.addLayer({ id: "route-line", type: "line", source: "route", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": pal.route, "line-width": 2.6, "line-opacity": 0.9, "line-dasharray": [1, 1.6] } });
       map.addLayer({
@@ -225,8 +254,8 @@ export default function WorldMap(props: WorldMapProps) {
         paint: {
           "circle-radius": ["interpolate", ["linear"], ["zoom"], 1, 2.6, 4, 4.8, 7, 7],
           "circle-color": fillExpr(pal),
-          "circle-stroke-color": pal.border,
-          "circle-stroke-width": 1,
+          "circle-stroke-color": ["case", ["==", ["coalesce", ["feature-state", "s"], "none"], "hint"], pal.hintEdge, pal.border],
+          "circle-stroke-width": ["case", ["==", ["coalesce", ["feature-state", "s"], "none"], "hint"], 3, 1],
           "circle-opacity": ["interpolate", ["linear"], ["zoom"], 5, 1, 7.5, 0],
           "circle-stroke-opacity": ["interpolate", ["linear"], ["zoom"], 5, 1, 7.5, 0],
         },
@@ -295,7 +324,10 @@ export default function WorldMap(props: WorldMapProps) {
       map.setPaintProperty("background", "background-color", pal.water);
       map.setPaintProperty("country-fill", "fill-color", fillExpr(pal));
       map.setPaintProperty("country-dots", "circle-color", fillExpr(pal));
-      map.setPaintProperty("country-dots", "circle-stroke-color", pal.border);
+      map.setPaintProperty("country-dots", "circle-stroke-color", ["case", ["==", ["coalesce", ["feature-state", "s"], "none"], "hint"], pal.hintEdge, pal.border]);
+      map.setPaintProperty("country-hint-edge", "line-color", pal.hintEdge);
+      map.setPaintProperty("links-strait", "line-color", pal.strait);
+      map.setPaintProperty("links-dispute", "line-color", pal.dispute);
       map.setPaintProperty("country-borders", "line-color", pal.border);
       map.setPaintProperty("country-selected", "line-color", pal.text);
       map.setPaintProperty("country-hover", "fill-color", pal.text);
@@ -378,6 +410,19 @@ export default function WorldMap(props: WorldMapProps) {
     selectedRef.current = selectedId ?? null;
     if (selectedId) map.setFeatureState({ source: "world", id: selectedId }, { selected: true });
   }, [selectedId, ready]);
+
+  // ---------------------------------------------------------------- special connections
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !ready) return;
+    const features = (links ?? []).filter((l) => graph.has(l.a) && graph.has(l.b)).map((l) => ({
+      type: "Feature" as const,
+      properties: { type: l.type },
+      geometry: { type: "LineString" as const, coordinates: [graph.country(l.a).center, graph.country(l.b).center] },
+    }));
+    (map.getSource("links") as GeoJSONSource | undefined)?.setData({ type: "FeatureCollection", features });
+    wrapRef.current?.setAttribute("data-links", (links ?? []).map((l) => `${l.a}-${l.b}:${l.type}`).sort().join(" "));
+  }, [links, ready]);
 
   // ---------------------------------------------------------------- route line + animation
   useEffect(() => {

@@ -21,7 +21,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: { default: `Atlas — ${t("tagline")}`, template: "%s · Atlas" },
     description: t("tagline"),
     manifest: "/manifest.webmanifest",
-    icons: { icon: [{ url: "/icons/icon.svg", type: "image/svg+xml" }], apple: "/icons/apple-touch-icon.png" },
+    // the favicon is the stylized A only
+    icons: {
+      icon: [
+        { url: "/favicon.ico", sizes: "any" },
+        { url: "/icons/favicon-32.png", type: "image/png", sizes: "32x32" },
+        { url: "/icons/favicon-48.png", type: "image/png", sizes: "48x48" },
+      ],
+      apple: "/icons/apple-touch-icon.png",
+    },
     appleWebApp: { capable: true, title: "Atlas", statusBarStyle: "default" },
     alternates: { languages: { fr: "/fr/", en: "/en/" } },
   };

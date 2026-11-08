@@ -18,7 +18,7 @@ npm run dev            # http://localhost:3000  (service worker is production-on
 | `npm run dev` | dev server |
 | `npm run build` | vendor worker → generate missing daily JSON (idempotent) → `next build` (→ `out/`) → write `out/sw.js` |
 | `npm start` | serve `out/` |
-| `npm test` | Vitest (169 tests: branching, resume, sea-link audit, SW manifest, graph, rules, pathfinding, hints, scoring, generator, configuration, replay, dailies, country data, persistence, i18n) |
+| `npm test` | Vitest (230+ tests: options, victory, branching, resume, sea-link audit, SW manifest, graph, rules, pathfinding, hints, scoring, generator, configuration, replay, dailies, country data, persistence, i18n) |
 | `npm run test:e2e` | Playwright desktop + mobile (needs `npm run build` and `npx playwright install chromium`) |
 | `npm run data:audit-sea` | Re-measure every curated sea link on the coastlines (`sea-audit.json`) |
 | `npm run data:revalidate-daily` | Check every published daily file against the current graph |

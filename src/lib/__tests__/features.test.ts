@@ -16,6 +16,8 @@ import { remainingDailies, suggestAfterDaily } from "@/lib/replay";
 const customConfig: GameConfig = {
   mode: "classic",
   difficulty: "custom",
+  straits: false,
+  disputes: false,
   scope: "europe",
   forbidden: ["DEU", "CHE"],
   minIntermediate: 4,

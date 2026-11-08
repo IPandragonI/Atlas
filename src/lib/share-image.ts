@@ -16,6 +16,27 @@ export interface ShareImageArgs {
 const W = 1080;
 const H = 1350;
 
+/** Loads a transparent PNG and fills its opaque pixels with one colour. Resolves to null when the image is unavailable. */
+async function tintedImage(url: string, color: string): Promise<HTMLCanvasElement | null> {
+  try {
+    const img = new Image();
+    img.src = url;
+    await img.decode();
+    const c = document.createElement("canvas");
+    c.width = img.naturalWidth;
+    c.height = img.naturalHeight;
+    const x = c.getContext("2d");
+    if (!x) return null;
+    x.drawImage(img, 0, 0);
+    x.globalCompositeOperation = "source-in";
+    x.fillStyle = color;
+    x.fillRect(0, 0, c.width, c.height);
+    return c;
+  } catch {
+    return null;
+  }
+}
+
 export async function renderShareImage(a: ShareImageArgs): Promise<Blob> {
   const css = getComputedStyle(document.documentElement);
   const v = (n: string, fallback: string) => css.getPropertyValue(n).trim() || fallback;
@@ -47,9 +68,20 @@ export async function renderShareImage(a: ShareImageArgs): Promise<Blob> {
   g.stroke();
 
   g.textAlign = "center";
-  g.fillStyle = accent;
-  g.font = `600 64px ${serif}`;
-  g.fillText("Atlas", W / 2, 190);
+  // the logo (stylized A + wordmark), tinted with the accent; plain text if the images cannot be loaded
+  const [mark, word] = await Promise.all([tintedImage("/logo/mark.png", accent), tintedImage("/logo/wordmark.png", accent)]);
+  if (mark && word) {
+    const mh = 92;
+    const mw = (mark.width / mark.height) * mh;
+    g.drawImage(mark, (W - mw) / 2, 86, mw, mh);
+    const wh = 20;
+    const ww = (word.width / word.height) * wh;
+    g.drawImage(word, (W - ww) / 2, 192, ww, wh);
+  } else {
+    g.fillStyle = accent;
+    g.font = `600 64px ${serif}`;
+    g.fillText("Atlas", W / 2, 190);
+  }
   g.fillStyle = text2;
   g.font = `500 36px ${sans}`;
   g.fillText(a.subtitle, W / 2, 255);

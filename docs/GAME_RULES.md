@@ -23,15 +23,27 @@ A valid next move is: adjacent to the current country under the active connectio
 forbidden, not the start, not the destination, inside the allowed region, and (with `maxIntermediate`) within the
 intermediate budget.
 
+## Strait crossings and territorial disputes (options)
+Two game options, **off by default** (see GEOGRAPHIC_DATA.md for the lists): *strait crossings* and *territorial disputes*. Each
+is stored in the challenge's rules (`straits`, `disputes`), travels in the game URL only when on, and applies to validation,
+shortest paths, hints, generation, alternative routes, victory and route branching because they all read the same graph view.
+The configuration modal remembers the last choice (a global preference, any mode). A daily challenge keeps the options it was
+published with. The map draws enabled strait links dotted and disputed links dashed (on a hidden map only between countries that
+are already shown).
+
 ## Repeated wrong answers
 Submitting a country that was already rejected earlier in the same game is "repeated": no attempt is used, no penalty, nothing
 is added to the mistakes (`submitGuess` returns the same state), and a neutral toast says so. Only the first wrong submission
 of a country counts. A country rejected earlier is still accepted normally once it has become a valid move.
 
 ## The game panel
-Top to bottom: mode/difficulty chips, from → to with the remaining mistakes, the route so far, the country input, a one-line
-row of the three hints with their costs (confirmation shows the penalty), the rules (collapsed unless the challenge has more
-than the basic land/sea rule), and the "give up" action. On mobile the collapsed sheet shows only the input; the expanded sheet
+Top to bottom: mode/difficulty chips, from → to with the remaining mistakes, the route so far (a list of about five rows that
+scrolls and follows the newest country), the country input, a one-line row of the three hint buttons with their costs, the rules
+(collapsed unless the challenge has more than the basic land/sea rule), and the "give up" action.
+
+Hints are **contextual and immediate**: clicking a hint uses it (the cost is on the button; no confirmation step) and a short
+toast confirms it. Hint 1 (letter) and hint 3 (name) appear in the input's placeholder, hint 2 outlines the country on the map
+(no name). A hint is shown only while its country is still a valid move from the current route, and disappears otherwise. On mobile the collapsed sheet shows only the input; the expanded sheet
 shows everything.
 
 ## Changing direction (route branching)
@@ -132,7 +144,8 @@ deterministic for a given state. If nothing can be determined (e.g. the intermed
 **no penalty is applied**, and a message says so.
 
 ## Victory feedback
-A victory (never a defeat) plays one synthesized jingle (`lib/sound.ts`, no audio file, works offline) and a ~3.5 s particle
+Effects are bound to ONE game: they fire only on a genuine playing → won transition of the same game (`lib/victory.ts`), never
+when a game is restored, resumed, restarted or replaced. A victory (never a defeat) plays one synthesized jingle (`lib/sound.ts`, no audio file, works offline) and a ~3.5 s particle
 burst (`VictoryBurst`, canvas, `pointer-events: none`, skipped with `prefers-reduced-motion`). Both fire once per win. The
 *Sound effects* setting (Settings, persisted) mutes the jingle and the other effects; the visual burst is independent.
 

@@ -170,3 +170,67 @@ export const SEA_DISTANCE_EXCEPTIONS: readonly EdgePair[] = [
   ["KIR", "TUV", "Published daily 2026-11-08 (regional) is solved through it; also the link joining Kiribati / Marshall Islands / Nauru to the rest (~810 km)."],
   ["JAM", "NIC", "Published daily 2026-11-06 (constraints) is solved through it (~630 km). Candidate for removal once that date is history."],
 ];
+
+/**
+ * STRAIT crossings: pairs of playable countries facing each other across a NAMED strait (or channel/passage) with a short
+ * crossing, usable when the game option "straits" is on. They are independent of the maritime option: turning straits on
+ * enables exactly this list and no other sea link.
+ *
+ * Selection rule: a recognised strait whose two shores belong to two different playable countries, and that is not
+ * already an ordinary land link (so Øresund DNK–SWE, Fehmarn DNK–DEU, Åland SWE–FIN and Gibraltar ESP–MAR are NOT listed:
+ * they are land links in this dataset). Every pair is also a curated sea link, so `maritime` still covers them.
+ * Uncertain entries are marked (?) and discussed in docs/GEOGRAPHIC_DATA.md.
+ */
+export const STRAIT_CONNECTIONS: readonly EdgePair[] = [
+  ["GBR", "FRA", "Strait of Dover (Pas de Calais): ~34 km, Channel Tunnel"],
+  ["ITA", "ALB", "Strait of Otranto: ~72 km between Apulia and Albania"],
+  ["ITA", "TUN", "Strait of Sicily: ~145 km between Sicily and Tunisia"],
+  ["IRN", "OMN", "Strait of Hormuz: between Iran and Oman's Musandam exclave"],
+  ["YEM", "DJI", "Bab-el-Mandeb: ~30 km between Yemen (Perim) and Djibouti"],
+  ["EGY", "SAU", "Strait of Tiran: between Sinai (Egypt) and Saudi Arabia"],
+  ["IND", "LKA", "Palk Strait: ~55 km between India and Sri Lanka"],
+  ["SGP", "IDN", "Singapore Strait: ~20 km to the Riau Islands (Indonesia)"],
+  ["AUS", "PNG", "Torres Strait: ~150 km between Cape York and Papua New Guinea"],
+  ["JPN", "KOR", "Korea Strait (Tsushima Strait): ~50 km between Tsushima (Japan) and Korea"],
+  ["JPN", "RUS", "(?) Nemuro / La Pérouse Straits: Hokkaido to Sakhalin and the Kuril Islands (Russia). The Kurils are disputed by Japan."],
+  ["USA", "RUS", "Bering Strait: ~85 km between Alaska and Chukotka"],
+  ["USA", "CUB", "Straits of Florida: ~150 km between Key West and Cuba"],
+  ["CUB", "HTI", "Windward Passage: ~80 km between Cuba and Haiti"],
+  ["CUB", "MEX", "Yucatán Channel: ~200 km between Cuba and Mexico"],
+  ["JAM", "HTI", "Jamaica Channel: ~190 km between Jamaica and Haiti"],
+  ["TTO", "VEN", "Columbus Channel / Dragon's Mouth: ~15–25 km between Trinidad and Venezuela"],
+  ["DNK", "NOR", "Skagerrak: strait between Denmark (Jutland) and Norway"],
+  ["PHL", "MYS", "(?) Balabac Strait: ~50 km between Palawan (Philippines) and Sabah (Malaysia). Sabah is claimed by the Philippines."],
+  ["DMA", "LCA", "Martinique Channel (Dominica Channel to Saint Lucia): ~45 km, Martinique itself is French and not playable"],
+  ["LCA", "VCT", "Saint Vincent Passage: ~40 km between Saint Lucia and Saint Vincent"],
+];
+
+/**
+ * DISPUTED connections: links that exist only through territory whose sovereignty or control is contested, usable when
+ * the game option "territorial disputes" is on. They are ADDITIONS to the baseline: nothing in this list is a land link in
+ * the default graph. Every entry states what is disputed. Never add a pair merely because a claim exists: a link is listed
+ * only when there is an actual border crossing or land boundary on the ground.
+ *
+ * Deliberately NOT listed (see docs/GEOGRAPHIC_DATA.md): India–Afghanistan (a claim on Gilgit-Baltistan with no border
+ * crossing), Canada–Denmark / Hans Island (settled in 2022), Cyprus–Turkey (no shared boundary).
+ */
+export const DISPUTED_CONNECTIONS: readonly EdgePair[] = [
+  ["MAR", "MRT", "Western Sahara: Morocco administers most of the territory and the only Morocco–Mauritania crossing (Guerguerat) lies in it. Its status is undecided (UN non-self-governing territory)."],
+  ["ESP", "GBR", "Gibraltar: a British Overseas Territory claimed by Spain; the land border at La Línea is a real crossing. The playable GBR node does not include overseas territories, so this link exists only when disputes are on."],
+  ["SRB", "ALB", "Kosovo: declared independence in 2008 and is not a node of this dataset; Serbia and Albania only touch through it. Serbia does not recognise Kosovo's independence."],
+];
+
+/**
+ * Baseline LAND links that rest on territory whose sovereignty is disputed. They are kept as ordinary land links in every
+ * game (changing them would rewrite published daily challenges); this list only documents them, a test keeps it honest,
+ * and it is the place to move an entry from if the project decides otherwise.
+ */
+export const DISPUTED_BASELINE_LAND: readonly EdgePair[] = [
+  ["ESP", "MAR", "Ceuta and Melilla (Spanish enclaves claimed by Morocco)"],
+  ["ISR", "SYR", "Golan Heights (Israeli-administered, claimed by Syria)"],
+  ["CHN", "IND", "Aksai Chin and Arunachal Pradesh"],
+  ["IND", "PAK", "Kashmir"],
+  ["GEO", "RUS", "Abkhazia and South Ossetia (Russian-backed separatist regions of Georgia)"],
+  ["ARM", "AZE", "Nagorno-Karabakh and exclaves"],
+  ["RUS", "UKR", "Crimea and the occupied regions"],
+];

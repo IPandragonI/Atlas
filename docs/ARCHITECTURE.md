@@ -12,7 +12,7 @@ src/
   components/    map/ (WorldMap, MapControls, MapView), game/, home/, collection/, ui/
   app/[locale]/  routes: / , play, game, collection, stats, settings
   i18n/          next-intl routing + fr/en catalogs
-scripts/         build-data, generate-daily, simulate, build-icons, build-sw, copy-maplibre-worker
+scripts/         build-data, generate-daily, simulate, build-brand, build-sw, copy-maplibre-worker
 ```
 (The suggested `features/` and `explore/` folders were folded into `lib/` and the collection map.)
 

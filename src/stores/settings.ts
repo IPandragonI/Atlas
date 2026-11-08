@@ -10,9 +10,13 @@ export interface Settings {
   theme: ThemePref;
   sound: boolean;
   labels: LabelMode;
+  /** Preference for FUTURE free games: strait crossings are valid links. Daily challenges define their own rules. */
+  straits: boolean;
+  /** Preference for FUTURE free games: connections through disputed territory are valid links. */
+  disputes: boolean;
 }
 
-const DEFAULTS: Settings = { theme: "system", sound: true, labels: "route" };
+const DEFAULTS: Settings = { theme: "system", sound: true, labels: "route", straits: false, disputes: false };
 const LS_KEY = "atlas-settings";
 
 function readLocal(): Settings {
@@ -31,6 +35,8 @@ export function sanitize(raw: unknown): Settings {
     theme: r.theme === "light" || r.theme === "dark" || r.theme === "system" ? r.theme : DEFAULTS.theme,
     sound: typeof r.sound === "boolean" ? r.sound : DEFAULTS.sound,
     labels: r.labels === "all" || r.labels === "route" || r.labels === "none" ? r.labels : DEFAULTS.labels,
+    straits: typeof r.straits === "boolean" ? r.straits : DEFAULTS.straits,
+    disputes: typeof r.disputes === "boolean" ? r.disputes : DEFAULTS.disputes,
   };
 }
 
@@ -59,7 +65,7 @@ export const useSettings = create<SettingsStore>((set, get) => ({
 }));
 
 function persist(s: Settings) {
-  const value: Settings = { theme: s.theme, sound: s.sound, labels: s.labels };
+  const value: Settings = { theme: s.theme, sound: s.sound, labels: s.labels, straits: s.straits, disputes: s.disputes };
   try {
     localStorage.setItem(LS_KEY, JSON.stringify(value));
   } catch {

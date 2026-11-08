@@ -8,7 +8,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import worldCountries from "world-countries";
-import { LAND_ADDITIONS, LAND_REMOVALS, SEA_CONNECTIONS } from "../src/data/connections/overrides";
+import { DISPUTED_CONNECTIONS, LAND_ADDITIONS, LAND_REMOVALS, SEA_CONNECTIONS, STRAIT_CONNECTIONS } from "../src/data/connections/overrides";
 import { ALIASES, CAPITAL_FR, CAPITAL_OVERRIDES, CONTINENT_OVERRIDES, ISLAND_OVERRIDES, NAME_OVERRIDES } from "../src/data/countries-meta";
 import { normalizeText } from "../src/engine/search";
 
@@ -186,6 +186,19 @@ for (const [a, b] of SEA_CONNECTIONS) {
   if (land.has(key(a, b))) continue; // land supersedes sea
   sea.set(key(a, b), norm(a, b));
 }
+// Strait and dispute links are independent options (never merged into sea or land); each must be a real, new link.
+const optional = (name: string, list: readonly (readonly [string, string, string])[]) => {
+  const out = new Map<string, [string, string]>();
+  for (const [a, b] of list) {
+    if (!playableIds.has(a) || !playableIds.has(b)) throw new Error(`bad ${name} link ${a}-${b}`);
+    if (a === b) throw new Error(`self ${name} link ${a}`);
+    if (land.has(key(a, b))) throw new Error(`${name} link ${a}-${b} is already an ordinary land link: remove it from the list`);
+    out.set(key(a, b), norm(a, b));
+  }
+  return out;
+};
+const strait = optional("strait", STRAIT_CONNECTIONS);
+const dispute = optional("dispute", DISPUTED_CONNECTIONS);
 const sortPairs = (m: Map<string, [string, string]>) =>
   [...m.values()].sort((x, y) => (x.join() < y.join() ? -1 : 1));
 
@@ -203,6 +216,6 @@ fs.writeFileSync(path.join(root, "public/data/world.geojson"), JSON.stringify({ 
 fs.writeFileSync(path.join(root, "src/data/countries.json"), JSON.stringify(countries, null, 1));
 fs.writeFileSync(
   path.join(root, "src/data/connections/connections.json"),
-  JSON.stringify({ land: sortPairs(land), sea: sortPairs(sea) }),
+  JSON.stringify({ land: sortPairs(land), sea: sortPairs(sea), strait: sortPairs(strait), dispute: sortPairs(dispute) }),
 );
-console.log(`countries=${countries.length} land=${land.size} sea=${sea.size} features=${features.length}`);
+console.log(`countries=${countries.length} land=${land.size} sea=${sea.size} strait=${strait.size} dispute=${dispute.size} features=${features.length}`);

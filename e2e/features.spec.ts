@@ -249,10 +249,8 @@ test.describe("hints and the hidden map", () => {
     if (await handle.isVisible()) await handle.click();
 
     await page.getByTestId("hint-letter").click();
-    await page.getByTestId("hint-confirm").click();
     await expect(map).toHaveAttribute("data-shown", "2"); // a letter reveals nothing on the map
     await page.getByTestId("hint-borders").click();
-    await page.getByTestId("hint-confirm").click();
     await expect(map).toHaveAttribute("data-shown", "3"); // exactly one more shape, drawn through the hint colour
     expect(await page.locator(".atlas-label").count()).toBe(labelsBefore); // ... and no name label
     await expect(page.getByTestId("hint-letter")).toBeDisabled();

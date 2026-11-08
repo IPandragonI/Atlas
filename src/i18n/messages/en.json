@@ -150,7 +150,12 @@
     "srRoute": "Active route: {route}. {n, plural, =0 {No country discovered} one {# country discovered} other {# countries discovered}}.",
     "repeated": "Already tried — no mistake counted.",
     "hintsLeft": "{n, plural, =0 {all used} one {# left} other {# left}}",
-    "constraintsCount": "{n}"
+    "constraintsCount": "{n}",
+    "legendStrait": "Strait",
+    "legendDispute": "Disputed territory",
+    "hintUsedToast": "Hint used · −{n} pts",
+    "hintFollowed": "hint followed",
+    "routeScroll": "Route (scrollable list)"
   },
   "constraint": {
     "forbidden": "Avoid: {countries}",
@@ -161,7 +166,9 @@
     "requireRegion": "Cross at least one country of: {region}",
     "avoidRegion": "Avoid the region: {region}",
     "allowedRegion": "Region: {region}",
-    "maritime": "Sea links enabled"
+    "maritime": "Sea links enabled",
+    "straits": "Strait crossings allowed",
+    "disputes": "Links through disputed territory allowed"
   },
   "hint": {
     "letter": {
@@ -183,7 +190,9 @@
     },
     "revealText": "A valid next country: {name}.",
     "outdated": "this hint no longer matches your current route.",
-    "followed": "followed"
+    "followed": "followed",
+    "placeholderLetter": "The next country starts with “{letter}”…",
+    "placeholderReveal": "Next country: {name}"
   },
   "results": {
     "won": "Destination reached!",
@@ -442,7 +451,12 @@
       "noRoute": "No route is possible with these settings. Remove an avoided country, pick a larger area or lower the minimum length.",
       "failed": "Could not generate a game. Try again."
     },
-    "warnHidden": "With the map hidden and no borders or names, the game becomes very hard."
+    "warnHidden": "With the map hidden and no borders or names, the game becomes very hard.",
+    "connections": "Special connections",
+    "straits": "Strait crossings",
+    "straitsHelp": "The straits of a fixed list (Dover, Hormuz, Torres…) become valid links. Off by default.",
+    "disputes": "Territorial disputes",
+    "disputesHelp": "Allows links that pass through territory whose status is disputed (Gibraltar, Western Sahara, Kosovo). Off by default."
   },
   "tutorial": {
     "title": "How to play",

@@ -39,10 +39,8 @@ export function isValidRoute(graph: AtlasGraph, ch: Pick<Challenge, "start" | "d
   for (let i = 0; i < route.length; i++) {
     const id = route[i];
     if (!graph.has(id) || view.blocked.has(id) || (view.allowed && !view.allowed.has(id))) return false;
-    if (i > 0) {
-      const t = graph.connection(route[i - 1], id);
-      if (!t || (t === "sea" && !ch.rules.maritime)) return false;
-    }
+    // the link must be usable under THIS challenge's options (land always; sea / strait / dispute only when enabled)
+    if (i > 0 && !graph.neighbors(route[i - 1], view).includes(id)) return false;
   }
   return routeSatisfies(graph, route, ch.rules);
 }

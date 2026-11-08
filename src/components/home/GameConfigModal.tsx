@@ -15,6 +15,7 @@ import {
 import { generateForConfigAsync, warmUpGenerator } from "@/lib/generate-client";
 import { scopeFacts } from "@/lib/generate";
 import { useProgress } from "@/stores/progress";
+import { useSettings } from "@/stores/settings";
 
 const DIFFICULTIES: ChallengeDifficulty[] = ["easy", "normal", "hard", "custom"];
 const storageKey = (mode: GameMode) => `atlas-config-${mode}`;
@@ -69,7 +70,10 @@ export function GameConfigModal({ mode, onClose }: { mode: GameMode; onClose: ()
   const dialog = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setCfg(loadSaved(mode));
+    // the two connection options are one global preference (the last choice), whatever the mode
+    useSettings.getState().init();
+    const { straits, disputes } = useSettings.getState();
+    setCfg({ ...loadSaved(mode), straits, disputes });
     setLoaded(true);
     warmUpGenerator(); // the worker loads while the player chooses, so the first generation is instant
   }, [mode]);
@@ -81,7 +85,7 @@ export function GameConfigModal({ mode, onClose }: { mode: GameMode; onClose: ()
   };
   const updateMap = (patch: Partial<MapAppearance>) => update({ map: { ...cfg.map, ...patch } });
 
-  const facts = useMemo(() => scopeFacts(cfg), [cfg.mode, cfg.scope, cfg.forbidden]); // eslint-disable-line react-hooks/exhaustive-deps
+  const facts = useMemo(() => scopeFacts(cfg), [cfg.mode, cfg.scope, cfg.forbidden, cfg.straits, cfg.disputes]); // eslint-disable-line react-hooks/exhaustive-deps
   const issues = validateConfig(cfg, facts.diameter);
   const issueText = (code: string) =>
     code === "min" ? t("config.errors.min", { max: facts.diameter }) : t(`config.errors.${code}` as "config.errors.attempts");
@@ -115,6 +119,7 @@ export function GameConfigModal({ mode, onClose }: { mode: GameMode; onClose: ()
     } catch {
       /* storage unavailable */
     }
+    useSettings.getState().update({ straits: cfg.straits, disputes: cfg.disputes }); // remembered for future games
     router.push(`/game?${configToParams(cfg, seed).toString()}` as "/game");
   };
 
@@ -231,6 +236,15 @@ export function GameConfigModal({ mode, onClose }: { mode: GameMode; onClose: ()
                 </optgroup>
               )}
             </select>
+          </section>
+
+          {/* ------------------------------------------------ special connections */}
+          <section aria-labelledby="cfg-links" data-testid="cfg-links">
+            <h3 id="cfg-links" className="eyebrow mb-1">{t("config.connections")}</h3>
+            <div className="divide-y divide-border-soft">
+              <Switch testId="cfg-straits" checked={cfg.straits} onChange={(v) => update({ straits: v })} label={t("config.straits")} help={t("config.straitsHelp")} />
+              <Switch testId="cfg-disputes" checked={cfg.disputes} onChange={(v) => update({ disputes: v })} label={t("config.disputes")} help={t("config.disputesHelp")} />
+            </div>
           </section>
 
           {/* ------------------------------------------------ countries to avoid */}

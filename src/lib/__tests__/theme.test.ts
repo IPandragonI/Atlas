@@ -76,3 +76,18 @@ describe("dark theme is unchanged", () => {
     expect(ratio(dark["--accent"], dark["--land"])).toBeGreaterThanOrEqual(3);
   });
 });
+
+describe("hint outline and special-connection lines are readable (WCAG non-text contrast, 3:1) in both themes", () => {
+  for (const [name, t] of [["light", light], ["dark", dark]] as const) {
+    for (const token of ["--hint-edge", "--link-strait", "--link-dispute"]) {
+      it(`${name}: ${token} against land and ocean`, () => {
+        expect(ratio(t[token], t["--land"]), `${token} vs land`).toBeGreaterThanOrEqual(3);
+        expect(ratio(t[token], t["--water"]), `${token} vs water`).toBeGreaterThanOrEqual(3);
+      });
+    }
+    it(`${name}: the three are distinguishable from each other and from the route colour`, () => {
+      const set = [t["--hint-edge"], t["--link-strait"], t["--link-dispute"], t["--route"]];
+      expect(new Set(set).size).toBe(set.length);
+    });
+  }
+});

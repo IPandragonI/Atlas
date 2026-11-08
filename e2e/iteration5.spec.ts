@@ -134,50 +134,80 @@ test.describe("changing direction, in real games", () => {
   });
 });
 
-test.describe("hint 3 — the full name of a valid next country", () => {
+const placeholderOf = async (page: Page) => (await page.getByRole("combobox").first().getAttribute("placeholder")) ?? "";
+const hintedOnMap = async (page: Page) =>
+  ((await page.getByTestId("world-map").getAttribute("data-applied")) ?? "").split(" ").filter((x) => x.endsWith(":hint")).map((x) => x.split(":")[0]);
+const clickHint = async (page: Page, k: "letter" | "borders" | "reveal") => page.getByTestId(`hint-${k}`).click(); // immediate: no confirmation step
+
+test.describe("contextual hints (letter and name in the input, borders on the map)", () => {
   const ch = custom("FRA", "AUT");
 
-  test("is locked until hints 1 and 2 are used, costs 300 (shown before confirming), names a valid country and plays nothing", async ({ page }) => {
+  test("hint 3 is locked until 1 and 2 are used, costs 300 (on the button), names a valid country IN THE INPUT and plays nothing", async ({ page }) => {
     await serve(page, ch);
     await expandSheet(page);
     const reveal = page.getByTestId("hint-reveal");
     await expect(reveal).toBeDisabled();
     await expect(reveal).toContainText("−300");
-    await page.getByTestId("hint-letter").click();
-    await page.getByTestId("hint-confirm").click();
+    await clickHint(page, "letter");
     await expect(reveal).toBeDisabled(); // hint 2 is still missing
-    await page.getByTestId("hint-borders").click();
-    await page.getByTestId("hint-confirm").click();
+    await clickHint(page, "borders");
     await expect(reveal).toBeEnabled();
-
-    await reveal.click();
-    await expect(page.getByTestId("hint-confirm-box")).toContainText("300"); // the penalty is announced before it is applied
-    await page.getByTestId("hint-cancel").click();
-    await expect(page.getByTestId("hint-item-reveal")).toHaveCount(0); // cancelling costs nothing and reveals nothing
-    await reveal.click();
-    await page.getByTestId("hint-confirm").click();
-
-    const text = (await page.getByTestId("hint-item-reveal").textContent()) ?? "";
+    await clickHint(page, "reveal");
+    await expect(page.getByTestId("toast")).toContainText("300");
     const valid = hintCandidates(graph, ch, ["FRA"]).map(fr);
-    expect(valid.some((n) => text.includes(n)), `"${text}" should name one of ${valid.join(", ")}`).toBe(true);
+    const placeholder = await placeholderOf(page);
+    expect(valid.some((n) => placeholder.includes(n)), `"${placeholder}" should name one of ${valid.join(", ")}`).toBe(true);
+    expect(placeholder).toMatch(/Prochain pays/);
+    await expect(page.getByRole("combobox").first()).toHaveValue(""); // nothing typed or entered for the player
     await expect(reveal).toBeDisabled(); // once per game
     await expect(page.getByTestId("attempts").first()).toHaveAttribute("data-left", String(ch.attempts)); // no attempt consumed
-    await expect.poll(() => routeOf(page)).toBe("FRA"); // nothing was entered for the player
+    await expect.poll(() => routeOf(page)).toBe("FRA"); // the route is untouched
+    await expect(page.getByTestId("hint-list")).toHaveCount(0); // and nothing appears under the buttons
   });
 
-  test("the three hints describe the same country, and following the hint is accepted", async ({ page }) => {
-    const ch = custom("FRA", "GRC"); // far enough that the hinted country does not end the game
-    await serve(page, ch);
+  test("the player can keep typing while a hint is shown, and the hint never overwrites the input", async ({ page }) => {
+    await serve(page, custom("FRA", "GRC"));
     await expandSheet(page);
-    for (const k of ["letter", "borders", "reveal"]) {
-      await page.getByTestId(`hint-${k}`).click();
-      await page.getByTestId("hint-confirm").click();
-    }
-    const id = createHint(graph, ch, ["FRA"], "reveal", [])!.countryId;
-    await expect(page.getByTestId("hint-item-reveal")).toContainText(fr(id));
-    await type(page, fr(id));
+    const input = page.getByRole("combobox").first();
+    await input.fill("Itali");
+    await clickHint(page, "letter");
+    await expect(input).toHaveValue("Itali");
+    await input.fill("Italie");
+    await expect(input).toHaveValue("Italie");
+    expect(await placeholderOf(page)).toMatch(/commence par/);
+  });
+
+  test("the three hints describe the SAME country: letter, outline on the map, then the name; following it clears them", async ({ page }) => {
+    const far = custom("FRA", "GRC"); // far enough that the hinted country does not end the game
+    await serve(page, far);
+    await expandSheet(page);
+    const id = createHint(graph, far, ["FRA"], "reveal", [])!.countryId;
+    await clickHint(page, "letter");
+    expect(await placeholderOf(page)).toContain(fr(id)[0].normalize("NFD").replace(/[̀-ͯ]/g, "").toUpperCase());
+    await clickHint(page, "borders");
+    await expect.poll(() => hintedOnMap(page)).toEqual([id]); // exactly that country is outlined, nothing else
+    await clickHint(page, "reveal");
+    expect(await placeholderOf(page)).toContain(fr(id));
+    expect(await hintedOnMap(page)).toEqual([id]);
+    await type(page, fr(id)); // the player still has to enter it
     await expect(page.getByTestId("toast")).not.toContainText("Incorrect");
-    await expect(page.getByTestId("hint-item-reveal")).toHaveAttribute("data-liveness", /followed|live/);
+    // the hint has been followed: the placeholder and the outline are gone
+    await expect.poll(() => placeholderOf(page)).toBe("Tape le nom d’un pays…");
+    await expect.poll(() => hintedOnMap(page)).toEqual([]);
+  });
+
+  test("the map outline never shows a name and never reveals other countries", async ({ page }) => {
+    const far = custom("FRA", "GRC", "hard"); // hidden map: only the shapes that are shown are drawn
+    await serve(page, far);
+    await expandSheet(page);
+    const map = page.getByTestId("world-map");
+    const shown = await map.getAttribute("data-shown");
+    const labels = await page.locator(".atlas-label").count();
+    await clickHint(page, "letter");
+    await clickHint(page, "borders");
+    await expect(map).toHaveAttribute("data-shown", String(Number(shown) + 1)); // exactly one more shape
+    expect(await page.locator(".atlas-label").count()).toBe(labels); // no name label
+    expect((await hintedOnMap(page)).length).toBe(1);
   });
 
   test("works with a change of direction: from a dead end it proposes the way back out, which is then accepted", async ({ page }) => {
@@ -186,19 +216,17 @@ test.describe("hint 3 — the full name of a valid next country", () => {
     await expandSheet(page);
     await type(page, fr("ESP"));
     await type(page, fr("PRT")); // dead end
-    for (const k of ["letter", "borders", "reveal"]) {
-      await page.getByTestId(`hint-${k}`).click();
-      await page.getByTestId("hint-confirm").click();
-    }
+    for (const k of ["letter", "borders", "reveal"] as const) await clickHint(page, k);
     const id = createHint(graph, far, ["FRA", "ESP", "PRT"], "reveal", [])!.countryId;
     expect(resolveMove(graph, far, ["FRA", "ESP", "PRT"], id).from).toBeLessThan(2); // it is a change of direction
-    await expect(page.getByTestId("hint-item-reveal")).toContainText(fr(id));
+    expect(await placeholderOf(page)).toContain(fr(id));
+    await expect.poll(() => hintedOnMap(page)).toEqual([id]);
     await type(page, fr(id));
     await expect(page.getByTestId("route-wrap")).toHaveAttribute("data-branched", "true");
     await expect(page.getByTestId("toast")).not.toContainText("Incorrect");
   });
 
-  test("a hint about a route the player has left is shown as outdated, never as guidance", async ({ page }) => {
+  test("after a change of direction an outdated hint disappears from the input and the map instead of misleading", async ({ page }) => {
     // search the engine for a real situation: a hint given at [FRA, A], then a change of direction to G after which the
     // hinted country H can no longer be entered
     const find = () => {
@@ -212,7 +240,7 @@ test.describe("hint 3 — the full name of a valid next country", () => {
           for (const g of graph.neighbors("FRA", view)) {
             if (g === a || g === dest || g === h) continue;
             if (resolveMove(graph, c, ["FRA", a], g).from !== 0) continue;
-            if (!resolveMove(graph, c, ["FRA", g], h).valid) return { c, a, g };
+            if (!resolveMove(graph, c, ["FRA", g], h).valid) return { c, a, g, h };
           }
         }
       }
@@ -220,17 +248,31 @@ test.describe("hint 3 — the full name of a valid next country", () => {
     };
     const found = find();
     test.skip(!found, "no such situation in the sampled pairs");
-    const { c, a, g } = found!;
+    const { c, a, g, h } = found!;
     await serve(page, c);
     await expandSheet(page);
     await type(page, fr(a));
-    await page.getByTestId("hint-letter").click();
-    await page.getByTestId("hint-confirm").click();
-    await expect(page.getByTestId("hint-item-letter")).toHaveAttribute("data-liveness", "live");
+    await clickHint(page, "letter");
+    await clickHint(page, "borders");
+    expect(await placeholderOf(page)).toMatch(/commence par/);
+    await expect.poll(() => hintedOnMap(page)).toEqual([h]);
     await type(page, fr(g)); // change of direction from France
     await expect(page.getByTestId("route-wrap")).toHaveAttribute("data-branched", "true");
-    await expect(page.getByTestId("hint-item-letter")).toHaveAttribute("data-liveness", "outdated");
-    await expect(page.getByTestId("hint-item-letter")).toContainText("ne correspond plus");
+    await expect.poll(() => placeholderOf(page)).toBe("Tape le nom d’un pays…"); // the stale hint is gone
+    await expect.poll(() => hintedOnMap(page)).toEqual([]);
+    // the hint stays spent (once per game) and the buttons show it
+    await expect(page.getByTestId("hint-letter")).toHaveAttribute("data-status", "used");
+  });
+
+  test("hint buttons show their state: available, locked (order), used", async ({ page }) => {
+    await serve(page, custom("FRA", "GRC"));
+    await expandSheet(page);
+    await expect(page.getByTestId("hint-letter")).toHaveAttribute("data-status", "available");
+    await expect(page.getByTestId("hint-borders")).toHaveAttribute("data-status", "locked");
+    await expect(page.getByTestId("hint-reveal")).toHaveAttribute("data-status", "locked");
+    await clickHint(page, "letter");
+    await expect(page.getByTestId("hint-letter")).toHaveAttribute("data-status", "used");
+    await expect(page.getByTestId("hint-borders")).toHaveAttribute("data-status", "available");
   });
 });
 

@@ -9,7 +9,7 @@ import { useCountryName, useRegionName } from "@/components/ui/useNames";
 export function constraintCount(rules: ChallengeRules): number {
   return (
     1 +
-    [rules.allowedRegion, rules.forbidden.length > 0, rules.mandatory.length > 0, rules.minCoastal !== undefined, rules.minIsland !== undefined, rules.maxIntermediate !== undefined, rules.requireRegion, rules.avoidRegion].filter(Boolean).length
+    [rules.straits, rules.disputes, rules.allowedRegion, rules.forbidden.length > 0, rules.mandatory.length > 0, rules.minCoastal !== undefined, rules.minIsland !== undefined, rules.maxIntermediate !== undefined, rules.requireRegion, rules.avoidRegion].filter(Boolean).length
   );
 }
 
@@ -23,6 +23,8 @@ export function ConstraintList({ rules }: { rules: ChallengeRules }) {
   const lines: { icon: "ship" | "flag" | "lock" | "globe" | "star"; text: string }[] = [];
   if (rules.allowedRegion) lines.push({ icon: "globe", text: t("constraint.allowedRegion", { region: region(rules.allowedRegion) }) });
   lines.push(rules.maritime ? { icon: "ship", text: t("game.maritime") } : { icon: "flag", text: t("game.landOnly") });
+  if (rules.straits) lines.push({ icon: "ship", text: t("constraint.straits") });
+  if (rules.disputes) lines.push({ icon: "globe", text: t("constraint.disputes") });
   if (rules.forbidden.length) lines.push({ icon: "lock", text: t("constraint.forbidden", { countries: list(rules.forbidden) }) });
   if (rules.mandatory.length) lines.push({ icon: "star", text: t("constraint.mandatory", { countries: list(rules.mandatory) }) });
   if (rules.minCoastal !== undefined) lines.push({ icon: "ship", text: t("constraint.minCoastal", { n: rules.minCoastal }) });

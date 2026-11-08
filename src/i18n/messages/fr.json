@@ -150,7 +150,12 @@
     "srRoute": "Itinéraire actif : {route}. {n, plural, =0 {Aucun pays découvert} one {# pays découvert} other {# pays découverts}}.",
     "repeated": "Déjà essayé — aucune erreur comptée.",
     "hintsLeft": "{n, plural, =0 {tous utilisés} one {# restant} other {# restants}}",
-    "constraintsCount": "{n}"
+    "constraintsCount": "{n}",
+    "legendStrait": "Détroit",
+    "legendDispute": "Territoire contesté",
+    "hintUsedToast": "Indice utilisé · −{n} pts",
+    "hintFollowed": "indice suivi",
+    "routeScroll": "Itinéraire (liste défilante)"
   },
   "constraint": {
     "forbidden": "Éviter : {countries}",
@@ -161,7 +166,9 @@
     "requireRegion": "Traverser au moins un pays de : {region}",
     "avoidRegion": "Éviter la région : {region}",
     "allowedRegion": "Région : {region}",
-    "maritime": "Liaisons maritimes activées"
+    "maritime": "Liaisons maritimes activées",
+    "straits": "Traversées de détroits autorisées",
+    "disputes": "Liaisons par territoires contestés autorisées"
   },
   "hint": {
     "letter": {
@@ -183,7 +190,9 @@
     },
     "revealText": "Un prochain pays valide : {name}.",
     "outdated": "cet indice ne correspond plus à ton itinéraire actuel.",
-    "followed": "suivi"
+    "followed": "suivi",
+    "placeholderLetter": "Le prochain pays commence par « {letter} »…",
+    "placeholderReveal": "Prochain pays : {name}"
   },
   "results": {
     "won": "Destination atteinte !",
@@ -442,7 +451,12 @@
       "noRoute": "Aucun trajet possible avec ces réglages. Retire un pays évité, choisis une zone plus grande ou réduis la longueur minimale.",
       "failed": "Impossible de générer une partie. Réessaie."
     },
-    "warnHidden": "Avec la carte masquée, sans frontières ni noms, le jeu devient très difficile."
+    "warnHidden": "Avec la carte masquée, sans frontières ni noms, le jeu devient très difficile.",
+    "connections": "Liaisons particulières",
+    "straits": "Traversées de détroits",
+    "straitsHelp": "Les détroits d’une liste fixe (Douvres, Ormuz, Torres…) deviennent des liaisons valides. Désactivé par défaut.",
+    "disputes": "Territoires contestés",
+    "disputesHelp": "Autorise les liaisons qui passent par un territoire dont le statut est contesté (Gibraltar, Sahara occidental, Kosovo). Désactivé par défaut."
   },
   "tutorial": {
     "title": "Comment jouer",

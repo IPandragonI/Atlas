@@ -99,35 +99,38 @@ test.describe("gameplay", () => {
     await expect(page.getByRole("option").first()).toContainText(/Côte d.Ivoire/);
   });
 
-  test("two ordered hints: penalty shown before confirming, never consume attempts", async ({ page }) => {
+  test("ordered hints: cost shown on the button, used immediately, shown in context, never consume attempts", async ({ page }) => {
     const g = challengeFor("e2e-hint");
     await open(page, "e2e-hint");
     const attempts = page.getByTestId("attempts").first();
     const before = await attempts.getAttribute("data-left");
     await expandSheet(page);
-    // order: the borders hint is locked until the first-letter hint was used
+    const input = page.getByRole("combobox").first();
+    // the cost is visible BEFORE the click; the order is enforced
     await expect(page.getByTestId("hint-letter")).toContainText("75");
     await expect(page.getByTestId("hint-borders")).toContainText("150");
+    await expect(page.getByTestId("hint-reveal")).toContainText("300");
     await expect(page.getByTestId("hint-borders")).toBeDisabled();
-    // the penalty is displayed in a confirmation step; cancelling costs nothing
+    await expect(page.getByTestId("hint-reveal")).toBeDisabled();
+    // hint 1: no confirmation step; a short message, and the letter appears in the input's placeholder
     await page.getByTestId("hint-letter").click();
-    await expect(page.getByTestId("hint-confirm-box")).toContainText("75");
-    await page.getByTestId("hint-cancel").click();
-    await expect(page.getByTestId("hint-list")).toHaveCount(0);
-    await page.getByTestId("hint-letter").click();
-    await page.getByTestId("hint-confirm").click();
-    await expect(page.getByText(/commence par la lettre/)).toBeVisible();
+    await expect(page.getByTestId("toast")).toContainText("Indice utilisé");
+    await expect(page.getByTestId("toast")).toContainText("75");
+    await expect(page.getByTestId("hint-confirm-box")).toHaveCount(0);
+    await expect(page.getByTestId("hint-list")).toHaveCount(0); // nothing is listed under the buttons
+    const placeholder = (await input.getAttribute("placeholder")) ?? "";
+    expect(placeholder).toMatch(/commence par/);
     // the letter belongs to a valid next country (first letter, French or English name)
-    const text = (await page.getByTestId("hint-list").textContent()) ?? "";
-    const letter = /« (.) »|“(.)”/.exec(text)?.slice(1).find(Boolean);
+    const letter = /« (.) »|“(.)”/.exec(placeholder)?.slice(1).find(Boolean);
     const valid = optimalContinuations(graph, g.challenge, [g.challenge.start]); // real solver: part of an optimal solution
     expect(valid.map((id) => fr(id).normalize("NFD").replace(/[̀-ͯ]/g, "")[0].toUpperCase())).toContain(letter);
+    await expect(input).toHaveValue(""); // the field itself is untouched
     await expect(page.getByTestId("hint-letter")).toBeDisabled(); // once per game
     await expect(page.getByTestId("hint-borders")).toBeEnabled();
+    // hint 2: on the map, never in the list, never with a name
     await page.getByTestId("hint-borders").click();
-    await page.getByTestId("hint-confirm").click();
     await expect(page.getByTestId("hint-borders")).toBeDisabled();
-    await expect(page.getByText(/sans son nom/)).toBeVisible();
+    await expect.poll(async () => ((await page.getByTestId("world-map").getAttribute("data-applied")) ?? "").split(" ").filter((x) => x.endsWith(":hint")).length).toBe(1);
     await expect(attempts).toHaveAttribute("data-left", before!);
   });
 });

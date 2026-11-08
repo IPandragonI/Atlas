@@ -29,6 +29,10 @@ export interface GenRequest {
   minIntermediate?: number;
   /** Custom difficulty: maximum attempts (overrides minIntermediate + margin). */
   attempts?: number;
+  /** Strait crossings are usable in this game (see `STRAIT_CONNECTIONS`). Default: off. */
+  straits?: boolean;
+  /** Connections through disputed territory are usable in this game (see `DISPUTED_CONNECTIONS`). Default: off. */
+  disputes?: boolean;
   /** Replay: this unordered start/destination pair is never generated again. */
   exclude?: readonly [string, string];
   seed: string;
@@ -94,7 +98,11 @@ function sampleRoute(graph: AtlasGraph, view: GraphView, rng: Rng, a: string, b:
   return route;
 }
 
-const emptyRules = (): ChallengeRules => ({ maritime: false, forbidden: [], mandatory: [] });
+/** Options are written into the rules only when ON, so rules (and therefore published challenges) of games without them are unchanged. */
+interface Options { straits?: boolean; disputes?: boolean }
+const optionRules = (o: Options): Pick<ChallengeRules, "straits" | "disputes"> => ({ ...(o.straits ? { straits: true } : {}), ...(o.disputes ? { disputes: true } : {}) });
+const optionKey = (o: Options) => `${o.straits ? "|straits" : ""}${o.disputes ? "|disputes" : ""}`;
+const emptyRules = (o: Options = {}): ChallengeRules => ({ maritime: false, forbidden: [], mandatory: [], ...optionRules(o) });
 
 export function dailyId(date: string, mode: GameMode): string {
   return `daily-${date}-${mode}`;
@@ -125,11 +133,11 @@ export function generateChallenge(ctx: GenContext, req: GenRequest): Generated |
     ids = [...graph.regionMembers(req.region)].sort();
     const def = REGION_SEA.get(req.region) ?? "never";
     maritime = def === "always" ? true : def === "optional" ? rng() < 0.3 : false;
-    baseRules = { ...emptyRules(), maritime, allowedRegion: req.region, forbidden: [...forbidden] };
+    baseRules = { ...emptyRules(req), maritime, allowedRegion: req.region, forbidden: [...forbidden] };
   } else {
     if (scope) ids = [...graph.regionMembers(scope)].sort();
     maritime = req.mode === "constraints" && rng() < 0.22;
-    baseRules = { ...emptyRules(), maritime, forbidden: [...forbidden], ...(scope ? { allowedRegion: scope } : {}) };
+    baseRules = { ...emptyRules(req), maritime, forbidden: [...forbidden], ...(scope ? { allowedRegion: scope } : {}) };
   }
   // forbidden countries are neither crossed nor ever picked as start / destination
   ids = ids.filter((id) => !forbiddenSet.has(id));
@@ -138,7 +146,7 @@ export function generateChallenge(ctx: GenContext, req: GenRequest): Generated |
   else if (req.mode === "regional" || scope) bandsFor = (d) => regionBands(d)[effDiff];
   else bandsFor = () => WORLD_BANDS[effDiff];
 
-  const table = pairTable(graph, view, ids, `${scope ?? "world"}|${maritime}|${forbidden.join(",")}`);
+  const table = pairTable(graph, view, ids, `${scope ?? "world"}|${maritime}|${forbidden.join(",")}${optionKey(req)}`);
   const band = bandsFor(table.diameter);
   let eligible = table.pairs.filter((p) => p.d - 1 >= band.min && p.d - 1 <= band.max);
   if (req.exclude) {
@@ -147,7 +155,7 @@ export function generateChallenge(ctx: GenContext, req: GenRequest): Generated |
   }
   if (maritime && req.mode === "constraints") {
     // maritime constraint must matter: keep pairs the land graph cannot link as well
-    const landView = graph.viewFor(emptyRules());
+    const landView = graph.viewFor(emptyRules(req)); // the options stay on: maritime must matter BEYOND them
     eligible = eligible.filter((p) => {
       const ld = bfsDistances(graph, p.a, landView).get(p.b);
       return ld === undefined || ld > p.d;
@@ -300,7 +308,7 @@ function buildConstraints(
     const without = chosen.filter((x) => x !== c).reduce((r, x) => x.apply(r), base);
     const sw = solve(graph, { start: a, destination: b, rules: without }, undefined, { slack: 0, maxRoutes: 80 });
     const only = c.apply(emptyRules());
-    const excludes = sw.routes.slice(0, sw.optimalCount).some((r) => !isValidRoute(graph, { start: a, destination: b, rules: { ...only, maritime } }, r));
+    const excludes = sw.routes.slice(0, sw.optimalCount).some((r) => !isValidRoute(graph, { start: a, destination: b, rules: { ...only, ...optionRules(baseRules), maritime } }, r));
     if (!(sw.minIntermediate < finalSol.minIntermediate || excludes)) return null;
   }
   if (maritime) {
@@ -318,13 +326,13 @@ export interface ScopeInfo {
   countries: number;
 }
 
-export function scopeInfo(ctx: GenContext, req: { mode: GameMode; scope?: string; forbidden?: readonly string[] }): ScopeInfo {
+export function scopeInfo(ctx: GenContext, req: { mode: GameMode; scope?: string; forbidden?: readonly string[]; straits?: boolean; disputes?: boolean }): ScopeInfo {
   const { graph } = ctx;
   const scope = req.scope && req.scope !== "world" && graph.hasRegion(req.scope) ? req.scope : undefined;
   const forbidden = [...new Set(req.forbidden ?? [])].filter((id) => graph.has(id)).sort();
   const maritime = req.mode === "regional" && !!scope && REGION_SEA.get(scope) === "always";
-  const rules: ChallengeRules = { ...emptyRules(), maritime, forbidden, ...(scope ? { allowedRegion: scope } : {}) };
+  const rules: ChallengeRules = { ...emptyRules(req), maritime, forbidden, ...(scope ? { allowedRegion: scope } : {}) };
   const ids = (scope ? [...graph.regionMembers(scope)] : graph.ids()).filter((id) => !forbidden.includes(id)).sort();
-  const table = pairTable(graph, graph.viewFor(rules), ids, `${scope ?? "world"}|${maritime}|${forbidden.join(",")}`);
+  const table = pairTable(graph, graph.viewFor(rules), ids, `${scope ?? "world"}|${maritime}|${forbidden.join(",")}${optionKey(req)}`);
   return { diameter: table.diameter, countries: ids.length };
 }
