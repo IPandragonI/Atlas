@@ -29,7 +29,8 @@
   --discovered: #8fb394;
   --hint: #7da3c4;
   --brand: #1f4538;
-  --hint-edge: #1f5f9e;
+  --hint-edge: #55745c;
+  --reveal: #17707f;
   --link-strait: #17707f;
   --link-dispute: #9a4f86;
   --radius: 10px;
@@ -64,6 +65,7 @@
   --hint: #6f9bbd;
   --brand: #b9d8bd;
   --hint-edge: #a9d2f5;
+  --reveal: #4a86bd;
   --link-strait: #5fbdcc;
   --link-dispute: #d494c2;
   color-scheme: dark;
@@ -154,6 +156,12 @@ button:disabled { cursor: not-allowed; opacity: 0.5; }
 .atlas-pin.start { background: var(--accent); }
 .atlas-pin.dest { background: var(--dest); border-radius: 6px; transform: rotate(45deg); }
 .atlas-pin.dest > span { transform: rotate(-45deg); }
+/* Hint 1: the first letter of the suggested country, on the map (no outline, no name) */
+.hint-letter {
+  display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; pointer-events: none;
+  background: var(--surface); color: var(--hint-edge); border: 3px solid var(--hint-edge);
+  font: 700 19px/1 Georgia, serif; box-shadow: 0 2px 8px rgba(0,0,0,.3);
+}
 .atlas-tooltip {
   position: absolute; z-index: 5; pointer-events: none; padding: 4px 10px; border-radius: var(--radius-sm);
   background: var(--surface); border: 1px solid var(--border-soft); box-shadow: 0 4px 14px rgba(0,0,0,.15);

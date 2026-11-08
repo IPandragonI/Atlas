@@ -13,7 +13,7 @@ import type { Challenge, GameMode } from "@/engine/types";
 import { useRouter } from "@/i18n/navigation";
 import { graph } from "@/lib/atlas";
 import { loadDailyChallenge } from "@/lib/daily";
-import { HINT_PENALTY, hintLiveness } from "@/engine/hints";
+import { HINT_PENALTY, hintLetter, hintLiveness } from "@/engine/hints";
 import type { HintKind } from "@/engine/types";
 import { startTouchesDestination } from "@/engine/rules";
 import { configFromChallenge, effectiveMap, parseConfig, PRESET_MAP, replayParams, type GameConfig } from "@/lib/config";
@@ -234,26 +234,24 @@ export function GameScreen() {
     [appearance, challenge?.start, challenge?.destination, finished, state?.visited],
   );
 
-  // Contextual hints. Each one is shown where it is useful, and only while it still describes a move the player can make from
-  // the CURRENT active route (after a change of direction an outdated hint simply disappears from the interface).
-  const liveHint = useCallback(
-    (kind: HintKind) => {
-      if (!state || !challenge || finished) return null;
-      const h = [...state.hints].reverse().find((x) => x.payload.kind === kind);
-      return h && hintLiveness(graph, challenge, state.route, state.visited, h) === "live" ? h.payload : null;
-    },
-    [state, challenge, finished],
+  // The three hints are shown ON THE MAP, at the suggested country, and never in the input. They all describe the SAME country: the one
+  // of the latest hint used (createHint keeps the earlier choice while it is still a candidate), and only while it is still a move the
+  // player can make from the CURRENT active route (after a change of direction an outdated hint disappears from the map).
+  const hintView = useMemo(() => {
+    if (!state || !challenge || finished || state.hints.length === 0) return null;
+    const latest = state.hints[state.hints.length - 1];
+    if (hintLiveness(graph, challenge, state.route, state.visited, latest) !== "live") return null;
+    const used = new Set(state.hints.map((h) => h.payload.kind));
+    return { id: latest.payload.countryId, letter: used.has("letter"), borders: used.has("borders"), reveal: used.has("reveal") };
+  }, [state, challenge, finished]);
+  // Hint 2: the outline of the country (plus a light tint). Hint 3: its whole area, stronger. Hint 1: a letter marker (below).
+  const hintId = hintView && (hintView.borders || hintView.reveal) ? hintView.id : null;
+  const hintState: MapState = hintView?.reveal ? "reveal" : "hint";
+  const hintLetterMarker = useMemo(
+    () => (hintView?.letter ? { id: hintView.id, letter: hintLetter(graph, hintView.id)[locale as "fr" | "en"] } : undefined),
+    [hintView, locale],
   );
-  // Hint 2: the shape and outline of ONE valid next country on the map (no name).
-  const hintId = useMemo(() => liveHint("borders")?.countryId ?? null, [liveHint]);
-  // Hints 1 and 3: written in the input's placeholder (never in the field itself: the player's text is untouched).
-  const hintPlaceholder = useMemo(() => {
-    const reveal = liveHint("reveal");
-    if (reveal) return t("hint.placeholderReveal", { name: name(reveal.countryId) });
-    const letter = liveHint("letter");
-    return letter && letter.kind === "letter" ? t("hint.placeholderLetter", { letter: letter.letter[locale as "fr" | "en"] }) : undefined;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [liveHint, locale]);
+  const hintCountry = hintView?.id ?? null; // whatever hint was used, the camera keeps that country on screen
   // Using a hint: immediate, with a short confirmation (the cost is on the button beforehand).
   const activateHint = useCallback(
     (kind: HintKind) => {
@@ -281,7 +279,7 @@ export function GameScreen() {
       for (const id of abandoned) s[id] = "abandoned";
       if (appearance.start) s[challenge.start] = "start";
       s[challenge.destination] = "destination";
-      if (hintId) s[hintId] = "hint";
+      if (hintId) s[hintId] = hintState;
       return s;
     }
     if (challenge.rules.allowedRegion) for (const id of graph.regionMembers(challenge.rules.allowedRegion)) s[id] = "region";
@@ -290,9 +288,9 @@ export function GameScreen() {
     for (const id of viewRoute) s[id] = "traversed";
     if (showStart) s[challenge.start] = "start";
     s[challenge.destination] = "destination";
-    if (hintId) s[hintId] = "hint";
+    if (hintId) s[hintId] = hintState;
     return s;
-  }, [challenge, state, viewRoute, finished, selected, vis, appearance.start, showStart, hintId]);
+  }, [challenge, state, viewRoute, finished, selected, vis, appearance.start, showStart, hintId, hintState]);
 
   const labelIds = useMemo(
     () =>
@@ -318,15 +316,26 @@ export function GameScreen() {
 
   const fitIds = useMemo(() => {
     if (!challenge) return undefined;
-    if (vis.masked) return hintId ? [...vis.shown, hintId] : vis.shown; // frame only what is displayed
+    if (vis.masked) return hintCountry ? [...vis.shown, hintCountry] : vis.shown; // frame only what is displayed
     if (finished) return viewRoute;
     const framed = challenge.rules.allowedRegion ? [...graph.regionMembers(challenge.rules.allowedRegion)] : [challenge.start, challenge.destination];
-    return hintId ? [...framed, hintId] : framed; // the country a hint points at must be on screen
-  }, [challenge, finished, viewRoute, vis, hintId]);
+    return hintCountry ? [...framed, hintCountry] : framed; // the country a hint points at must be on screen
+  }, [challenge, finished, viewRoute, vis, hintCountry]);
 
   const known = useMemo(() => new Set(labelIds), [labelIds]);
   const showNames = appearance.names || finished;
-  const tooltip = useCallback((id: string) => (showNames && known.has(id) ? name(id) : null), [known, name, showNames]);
+  // Names on the map. During the game only the labelled countries have one (as before). Once the route is found, hovering ANY other
+  // country also shows its name (in the current language) so the finished map can be explored. Countries of the displayed route are
+  // not given this extra tooltip. Touch screens have no hover: nothing new is shown there.
+  const tooltip = useCallback(
+    (id: string) => {
+      if (showNames && known.has(id)) return name(id);
+      if (!finished || !challenge || viewRoute.includes(id) || id === challenge.start || id === challenge.destination) return null;
+      if (typeof window !== "undefined" && !window.matchMedia("(hover: hover)").matches) return null;
+      return name(id);
+    },
+    [known, name, showNames, finished, challenge, viewRoute],
+  );
   const padding = isDesktop ? { top: 60, bottom: 60, left: 60, right: 60 } : { top: 84, bottom: expanded ? 360 : 190, left: 20, right: 20 };
 
   // ---------------------------------------------------------------- render
@@ -389,6 +398,7 @@ export function GameScreen() {
           className="h-full w-full"
           states={mapStates}
           links={links}
+          hintLetter={hintLetterMarker}
           masked={vis.masked}
           controlsInset
           route={viewRoute}
@@ -399,7 +409,7 @@ export function GameScreen() {
           labelMode={!showNames ? "none" : vis.masked ? "route" : labels === "all" ? "all" : labels === "none" ? "none" : "route"}
           labelIds={labelIds}
           fitIds={fitIds}
-          fitKey={`${challenge.id}-${vis.masked ? `m${vis.shown.length}${hintId ?? ""}` : finished ? `r${selected}` : `play${hintId ?? ""}`}`}
+          fitKey={`${challenge.id}-${vis.masked ? `m${vis.shown.length}${hintCountry ?? ""}` : finished ? `r${selected}` : `play${hintCountry ?? ""}`}`}
           padding={padding}
           tooltip={tooltip}
         />
@@ -501,7 +511,6 @@ export function GameScreen() {
               <div className="grid gap-2">
                 <CountryCombobox
                   key={gameId ?? "none"}
-                  placeholder={hintPlaceholder}
                   disabled={!playing}
                   errorTick={errTick}
                   autoFocus

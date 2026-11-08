@@ -8,7 +8,10 @@ import { COUNTRIES, graph } from "@/lib/atlas";
 import { MapControls } from "./MapControls";
 
 /** Visual states a country can have (see docs/ARCHITECTURE.md). */
-export type MapState = "start" | "destination" | "traversed" | "wrong" | "discovered" | "new" | "region" | "dim" | "hint" | "abandoned";
+/**
+ * "hint": the outline (and a light tint) of the country hint 2 points at. "reveal": hint 3 highlights its WHOLE area, stronger.
+ */
+export type MapState = "start" | "destination" | "traversed" | "wrong" | "discovered" | "new" | "region" | "dim" | "hint" | "reveal" | "abandoned";
 export type LabelMode = "none" | "route" | "all";
 
 /** A special connection drawn between two country centres (never an ordinary land border). */
@@ -20,6 +23,8 @@ export interface MapLink {
 
 export interface WorldMapProps {
   states?: Record<string, MapState>;
+  /** Hint 1: the first letter drawn over the geographical location of the suggested country (no name, no outline). */
+  hintLetter?: { id: string; letter: string };
   /** Strait / disputed connections currently usable in the game, drawn as thin dotted / dashed lines. */
   links?: MapLink[];
   /** Ordered country ids drawn as a line between country centres. */
@@ -53,7 +58,7 @@ export interface WorldMapProps {
 interface Palette {
   water: string; land: string; landOff: string; border: string; accent: string; dest: string; route: string;
   discovered: string; abandoned: string; error: string; success: string; text: string; surface: string; region: string; hint: string;
-  hintEdge: string; strait: string; dispute: string;
+  hintEdge: string; reveal: string; strait: string; dispute: string;
 }
 
 // MapLibre 6 needs an explicit worker URL under bundlers (file vendored by scripts/copy-maplibre-worker.mjs).
@@ -70,7 +75,7 @@ function readPalette(): Palette {
     water: v("--water"), land, landOff: v("--land-off"), border: v("--map-border"), accent: v("--accent"), dest: v("--dest"),
     route: v("--route"), discovered: v("--discovered"), abandoned: mix(v("--discovered"), land, 0.5), error: mix(v("--error"), land, 0.55), success: v("--success"),
     text: v("--text"), surface: v("--surface"), region: v("--map-region"), hint: v("--hint"),
-    hintEdge: v("--hint-edge"), strait: v("--link-strait"), dispute: v("--link-dispute"),
+    hintEdge: v("--hint-edge"), reveal: v("--reveal"), strait: v("--link-strait"), dispute: v("--link-dispute"),
   };
 }
 
@@ -101,6 +106,7 @@ function fillExpr(c: Palette): ExpressionSpecification {
       "new", c.success,
       "region", c.region,
       "hint", c.hint,
+      "reveal", c.reveal,
       "abandoned", c.abandoned,
       "dim", c.landOff,
       c.land,
@@ -121,7 +127,7 @@ function boundsOf(ids: readonly string[]): LngLatBoundsLike | null {
 
 export default function WorldMap(props: WorldMapProps) {
   const {
-    states, links, route, routeKey, start, destination, labelMode = "route", labelIds, fitIds, fitKey, padding, selectedId, masked = false, showBorders = true, controlsInset = false, onCountryClick, tooltip, className,
+    states, links, hintLetter, route, routeKey, start, destination, labelMode = "route", labelIds, fitIds, fitKey, padding, selectedId, masked = false, showBorders = true, controlsInset = false, onCountryClick, tooltip, className,
   } = props;
   const t = useTranslations("common");
   const locale = useLocale() as "fr" | "en";
@@ -139,7 +145,7 @@ export default function WorldMap(props: WorldMapProps) {
   maskedRef.current = masked;
   const shownRef = useRef<Set<string>>(new Set());
   const levelRef = useRef(masked ? 0 : 1); // opacity of NON-shown countries: 0 = hidden, 1 = fully revealed
-  const markers = useRef<{ start?: maplibregl.Marker; dest?: maplibregl.Marker; labels: Map<string, maplibregl.Marker> }>({ labels: new Map() });
+  const markers = useRef<{ start?: maplibregl.Marker; dest?: maplibregl.Marker; hint?: maplibregl.Marker; labels: Map<string, maplibregl.Marker> }>({ labels: new Map() });
   const cb = useRef({ onCountryClick, tooltip });
   cb.current = { onCountryClick, tooltip };
   const lastFitKey = useRef<string | number | undefined>(undefined);
@@ -234,8 +240,9 @@ export default function WorldMap(props: WorldMapProps) {
       map.addLayer({
         id: "country-hint-edge", type: "line", source: "world", layout: { "line-join": "round" },
         paint: {
-          "line-color": pal.hintEdge, "line-width": ["interpolate", ["linear"], ["zoom"], 1, 2, 5, 3.2],
-          "line-opacity": ["case", ["==", ["coalesce", ["feature-state", "s"], "none"], "hint"], 1, 0],
+          "line-color": pal.hintEdge,
+          "line-width": ["interpolate", ["linear"], ["zoom"], 1, ["case", ["==", ["coalesce", ["feature-state", "s"], "none"], "reveal"], 3.4, 2], 5, ["case", ["==", ["coalesce", ["feature-state", "s"], "none"], "reveal"], 5, 3.2]],
+          "line-opacity": ["case", ["in", ["coalesce", ["feature-state", "s"], "none"], ["literal", ["hint", "reveal"]]], 1, 0],
         },
       });
       // special connections: straits are dotted, connections through disputed territory are dashed (neither looks like a border or the route)
@@ -254,8 +261,8 @@ export default function WorldMap(props: WorldMapProps) {
         paint: {
           "circle-radius": ["interpolate", ["linear"], ["zoom"], 1, 2.6, 4, 4.8, 7, 7],
           "circle-color": fillExpr(pal),
-          "circle-stroke-color": ["case", ["==", ["coalesce", ["feature-state", "s"], "none"], "hint"], pal.hintEdge, pal.border],
-          "circle-stroke-width": ["case", ["==", ["coalesce", ["feature-state", "s"], "none"], "hint"], 3, 1],
+          "circle-stroke-color": ["case", ["in", ["coalesce", ["feature-state", "s"], "none"], ["literal", ["hint", "reveal"]]], pal.hintEdge, pal.border],
+          "circle-stroke-width": ["case", ["==", ["coalesce", ["feature-state", "s"], "none"], "reveal"], 4, ["==", ["coalesce", ["feature-state", "s"], "none"], "hint"], 3, 1],
           "circle-opacity": ["interpolate", ["linear"], ["zoom"], 5, 1, 7.5, 0],
           "circle-stroke-opacity": ["interpolate", ["linear"], ["zoom"], 5, 1, 7.5, 0],
         },
@@ -303,8 +310,19 @@ export default function WorldMap(props: WorldMapProps) {
       if (text) {
         tip.textContent = text;
         tip.style.display = "block";
-        tip.style.left = `${e.point.x}px`;
-        tip.style.top = `${e.point.y}px`;
+        // near the cursor, but never clipped by the map: flip to the other side of the cursor and clamp inside the container
+        const box = wrapRef.current;
+        const cw = box?.clientWidth ?? Infinity;
+        const ch = box?.clientHeight ?? Infinity;
+        const tw = tip.offsetWidth;
+        const th = tip.offsetHeight;
+        let x = e.point.x + 12;
+        let y = e.point.y + 12;
+        if (x + tw + 6 > cw) x = e.point.x - 12 - tw;
+        if (y + th + 6 > ch) y = e.point.y - 12 - th;
+        tip.style.transform = "none";
+        tip.style.left = `${Math.max(4, Math.min(x, cw - tw - 4))}px`;
+        tip.style.top = `${Math.max(4, Math.min(y, ch - th - 4))}px`;
       } else tip.style.display = "none";
     });
     map.on("mouseout", () => {
@@ -324,7 +342,7 @@ export default function WorldMap(props: WorldMapProps) {
       map.setPaintProperty("background", "background-color", pal.water);
       map.setPaintProperty("country-fill", "fill-color", fillExpr(pal));
       map.setPaintProperty("country-dots", "circle-color", fillExpr(pal));
-      map.setPaintProperty("country-dots", "circle-stroke-color", ["case", ["==", ["coalesce", ["feature-state", "s"], "none"], "hint"], pal.hintEdge, pal.border]);
+      map.setPaintProperty("country-dots", "circle-stroke-color", ["case", ["in", ["coalesce", ["feature-state", "s"], "none"], ["literal", ["hint", "reveal"]]], pal.hintEdge, pal.border]);
       map.setPaintProperty("country-hint-edge", "line-color", pal.hintEdge);
       map.setPaintProperty("links-strait", "line-color", pal.strait);
       map.setPaintProperty("links-dispute", "line-color", pal.dispute);
@@ -347,6 +365,8 @@ export default function WorldMap(props: WorldMapProps) {
       m.labels.clear();
       m.start?.remove();
       m.dest?.remove();
+      m.hint?.remove();
+      m.hint = undefined;
       map.remove();
       mapRef.current = null;
       appliedStates.current = {};
@@ -499,6 +519,31 @@ export default function WorldMap(props: WorldMapProps) {
     m.dest?.remove();
     m.start = m.dest = undefined;
   }, [start, destination, ready]);
+
+  // ---------------------------------------------------------------- hint 1: the first letter, on the suggested country
+  // A DOM marker at the anchor point of the country: MapLibre keeps it on that geographical position through zoom, pan and resize.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !ready) return;
+    const m = markers.current;
+    if (!hintLetter || !graph.has(hintLetter.id)) {
+      m.hint?.remove();
+      m.hint = undefined;
+      return;
+    }
+    const lngLat = graph.country(hintLetter.id).center;
+    if (m.hint) {
+      m.hint.setLngLat(lngLat);
+      m.hint.getElement().textContent = hintLetter.letter;
+      return;
+    }
+    const el = document.createElement("div");
+    el.className = "hint-letter";
+    el.textContent = hintLetter.letter;
+    el.setAttribute("aria-hidden", "true");
+    el.dataset.testid = "hint-letter-marker";
+    m.hint = new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat(lngLat).addTo(map);
+  }, [hintLetter?.id, hintLetter?.letter, ready]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ---------------------------------------------------------------- camera
   const fit = useCallback((ids?: readonly string[], animate = true) => {

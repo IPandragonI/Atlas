@@ -69,12 +69,13 @@ export function createHint(
   const earlier = [...previous].reverse().find((h) => candidates.includes(h.payload.countryId));
   const pickId = earlier?.payload.countryId ?? candidates[hashString(`${ch.id}|${route.join(">")}|${kind}`) % candidates.length];
   if (kind === "borders" || kind === "reveal") return { kind, countryId: pickId };
-  const c = graph.country(pickId);
-  return {
-    kind,
-    countryId: pickId,
-    letter: { fr: stripAccents(c.name.fr).charAt(0).toUpperCase(), en: stripAccents(c.name.en).charAt(0).toUpperCase() },
-  };
+  return { kind, countryId: pickId, letter: hintLetter(graph, pickId) };
+}
+
+/** First letter of a country name in each language (accents removed): what hint 1 shows on the map. */
+export function hintLetter(graph: AtlasGraph, countryId: string): { fr: string; en: string } {
+  const c = graph.country(countryId);
+  return { fr: stripAccents(c.name.fr).charAt(0).toUpperCase(), en: stripAccents(c.name.en).charAt(0).toUpperCase() };
 }
 
 /**

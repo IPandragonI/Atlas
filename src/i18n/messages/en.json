@@ -190,9 +190,7 @@
     },
     "revealText": "A valid next country: {name}.",
     "outdated": "this hint no longer matches your current route.",
-    "followed": "followed",
-    "placeholderLetter": "The next country starts with “{letter}”…",
-    "placeholderReveal": "Next country: {name}"
+    "followed": "followed"
   },
   "results": {
     "won": "Destination reached!",

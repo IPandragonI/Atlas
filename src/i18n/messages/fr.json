@@ -190,9 +190,7 @@
     },
     "revealText": "Un prochain pays valide : {name}.",
     "outdated": "cet indice ne correspond plus à ton itinéraire actuel.",
-    "followed": "suivi",
-    "placeholderLetter": "Le prochain pays commence par « {letter} »…",
-    "placeholderReveal": "Prochain pays : {name}"
+    "followed": "suivi"
   },
   "results": {
     "won": "Destination atteinte !",
