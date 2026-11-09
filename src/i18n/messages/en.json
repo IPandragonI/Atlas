@@ -155,7 +155,8 @@
     "legendDispute": "Disputed territory",
     "hintUsedToast": "Hint used · −{n} pts",
     "hintFollowed": "hint followed",
-    "routeScroll": "Route (scrollable list)"
+    "routeScroll": "Route (scrollable list)",
+    "hintEntered": "Hint used · −{n} pts — {name} added to your route."
   },
   "constraint": {
     "forbidden": "Avoid: {countries}",
@@ -185,7 +186,7 @@
     "bordersText": "The borders of a valid next country are shown on the map (without its name).",
     "reveal": {
       "name": "Country name",
-      "desc": "The full name of a valid next country. You still have to type it.",
+      "desc": "The name of a valid next country: it is added to your route for you.",
       "short": "Name"
     },
     "revealText": "A valid next country: {name}.",

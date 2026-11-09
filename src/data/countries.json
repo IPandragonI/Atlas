@@ -6284,16 +6284,15 @@
   "id": "TLS",
   "iso2": "TL",
   "name": {
-   "fr": "Timor-Leste",
+   "fr": "Timor oriental",
    "en": "Timor-Leste"
   },
   "aliases": {
    "fr": [
-    "timor oriental"
+    "timor"
    ],
    "en": [
     "east timor",
-    "Timor",
     "Democratic Republic of Timor-Leste",
     "República Democrática de Timor-Leste",
     "Repúblika Demokrátika Timór-Leste",
@@ -6606,6 +6605,44 @@
    45.234,
    40.128,
    52.354
+  ]
+ },
+ {
+  "id": "UNK",
+  "iso2": "XK",
+  "name": {
+   "fr": "Kosovo",
+   "en": "Kosovo"
+  },
+  "aliases": {
+   "fr": [
+    "kosova"
+   ],
+   "en": [
+    "Република Косово",
+    "Republic of Kosovo",
+    "République du Kosovo"
+   ]
+  },
+  "capital": {
+   "en": "Pristina",
+   "fr": "Pristina"
+  },
+  "continent": "europe",
+  "region": "Southeast Europe",
+  "population": 1794248,
+  "area": 10908,
+  "isCoastal": false,
+  "isIsland": false,
+  "center": [
+   20.873,
+   42.571
+  ],
+  "bbox": [
+   20.029,
+   41.854,
+   21.753,
+   43.261
   ]
  },
  {

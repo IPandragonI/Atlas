@@ -138,3 +138,24 @@ describe("saving never disturbs progression data", () => {
     expect(JSON.stringify(snap)).not.toContain("zz-only-in-progress");
   });
 });
+
+describe("the name hint enters the country", () => {
+  it("pays 300, then validates the suggested country like a normal move (route, discovery, victory)", async () => {
+    const g = useGame.getState();
+    g.start(challenge(), undefined, KEY);
+    expect(g.hint("letter")).toBe(true);
+    expect(g.hint("borders")).toBe(true);
+    const before = useGame.getState().state!;
+    expect(before.route).toEqual(["FRA"]); // the first two hints only point
+    expect(g.hint("reveal")).toBe(true);
+    const after = useGame.getState().state!;
+    expect(after.hints.map((h) => h.penalty)).toEqual([75, 150, 300]);
+    expect(after.route).toEqual(["FRA", "ESP"]); // the only way to Portugal in one step
+    expect(after.visited).toEqual(["ESP"]);
+    expect(after.mistakes).toEqual([]);
+    expect(after.attemptsLeft).toBe(before.attemptsLeft); // no attempt consumed
+    expect(after.status).toBe("won"); // Spain touches Portugal
+    expect(useGame.getState().feedback?.via).toBe("hint");
+    await settle();
+  });
+});

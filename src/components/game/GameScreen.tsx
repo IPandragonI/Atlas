@@ -163,7 +163,9 @@ export function GameScreen() {
       flash(t("game.repeated"), "info");
     } else if (feedback.outcome === "accepted") {
       playSound("ok", sound);
-      flash(feedback.removed.length > 0 ? t("game.branch") : t("game.right"), "ok");
+      // the "name" hint enters the country itself: the message says so (and shows the cost), instead of a plain "correct"
+      if (feedback.via === "hint") flash(t("game.hintEntered", { name: name(feedback.country), n: HINT_PENALTY.reveal }), "ok", 6000);
+      else flash(feedback.removed.length > 0 ? t("game.branch") : t("game.right"), "ok");
     }
     // a victory is handled below, from the game's own status transition
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -218,7 +220,11 @@ export function GameScreen() {
 
   // The configuration this game was started with (restored dailies derive it from the challenge).
   const cfg = useMemo(() => (challenge ? (config ?? configFromChallenge(challenge)) : null), [challenge, config]);
-  const appearance = useMemo(() => (cfg ? effectiveMap(cfg) : PRESET_MAP.easy), [cfg]);
+  // Daily challenges always hide the map (progressive discovery), like Normal and Hard games, whatever their difficulty preset.
+  const appearance = useMemo(() => {
+    const base = cfg ? effectiveMap(cfg) : PRESET_MAP.easy;
+    return challenge?.date ? { ...base, full: false } : base;
+  }, [cfg, challenge?.date]);
   const showStart = appearance.start || finished;
 
   // Map visibility is a purely visual rule (see lib/visibility.ts); the engine and graph never see it.
@@ -256,7 +262,8 @@ export function GameScreen() {
   const activateHint = useCallback(
     (kind: HintKind) => {
       const ok = hint(kind);
-      flash(ok ? t("game.hintUsedToast", { n: HINT_PENALTY[kind] }) : t("game.hintNone"), "info", 4500);
+      // the name hint reports itself through the move it makes (see the feedback effect)
+      if (!ok || kind !== "reveal") flash(ok ? t("game.hintUsedToast", { n: HINT_PENALTY[kind] }) : t("game.hintNone"), "info", 4500);
       return ok;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps

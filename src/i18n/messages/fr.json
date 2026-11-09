@@ -155,7 +155,8 @@
     "legendDispute": "Territoire contesté",
     "hintUsedToast": "Indice utilisé · −{n} pts",
     "hintFollowed": "indice suivi",
-    "routeScroll": "Itinéraire (liste défilante)"
+    "routeScroll": "Itinéraire (liste défilante)",
+    "hintEntered": "Indice utilisé · −{n} pts — {name} ajouté à l’itinéraire."
   },
   "constraint": {
     "forbidden": "Éviter : {countries}",
@@ -185,7 +186,7 @@
     "bordersText": "Les frontières d’un prochain pays valide sont affichées sur la carte (sans son nom).",
     "reveal": {
       "name": "Nom du pays",
-      "desc": "Le nom complet d’un prochain pays valide. À toi de le saisir.",
+      "desc": "Le nom d’un prochain pays valide : il est ajouté directement à ton itinéraire.",
       "short": "Nom"
     },
     "revealText": "Un prochain pays valide : {name}.",

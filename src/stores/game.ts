@@ -17,6 +17,8 @@ export interface Feedback {
   n: number; // monotonic counter so identical consecutive outcomes still re-trigger animations
   /** Countries that left the active route because the player changed direction (empty for a plain move). */
   removed: string[];
+  /** Set when the move was made FOR the player by the "name" hint (the country was entered automatically). */
+  via?: "hint";
 }
 
 interface GameStore {
@@ -40,7 +42,7 @@ interface GameStore {
   findSaved: (key: string) => Promise<InProgressRecord | null>;
   /** Continues a saved in-progress game exactly where it was left. */
   resume: (rec: InProgressRecord) => void;
-  guess: (countryId: string) => MoveOutcome;
+  guess: (countryId: string, via?: "hint") => MoveOutcome;
   /** Returns true when a hint was given (and its penalty applied). */
   hint: (kind: HintKind) => boolean;
   giveUp: () => void;
@@ -156,11 +158,11 @@ export const useGame = create<GameStore>((set, get) => {
       });
     },
 
-    guess: (countryId) => {
+    guess: (countryId, via) => {
       const { challenge, state } = get();
       if (!challenge || !state) return "ignored";
       const { state: next, outcome, removed } = submitGuess(graph, challenge, state, countryId, Date.now());
-      set({ state: next, feedback: { outcome, country: countryId, n: ++counter, removed: removed ?? [] } });
+      set({ state: next, feedback: { outcome, country: countryId, n: ++counter, removed: removed ?? [], ...(via ? { via } : {}) } });
       if (outcome === "accepted" || outcome === "won") {
         // Discovery is immediate and survives a later defeat (and an abandoned branch).
         const write = useProgress.getState().discover(countryId).then((isNew) => {
@@ -181,6 +183,9 @@ export const useGame = create<GameStore>((set, get) => {
       if (!res) return false;
       set({ state: res.state, lastHint: res.hint });
       persist();
+      // The third hint (the name) does not just point at the country: it ENTERS it. The penalty is already applied above; the country is
+      // a valid next move by construction, so it goes through the normal move rules (route, discovery, branching, victory).
+      if (kind === "reveal") get().guess(res.hint.payload.countryId, "hint");
       return true;
     },
 

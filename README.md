@@ -31,7 +31,7 @@ npm run dev            # http://localhost:3000  (service worker is production-on
 `nvkelso/natural-earth-vector` if missing.
 
 ## Geographic data & country policy
-195 playable states (193 UN + Holy See + Palestine); Kosovo and Taiwan are excluded (drawn neutral); dependencies are not
+196 playable states (the states France recognises: 193 UN + Holy See + Palestine + Kosovo); Taiwan is excluded (drawn neutral); dependencies are not
 playable. Adjacency is a reviewed list, not derived from polygons (French Guiana never links France to Brazil). Details:
 [docs/GEOGRAPHIC_DATA.md](docs/GEOGRAPHIC_DATA.md).
 

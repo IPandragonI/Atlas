@@ -158,7 +158,8 @@ export function ResultsPanel({ challenge, result, solution, hints, fresh, achiev
         </p>
       </section>
 
-      {hints.length > 0 && (
+      {/* no hints panel once the game is won (the score breakdown above still shows the hint penalty) */}
+      {hints.length > 0 && result.status !== "won" && (
         <section>
           <h3 className="eyebrow mb-1">{t("results.hints")}</h3>
           <ul className="grid gap-1 text-sm muted">{hints.map((h, i) => <li key={i}><HintText payload={h.payload} /></li>)}</ul>

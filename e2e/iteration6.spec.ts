@@ -151,19 +151,21 @@ test.describe("strait crossings and territorial disputes", () => {
 
   test("a strait is a valid link only with the option: Dover makes France-Ireland possible; without it the answer is wrong", async ({ page }) => {
     await serve(page, custom("FRA", "IRL", "easy", { straits: true }));
-    await expect.poll(async () => await links(page)).toContain("FRA-GBR:strait");
-    await expect(page.getByTestId("legend-strait")).toBeVisible().catch(() => undefined); // legend is desktop only
     await type(page, fr("GBR"));
     await expect(page.getByTestId("results")).toHaveAttribute("data-status", "won"); // Britain touches Ireland by land
+    // a daily map is hidden while playing; once the game is over the whole map, links included, is shown
+    await expect.poll(async () => await links(page)).toContain("FRA-GBR:strait");
   });
 
   test("territorial disputes: Gibraltar links Spain and Britain only when enabled; drawn as a dashed link", async ({ page }) => {
     await serve(page, custom("PRT", "GBR", "easy", { disputes: true }));
-    await expect.poll(async () => await links(page)).toContain("ESP-GBR:dispute");
-    expect(await links(page)).toContain("MAR-MRT:dispute");
-    expect(await links(page)).not.toContain(":strait");
+    await expect(page.getByTestId("world-map")).toHaveAttribute("data-ready", "true");
+    expect(await links(page)).toBe(""); // the daily map is hidden: a link to a country not shown yet is never drawn (nothing leaks)
     await type(page, fr("ESP"));
     await expect(page.getByTestId("results")).toHaveAttribute("data-status", "won");
+    await expect.poll(async () => await links(page)).toContain("ESP-GBR:dispute"); // the finished map shows the link
+    expect(await links(page)).toContain("MAR-MRT:dispute");
+    expect(await links(page)).not.toContain(":strait");
   });
 
   test("a game without the options draws no special link and treats the crossing as a wrong answer", async ({ page }) => {
@@ -209,10 +211,9 @@ test.describe("strait crossings and territorial disputes", () => {
     await serve(page, custom("FRA", "IRL", "easy", { straits: true }));
     await expandSheet(page);
     await page.getByTestId("hint-letter").click();
-    await expect(page.getByRole("combobox").first()).toHaveAttribute("placeholder", /« R »|“R”|Royaume/); // Royaume-Uni
+    await expect(page.locator(".hint-letter")).toHaveText("R"); // Royaume-Uni, on the map
     await page.getByTestId("hint-borders").click();
-    await page.getByTestId("hint-reveal").click();
-    await expect(page.getByRole("combobox").first()).toHaveAttribute("placeholder", /Royaume-Uni/);
-    await expect.poll(async () => await routeOf(page)).toBe("FRA");
+    await page.getByTestId("hint-reveal").click(); // the name hint enters the country: Britain, across the strait, touches Ireland
+    await expect(page.getByTestId("results")).toHaveAttribute("data-status", "won");
   });
 });

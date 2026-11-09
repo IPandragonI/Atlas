@@ -24,12 +24,18 @@ const ne = JSON.parse(
   fs.readFileSync(path.join(root, "data-src/ne_50m_admin_0_map_units.geojson"), "utf8"),
 ) as { features: NeFeature[] };
 
-const NE_TO_ISO: Record<string, string> = { SDS: "SSD", PSX: "PSE" };
+const NE_TO_ISO: Record<string, string> = { SDS: "SSD", PSX: "PSE", KOS: "UNK" };
 /** Map units rendered but NOT part of their sovereign's playable geometry (overseas / remote). */
 const EXCLUDED_UNITS = new Set(["MYT", "REU", "MTQ", "GLP", "GUF", "NLY", "NJM", "NSV", "TKL"]);
 
-const playable = worldCountries.filter((c) => c.unMember || c.cca3 === "VAT" || c.cca3 === "PSE");
-if (playable.length !== 195) throw new Error(`Expected 195 playable states, got ${playable.length}`);
+/**
+ * Playable states: the 193 UN members plus the three other states the French Republic recognises: the Holy See (VAT), the State of
+ * Palestine (PSE, recognised 22 September 2025) and Kosovo (UNK, recognised 2008). Kosovo is treated as an ordinary country with
+ * ordinary land borders.
+ */
+const RECOGNISED_BY_FRANCE = new Set(["VAT", "PSE", "UNK"]);
+const playable = worldCountries.filter((c) => c.unMember || RECOGNISED_BY_FRANCE.has(c.cca3));
+if (playable.length !== 196) throw new Error(`Expected 196 playable states, got ${playable.length}`);
 const playableIds = new Set<string>(playable.map((c) => c.cca3));
 
 const round = (n: number) => Math.round(n * 1000) / 1000;

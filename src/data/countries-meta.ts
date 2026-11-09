@@ -24,7 +24,8 @@ export const ALIASES: Record<string, { fr: string[]; en: string[] }> = {
   MMR: { fr: ["birmanie"], en: ["burma"] },
   SWZ: { fr: ["swaziland"], en: ["swaziland", "eswatini"] },
   MKD: { fr: ["macedoine", "république de macédoine du nord"], en: ["macedonia"] },
-  TLS: { fr: ["timor oriental"], en: ["east timor"] },
+  TLS: { fr: ["timor-leste", "timor leste", "timor"], en: ["east timor", "timor"] },
+  UNK: { fr: ["kosova"], en: ["kosova"] },
   KOR: { fr: ["coree du sud"], en: ["south korea"] },
   PRK: { fr: ["coree du nord"], en: ["north korea"] },
   VAT: { fr: ["vatican", "saint-siege", "saint siège"], en: ["vatican", "holy see"] },
@@ -59,7 +60,7 @@ export const CAPITAL_FR: Record<string, string> = {
   SYC: "Victoria", MUS: "Port-Louis", DJI: "Djibouti", ERI: "Asmara", LSO: "Maseru", SWZ: "Mbabane",
   MWI: "Lilongwe", BEN: "Porto-Novo", TGO: "Lomé", BFA: "Ouagadougou", GIN: "Conakry", GNB: "Bissau",
   GMB: "Banjul", SLE: "Freetown", LBR: "Monrovia", CAF: "Bangui", NGA: "Abuja", YEM: "Sanaa",
-  OMN: "Mascate", BHR: "Manama", MKD: "Skopje", ALB: "Tirana", BIH: "Sarajevo", MNE: "Podgorica",
+  OMN: "Mascate", BHR: "Manama", MKD: "Skopje", UNK: "Pristina", ALB: "Tirana", BIH: "Sarajevo", MNE: "Podgorica",
   LVA: "Riga", AND: "Andorre-la-Vieille", LIE: "Vaduz", SMR: "Saint-Marin", ECU: "Quito", BOL: "Sucre",
   VEN: "Caracas", SUR: "Paramaribo", GUY: "Georgetown", CHL: "Santiago", ARG: "Buenos Aires",
   URY: "Montevideo", PAN: "Panama", CRI: "San José", NIC: "Managua", HND: "Tegucigalpa",
@@ -85,7 +86,7 @@ export const NAME_OVERRIDES: Record<string, { fr?: string; en?: string }> = {
   SUR: { fr: "Suriname" }, // "Surinam" is the old spelling
   SAU: { fr: "Arabie saoudite" }, // French capitalisation rule for adjectives
   COD: { fr: "RD Congo" }, // "Congo (Rép. dém.)" was a catalogue abbreviation
-  TLS: { fr: "Timor-Leste" }, // official name since 2002
+  TLS: { fr: "Timor oriental" }, // the usual French name (East Timor); "Timor-Leste" stays searchable
 };
 
 /** Capitals corrected so that French and English agree. */

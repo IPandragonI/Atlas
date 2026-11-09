@@ -147,7 +147,7 @@ describe("autocomplete is a pure name search", () => {
     expect(g).toContain("DEU"); // Germany matches via its English name
     expect(g).toContain("GEO");
   });
-  it("covers (nearly) all 195 countries across common letters", () => {
+  it("covers (nearly) all 196 countries across common letters", () => {
     const union = new Set(["a", "e", "i", "o", "u"].flatMap((v) => names(v)));
     expect(union.size).toBeGreaterThan(180);
   });
@@ -176,7 +176,7 @@ describe("autocomplete is a pure name search", () => {
   it("resolves any country, including ones that are not valid moves", () => {
     expect(resolveCountry(searchIndex, "Japon", null, "fr")?.id).toBe("JPN");
     expect(resolveCountry(searchIndex, "zzzz", null, "fr")).toBeNull();
-    expect(COUNTRIES).toHaveLength(195);
+    expect(COUNTRIES).toHaveLength(196);
   });
 });
 

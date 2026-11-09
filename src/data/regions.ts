@@ -12,7 +12,7 @@ export const REGION_DEFS: RegionDef[] = [
     id: "balkans",
     kind: "subregion",
     seaMode: "never",
-    countries: ["ALB", "BIH", "BGR", "HRV", "GRC", "MKD", "MNE", "ROU", "SRB", "SVN"],
+    countries: ["ALB", "BIH", "BGR", "HRV", "GRC", "MKD", "MNE", "ROU", "SRB", "SVN", "UNK"],
   },
   { id: "scandinavia", kind: "subregion", seaMode: "optional", countries: ["NOR", "SWE", "DNK", "FIN", "ISL"] },
   { id: "caucasus", kind: "subregion", seaMode: "never", countries: ["ARM", "AZE", "GEO", "RUS", "TUR", "IRN"] },

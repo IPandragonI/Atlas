@@ -211,13 +211,13 @@ export const STRAIT_CONNECTIONS: readonly EdgePair[] = [
  * the default graph. Every entry states what is disputed. Never add a pair merely because a claim exists: a link is listed
  * only when there is an actual border crossing or land boundary on the ground.
  *
+ * Kosovo is NOT here: France recognises it, so it is an ordinary country with ordinary land borders (see build-data.ts).
  * Deliberately NOT listed (see docs/GEOGRAPHIC_DATA.md): India–Afghanistan (a claim on Gilgit-Baltistan with no border
  * crossing), Canada–Denmark / Hans Island (settled in 2022), Cyprus–Turkey (no shared boundary).
  */
 export const DISPUTED_CONNECTIONS: readonly EdgePair[] = [
   ["MAR", "MRT", "Western Sahara: Morocco administers most of the territory and the only Morocco–Mauritania crossing (Guerguerat) lies in it. Its status is undecided (UN non-self-governing territory)."],
   ["ESP", "GBR", "Gibraltar: a British Overseas Territory claimed by Spain; the land border at La Línea is a real crossing. The playable GBR node does not include overseas territories, so this link exists only when disputes are on."],
-  ["SRB", "ALB", "Kosovo: declared independence in 2008 and is not a node of this dataset; Serbia and Albania only touch through it. Serbia does not recognise Kosovo's independence."],
 ];
 
 /**

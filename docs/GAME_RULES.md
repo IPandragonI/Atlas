@@ -91,14 +91,14 @@ suggestion is another daily not yet completed today (classic → constraints →
 it shows the saved result, and replaying it launches a free game.
 
 ## Autocomplete
-A name-search aid only. It searches **all 195 countries** from the typed text alone (French + English names, aliases,
+A name-search aid only. It searches **all 196 countries** from the typed text alone (French + English names, aliases,
 accents/case/spacing ignored) and shows nothing until something is typed. It knows nothing about the route, adjacency,
 visited, forbidden or constrained countries and never prioritises neighbours. Any country can be submitted; the engine
 (`rules.validateMove`) decides. Code: `engine/search.ts`, `components/game/CountryCombobox.tsx`.
 
 ## Map visibility (visual only)
 Rule in `lib/visibility.ts`; the GeoJSON, the graph, validation and generation never see it.
-- **Easy**: the full map during the game (`full: true`).
+- **Easy**: the full map during the game (`full: true`). **Daily challenges** are the exception: they always hide the map (progressive discovery), whatever their difficulty.
 - **Normal / Hard**: the map is hidden while playing, except the **departure and arrival countries, which are always
   displayed** (highlighted, with the A / B pins and names). A further country (shape, border, name) appears the moment it
   is correctly entered. Wrong guesses are never drawn. The camera frames only what is displayed.
@@ -134,10 +134,10 @@ not refunded. (`engine/hints.ts`, `game.useHint`)
    "hint" colour), **without its name**. On a hidden map this is the only extra information revealed; it is shown only while
    that country is still a valid next step.
 
-3. **Country name (−300)**, available once hint 2 was used: the full name of the same country. It is never entered for the
-   player.
+3. **Country name (−300)**, available once hint 2 was used: the same country is **entered for the player** (a normal, valid
+   move: route, discovery, change of direction and victory all apply; no attempt is used).
 
-The penalty is displayed on the button and again in a confirmation step, and is applied only when confirmed. The hinted
+Hints are shown ON THE MAP, never in the input: hint 1 a letter badge over the country, hint 2 its outline, hint 3 enters it. The cost is on the button (no confirmation step). The hinted
 country always comes from the real solver, so it belongs to an actual optimal solution and respects every constraint
 (forbidden, mandatory, region, coastal…). Selection is
 deterministic for a given state. If nothing can be determined (e.g. the intermediate budget is exhausted), no hint is given,

@@ -180,7 +180,7 @@ describe("custom difficulty, continents and forbidden countries", () => {
   });
   it("reports scope facts used by the configuration form", () => {
     const world = scopeFacts({ mode: "classic", scope: "world", forbidden: [] });
-    expect(world.countries).toBe(195);
+    expect(world.countries).toBe(196);
     expect(world.diameter).toBeGreaterThan(8);
     expect(scopeFacts({ mode: "classic", scope: "oceania", forbidden: [] }).diameter).toBe(0);
     const base = scopeFacts({ mode: "classic", scope: "europe", forbidden: [] }).countries;
@@ -202,7 +202,7 @@ describe("country names and data integrity", () => {
       SUR: ["Suriname", "Suriname"],
       SAU: ["Arabie saoudite", "Saudi Arabia"],
       COD: ["RD Congo", "DR Congo"],
-      TLS: ["Timor-Leste", "Timor-Leste"],
+      TLS: ["Timor oriental", "Timor-Leste"], // French: East Timor; "Timor-Leste" stays searchable
       MKD: ["Macédoine du Nord", "North Macedonia"],
       CZE: ["Tchéquie", "Czechia"],
       MMR: ["Birmanie", "Myanmar"],
@@ -264,7 +264,7 @@ describe("country names and data integrity", () => {
     }
   });
   it("internal IDs are stable ISO codes, so saved progress, graph and exports are unaffected by renames", () => {
-    expect(COUNTRIES).toHaveLength(195);
+    expect(COUNTRIES).toHaveLength(196);
     for (const c of COUNTRIES) expect(c.id).toMatch(/^[A-Z]{3}$/);
     for (const id of ["SWZ", "CPV", "CIV", "PLW", "SUR", "SAU", "COD", "TLS"]) expect(graph.has(id)).toBe(true);
     expect(graph.connection("SWZ", "ZAF")).toBe("land");

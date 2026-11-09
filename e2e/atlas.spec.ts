@@ -112,16 +112,15 @@ test.describe("gameplay", () => {
     await expect(page.getByTestId("hint-reveal")).toContainText("300");
     await expect(page.getByTestId("hint-borders")).toBeDisabled();
     await expect(page.getByTestId("hint-reveal")).toBeDisabled();
-    // hint 1: no confirmation step; a short message, and the letter appears in the input's placeholder
+    // hint 1: no confirmation step; a short message, and the letter appears on the map (never in the input)
     await page.getByTestId("hint-letter").click();
     await expect(page.getByTestId("toast")).toContainText("Indice utilisé");
     await expect(page.getByTestId("toast")).toContainText("75");
     await expect(page.getByTestId("hint-confirm-box")).toHaveCount(0);
     await expect(page.getByTestId("hint-list")).toHaveCount(0); // nothing is listed under the buttons
-    const placeholder = (await input.getAttribute("placeholder")) ?? "";
-    expect(placeholder).toMatch(/commence par/);
+    expect((await input.getAttribute("placeholder")) ?? "").not.toMatch(/commence par/);
     // the letter belongs to a valid next country (first letter, French or English name)
-    const letter = /« (.) »|“(.)”/.exec(placeholder)?.slice(1).find(Boolean);
+    const letter = await page.locator(".hint-letter").textContent();
     const valid = optimalContinuations(graph, g.challenge, [g.challenge.start]); // real solver: part of an optimal solution
     expect(valid.map((id) => fr(id).normalize("NFD").replace(/[̀-ͯ]/g, "")[0].toUpperCase())).toContain(letter);
     await expect(input).toHaveValue(""); // the field itself is untouched

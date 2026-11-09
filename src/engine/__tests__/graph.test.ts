@@ -6,13 +6,18 @@ const land = { maritime: false, blocked: new Set<string>() };
 const sea = { maritime: true, blocked: new Set<string>() };
 
 describe("country list", () => {
-  it("contains exactly 195 sovereign states", () => {
-    expect(COUNTRIES).toHaveLength(195);
-    expect(new Set(COUNTRIES.map((c) => c.id)).size).toBe(195);
+  it("contains exactly 196 states recognised by France (193 UN members, the Holy See, Palestine and Kosovo)", () => {
+    expect(COUNTRIES).toHaveLength(196);
+    expect(new Set(COUNTRIES.map((c) => c.id)).size).toBe(196);
   });
-  it("includes Vatican City and Palestine, excludes Kosovo, Taiwan and dependencies", () => {
-    for (const id of ["VAT", "PSE"]) expect(graph.has(id)).toBe(true);
-    for (const id of ["XKX", "UNK", "KOS", "TWN", "GRL", "PRI", "GUF", "HKG"]) expect(graph.has(id)).toBe(false);
+  it("includes the states France recognises beyond the UN members (Holy See, Palestine, Kosovo), but not Taiwan or dependencies", () => {
+    for (const id of ["VAT", "PSE", "UNK"]) expect(graph.has(id)).toBe(true);
+    for (const id of ["XKX", "KOS", "TWN", "GRL", "PRI", "GUF", "HKG"]) expect(graph.has(id)).toBe(false);
+  });
+  it("Kosovo is an ordinary country with ordinary land borders (not a disputed link)", () => {
+    for (const n of ["SRB", "ALB", "MNE", "MKD"]) expect(graph.connection("UNK", n), n).toBe("land");
+    expect(graph.country("UNK").name).toEqual({ fr: "Kosovo", en: "Kosovo" });
+    expect(graph.country("UNK").continent).toBe("europe");
   });
   it("has complete metadata for every country", () => {
     for (const c of COUNTRIES) {

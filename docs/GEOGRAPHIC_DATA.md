@@ -11,17 +11,17 @@ Build: `npm run data:build` (`scripts/build-data.ts`). Outputs are committed: `s
 | Flags | `flag-icons` (bundled SVG) | MIT |
 | French capitals | `src/data/countries-meta.ts` (hand-curated differences) | — |
 
-## Country inclusion policy (195)
-193 UN members + Holy See + Palestine, identified by ISO 3166-1 alpha-3. Dependent territories (Greenland, Puerto Rico,
+## Country inclusion policy (196)
+The states the French Republic recognises: the 193 UN members + the Holy See + Palestine (recognised 22 September 2025) + Kosovo (recognised 2008), identified by ISO 3166-1 alpha-3. Dependent territories (Greenland, Puerto Rico,
 French Guiana, Hong Kong…) are **not playable**. They are drawn as neutral, non-clickable areas.
 
-- **Kosovo**: not playable (not a UN member); drawn neutral. Serbia is unaffected for gameplay.
+- **Kosovo** (`UNK`): playable, with ordinary land borders (Serbia, Albania, Montenegro, North Macedonia); it is NOT a disputed link, because France recognises it. Candidates considered and not added: Niue and the Cook Islands (their recognition by France could not be confirmed), Taiwan (France recognises the PRC).
 - **Taiwan**: not playable (not a UN member); drawn neutral.
 - Palestine: NE splits Gaza/West Bank; both merge into `PSE`. South Sudan is `SSD` (NE uses `SDS`).
 - Continent for transcontinental states: Russia→Europe, Turkey/Kazakhstan/Georgia/Armenia/Azerbaijan→Asia, Cyprus→Europe,
   Egypt→Africa. Americas split by UN subregion (South America vs North America incl. Central America & Caribbean).
 - "Island" = no land border, plus shared islands (IRL, GBR, HTI, DOM, PNG, IDN, TLS, BRN).
-- Changing this list requires bumping `DATASET_VERSION` and a deliberate review: tests assert exactly 195.
+- Changing this list requires bumping `DATASET_VERSION` and a deliberate review: tests assert exactly 196.
 
 ## Visual geometry vs gameplay graph (separate on purpose)
 Playable geometry uses *map units* and excludes overseas units (`FRA`: Guiana, Guadeloupe, Martinique, Réunion, Mayotte;
@@ -59,8 +59,8 @@ Balabac PHL–MYS (?), Martinique Channel DMA–LCA, Saint Vincent Passage LCA�
 two playable countries, short crossing, and not already a land link (so Øresund, Fehmarn, Åland and Gibraltar are **not**
 listed: they are land links here). Every strait is also a sea link, so `maritime` still covers it.
 
-**Disputed connections (3), additions to the baseline:** Morocco–Mauritania (Western Sahara, Guerguerat crossing), Spain–UK
-(Gibraltar land border), Serbia–Albania (via Kosovo, which is not a node of this dataset).
+**Disputed connections (2), additions to the baseline:** Morocco–Mauritania (Western Sahara, Guerguerat crossing) and Spain–UK
+(Gibraltar land border). (Serbia–Albania via Kosovo is gone: Kosovo is now an ordinary country.)
 
 **Uncertain, flagged (?) and decisions for the project owner:**
 1. *Baseline land links on disputed land* (Ceuta/Melilla ESP–MAR, Golan ISR–SYR, Aksai Chin CHN–IND, Kashmir IND–PAK,
@@ -81,7 +81,7 @@ still validates (invalid *future* days were regenerated; past and today's days w
 
 ## Tests guarding the data
 France–Spain/Germany land; France–UK sea only; France–Brazil none; bidirectionality; maritime on/off; Luxembourg's three
-neighbours; main land component membership; 195 countries; metadata completeness.
+neighbours; main land component membership; 196 countries; metadata completeness.
 
 ## Known limitations
 Natural Earth 1:50m is coarse for microstates (rendered as clickable dots when area < 12,000 km²). Antimeridian: geometries
